@@ -1,8 +1,10 @@
 ---
-title: "[Proxmox] 시놀로지 나스의 공유 폴더를 Proxmox VM의 볼륨으로 사용해보자"
+title: "시놀로지 나스의 공유 폴더를 Proxmox VM의 볼륨으로 사용해보자"
 sidebar_position: 1
 ---
+
 ---
+
 ## 왜?
 
 데이터 센터에서 근무를 할 때를 생각해보면, 데이터 센터에서는 컴퓨팅 자원(서버 노드: vCPU, vRAM 제공)과 스토리지 자원(NAS 스토리지 서버)이 분리되서 운영되었다. VM의 볼륨은 NAS 스토리지에 위치시키고 이를 NFS 프로토콜을 통해 각 서버 노드에서 마운트하여 사용한다. 왜냐하면 어떠한 하나의 서버 노드가 폴트가 발생했을 때 VM 볼륨이 독립된 NAS 스토리지에 존재하기 때문에 다른 정상 동작 중인 서버 노드에서 해당 VM을 재구동할 수 있기 때문이다.
@@ -12,7 +14,9 @@ sidebar_position: 1
 사실 뭐,, 그렇게 중요한 서비스가 돌아가는 것도 아니고 이러한 가용성 보장이 필요하냐? 라는 차원에서는 굳이? 싶지만, 홈랩 자체가 재미로하는 취미생활이니까,, 그래서 구동하고 있는 VM들의 볼륨을 Synology NAS에 위치시키는 작업을 해보았다.
 
 ---
+
 ## Synology NAS 설정
+
 ### 시놀로지 나스에서 NFS 활성화
 
 ![vm-to-nfs1](./assets/vm-to-nfs1.png)
@@ -23,7 +27,7 @@ sidebar_position: 1
 
 - NFS 탭 선택
 - NFS 서비스 활성화
-	- 최대 NFS 프로토콜은 원하는 프로토콜 선택
+  - 최대 NFS 프로토콜은 원하는 프로토콜 선택
 
 ### 공유 폴더 NFS 설정
 
@@ -42,10 +46,11 @@ sidebar_position: 1
 ![vm-to-nfs6](./assets/vm-to-nfs6.png)
 
 - 호스트이름 또는 IP
-	- proxmox 호스트의 IP 입력
-	- 나는 여러 proxmox 노드가 접근할 수 있어야할 수 있기 때문에 CIDR 입력했다.
+  - proxmox 호스트의 IP 입력
+  - 나는 여러 proxmox 노드가 접근할 수 있어야할 수 있기 때문에 CIDR 입력했다.
 
 ---
+
 ## Proxmox 설정
 
 ![vm-to-nfs7](./assets/vm-to-nfs7.png)
