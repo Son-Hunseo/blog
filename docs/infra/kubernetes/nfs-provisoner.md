@@ -2,10 +2,12 @@
 title: NFS를 이용한 정적 프로비저닝
 sidebar_position: 1
 ---
+
 ---
+
 ## 왜?
 
-그동안 블로그, 포폴, 개인적인 용도의 어플리케이션들을 `Jenkins`와 `ArgoCD`로 자동 배포해왔다. 안에 설정들과 스크립트들이 많았지만, 귀찮아서 PV를 `emptyDir`로 그냥 써왔다. 그러다가 모든 서버들을 한번씩 재부팅 할 일이 있었는데, 이때 모든 설정이 날아갔다. 복구하는 김에 얼마전에 NAS에 NFS로 VM 볼륨을 마운팅 했듯이 PV도 NFS로 하면 되겠다는 생각이 들어서 시도하게되었다.
+그동안 블로그, 포폴, 개인적인 용도의 어플리케이션들을 `Jenkins`와 `ArgoCD`로 자동 배포해왔다. `ArgoCD`의 경우에는 정보들이 쿠버네티스 클러스터의 `etcd` 등에 저장되는 stateless한 어플리케이션이지만, `Jenkins`의 경우 pod 내부에 설정파일이 들어있는 stateful한 어플리케이션이다. 따라서 PV를 연결해주어야한다. 그러나 귀찮아서 PV를 `emptyDir`로 그냥 써왔다. 그러다가 모든 서버들을 한번씩 재부팅 할 일이 있었는데, 이때 모든 설정이 날아갔다. 복구하는 김에 얼마전에 NAS에 NFS로 VM 볼륨을 마운팅 했듯이 PV도 NFS로 하면 되겠다는 생각이 들어서 시도하게되었다.
 
 ---
 
@@ -37,9 +39,9 @@ helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs
 ```
 
 - 프로비저너 설치
-	- `nfs.server`: NFS의 IP
-	- `nfs.path`: NFS 스토리지 경로
-	- `storageClass.name`: 식별자
+  - `nfs.server`: NFS의 IP
+  - `nfs.path`: NFS 스토리지 경로
+  - `storageClass.name`: 식별자
 - `kubectl get sc` 하면 등록된 프로비저너를 확인할 수 있다.
 
 ---
