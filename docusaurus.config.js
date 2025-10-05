@@ -12,7 +12,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   // 탭에 뜨는 부분들
   title: 'Son\'s Blog',
-  tagline: 'Son Hunseo',
+  tagline: '개발, 인프라(클라우드, 플랫폼), 홈랩(홈서버) 등의 주제로 글을 작성하는 블로그입니다.',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
