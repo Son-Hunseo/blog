@@ -1,8 +1,12 @@
 ---
 title: Apache Guacamole로 개인 vdi를 만들어보자
+description: Apache Guacamole을 활용하여 홈랩 환경에서 VDI(가상 데스크톱 인프라)를 구축하는 방법을 설명합니다. 브라우저 기반 원격 접속 환경 구성 가이드입니다
+keywords: [Apache Guacamole, VDI, 가상 데스크톱, 원격 접속, 홈랩, RDP, VNC]
 sidebar_position: 1
 ---
+
 ---
+
 ## 왜?
 
 회사에서 근무할 때, 데이터 센터 내부 서버에 직접 연결을 해서 작업을 해야하는 경우 해당 망에 존재하는 VDI를 사용하였는데 현재 홈랩 환경에서도 개발용으로 우분투 VM을 VDI로 사용해보면 재밌지 않을까? 라는 생각이 들어서 진행하게되었다. (실제로 사용할지는 몰루?) 엔터프라이즈급 솔루션보다는 간단한 솔루션을 찾던 중 Apache Guacamole를 알게되었고 이를 통한 VDI 구축기를 기록하고자 한다.
@@ -10,6 +14,7 @@ sidebar_position: 1
 ## 사전 세팅 (Ubuntu)
 
 OS: `Ubuntu 24.04.3 LTS`
+
 - 윈도우는 이 과정이 필요없으니 바로 과카몰리 설치로 넘어가면 된다.
 
 ### RDP 서버 설치
@@ -41,7 +46,7 @@ sudo apt install xfce4 xfce4-goodies -y
 ```
 
 - 우리가 아는 익숙한 우분투 GUI는 `GNOME`이다. 그러나 `GNOME`은 인터페이스는 편리하지만 무겁기도하고, `xrdp`와 호환이 안되는 경우도 있어서 `XFCE`를 설치한다.
-	- `GNOME`과 `XFCE` 모두 우분투 GUI의 종류
+  - `GNOME`과 `XFCE` 모두 우분투 GUI의 종류
 
 ### 세션 설정
 
@@ -63,14 +68,17 @@ sudo systemctl restart xrdp
 ## Apache Guacamole 설치
 
 나는 쿠버네티스 클러스터에 배포했다. 만약 도커로 배포하고 싶은 경우 아래 링크를 참조하면 될 듯
+
 - https://svrforum.com/svr/192303
 
 ### Manifest 작성
 
 나는 쿠버네티스 클러스터에 배포했다. 만약 도커로 배포하고 싶은 경우 아래 링크를 참조하면 될 듯
+
 - https://svrforum.com/svr/192303
 
 **매니페스트 파일**
+
 ```yaml
 apiVersion: v1
 kind: Namespace
@@ -120,7 +128,6 @@ spec:
   type: LoadBalancer
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -137,20 +144,20 @@ spec:
         app: guacd
     spec:
       containers:
-      - name: guacd
-        image: linuxserver/guacd:latest
-        volumeMounts:
-        - name: drive
-          mountPath: /drive
-        - name: record
-          mountPath: /record
+        - name: guacd
+          image: linuxserver/guacd:latest
+          volumeMounts:
+            - name: drive
+              mountPath: /drive
+            - name: record
+              mountPath: /record
       volumes:
-      - name: drive
-        hostPath:
-          path: /guacamole/drive
-      - name: record
-        hostPath:
-          path: /guacamole/record
+        - name: drive
+          hostPath:
+            path: /guacamole/drive
+        - name: record
+          hostPath:
+            path: /guacamole/record
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -168,35 +175,35 @@ spec:
         app: postgres
     spec:
       containers:
-      - name: postgres
-        image: postgres:13.4
-        env:
-        - name: PGDATA
-          value: /var/lib/postgresql/data/guacamole
-        - name: POSTGRES_DB
-          value: guacamole_db
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: POSTGRES_PASSWORD
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: POSTGRES_USER
-        volumeMounts:
-        - name: init
-          mountPath: /docker-entrypoint-initdb.d
-        - name: data
-          mountPath: /var/lib/postgresql/data
+        - name: postgres
+          image: postgres:13.4
+          env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/guacamole
+            - name: POSTGRES_DB
+              value: guacamole_db
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+          volumeMounts:
+            - name: init
+              mountPath: /docker-entrypoint-initdb.d
+            - name: data
+              mountPath: /var/lib/postgresql/data
       volumes:
-      - name: init
-        hostPath:
-          path: /guacamole/init
-      - name: data
-        hostPath:
-          path: /guacamole/data
+        - name: init
+          hostPath:
+            path: /guacamole/init
+        - name: data
+          hostPath:
+            path: /guacamole/data
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -214,36 +221,36 @@ spec:
         app: guacamole
     spec:
       containers:
-      - name: guacamole
-        image: jwetzell/guacamole:arm64
-        env:
-        - name: EXTENSIONS
-          value: auth-totp
-        - name: GUACD_HOSTNAME
-          value: guacd
-        - name: POSTGRES_DATABASE
-          value: guacamole_db
-        - name: POSTGRES_HOSTNAME
-          value: postgres
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: POSTGRES_PASSWORD
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: POSTGRES_USER
-        - name: POSTGRESQL_AUTO_CREATE_ACCOUNTS
-          value: "true"
-        volumeMounts:
-        - name: drive
-          mountPath: /drive
+        - name: guacamole
+          image: jwetzell/guacamole:arm64
+          env:
+            - name: EXTENSIONS
+              value: auth-totp
+            - name: GUACD_HOSTNAME
+              value: guacd
+            - name: POSTGRES_DATABASE
+              value: guacamole_db
+            - name: POSTGRES_HOSTNAME
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: POSTGRESQL_AUTO_CREATE_ACCOUNTS
+              value: "true"
+          volumeMounts:
+            - name: drive
+              mountPath: /drive
       volumes:
-      - name: drive
-        hostPath:
-          path: /guacamole/drive
+        - name: drive
+          hostPath:
+            path: /guacamole/drive
 ---
 apiVersion: v1
 kind: Secret
@@ -274,20 +281,21 @@ kubectl apply -f 매니페스트파일.yml -n guacamole
 ---
 
 ## Apache Guacamole 설정
+
 ### 로그인
 
 ![guacamole1](./assets/guacamole1.png)
 
 - guacamole 서비스가 클러스터에 떠있는 경로로 접속하면 위와 같은 로그인 화면이 뜬다.
-	- Docker로 설치한 경우 https://ip:8443
+  - Docker로 설치한 경우 https://ip:8443
 - 초기 id, pw를 입력하고 로그인한다.
-	- id: guacadmin
-	- pw: guacadmin
+  - id: guacadmin
+  - pw: guacadmin
 
 ![guacamole2](./assets/guacamole2.png)
 
 - Google Authenticator 등으로 2FA 인증 등록을 한다.
-	- Docker 버전의 경우 2FA가 기본으로 되어있지 않다. (개인적으로 특정 VM에 직접 접근하는 것이므로 외부에 노출할 경우 2FA 인증 설정을 하는 것을 권장한다)
+  - Docker 버전의 경우 2FA가 기본으로 되어있지 않다. (개인적으로 특정 VM에 직접 접근하는 것이므로 외부에 노출할 경우 2FA 인증 설정을 하는 것을 권장한다)
 
 ### 새로운 계정 생성 & 기본 계정 삭제
 
@@ -316,17 +324,17 @@ kubectl apply -f 매니페스트파일.yml -n guacamole
 ![guacamole8](./assets/guacamole8.png)
 
 - 정말 많은 설정이 있지만 필수적으로 해야할 세팅을 하고 나머지 세팅은 추후 용도에 맞게 설정하자.
-	- 연결 편집
-		- 이름: 사용할 연결 이름
-		- 위치: 그대로 놔두기
-		- 프로토콜: `RDP`로 변경
-	- 매개 변수
-		- 네트워크
-			- 호스트 이름: 접속할 호스트의 IP
-			- 포트: `3389` (RDP 포트)
-		- 인증
-			- 사용자 이름: 생성했던 원격 전용 계정 (계정을 생성하지 않았다면, 원래 접속하던 기본 계정)
-			- 패스워드: 계정의 패스워드
+  - 연결 편집
+    - 이름: 사용할 연결 이름
+    - 위치: 그대로 놔두기
+    - 프로토콜: `RDP`로 변경
+  - 매개 변수
+    - 네트워크
+      - 호스트 이름: 접속할 호스트의 IP
+      - 포트: `3389` (RDP 포트)
+    - 인증
+      - 사용자 이름: 생성했던 원격 전용 계정 (계정을 생성하지 않았다면, 원래 접속하던 기본 계정)
+      - 패스워드: 계정의 패스워드
 - 세팅 이후 저장
 
 ### 연결
