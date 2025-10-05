@@ -79,6 +79,11 @@ const config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        // Google Analytics
+        gtag: {
+          trackingID: 'G-Q9GGC935DY', // 여기에 측정 ID 입력
+          anonymizeIP: true, // IP 익명화 (선택사항)
+        },
       }),
     ],
   ],
