@@ -30,13 +30,3 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
-
-/* Giscus 전체 컨테이너 상단 여백 */
-.giscus {
-  margin-top: 3rem;
-}
-
-/* 반응 버튼 가운데 정렬 */
-.giscus-reactions {
-  justify-content: center !important;
-}

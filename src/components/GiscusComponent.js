@@ -13,7 +13,7 @@ export default function GiscusComponent() {
       categoryId="DIC_kwDOP2AlTs4CwQsW"
       mapping="pathname"
       strict="0"
-      reactionsEnabled="1"
+      reactionsEnabled="0" // 반응 비활성화
       emitMetadata="0"
       inputPosition="bottom"
       theme={colorMode}
