@@ -135,6 +135,8 @@ class Trie {
 
 ### 삭제
 
+**물리적 삭제 포함**
+
 ```java
 class Trie {
 	...
@@ -178,3 +180,30 @@ class Trie {
 - 결국 단순하게 생각하면 `isEndOfWord`를 `false`로 바꾸면 되지만, 메모리 최적화를 위해서 이를 물리적으로도 삭제 해야할지 판단해서 삭제하는 코드이다.
 - 조금 복잡해서 주석을 코드마다 달아놨다.
 - 코딩 테스트에서는 어짜피 최대 메모리 제한만 있고 실시간 메모리 최적화 여부는 판단하지 않으니, 그냥 `isEndOfWord`만 `false`로 바꾸어도 될 것 같다.
+
+**논리적 삭제만**
+
+```java
+class Trie {
+	...
+	public boolean delete(String word) { 
+		TrieNode current = root; // 삭제할 단어의 마지막 노드까지 이동 
+		for (char ch : word.toCharArray()) { 
+			if (!current.children.containsKey(ch)) { 
+				return false; // 단어가 존재하지 않음 
+			} 
+			current = current.children.get(ch); 
+		} 
+		
+		// 단어의 끝이 아니면 삭제 실패 
+		if (!current.isEndOfWord) { 
+			return false; 
+		} 
+		
+		// isEndOfWord만 false로 변경 (논리적 삭제) 
+		current.isEndOfWord = false; 
+		return true; 
+	}	
+	...
+}
+```
