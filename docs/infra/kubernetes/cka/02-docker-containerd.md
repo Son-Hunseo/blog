@@ -20,8 +20,6 @@ keywords:
   - Kubernetes containerd 설치
   - nerdctl 사용법
 ---
-이 글은 Udemy - Certified Kubernetes Administrator (CKA) with Practice Tests (Mumshad) 강의를 보고 정리한 내용입니다.
-
 ---
 ## Docker와 Containerd의 관계
 
@@ -75,3 +73,7 @@ keywords:
 - crictl: Kubernetes 전용 디버깅용, 모든 CRI 런타임과 호환
 
 즉, 일반적으로 컨테이너 실행/관리에는 **nerdctl**, Kubernetes 환경 디버깅에는 **crictl**을 사용.
+
+## 레퍼런스
+
+- Udemy - Certified Kubernetes Administrator (CKA) with Practice Tests (Mumshad)
