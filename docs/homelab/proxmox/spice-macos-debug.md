@@ -1,6 +1,6 @@
 ---
 title: MacOS에서 virt-viewer로 SPICE연결이 되지 않는 현상 해결
-sidebar_label: "6"
+sidebar_position: "6"
 description: MacOS에서 Proxmox SPICE 연결 시 발생하는 remote-viewer 오류 해결 방법을 정리했습니다. Homebrew로 설치한 virt-viewer 환경에서 GTK 라이브러리 충돌(GTK3 vs GTK4, GLib, GObject 등)로 인한 접속 불가 문제를 디버깅하고, 환경변수 및 의존성 정리로 해결한 과정을 다룹니다.
 keywords:
   - Proxmox
