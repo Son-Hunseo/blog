@@ -16,9 +16,7 @@ keywords:
   ]
 sidebar_position: 4
 ---
-
 ---
-
 ## 회문 (Palindrome)
 
 ### 기본 유형

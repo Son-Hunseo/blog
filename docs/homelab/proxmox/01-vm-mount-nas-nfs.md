@@ -1,12 +1,17 @@
 ---
-title: "시놀로지 나스의 공유 폴더를 Proxmox VM의 볼륨으로 사용해보자"
+title: 시놀로지 나스의 공유 폴더를 Proxmox VM의 볼륨으로 사용해보자
 description: Proxmox 환경에서 Synology NAS 스토리지를 NFS로 마운트하여 VM 볼륨으로 활용하는 방법을 다룹니다. 컴퓨팅과 스토리지 자원 분리를 통한 고가용성 구성 가이드입니다
-keywords: [Proxmox, Synology, NAS, NFS, VM 볼륨, 고가용성, 스토리지 분리, 홈랩]
-sidebar_position: 1
+keywords:
+  - Proxmox
+  - Synology
+  - NAS
+  - NFS
+  - VM 볼륨
+  - 고가용성
+  - 스토리지 분리
+  - 홈랩
 ---
-
 ---
-
 ## 왜?
 
 데이터 센터에서 근무를 할 때를 생각해보면, 데이터 센터에서는 컴퓨팅 자원(서버 노드: vCPU, vRAM 제공)과 스토리지 자원(NAS 스토리지 서버)이 분리되서 운영되었다. VM의 볼륨은 NAS 스토리지에 위치시키고 이를 NFS 프로토콜을 통해 각 서버 노드에서 마운트하여 사용한다. 왜냐하면 어떠한 하나의 서버 노드가 폴트가 발생했을 때 VM 볼륨이 독립된 NAS 스토리지에 존재하기 때문에 다른 정상 동작 중인 서버 노드에서 해당 VM을 재구동할 수 있기 때문이다.

@@ -1,12 +1,16 @@
 ---
 title: OpenVPN -> WireGuard 전환기
 description: Synology NAS에서 OpenVPN을 WireGuard로 교체한 경험을 공유합니다. WireGuard의 장점과 마이그레이션 과정을 실무 관점에서 설명합니다
-keywords: [WireGuard, OpenVPN, VPN, Synology, 마이그레이션, 네트워크 보안, 홈랩]
-sidebar_position: 1
+keywords:
+  - WireGuard
+  - OpenVPN
+  - VPN
+  - Synology
+  - 마이그레이션
+  - 네트워크 보안
+  - 홈랩
 ---
-
 ---
-
 ## 왜?
 
 나는 보안상의 이유로 홈랩에서 구축한 거의 모든 서비스를 외부로 노출시키지 않고 VPN을 통해 내부망에 연결해서 사용하는 형식으로 사용하고있다. VPN 서버는 많은 서비스들이 실행되고 있는 서버 보다는 상대적으로 안정적인 Synology NAS 서버에 두고있었다. 이에 DSM에서 패키지로 제공하고 있는 OpenVPN이 구축하기 편해서 사용하고 있었으나, 속도를 비롯한 여러가지 측면에서 WireGuard가 더 좋겠다는 생각이 들었고 VPN 서버를 WireGuard로 교체하게 되었다.

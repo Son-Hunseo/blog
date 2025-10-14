@@ -1,6 +1,5 @@
 ---
 title: Kube-proxy
-sidebar_position: 8
 description: kube-proxy는 Kubernetes에서 Service 트래픽을 실제 Pod로 전달하는 핵심 컴포넌트로, 클러스터 내 Pod 간 통신을 가능하게 합니다. 이 글에서는 Pod Networking 구조, Service와 kube-proxy의 역할, 그리고 설치 및 실행 방법을 CKA 학습 기준으로 정리했습니다.
 keywords:
   - kube-proxy

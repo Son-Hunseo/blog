@@ -1,6 +1,5 @@
 ---
 title: Ubuntu/Debian WOL(Wake-On-LAN) 설정하기
-sidebar_position: 3
 description: MSI 메인보드와 Ubuntu/Debian에서 Wake-on-LAN(WOL)을 설정하는 방법을 정리했습니다. BIOS 설정부터 ethtool, systemd 서비스 등록, 공유기 설정까지 간단히 안내합니다.
 keywords:
   - WOL

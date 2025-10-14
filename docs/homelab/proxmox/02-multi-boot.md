@@ -1,6 +1,5 @@
 ---
 title: Proxmox 멀티 부팅 세팅
-sidebar_position: 2
 description: Proxmox와 Windows를 한 PC에서 쉽게 전환할 수 있는 듀얼 부팅 환경 설정 방법을 정리했습니다. BIOS에서 부팅 순서를 매번 변경하지 않고 GRUB 메뉴를 통해 부팅 선택지를 추가하는 과정과, 부트 파티션 식별 및 설정 파일 수정법을 단계별로 설명합니다.
 keywords:
   - Proxmox

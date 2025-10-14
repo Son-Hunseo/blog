@@ -1,12 +1,17 @@
 ---
 title: Jenkins Webhook을 위해 Nginx 화이트리스트 처리하기
 description: Jenkins를 외부에 노출하지 않고 Github Webhook을 안전하게 받는 방법을 소개합니다. Nginx 화이트리스트를 통한 보안 강화 기법을 다룹니다
-keywords: [Jenkins, Webhook, Nginx, 화이트리스트, whitelist, Github, CI/CD, 보안]
-sidebar_position: 1
+keywords:
+  - Jenkins
+  - Webhook
+  - Nginx
+  - 화이트리스트
+  - whitelist
+  - Github
+  - CI/CD
+  - 보안
 ---
-
 ---
-
 ## 왜?
 
 개인적으로 개발한 것들을 배포할 때 Github에 푸시하면 Github에서 웹훅을 Jenkins로 보내고 Jenkins가 CI/CD 파이프라인을 실행하게끔 세팅했었다. 이러한 웹훅을 보내기 위해서 Jenkins를 어쩔 수 없이 리버스프록시를 통해서 외부에 노출시켰었는데 이렇게 외부로 노출시키는게 항상 찝찝했었다. 그러다가 문득 Github에서 웹훅을 보내는 경로와 ip만 화이트리스트로 등록하면 되다는 생각이 들었고 이를 진행하게 되었다.

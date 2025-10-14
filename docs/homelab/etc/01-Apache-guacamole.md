@@ -1,12 +1,16 @@
 ---
 title: Apache Guacamole로 개인 vdi를 만들어보자
 description: Apache Guacamole을 활용하여 홈랩 환경에서 VDI(가상 데스크톱 인프라)를 구축하는 방법을 설명합니다. 브라우저 기반 원격 접속 환경 구성 가이드입니다
-keywords: [Apache Guacamole, VDI, 가상 데스크톱, 원격 접속, 홈랩, RDP, VNC]
-sidebar_position: 1
+keywords:
+  - Apache Guacamole
+  - VDI
+  - 가상 데스크톱
+  - 원격 접속
+  - 홈랩
+  - RDP
+  - VNC
 ---
-
 ---
-
 ## 왜?
 
 회사에서 근무할 때, 데이터 센터 내부 서버에 직접 연결을 해서 작업을 해야하는 경우 해당 망에 존재하는 VDI를 사용하였는데 현재 홈랩 환경에서도 개발용으로 우분투 VM을 VDI로 사용해보면 재밌지 않을까? 라는 생각이 들어서 진행하게되었다. (실제로 사용할지는 몰루?) 엔터프라이즈급 솔루션보다는 간단한 솔루션을 찾던 중 Apache Guacamole를 알게되었고 이를 통한 VDI 구축기를 기록하고자 한다.

@@ -1,10 +1,15 @@
 ---
 title: 분할정복 & 이진탐색
 description: 문제를 작은 단위로 나누어 해결하는 분할정복 알고리즘과 정렬된 데이터에서 효율적으로 탐색하는 이진탐색 기법을 설명합니다
-keywords: [분할정복, 이진탐색, binary search, divide and conquer, 알고리즘, 탐색 알고리즘]
-sidebar_position: 2
+keywords:
+  - 분할정복
+  - 이진탐색
+  - binary search
+  - divide and conquer
+  - 알고리즘
+  - 탐색 알고리즘
 ---
-
+---
 ## 분할 정복 기초
 
 ### 대표 예제
