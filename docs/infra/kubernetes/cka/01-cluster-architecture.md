@@ -24,9 +24,6 @@ keywords:
     쿠버네티스 공부,
   ]
 ---
-
-이 글은 Udemy - Certified Kubernetes Administrator (CKA) with Practice Tests (Mumshad) 강의를 보고 정리한 내용입니다.
-
 ---
 
 **아키텍처**
@@ -95,3 +92,4 @@ keywords:
 - [https://kubernetes.io/docs/concepts/overview/components/](https://kubernetes.io/docs/concepts/overview/components/)
 - [https://kubernetes.io/docs/concepts/services-networking/](https://kubernetes.io/docs/concepts/services-networking/)
 - [https://kubernetes.io/docs/concepts/architecture/](https://kubernetes.io/docs/concepts/architecture/)
+- Udemy - Certified Kubernetes Administrator (CKA) with Practice Tests (Mumshad)
