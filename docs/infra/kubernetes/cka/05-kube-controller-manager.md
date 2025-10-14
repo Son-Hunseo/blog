@@ -1,6 +1,5 @@
 ---
 title: Kube Controller Manager
-sidebar_position: 5
 description: kube-controller-manager는 Kubernetes의 다양한 컨트롤러들을 관리하며, 클러스터를 항상 원하는 상태로 유지하도록 자동 조정합니다. 이 글에서는 Node Controller, Replication Controller 등 주요 컨트롤러들의 역할과 동작 방식, 설치 방법을 CKA 기준으로 정리했습니다.
 keywords:
   - kube-controller-manager

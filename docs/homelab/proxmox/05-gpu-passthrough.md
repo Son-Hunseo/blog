@@ -1,6 +1,5 @@
 ---
 title: Proxmox VM에 GPU Passthrough를 적용해보자.
-sidebar_position: 5
 description: Proxmox에서 NVIDIA GPU Passthrough를 설정하는 완벽 가이드. BIOS 설정부터 vfio.conf 구성, VM에 GPU 장치 연결, Ubuntu에서 드라이버 설치까지 단계별로 설명합니다. RTX 4080 등 최신 GPU 환경에서도 안정적으로 AI 추론, 그래픽 작업, 게이밍용 VM을 구성할 수 있습니다.
 keywords:
   - Proxmox

@@ -1,6 +1,5 @@
 ---
 title: 문자열 2 - Trie
-sidebar_position: 5
 description: Trie(트라이)는 문자열을 효율적으로 저장하고 탐색하기 위한 트리 기반 자료구조입니다. 이 글에서는 Trie의 구조, 시간·공간 복잡도, 장단점부터 Java로 구현한 삽입·탐색·삭제 코드까지 자세히 설명합니다.
 keywords:
   - Trie
