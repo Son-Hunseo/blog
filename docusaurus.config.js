@@ -20,6 +20,12 @@ const config = {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
+    // mermaid 추가
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+
   // Set the production url of your site here
   // 검색 최적화 등에 사용
   url: 'https://blog.sonhs.com',
