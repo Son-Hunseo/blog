@@ -1,0 +1,31 @@
+---
+title: Spring
+sidebar_position: 1
+---
+
+---
+
+- 분류 기준: [https://docs.spring.io/spring-framework/reference/index.html](https://docs.spring.io/spring-framework/reference/index.html)
+
+---
+
+```mermaid
+graph TD
+    Spring[Spring Framework]
+
+    Spring --> Core
+    Spring --> Web-Servlet
+    Spring --> Data-Access
+    Spring --> Etc
+
+    Core --> CoreItems[IoC Container<br/>Bean<br/>AOP<br/>...]
+
+    Web-Servlet --> Web-ServletItems[Spring MVC<br/>WebSocket<br/>...]
+
+    Data-Access --> DataItems[Transactions<br/>JDBC<br/>...]
+
+    Etc --> EtcItems[...]
+
+    style Spring fill:#6db33f,stroke:#333,stroke-width:3px,color:#fff
+    style Core fill:#68b3e0,str
+```
