@@ -12,7 +12,7 @@ keywords:
 ## 개요
 
 - kubelet은 각 노드에서 실행되는 에이전트로, 노드와 쿠버네티스 클러스터 간의 단일 접점 역할을 한다.
-- 스케줄러가 어떤 노드에 pod를 배치할지 결정하면, 실제로 pod를 생성하고 실행하는 것은 kubelet의 역할이다.
+- 스케줄러가 어떤 노드에 pod를 배치할지 결정하면, <span style={{color: 'red'}}>실제로 pod를 생성하고 실행하는 것은 kubelet의 역할</span>이다.
 - kubelet은 container runtime(containerd, CRI-O 등)과 연동해 컨테이너를 생성하고 관리한다.
 
 ## 주요 역할

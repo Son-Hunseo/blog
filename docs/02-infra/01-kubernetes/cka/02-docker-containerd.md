@@ -23,10 +23,10 @@ keywords:
 ## Docker와 Containerd의 관계
 
 - 초창기에는 Docker가 컨테이너 생태계를 주도했고 Kubernetes도 Docker만 지원.
-- 이후 다양한 컨테이너 런타임을 지원하기 위해 CRI(Container Runtime Interface) 도입.
+- 이후 <span style={{color: 'red'}}>다양한 컨테이너 런타임을 지원하기 위해 CRI(Container Runtime Interface) 도입.</span>
 - OCI(Open Container Initiative) 표준(이미지 스펙, 런타임 스펙)을 따르는 런타임들은 Kubernetes와 호환 가능.
 - Docker는 CRI 표준을 따르지 않았기에 Kubernetes가 dockershim이라는 별도 호환 계층을 제공.
-	- Docker는 Kubernetes를 위해 만들어진 것이 아니라 그 자체의 기능들도 많았기 때문에 CRI 표준을 따르기 힘들었음.
+	- <span style={{color: 'red'}}>Docker는 Kubernetes를 위해 만들어진 것이 아니라 그 자체의 기능들도 많았기 때문에 CRI 표준을 따르기 힘들었음.</span>
 - Kubernetes v1.24에서 dockershim 제거 → Docker 직접 지원 종료.
 	- 그런데 Kubernetes에서 업데이트를 하며, dockershim을 지원하기 위한 리소스가 너무 많이 들어 Docker 지원 종료
 - 그러나 Docker가 생성한 이미지는 OCI 스펙을 따르므로 containerd 등 다른 런타임에서 그대로 사용 가능.

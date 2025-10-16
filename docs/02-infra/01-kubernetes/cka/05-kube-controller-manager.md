@@ -12,14 +12,14 @@ keywords:
 ## 개요
 
 - Kube Controller Manager는 Kubernetes의 다양한 컨트롤러들을 관리하는 컴포넌트이다.
-- 컨트롤러란 시스템 내 컴포넌트들의 상태를 지속적으로 모니터링하고, 클러스터를 원하는 상태(Desired State)로 맞추는 역할을 하는 프로세스이다.
+- 컨트롤러란 시스템 내 <span style={{color: 'red'}}>컴포넌트들의 상태를 지속적으로 모니터링하고, 클러스터를 원하는 상태(Desired State)로 맞추는 역할</span>을 하는 프로세스이다.
 - **여러 컨트롤러들은 각각 독립적인 기능을 수행하지만, 하나의 프로세스로 패키징되어 kube-controller-manager 안에서 실행**된다.
 
 ## 주요 컨트롤러
 
 ### (1) Node Controller
 
-- 각 노드 상태를 주기적으로 확인하고, 장애 시 적절한 조치를 취한다.
+- <span style={{color: 'red'}}>각 노드 상태를 주기적으로 확인하고, 장애 시 적절한 조치를 취한다.</span>
 - 동작 방식
     - kube-apiserver를 통해 5초마다 각 노드에 헬스체크 요청을 보냄 (Node Monitor Period)
     - 응답이 없으면 최대 40초간 대기 (Node Monitor Grace Period)

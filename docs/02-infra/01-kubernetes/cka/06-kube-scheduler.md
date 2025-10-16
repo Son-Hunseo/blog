@@ -12,7 +12,7 @@ keywords:
 ## 개요
 
 - kube-scheduler는 pod를 어느 노드에 배치할지 결정하는 역할을 한다.
-- 중요한 점: kube-scheduler는 단지 **"어디에 둘지 결정"**만 하며, 실제로 pod를 생성하여 실행하는 것은 각 노드의 kubelet이 담당한다.
+- 중요한 점: kube-scheduler는 단지 <span style={{color: 'red'}}>"어디에 둘지 결정"</span>만 하며, 실제로 pod를 생성하여 실행하는 것은 각 노드의 kubelet이 담당한다.
 
 ## 스케줄러가 필요한 이유
 
