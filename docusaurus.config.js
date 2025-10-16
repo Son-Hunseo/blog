@@ -100,19 +100,24 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Son Hunseo', // 메뉴 바의 웹사이트 메인 제목
+        title: 'Son\'s Blog', // 메뉴 바의 웹사이트 메인 제목
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.png', // 필요없을 것 같아서 비워 둠
         },
         items: [
+        {
+          to: '/',
+          position: 'left',
+          label: 'Blog',
+        },
           // doc 타입의 메뉴
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Blog',
-          },
+          // {
+          //   type: 'docSidebar',
+          //   sidebarId: 'tutorialSidebar',
+          //   position: 'left',
+          //   label: 'Blog',
+          // },
           // 블로그 타입 필요없어서 없앰
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
