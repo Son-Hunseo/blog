@@ -4,7 +4,7 @@ const matter = require('gray-matter');
 
 module.exports = function (context, options) {
   return {
-    name: 'recent-posts-plugin',
+    name: 'random-posts-plugin',
     async contentLoaded({content, actions}) {
       const {setGlobalData} = actions;
       
@@ -12,7 +12,6 @@ module.exports = function (context, options) {
       
       // 숫자 프리픽스 제거 함수 (Docusaurus 규칙)
       function removeNumberPrefix(str) {
-        // 01-, 02-number- 등의 패턴 제거
         return str.replace(/^\d+-/, '');
       }
       
@@ -78,7 +77,6 @@ module.exports = function (context, options) {
       
       // 마크다운에서 첫 번째 이미지 찾기
       function findFirstImage(content, filePath) {
-        // ![alt](url) 형식 찾기
         const imageRegex = /!\[.*?\]\((.*?)\)/;
         const match = content.match(imageRegex);
         
@@ -86,12 +84,10 @@ module.exports = function (context, options) {
         
         let imagePath = match[1];
         
-        // 이미 절대 경로면 그대로 반환
         if (imagePath.startsWith('/') || imagePath.startsWith('http')) {
           return imagePath;
         }
         
-        // 상대 경로를 절대 경로로 변환
         if (imagePath.startsWith('./') || imagePath.startsWith('../')) {
           const fileDir = path.dirname(filePath);
           const imageName = path.basename(imagePath);
@@ -110,7 +106,6 @@ module.exports = function (context, options) {
       mdFiles.forEach(filePath => {
         const fileName = path.basename(filePath, path.extname(filePath));
         
-        // index 파일은 제외
         if (fileName === 'index' || fileName === '_category_') {
           return;
         }
@@ -118,24 +113,18 @@ module.exports = function (context, options) {
         const fileContent = fs.readFileSync(filePath, 'utf-8');
         const {data: frontMatter, content: contentText} = matter(fileContent);
         
-        // 루트 index나 숨김 파일 제외
         if (frontMatter.slug === '/' || frontMatter.sidebar_class_name === 'hidden-sidebar-item') {
           return;
         }
         
-        // 문서가 속한 폴더
         const fileDir = path.dirname(filePath);
         const relativePath = path.relative(docsDir, filePath);
         const pathParts = relativePath.split(path.sep);
         
-        // URL 생성: 모든 폴더 경로 + 문서의 slug 또는 파일명
         let urlPath = '';
-        
-        // 파일이 속한 전체 폴더 경로 처리
-        const fileDirParts = pathParts.slice(0, -1); // 파일명 제외한 폴더들
+        const fileDirParts = pathParts.slice(0, -1);
         
         if (fileDirParts.length > 0) {
-          // 각 폴더의 slug를 찾거나 폴더명 사용
           const folderSlugs = [];
           
           for (let i = 0; i < fileDirParts.length; i++) {
@@ -143,18 +132,15 @@ module.exports = function (context, options) {
             const folderSlug = getFolderSlug(folderPath);
             
             if (folderSlug) {
-              // 이전 폴더들의 slug를 제거하고 현재 폴더의 slug만 추출
               const cleanSlug = folderSlug.replace(/^\//, '').split('/').pop();
               folderSlugs.push(cleanSlug);
             } else {
-              // slug가 없으면 폴더명 사용 (숫자 프리픽스 제거)
               folderSlugs.push(removeNumberPrefix(fileDirParts[i]));
             }
           }
           
           urlPath = folderSlugs.join('/');
           
-          // 문서의 slug가 있으면 사용, 없으면 파일명 사용
           if (frontMatter.slug) {
             const docSlug = frontMatter.slug.startsWith('/') ? frontMatter.slug.substring(1) : frontMatter.slug;
             urlPath = `${urlPath}/${docSlug}`;
@@ -162,7 +148,6 @@ module.exports = function (context, options) {
             urlPath = `${urlPath}/${removeNumberPrefix(fileName)}`;
           }
         } else {
-          // 루트에 있는 경우
           if (frontMatter.slug) {
             urlPath = frontMatter.slug.replace(/^\//, '');
           } else {
@@ -170,7 +155,6 @@ module.exports = function (context, options) {
           }
         }
         
-        // 카테고리 이름 가져오기 (전체 경로)
         let categoryName = 'Etc';
         if (fileDirParts.length > 0) {
           const categoryParts = [];
@@ -189,16 +173,13 @@ module.exports = function (context, options) {
           categoryName = categoryParts.join(' / ');
         }
         
-        // 첫 번째 단락을 설명으로 사용
         const description = contentText
           .split('\n')
           .find(line => line.trim() && !line.startsWith('#') && !line.startsWith('import') && !line.startsWith('!'))
           ?.substring(0, 150) || '';
         
-        // 첫 번째 이미지 찾기 (상대 경로를 절대 경로로 변환)
         const firstImage = findFirstImage(contentText, filePath);
         
-        // frontmatter의 date 우선 사용, 없으면 파일 수정 시간 사용
         const stats = fs.statSync(filePath);
         let postDate;
         
@@ -215,18 +196,13 @@ module.exports = function (context, options) {
           category: categoryName,
           date: postDate,
           tags: frontMatter.tags || [],
-          image: frontMatter.image || firstImage || null, // frontmatter > 본문 첫 이미지 > null
+          image: frontMatter.image || firstImage || null,
         });
       });
       
-      // 날짜순으로 정렬 (최신순)
       posts.sort((a, b) => b.date - a.date);
       
-      // 최신 글 N개만 선택 (기본 6개)
-      const recentPosts = posts.slice(0, options.limit || 6);
-      
-      // 날짜를 상대적 시간으로 변환
-      recentPosts.forEach(post => {
+      posts.forEach(post => {
         const now = new Date();
         const diffTime = Math.abs(now - new Date(post.date));
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -245,12 +221,10 @@ module.exports = function (context, options) {
           post.dateText = `${years}년 전`;
         }
         
-        // 원본 Date 객체 제거 (JSON 직렬화를 위해)
         delete post.date;
       });
       
-      // 글로벌 데이터로 설정
-      setGlobalData({recentPosts});
+      setGlobalData({recentPosts: posts});
     },
   };
 };
