@@ -179,6 +179,16 @@ const config = {
         additionalLanguages: ['java', 'bash', 'markup'],
       },
     }),
+  
+  // plugins 섹션 추가
+  plugins: [
+    [
+      './plugins/recent-posts-plugin.js',
+      {
+        limit: 4, // 표시할 최신 글 개수 (원하는 대로 조정)
+      },
+    ],
+  ],
 };
 
 export default config;
