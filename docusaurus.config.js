@@ -188,9 +188,9 @@ const config = {
   // plugins 섹션 추가
   plugins: [
     [
-      './plugins/recent-posts-plugin.js',
+      './plugins/random-posts-plugin.js',
       {
-        limit: 4, // 표시할 최신 글 개수 (원하는 대로 조정)
+        limit: 6, // 표시할 최신 글 개수 (원하는 대로 조정)
       },
     ],
   ],

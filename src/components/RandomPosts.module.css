@@ -1,8 +1,8 @@
-.recentPosts {
+.randomPosts {
   margin: 2rem 0;
 }
 
-.recentPosts h2 {
+.randomPosts h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
   color: var(--ifm-font-color-base);
@@ -115,12 +115,14 @@
   font-weight: 600;
 }
 
-.separator {
-  color: var(--ifm-color-emphasis-400);
-}
-
 .date {
   color: var(--ifm-color-emphasis-600);
+  display: none;  /* 날짜 숨김 */
+}
+
+.separator {
+  color: var(--ifm-color-emphasis-400);
+  display: none;  /* 구분자도 숨김 */
 }
 
 .tags {
