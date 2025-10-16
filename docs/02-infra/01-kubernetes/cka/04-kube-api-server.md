@@ -11,11 +11,11 @@ keywords:
 ---
 ## 역할
 
-- Kubernetes의 핵심 컴포넌트로 모든 요청은 kube-apiserver를 거쳐 처리된다.
+- Kubernetes의 핵심 컴포넌트로 <span style={{color: 'red'}}>모든 요청은 kube-apiserver를 거쳐 처리</span>된다.
 - 주요 기능:
     - 사용자 요청을 인증(authenticate) 및 검증(validate)
     - etcd에 데이터를 조회(retrieve)하거나 업데이트(update)
-    - etcd와 직접 통신하는 유일한 컴포넌트
+    - <span style={{color: 'red'}}>etcd와 직접 통신하는 유일한 컴포넌트</span>
     - 다른 컴포넌트(kube-scheduler, controller-manager, kubelet 등)는 etcd와 직접 통신하지 않고 kube-apiserver를 통해 상태를 갱신한다.
 
 ## 동작 예시

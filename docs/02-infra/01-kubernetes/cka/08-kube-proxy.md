@@ -23,17 +23,17 @@ keywords:
 
 ## Service와 Kube-Proxy의 역할
 
-- Service
-    - Service는 Pod와 달리 네트워크 인터페이스나 리슨 프로세스가 없는, Kubernetes 메모리에 존재하는 가상의 개념이다.
-    - Service는 고정된 ClusterIP를 제공해 Pod들의 IP 변경에도 안정적으로 접근 가능하게 한다.
+**Service**
+- Service는 Pod와 달리 네트워크 인터페이스나 리슨 프로세스가 없는, Kubernetes 메모리에 존재하는 가상의 개념이다.
+- Service는 고정된 ClusterIP를 제공해 Pod들의 IP 변경에도 안정적으로 접근 가능하게 한다.
 
-- Kube-Proxy
-    - Kube-Proxy는 각 노드에서 실행되는 프로세스이다.
-    - 새로운 Service가 생성되면 이를 감지하고, 각 노드에 해당 Service로 트래픽을 전달할 규칙을 자동으로 생성한다.
-    - 규칙 생성 방식 중 하나가 iptables 규칙이다.
-        - 예: Service IP가 `10.96.0.12`, Pod IP가 `10.32.0.15`일 때  
-            → “목적지가 `10.96.0.12`라면 `10.32.0.15`로 포워딩” 규칙을 iptables에 추가.
-    - 따라서 Kube-Proxy는 Pod가 아닌 Service에 대한 실제 네트워크 트래픽 처리자 역할을 한다.
+**Kube-Proxy**
+- Kube-Proxy는 각 노드에서 실행되는 프로세스이다.
+- <span style={{color: 'red'}}>새로운 Service가 생성되면 이를 감지하고, 각 노드에 해당 Service로 트래픽을 전달할 규칙을 자동으로 생성한다.</span>
+- 규칙 생성 방식 중 하나가 iptables 규칙이다.
+	- 예: Service IP가 `10.96.0.12`, Pod IP가 `10.32.0.15`일 때  
+		→ “목적지가 `10.96.0.12`라면 `10.32.0.15`로 포워딩” 규칙을 iptables에 추가.
+- 따라서 Kube-Proxy는 Pod가 아닌 Service에 대한 실제 네트워크 트래픽 처리자 역할을 한다.
 
 ## 설치 및 실행 방식
 

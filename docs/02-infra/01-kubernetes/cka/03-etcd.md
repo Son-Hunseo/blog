@@ -20,7 +20,7 @@ keywords:
 
 - 분산형 신뢰성 있는 키-값 저장소
 - 단순하고, 보안성이 있으며, 빠른 성능 제공
-- Kubernetes 클러스터의 모든 상태와 리소스를 저장
+- <span style={{color: 'red'}}>Kubernetes 클러스터의 모든 상태와 리소스를 저장</span>
 - 예: Nodes, Pods, Configs, Secrets, Accounts, Roles, Bindings 등    
 - kubectl get 명령어로 조회하는 정보는 모두 etcd 서버에서 가져옴
 
