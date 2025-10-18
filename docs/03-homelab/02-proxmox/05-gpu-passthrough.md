@@ -82,6 +82,67 @@ reboot
 
 - initramfs 업데이트 후 재부팅
 
+### Window 추가 설정
+
+VM이 리눅스 기반 OS인 경우 위 과정까지 하고 아래 'VM에 GPU 연결'로 넘어가면 되고, Window의 경우 아래 과정을 추가로 진행한다.
+
+**호스트 서버에서 GPU 드라이버 로드 차단**
+
+```bash
+nano /etc/modprobe.d/pve-blacklist.conf
+```
+
+- proxmox `pve-blacklist.conf` 파일 수정
+
+```bash
+blacklist nouveau
+blacklist nvidia
+```
+
+- 위 2줄 추가
+
+```bash
+reboot
+```
+
+- 재부팅
+
+**VM 설정 수정**
+
+```bash
+nano /etc/pve/qemu-server/VM의ID.conf
+```
+
+- VM 설정 파일 수정
+
+```bash
+args: -cpu 'host,kvm=off,hv_vendor_id=proxmox'
+boot: order=scsi0;ide2;net0;ide0
+cores: 8
+cpu: host,hidden=1,flags=+pcid
+hostpci0: 0000:2b:00,pcie=1
+ide0: local:iso/virtio-win-0.1.285.iso,media=cdrom,size=771138K
+ide2: local:iso/Win10_22H2_Korean_x64v1.iso,media=cdrom,size=5683458K
+machine: q35
+memory: 24576
+name: window-vdi
+net0: virtio=BC:24:11:42:06:61,bridge=vmbr0,firewall=1
+numa: 0
+ostype: win10
+scsi0: local-lvm:vm-104-disk-0,iothread=1,size=256G
+scsihw: virtio-scsi-single
+smbios1: uuid=e9d71170-fa59-4b21-91ae-d0dcd4e33112
+sockets: 1
+vga: std
+vmgenid: 9676e07b-7c44-4610-91af-dca4f2240eec
+```
+
+- **`cpu: host,hidden=1,flags=+pcid`** - OS에 VM 환경이라는 것을 숨김
+- **`hostpci0: 0000:2b:00,pcie=1`** - GPU와 오디오를 함께 패스스루
+- **`machine: q35`** - 추가 (최신 머신 타입)
+- **`ostype: win10`** - `l26`(Linux)에서 `win10`으로 변경
+- vm 재시작
+
 ---
 ### VM에 GPU 연결
 
@@ -98,7 +159,7 @@ reboot
 
 VM에서 GPU를 인식하기 위해 GPU 드라이버를 설치해야한다. 
 
-**Ubuntu 기준**
+### Linux (Ubuntu/Debian)
 
 ```bash
 sudo add-apt-repository ppa:graphics-drivers/ppa -y
@@ -143,6 +204,47 @@ nvidia-smi
 ```
 
 - `nvidia-smi`를 입력했을 때 출력이 뜨면 성공
+
+### Window
+
+**설치**
+
+- https://www.nvidia.com/ko-kr/drivers/ 여기서 다운로드 후 설치
+- 재부팅
+
+**참고**
+
+- 혹시나 어떤 문제가 생겨서 지우고 다시 설치해야할 경우 DDU(https://www.wagnardsoft.com/display-driver-uninstaller-ddu) 로 지우고 다시 설치
+
+---
+## 참고
+
+:::warning
+예외적인 경우이긴 하나, 나의 경우에는 proxmox와 다른 ssd에 윈도우를 설치하고 멀티부팅으로 사용했었다. 이 때 proxmox의 Window VM 에 GPU Passthrough를 적용하니, VM이 아닌 호스트 윈도우가 부팅이 되지 않았다. 왜냐하면 Window VM에 GPU Passthrough를 하는 과정에서 GPU를 시스템에서 격리하기 때문이다.
+
+이러한 상황에서는 Window VM에 GPU Passthrough를 사용하지 않는 것이 맞다. 혹시나 이런 상황이 생긴다면 아래 과정을 거쳐 호스트 Window OS를 복구하자.
+:::
+
+1. Window VM 삭제
+2. GPU Passthrough를 하기위한 설정 모두 롤백
+3. Window 부팅하면서 F8 입력 (고급 부팅 옵션 진입)
+4. 문제 해결 - 고급 옵션 - 시작 설정 - 다시 시작 (재부팅 됨)
+5. Window로 재부팅 이후 부팅 모드 선택에서 F5 입력 (네트워크 사용 안전모드)
+6. 안전모드 진입 후 DDU로 그래픽 드라이버 삭제 후 그래픽 드라이버 다시 설치
+7. 재부팅
+8. 안될경우 여러번 재부팅
+9. 해결
+
+:::info
+그러면, 왜 Linux VM의 Passthrough는 다른 호스트 Window에 영향을 주지 않는걸까?
+
+Window VM에 GPU Passthrough시에는 `blacklist` 설정이 필요하지만 Linux에는 필요없기 때문이다. (격리되지 않는다) 
+:::
+
+| 구분         | blacklist 필요 여부 | 이유                                                           |
+| ---------- | --------------- | ------------------------------------------------------------ |
+| Ubuntu VM  | 필요 없음           | VFIO에 의해 GPU가 완전 분리되어 Ubuntu 내부 커널이 영향을 받지 않음                |
+| Windows VM | 필요함             | Proxmox가 GPU를 초기화하면 NVIDIA 드라이버가 “가상 GPU 감지(Code 43)”로 오류 발생 |
 
 ---
 ## 레퍼런스
