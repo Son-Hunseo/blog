@@ -11,6 +11,8 @@ keywords:
 ---
 ## 상황
 
+![namespace-force-delete1](./assets/namespace-force-delete1.jpg)
+
 Kubernetes에서 네임스페이스를 삭제했을 때, 해당 네임 스페이스의 리소스는 모두 삭제되었지만, `kubectl get ns` 했을 때, `Terminating` 상태로 지속적으로 네임스페이스가 삭제되지 않는 경우가 있다. 이럴 경우 강제로 네임스페이스를 삭제하는 법을 알아보자.
 
 ## 해결
