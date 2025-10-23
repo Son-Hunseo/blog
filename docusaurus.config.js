@@ -181,7 +181,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['java', 'bash', 'markup'],
+        additionalLanguages: ['java', 'bash', 'markup', 'sql'],
       },
     }),
   
