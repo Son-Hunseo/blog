@@ -160,10 +160,10 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'Portfolio',
-                to: 'https://pf.sonhs.com',
-              },
+              // {
+              //   label: 'Portfolio',
+              //   to: 'https://pf.sonhs.com',
+              // },
               {
                 label: 'GitHub',
                 href: 'https://github.com/Son-Hunseo',
