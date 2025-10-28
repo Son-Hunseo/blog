@@ -1,7 +1,10 @@
 ---
 title: "[DML] SELECT - SUBQUERY"
-description:
+description: SQL 서브쿼리(Subquery)의 개념부터 종류(Nested, Inline View, Scalar)별 특징과 활용법까지 단계별로 설명합니다. 예제 중심으로 SELECT문에서 서브쿼리를 효율적으로 사용하는 방법을 배울 수 있습니다.
 keywords:
+  - SQL Subquery
+  - 서브쿼리 예제
+  - SQL SELECT
 ---
 ---
 ## SUBQUERY
