@@ -9,8 +9,7 @@ keywords:
   - 집계 함수
 ---
 ---
-## 내장함수
-### 숫자
+## 숫자
 
 ![select8](./assets/select8.png)
 
@@ -36,7 +35,7 @@ SELECT ABS(-5);
 ```
 :::
 
-### 문자
+## 문자
 
 ![select9](./assets/select9.png)
 ![select10](./assets/select10.png)
@@ -53,7 +52,7 @@ SELECT ABS(-5);
 - 다른 DB들은 인자로 여러개가 가능해서 `CONCAT('A', 'B', 'C')` 로 사용한다. 
 :::
 
-### 날짜
+## 날짜
 
 ![select11](./assets/select11.png)
 ![select12](./assets/select12.png)
@@ -62,11 +61,11 @@ SELECT ABS(-5);
 - `SELECT NOW(), SLEEP(5), SYSDATE();` -> 5초 차이나게 조회된다.
 - `SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s)` -> 2024-09-10 10:41:06
 
-### 논리
+## 논리
 
 ![select14](./assets/select14.png)
 
-### 집계
+## 집계
 
 ![select15](./assets/select15.png)
 
