@@ -18,3 +18,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# 빌드된 이미지들
+/static/img/dev
+/static/img/homelab
+/static/img/infra
