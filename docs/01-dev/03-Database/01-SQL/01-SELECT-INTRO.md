@@ -11,7 +11,7 @@ keywords:
 ---
 ## SELECT, FROM
 
-![select1](select1.png)
+![select1](./assets/select1.png)
 
 ```sql
 SELECT * | { [ALL | DISTINCT] column | expression [ alias ], ...}
@@ -30,7 +30,7 @@ FROM employees;
 - 모든 사원의 사번, 이름, 급여 검색
 
 
-![select2](select2.jpg)
+![select2](./assets/select2.jpg)
 
 ```sql
 SELECT employee_id 사번, first_name "이름", salary "급 여"
@@ -58,7 +58,7 @@ FROM employees;
 - 모든 사원의 사번, 이름, 급여, 급여 * 12 (연봉) 검색
 
 
-![select3](select3.jpg)
+![select3](./assets/select3.jpg)
 
 ```sql
 SELECT employee_id AS 사번, 

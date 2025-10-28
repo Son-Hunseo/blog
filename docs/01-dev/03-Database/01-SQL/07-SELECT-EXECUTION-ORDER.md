@@ -11,4 +11,4 @@ keywords:
 ---
 ## 쿼리의 실행순서 (중요)
 
-![select16](select16.png)
+![select16](./assets/select16.png)
