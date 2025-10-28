@@ -12,7 +12,7 @@ keywords:
 ## 내장함수
 ### 숫자
 
-![select8](select8.png)
+![select8](./assets/select8.png)
 
 - `CEIL()` 과 `CEILING()`은 같다고 생각하면 된다.
 - `ROUND(1526.159)` 는 `ROUND(1526.159, 0)` 과 같다. (정수자리까지 반올림)
@@ -38,8 +38,8 @@ SELECT ABS(-5);
 
 ### 문자
 
-![select9](select9.png)
-![select10](select10.png)
+![select9](./assets/select9.png)
+![select10](./assets/select10.png)
 
 - `ASCII('0')` -> 48 / `ASCII('A')` -> 65 / `ASCII('a')` -> 97
 	- `CAST(CHAR(48) AS CHAR)` -> '0'
@@ -55,19 +55,19 @@ SELECT ABS(-5);
 
 ### 날짜
 
-![select11](select11.png)
-![select12](select12.png)
-![select13](select13.png)
+![select11](./assets/select11.png)
+![select12](./assets/select12.png)
+![select13](./assets/select13.png)
 
 - `SELECT NOW(), SLEEP(5), SYSDATE();` -> 5초 차이나게 조회된다.
 - `SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s)` -> 2024-09-10 10:41:06
 
 ### 논리
 
-![select14](select14.png)
+![select14](./assets/select14.png)
 
 ### 집계
 
-![select15](select15.png)
+![select15](./assets/select15.png)
 
 - `null`은 자동으로 제외된다.
