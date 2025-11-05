@@ -32,22 +32,13 @@ pveam download local debian-12-standard_12.12-1_amd64.tar.zst
 
 ### 컨테이너 생성
 
-| 항목        | 설정값 예시                                                                            |
-| --------- | --------------------------------------------------------------------------------- |
-| Node      | cloud                                                                             |
-| CT ID     | 105                                                                               |
-| Hostname  | pihole                                                                            |
-| Template  | debian-12-standard                                                                |
-| Password  | (원하는 비밀번호)                                                                        |
-| Disk Size | 8GB                                                                               |
-| CPU       | 1 core                                                                            |
-| Memory    | 512MB                                                                             |
-| Network   | Static IP<br>- IPv4/CIDR: 원하는IP/24<br>- Gateway (IPv4): 게이트웨이IP<br>- Firewall 비활성 |
-| Features  | Nesting=1                                                                         |
+**필수 컨테이너 스펙**
 
-- 단순 DNS서버이기 때문에, 높은 사양이 필요없다.
-- DNS서버이기 때문에 DHCP가 아닌 Static IP를 설정하자.
-- `Nesting=1` 필수
+* **Network**: Static IP (DNS서버이기 때문에 DHCP가 아닌 Static IP를 설정하자)
+  * IPv4/CIDR: 원하는IP/24
+  * Gateway (IPv4): 게이트웨이IP
+  * Firewall 비활성
+* **Features**: Nesting=1 (필수)
 
 ### Pi-Hole 설치
 
