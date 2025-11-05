@@ -312,7 +312,7 @@ kubeadm init --apiserver-advertise-address=내private아이피 --pod-network-cid
 ```
 
 - `kubeadm init`을 사용해 초기화한다. `--apiserver-advertise-address` 옵션을 통해 쿠버네티스 마스터 노드의 IP 주소를 입력한다. 그리고 `--pod-network-cidr` 을 통해 네트워크 대역을 설정한다. (`calico`의 경우 `192.168.0.0/16` / `flannel`의 경우 `10.244.0.0./16`를 주로 사용한다)
-	- 나는 `calico`이지만, 해당 대역이 내 사설망 대역과 겹쳐서 `10.10.0.0/16` 대역을 사용했다. 이 경우 `calico` 설치 시 `custom-resources.yaml` 파일을 꼭 수정해주어야한다.
+	- 나는 `calico`이지만, 해당 대역이 내 사설망 대역과 겹쳐서 `10.0.0.0/8` 대역을 사용했다. 이 경우 `calico` 설치 시 `custom-resources.yaml` 파일을 꼭 수정해주어야한다.
 
 - 마지막에 나오는 join 구문은 워커 노드와 마스터 노드를 연결하라 때 사용할 구문이니 따로 저장한다. (다시 보고싶다면, `kubeadm token create --print-join-command`)
 - 이후 다시 `kubeadm certs check-expiration` 해보면 인증 되어있는 것을 볼 수 있다.
