@@ -39,10 +39,7 @@ helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/
 - 프로비저너 Helm 레포지토리 추가
 
 ```bash
-helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
-    --set nfs.server=192.168.1.100
-    --set nfs.path=/volume1/jenkins
-    --set storageClass.name=nfs-client
+helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner --set nfs.server=192.168.1.100 --set nfs.path=/volume1/jenkins --set storageClass.name=nfs-client
 ```
 
 - 프로비저너 설치
