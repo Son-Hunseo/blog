@@ -17,10 +17,11 @@ keywords:
 
 ### 예시
 
-- 노드 A에 웹 애플리케이션 Pod, 노드 B에 데이터베이스 Pod가 실행 중일 경우:
-    - 웹 애플리케이션 Pod는 DB Pod의 IP를 통해 직접 접근 가능하다.
-    - 하지만 Pod의 IP는 변동될 수 있어, **Service**를 통해 접근하는 것이 안정적이다.
+노드 A에 웹 애플리케이션 Pod, 노드 B에 데이터베이스 Pod가 실행 중일 경우:
+- 웹 애플리케이션 Pod는 DB Pod의 IP를 통해 직접 접근 가능하다.
+- 하지만 Pod의 IP는 변동될 수 있어, **Service**를 통해 접근하는 것이 안정적이다.
 
+---
 ## Service와 Kube-Proxy의 역할
 
 **Service**
@@ -35,22 +36,30 @@ keywords:
 		→ “목적지가 `10.96.0.12`라면 `10.32.0.15`로 포워딩” 규칙을 iptables에 추가.
 - 따라서 Kube-Proxy는 Pod가 아닌 Service에 대한 실제 네트워크 트래픽 처리자 역할을 한다.
 
+---
 ## 설치 및 실행 방식
 
-- 수동 설치
-    - kube-proxy 바이너리를 [Kubernetes Release 페이지](https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-proxy)에서 다운로드
-        ```bash
-        wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-proxy
-        ```
-    - 압축 해제 후 서비스로 실행
+### Kubeadm Setup
+
+```bash
+kubectl get pods -n kube-system
+```
 
 - kubeadm 설치
-    - kubeadm으로 클러스터를 구성하면, kube-proxy는 kube-system 네임스페이스의 DaemonSet으로 배포된다.
-    - 확인 명령어:
-        ```bash
-        kubectl get pods -n kube-system
-        ```
+- kubeadm으로 클러스터를 구성하면, kube-proxy는 kube-system 네임스페이스의 DaemonSet으로 배포된다.
+- 위 명령어는 확인 명령어
 
+### Manual Setup
+
+```bash
+wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-proxy
+```
+
+- 수동 설치
+- kube-proxy 바이너리를 다운로드
+- 압축 해제 후 서비스로 실행
+
+---
 ## 레퍼런스
 
 - [kube-proxy command-line reference](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/)

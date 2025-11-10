@@ -41,8 +41,38 @@ keywords:
 - 단독 설치 가능하며 Docker 없이도 컨테이너 실행 가능.
 	- cf) 원래 나는 kubernetes를 설치할 때, Docker 설치 -> Kubernetes 설치 이렇게 했었는데, 불필요한 Docker의 다른 요소까지 설치하기 보다는 containerd 설치 -> Kubernetes 설치 이게 맞다.
 
+### 설치
+
+```bash
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+```
+
+- 필수 패키지 설치
+
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+```
+
+- Docker 공식 저장소 등록
+
+```bash
+sudo apt-get update
+sudo apt-get install -y containerd.io
+```
+
+- containerd 설치
+
+```bash
+sudo systemctl start containerd
+sudo systemctl enable containerd
+```
+
+- 서비스 시작 및 부팅시 자동 실행 설정
+
 ---
-## 주요 CLI 도구 비교
+## Containerd의 주요 CLI 도구 비교
 
 ### ctr
     
@@ -57,22 +87,91 @@ keywords:
 - Docker보다 더 많은 최신 기능 지원 (이미지 암호화, lazy pull, P2P 배포 등)
 - 실사용 시 Docker CLI를 대체 가능
 	- Docker의 많은 명령어를 그냥 nerdctl로 대체해서 사용 가능 (`docker ps` -> `nerdctl ps`)
-        
+
+**설치**
+
+```bash
+wget https://github.com/containerd/nerdctl/releases/download/v1.7.7/nerdctl-1.7.7-linux-amd64.tar.gz
+```
+
+- 원하는 버전의 `nerdctl` 바이너리 다운로드 (예시는 1.7.7 기준)
+
+```bash
+mkdir -p ~/.local/bin
+tar -zxvf nerdctl-1.7.7-linux-amd64.tar.gz -C ~/.local/bin
+```
+
+- 다운로드한 압축 파일을 적절한 위치(예: ~/.local/bin 또는 /usr/local/bin)에 해제
+
+```bash
+export PATH=$PATH:~/.local/bin
+```
+
+- 설치 위치를 PATH에 추가
+
+```bash
+sudo chown root ~/.local/bin/nerdctl
+sudo chmod +s ~/.local/bin/nerdctl
+```
+
+- `nerdctl` 실행 권한 설정
+
+```bash
+nerdctl --version
+```
+
+- 설치 확인
+
 ### crictl
     
 - Kubernetes 커뮤니티에서 개발
 - CRI 호환 런타임을 대상으로 디버깅/점검용 CLI
 - 컨테이너 생성보다는 로그 확인, pod 조회, 디버깅 목적
 - kubelet과 협력하여 동작
+- `kubectl`은 클러스터 운영과 관리용, `crictl`은 개별 노드 내 컨테이너 런타임 상태 조사 및 디버깅용
+
+**설치**
+
+```bash
+VERSION="v1.26.0"
+curl -LO https://github.com/kubernetes-sigs/cri-tools/releases/download/${VERSION}/crictl-${VERSION}-linux-amd64.tar.gz
+```
+
+- `circtl` 다운로드
+
+```bash
+sudo tar -C /usr/local/bin -xzf crictl-${VERSION}-linux-amd64.tar.gz
+```
+
+- 다운로드한 tar 압축 해제
+
+```bash
+crictl --version
+```
+
+- 설치 확인
+
+```bash
+nano /etc/crictl.yaml
+```
+
+```yaml
+# /etc/crictl.yaml
+runtime-endpoint: unix:///run/containerd/containerd.sock
+```
+
+- `kubelet`과 같은 CRI 런타임과 통신을 위한 설정 파일 생성
 
 ### 요약 정리
 
-- ctr: containerd 기본 디버깅용 → 거의 사용 X    
-- nerdctl: Docker CLI와 유사, containerd 기반 운영 시 주 사용
-- crictl: Kubernetes 전용 디버깅용, 모든 CRI 런타임과 호환
+- `ctr`: containerd 기본 디버깅용 → 거의 사용 X    
+- `nerdctl`: Docker CLI와 유사, containerd 기반 운영 시 주 사용
+- `crictl`: Kubernetes 전용 디버깅용, 모든 CRI 런타임과 호환
+	- `kubectl`은 클러스터 운영과 관리용, `crictl`은 개별 노드 내 컨테이너 런타임 상태 조사 및 디버깅용
 
-즉, 일반적으로 컨테이너 실행/관리에는 **nerdctl**, Kubernetes 환경 디버깅에는 **crictl**을 사용.
+즉, 일반적으로 Containerd 환경 컨테이너 실행/관리에는 `nerdctl`, Kubernetes 환경 디버깅에는 `crictl`을 사용.
 
+---
 ## 레퍼런스
 
 - Udemy - Certified Kubernetes Administrator (CKA) with Practice Tests (Mumshad)

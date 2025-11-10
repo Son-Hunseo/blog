@@ -16,6 +16,7 @@ keywords:
 - 키-값 저장소는 Key와 Value 쌍으로 데이터를 저장
 - 단순한 구조로 빠른 조회와 저장 가능
 
+---
 ## ETCD란?
 
 - 분산형 신뢰성 있는 키-값 저장소
@@ -24,21 +25,24 @@ keywords:
 - 예: Nodes, Pods, Configs, Secrets, Accounts, Roles, Bindings 등    
 - kubectl get 명령어로 조회하는 정보는 모두 etcd 서버에서 가져옴
 
+---
 ## ETCD 설치 및 시작 (Standalone)
 
+```bash
+curl -LO https://github.com/etcd-io/etcd/releases/download/v3.5.6/etcd-v3.5.6-linux-amd64.tar.gz
+```
+
 - GitHub Releases에서 OS에 맞는 바이너리 다운로드
-    ```bash
-    curl -LO https://github.com/etcd-io/etcd/releases/download/v3.5.6/etcd-v3.5.6-linux-amd64.tar.gz
-    ```
+
+```bash
+tar xvzf etcd-v3.5.6-linux-amd64.tar.gz
+./etcd
+```
 
 - 압축 해제 후 실행
-    ```bash
-    tar xvzf etcd-v3.5.6-linux-amd64.tar.gz
-    ./etcd
-    ```
-
 - 기본 포트: 2379
 
+---
 ## etcdctl 클라이언트
 
 - etcd 기본 제공 클라이언트
@@ -56,24 +60,29 @@ keywords:
 - 데이터는 `registry` 디렉토리 아래에 저장
 - 주요 구조: minions, nodes, pods, replicasets, deployments, roles, secrets 등
 
+---
 ## Kubernetes 환경에서의 ETCD 배포
-
-### Manual Setup
-
-- 클러스터를 직접 구축하는 경우 → etcd 바이너리 다운로드 및 설치
-- Master 노드에 서비스로 직접 구성
-    ```bash
-    wget -q --https-only \
-    "https://github.com/etcd-io/etcd/releases/download/v3.3.11/etcd-v3.3.11-linux-amd64.tar.gz"
-    ```
 
 ### Kubeadm Setup
 
-- kubeadm으로 클러스터 구축 시(kubeadm 설치시) → etcd 서버가 kube-system 네임스페이스의 Pod로 자동 배포
-    ```bash
-    kubectl get pods -n kube-system
-    ```
+```bash
+kubectl get pods -n kube-system
+```
 
+- kubeadm으로 클러스터 구축 시(kubeadm 설치시) → etcd 서버가 kube-system 네임스페이스의 Pod로 자동 배포
+- kubeadm 설치 명령어: `sudo apt-get install -y kubeadm=1.31.6-1.1` (이외 많은 설정들이 있어서 자세한건 쿠버네티스 설치 글을 참조)
+
+### Manual Setup
+
+```bash
+wget -q --https-only \
+"https://github.com/etcd-io/etcd/releases/download/v3.3.11/etcd-v3.3.11-linux-amd64.tar.gz"
+```
+
+- 클러스터를 직접 구축하는 경우 → etcd 바이너리 다운로드 및 설치
+- Master 노드에 서비스로 직접 구성
+
+---
 ## ETCD in HA Environment
 
 - 고가용성 환경에서는 여러 Master 노드마다 etcd 인스턴스를 분산 배치
@@ -81,6 +90,7 @@ keywords:
 - etcd.service 설정에서 `--initial-cluster` 옵션으로 인스턴스 지정
 - 데이터 정합성을 위해 quorum 기반 합의 필요
 
+---
 ## 레퍼런스
 
 - [https://kubernetes.io/docs/concepts/overview/components/](https://kubernetes.io/docs/concepts/overview/components/)
