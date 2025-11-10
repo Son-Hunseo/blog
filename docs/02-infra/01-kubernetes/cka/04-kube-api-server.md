@@ -18,6 +18,7 @@ keywords:
     - <span style={{color: 'red'}}>etcd와 직접 통신하는 유일한 컴포넌트</span>
     - 다른 컴포넌트(kube-scheduler, controller-manager, kubelet 등)는 etcd와 직접 통신하지 않고 kube-apiserver를 통해 상태를 갱신한다.
 
+---
 ## 동작 예시
 ### (1) 정보 조회 요청 (예: `kubectl get nodes`)
 
@@ -40,18 +41,27 @@ keywords:
 9. 실행이 완료되면 kubelet은 상태를 kube-apiserver에 전달한다.
 10. kube-apiserver는 최종 상태를 etcd에 업데이트한다.
 
-### 3. 설치 및 확인 방법
+---
+## 설치 및 확인 방법
 
-- kubeadm 사용 시(kubeadm 설치시): kube-system 네임스페이스의 Pod로 배포됨
+### Kubeadm Setup
+
 ```bash
 kubectl get pods -n kube-system cat /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
-    
-- 수동 설치 시: 바이너리를 직접 다운로드하여 실행
+
+- kubeadm 사용 시(kubeadm 설치시 kube-apiserver 자동으로 설치된다): kube-system 네임스페이스의 Pod로 배포됨
+- kubeadm 설치 명령어: `sudo apt-get install -y kubeadm=1.31.6-1.1` (이외 많은 설정들이 있어서 자세한건 쿠버네티스 설치 글을 참조)
+
+### Manual Setup
+
 ```bash
 cat /etc/systemd/system/kube-apiserver.service ps -aux | grep kube-apiserver
 ```
 
+- 수동 설치 시: 바이너리를 직접 다운로드하여 실행
+
+---
 ## 레퍼런스
 
 - [https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)

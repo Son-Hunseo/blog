@@ -15,6 +15,7 @@ keywords:
 - 스케줄러가 어떤 노드에 pod를 배치할지 결정하면, <span style={{color: 'red'}}>실제로 pod를 생성하고 실행하는 것은 kubelet의 역할</span>이다.
 - kubelet은 container runtime(containerd, CRI-O 등)과 연동해 컨테이너를 생성하고 관리한다.
 
+---
 ## 주요 역할
 
 1. kube-apiserver를 통해 전달받은 pod 스펙(Manifest)을 기반으로 pod를 생성한다.
@@ -23,23 +24,46 @@ keywords:
 4. 상태 정보를 주기적으로 kube-apiserver에 보고한다.
 5. pod가 종료되거나 재시작이 필요한 경우 해당 작업을 수행한다.
 
+---
 ## 설치
+### Manual Setup
 
-- kubeadm을 사용하더라도 kubelet은 자동으로 배포되지 않는다.
-- 따라서 각 노드에 직접 설치해야 한다.
-- 설치 방법 (예시: v1.13.0 버전)
 ```bash
 wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kubelet
 ```
+
+- kubeadm을 사용하더라도 kubelet은 자동으로 배포되지 않는다.
+- 따라서 각 노드에 직접 설치해야 한다.
+
+```bash
+ExecStart=/usr/local/bin/kubelet \
+  --config=/var/lib/kubelet/kubelet-config.yaml \
+  --container-runtime=remote \
+  --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock \
+  --image-pull-progress-deadline=2m \
+  --kubeconfig=/var/lib/kubelet/kubeconfig \
+  --network-plugin=cni \
+  --register-node=true \
+  --v=2
+```
+
 - 압축 해제 후 systemd 서비스로 실행한다.
 
-## 실행 옵션 확인
+### Package Manager Setup (추천)
 
-- 워커 노드에서 kubelet 프로세스를 확인해 현재 사용 중인 옵션을 볼 수 있다.
+```bash
+sudo apt-get install -y kubeadm=1.13.0
+```
+
+- 자세한건 쿠버네티스 설치 글 참조
+
 ```bash
 ps -aux | grep kubelet
 ```
 
+- 워커 노드에서 kubelet 프로세스를 확인해 현재 사용 중인 옵션을 볼 수 있다.
+
+---
 ## 레퍼런스
 
 - [https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/)

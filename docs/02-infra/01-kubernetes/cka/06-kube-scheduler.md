@@ -14,12 +14,14 @@ keywords:
 - kube-scheduler는 pod를 어느 노드에 배치할지 결정하는 역할을 한다.
 - 중요한 점: kube-scheduler는 단지 <span style={{color: 'red'}}>"어디에 둘지 결정"</span>만 하며, 실제로 pod를 생성하여 실행하는 것은 각 노드의 kubelet이 담당한다.
 
+---
 ## 스케줄러가 필요한 이유
 
 - 클러스터에는 여러 노드가 있고, 각 노드의 리소스 상태(cpu, memory 등)가 다르다.
 - 특정 pod가 필요한 리소스를 만족할 수 있는 노드에 배치하지 않으면 실행이 불가능하다.
 - 따라서 스케줄러는 pod의 요구사항과 클러스터 상태를 바탕으로 최적의 노드를 선택한다.
 
+---
 ## Pod 배치 과정 (스케줄링 흐름)
 
 예시: cpu 10을 요구하는 pod가 있고, 노드들의 cpu 상태가 각각 4/4/12/16이라고 가정할 때
@@ -40,24 +42,36 @@ keywords:
     - Node Selectors 및 Affinity
     - 이 외에도 다양한 요소들이 있으며, 알고리즘은 커스텀할 수 있다.
 
+---
 ## 설치 및 확인
 
-- 수동 설치
-    - Kubernetes release 페이지에서 바이너리를 다운로드해 서비스로 실행
-```bash
-wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-scheduler
-```
-- kubeadm 설치
-    - kube-system 네임스페이스에 pod로 배포됨
-	- 확인 명령어
+### Kubeadm Setup
+
  ```bash
  kubectl get pods -n kube-system cat /etc/kubernetes/manifests/kube-scheduler.yaml
  ```
-- 실행 중 옵션 확인
+
+- kubeadm 사용 시(kubeadm 설치시 kube scheduler 자동으로 설치된다)
+- kubeadm 설치 명령어: `sudo apt-get install -y kubeadm=1.31.6-1.1` (이외 많은 설정들이 있어서 자세한건 쿠버네티스 설치 글을 참조)
+- kube-system 네임스페이스에 pod로 배포됨
+- 위 명령어는 확인 명령어
+
+### Manual Setup
+
+```bash
+wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-scheduler
+```
+
+- 수동 설치
+    - Kubernetes release 페이지에서 바이너리를 다운로드해 서비스로 실행
+
 ```bash
 ps -aux | grep kube-scheduler
 ```
 
+- 실행 중 옵션 확인 명령어
+
+---
 ## 레퍼런스
 
 - [https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/)
