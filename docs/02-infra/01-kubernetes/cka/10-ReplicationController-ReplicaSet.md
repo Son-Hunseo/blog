@@ -46,20 +46,20 @@ kind: ReplicationController
 metadata:
   name: myapp-rc
   labels:
-	app: myapp
+    app: myapp
 	type: front-end
 spec:
- template:
+  template:
 	metadata:
 	  name: myapp-pod
 	  labels:
 		app: myapp
 		type: front-end
 	spec:
-	 containers:
-	 - name: nginx-container
-	   image: nginx
-replicas: 3
+	  containers:
+	  - name: nginx-container
+	    image: nginx
+  replicas: 3
 ```
 
 - `apiVersion`, `kind`, `metadata`는 `Pod`와 크게 다른 점 없음 
@@ -68,7 +68,7 @@ replicas: 3
 - `spec`
 	- `template`(Dictionary): `Replication Controller`에서 사용할 `Pod`의 정보를 작성한다.
 		- `Pod`의 Yaml 작성에서 `apiVersion`과 `kind`를 제외한 다른 모든 것을 그대로 작성하면 된다.
-- `replicas`: 유지할 `Pod`의 갯수
+	- `replicas`: 유지할 `Pod`의 갯수
 
 ```bash
 kubectl create -f rc-defination.yaml
@@ -94,19 +94,19 @@ metadata:
 	app: myapp
 	type: front-end
 spec:
- template:
+  template:
 	metadata:
 	  name: myapp-pod
 	  labels:
 		app: myapp
 		type: front-end
 	spec:
-	 containers:
-	 - name: nginx-container
-	   image: nginx
- replicas: 3
- selector:
-   matchLabels:
+	  containers:
+	  - name: nginx-container
+	    image: nginx
+  replicas: 3
+  selector:
+    matchLabels:
 	type: front-end
 ```
 
@@ -116,10 +116,10 @@ spec:
 - `spec`
 	- `template`(Dictionary): `Replication Controller`에서 사용할 `Pod`의 정보를 작성한다.
 		- `Pod`의 Yaml 작성에서 `apiVersion`과 `kind`를 제외한 다른 모든 것을 그대로 작성하면 된다.
-- `replicas`: 유지할 `Pod`의 갯수
-- `selector`(Dictionary): `ReplicaSet`에 속하는 `Pod`를 식별하는데 사용한다.
-	- `matchLabels`: `labels` 필드의 하위 타입들(`type`, `app`, `role` 등의 사용자 지정 필드)을 지정하여 관리할 `Pod`의 집합을 식별한다.
-	- `Replication Controller`와의 가장 큰 차이점 중 하나이다. (`selector` 필드의 경우 `ReplicaSet`에서는 필수이지만, `Replcation Controller`에서는 Optional하게 사용한다)
+	- `replicas`: 유지할 `Pod`의 갯수
+	- `selector`(Dictionary): `ReplicaSet`에 속하는 `Pod`를 식별하는데 사용한다.
+		- `matchLabels`: `labels` 필드의 하위 타입들(`type`, `app`, `role` 등의 사용자 지정 필드)을 지정하여 관리할 `Pod`의 집합을 식별한다.
+		- `Replication Controller`와의 가장 큰 차이점 중 하나이다. (`selector` 필드의 경우 `ReplicaSet`에서는 필수이지만, `Replcation Controller`에서는 Optional하게 사용한다)
 
 
 :::info
