@@ -20,9 +20,15 @@ keywords:
 ![replicaset2](./assets/replicaset2.png)
 
 - 처음에 단일 `Pod`라고 가정하자.
-- 트래픽이 증가하면 추가 `Pod`를 배포하여 Load Balacing을 한다.
+- 트래픽이 증가하면 추가 `Pod`를 배포한다.
 - 트래픽이 더 증가하고 첫번째 `Node`의 자원이 부족해지면 새로운 `Node`에 추가 `Pod`를 배포한다.
 - 위의 예시처럼 `Replication controller`는 여러 `Node`에 걸쳐서 존재하며, 서로 다른 `Node`에서 여러 `Pod`에 걸쳐 Load Balancing을 하고 애플리케이션을 확장하는데 도움을 준다.
+
+:::warning
+`ReplicaSet`은 직접적으로 Load Balancing을 하는 주체가 아니다. 단지 지정된 갯수의 `Pod`가 실행되고 있도록 보장하며, `Service`가 Load Balancing의 주체이다.
+
+위의 설명은 `Service`가 실행하는 Load Balancing을 `ReplicaSet`이 `Pod`의 갯수를 유지하며 돕는다는 뜻이다.
+:::
 
 ---
 ## ReplicaSet vs Replication Controller
