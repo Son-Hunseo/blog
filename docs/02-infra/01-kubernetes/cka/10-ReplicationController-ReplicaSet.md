@@ -166,12 +166,28 @@ kubectl apply -f replicaset-definition.yaml
 kubectl scale --replicas=6 -f replicaset-definition.yaml
 ```
 
+- 현재 실행되고 있는 `ReplicaSet`의 `Pod` 수는 6개로 바뀌지만, yaml 파일의 `replica` 필드의 값이 바뀌는 것은 아니다.
 
 ### 방법3: sclae 명령어 사용 (type, name 대상)
 
 ```bash
 kubectl scale --replicas=6 replicaset myapp-replicaset
 ```
+
+---
+## 추가 명령어
+
+```bash
+kubectl delete replicaset myapp-replicaset
+```
+
+- pod들도 함께 종료된다.
+
+```bash
+kubectl replace -f replicaset-definition.yaml
+```
+
+- 수정한 yaml 파일을 적용한다.
 
 ---
 ## 레퍼런스
