@@ -113,7 +113,7 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-	type: front-end
+	  type: front-end
 ```
 
 - `apiVersion`, `kind`, `metadata`는 `Pod`와 크게 다른 점 없음 
