@@ -56,3 +56,34 @@ kubectl apply -f nginx-deployment.yaml
 ```
 
 - 추출한 yaml 파일을 수정하고 적용하여 리소스를 생성할 수 있다.
+
+---
+## 시험장에서 Docs에서 찾기 힘들고 기억나지 않는것이 있을 때
+
+```bash
+kubectl api-resoucres
+```
+
+- 리소스의 `apiVersion`이나 `name`, 축약어 등이 기억나지 않을 경우 위 명령어 사용 
+
+```bash
+kubectl explain pods
+```
+
+- 특정 리소스의 `apiVersion`이나 `metadata`, `spec` 등이 기억나지 않을 경우 위 명령어 사용
+- 위 명령어는 `Pod`에 어떤 요소가 들어가는지를 알고싶을 때 사용 (최상위 요소만 나타냄)
+
+```bash
+kubectl explain pods.spec
+```
+
+- 최상위 요소 하위에 더 자세한 요소가 기억나지 않을경우 위처럼 명령어 사용
+- 위 명령어는 `Pod`의 `spec`에 어떤 요소가 들어가야하는지 기억나지 않을 경우 사용
+
+```bash
+kubectl explain pods --recursice
+```
+
+- yaml 파일 형식처럼 모든 요소를 보고싶을 경우
+- 해당 리소스에서 사용가능한 모든 필드를 출력한다.
+- yaml 파일 작성에 도움받을 수 있음
