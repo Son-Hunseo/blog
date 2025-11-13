@@ -11,13 +11,13 @@ keywords:
 ## Replication Controller가 필요한 이유
 ### High Availability (고가용성)
 
-![replicaset1](./assets/replicaset1.png)
+![replicaset1](replicaset1.png)
 
 - `Pod`가 하나이더라도, `Replication Controller`는 기존 `Pod`에 장애가 생기면, 자동으로 새로운 `Pod`를 생성해서 고가용성을 유지한다. 즉, `Replication Controller`는 정해진 갯수의 `Pod`가 항상 실행되도록 보장한다.
 
 ### Load Balancing & Scaling
 
-![replicaset2](./assets/replicaset2.png)
+![replicaset2](replicaset2.png)
 
 - 처음에 단일 `Pod`라고 가정하자.
 - 트래픽이 증가하면 추가 `Pod`를 배포한다.
@@ -126,6 +126,7 @@ spec:
 	- `selector`(Dictionary): `ReplicaSet`에 속하는 `Pod`를 식별하는데 사용한다.
 		- `matchLabels`: `labels` 필드의 하위 타입들(`type`, `app`, `role` 등의 사용자 지정 필드)을 지정하여 관리할 `Pod`의 집합을 식별한다.
 		- `Replication Controller`와의 가장 큰 차이점 중 하나이다. (`selector` 필드의 경우 `ReplicaSet`에서는 필수이지만, `Replcation Controller`에서는 Optional하게 사용한다)
+		- 이에 `spec.selector.matchLabels`에 정의된 **모든** key-value 쌍은`spec.template.metadata.labels`에 포함되어 있어야 한다. (즉, `spec.selector.matchLabels`는 `spec.template.metadata.labels`의 부분집합이어야 한다.)
 
 
 :::info
