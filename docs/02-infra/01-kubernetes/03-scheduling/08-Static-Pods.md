@@ -56,7 +56,7 @@ keywords:
 **방법 2**: `Kubelet` 설정 파일에서 지정
 
 ```bash
-nano ~/.kube/config
+nano /var/lib/kubelet/config.yaml
 ```
 
 ```yaml
