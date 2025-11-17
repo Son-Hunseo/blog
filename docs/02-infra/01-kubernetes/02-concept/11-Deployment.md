@@ -95,6 +95,25 @@ kubectl get replicaset
 - `Deployment` 생성으로 인해 생성도니 `ReplicaSet` 확인
 
 ---
+## Deployment로 Pod 수정하기
+### Pod는 거의 불변
+
+- 이미 생성된 Pod는 다음 4가지를 제외하고 스펙을 수정할 수 없다:
+	- `spec.containers[*].image`
+	- `spec.initContainers[*].image`
+	- `spec.activeDeadlineSeconds`
+	- `spec.tolerations`
+- 즉, 거의 불변에 가깝다.
+- `kubectl edit pod <pod-name>` 으로 변경 불가한 스펙을 수정할 시, 저장했을 때 에러가 발생한다. 
+- 수정하기 위해서는, `Pod`의 yaml를 추출하고, 수정한 뒤, 기존 `Pod`를 `delete`하고, 다시 수정한 yaml 파일로 `create` 해야한다. (`apply` 로 수정 불가)
+
+### Deployment는 수정 가능
+
+- `Deployment`는 `Pod` 템플릿을 포함하고 있고, `Deployment` 스펙을 수정하여 반영하면 자동으로 `Pod`를 재생성한다. (Rolling 방식으로 재생성)
+- `kubectl edit deployment <deployment-name>` 으로 `Pod`의 `template` 부분을 수정하면 변경한 `Pod` 스펙으로 롤아웃한다.
+- 물론, yaml 추출 후 수정하고 `apply`도 가능
+
+---
 ## 레퍼런스
 
 - [https://kubernetes.io/docs/concepts/workloads/controllers/deployment/](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
