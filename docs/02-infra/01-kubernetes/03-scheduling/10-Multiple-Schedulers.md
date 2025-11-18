@@ -1,5 +1,5 @@
 ---
-title: Custom Scheduler
+title: Multiple Schedulers
 description: Kubernetes 환경에서 기본 스케줄러로 해결할 수 없는 고급 스케줄링 요구를 충족하기 위한 Custom Scheduler 개념과 사용 사례를 상세히 설명합니다. GPU 실시간 부하 기반 스케줄링, 외부 시스템 상태를 고려한 스케줄링, 시간 기반 비용 최적화 스케줄링 등 실제 활용 예시를 포함하며, 바이너리 실행 방식과 Deployment 기반 배포 방식(권장 방식)의 차이를 명확히 정리합니다. 또한 ServiceAccount·RBAC·ConfigMap·Leader Election 구성 이유와, schedulerName을 통한 Pod 지정 방식까지 실무 중심으로 안내합니다.
 keywords:
   - Kubernetes Custom Scheduler
@@ -7,14 +7,14 @@ keywords:
   - 쿠버네티스 커스텀 스케줄러
 ---
 ---
-## Custom Scheduler
+## Multiple Schedulers
 ### 개념
 
 - 기본적으로 Kubernetes는 `kube-scheduler`(디폴트 스케줄러)하나로 모든 `Pod`를 Scheduling한다.
 - 하지만 특정 애플리케이션에 대해 기본 Scheduler로는 부족한 특별한 규칙이 필요할 수 있다.
 - 이때 개발자가 직접 Scheduling 로직을 만든 후 Kubernetes에 추가 Scheduler로 배포할 수 있다.
 	- `Go` 언어로 스케줄링 로직을 개발하고 빌드(바이너리든, 컨테이너든)하면 된다.
-- 즉, 하나의 클러스터에 여러 개의 스케줄러가 동시에 존재할 수 있다.
+- 하나의 클러스터에 여러 개의 스케줄러가 동시에 존재할 수 있다. 즉, `Multiple Schedulers`가 가능하다.
 
 ### 사용 예시
 
@@ -83,7 +83,7 @@ spec:
 ```
 
 - `spec`
-	- `schedulerName`: 여기에 해당 `Pod`를 배치하는데 사용할 스케줄러를 설정한다. 해당 필드가 비어있다면 기본 스케줄러가 사용된다.
+	- `schedulerName`: `Multiple Schedulers` 중 여기에 해당 `Pod`를 배치하는데 사용할 스케줄러를 설정한다. 해당 필드가 비어있다면 기본 스케줄러가 사용된다.
 
 ---
 ## 레퍼런스
