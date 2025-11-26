@@ -107,7 +107,7 @@ kubectl apply -f deployment-definition.yaml
 ### command
 
 ```bash
-kubectl set image deployment/myapp-deployment nginx=nginx:1.7.1
+kubectl set image deployment/<deployment 이름> <contaiiner 이름>=<image 이름>
 ```
 
 ---
