@@ -141,6 +141,9 @@ spec:
 	- 먼저 실행되어야하는 이유: 애플리케이션 시작 완료 혹은 시작 중 에러 로그도 수집해야하기 때문
 - `restartPolicy: Always` 옵션이 있어야하며, 이를 '네이티브 사이드카 컨테이너' 라고 한다. (v1.28 부터 적용)
 
+- 실제 예시는 `app`(메인앱 + filebeat) -> `elastic-search` -> `kibana` 가 있을 수 있다.
+	- `Prometheus` -> `Grafana` 패턴과 비슷...
+
 ---
 ## 레퍼런스
 
