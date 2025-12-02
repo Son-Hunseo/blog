@@ -67,7 +67,8 @@ sudo ETCDCTL_API=3 etcdctl snapshot save snapshot.db \
 - `ETCD` 스냅샷을 추출한다.
 
 ```bash
-ETCDCTL_API=3 etcdctl snapshot status snapshot.db
+ETCDCTL_API=3 etcdctl snapshot status snapshot.db \
+	--write-out=table
 ```
 
 - 추출한 스냅샷 상태 확인 명령어
