@@ -76,11 +76,10 @@ ETCDCTL_API=3 etcdctl snapshot status snapshot.db \
 ### 방법 - 복원
 
 ```bash
-service kube-apiserver stop
+mv /etc/kubernetes/manifests/kube-apiserver.yaml /etc/kubernetes/manifests/kube-apiserver.yaml.bak
 ```
 
-- `kube-apiserver`를 중지한다.
-- 위 방법이 통하지 않을 경우 `/etc/kubernetes/manifests/kube-apiserver.yaml` 파일을 `/etc/kubernetes/manifests/kube-apiserver.yaml.bak` 이런식으로 Static Pod로 못읽게 해놓고 나중에 복구한다.
+- 임시로 `kube-apiserver`의 매니페스트 파일의 이름을 바꾸어 Static Pod로 실행되고 있는 `kube-apiserver` 를 중지시킨다.
 
 ```bash
 ETCDCTL_API=3 etcdctl snapshot restore snapshot.db \
@@ -95,63 +94,22 @@ nano /etc/kubernetes/manifests/etcd.yaml
 ```
 
 ```yaml
-
-apiVersion: v1
-kind: Pod
-metadata:
-  annotations:
-    kubeadm.kubernetes.io/etcd.advertise-client-urls: https://192.168.0.19:2379
-  creationTimestamp: null
-  labels:
-    component: etcd
-    tier: control-plane
-  name: etcd
-  namespace: kube-system
-spec:
-  containers:
-  - command:
-    - etcd
-    - --advertise-client-urls=https://192.168.0.19:2379
-    - --cert-file=/etc/kubernetes/pki/etcd/server.crt
-    - --client-cert-auth=true
-    - --data-dir=/var/lib/etcd-from-backup # 여기 변경 후 저장
-    - --experimental-initial-corrupt-check=true
-    - --experimental-watch-progress-notify-interval=5s
-    - --initial-advertise-peer-urls=https://192.168.0.19:2380
-    - --initial-cluster=master=https://192.168.0.19:2380
-    - --key-file=/etc/kubernetes/pki/etcd/server.key
-    - --listen-client-urls=https://127.0.0.1:2379,https://192.168.0.19:2379
-    - --listen-metrics-urls=http://127.0.0.1:2381
-    - --listen-peer-urls=https://192.168.0.19:2380
-    - --name=master
-    - --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt
-    - --peer-client-cert-auth=true
-    - --peer-key-file=/etc/kubernetes/pki/etcd/peer.key
-    - --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
-    - --snapshot-count=10000
-    - --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+  ...
+  volumes:
+  - hostPath:
+      path: /var/lib/etcd-from-backup # 여기를 바꿔야한다.
+      type: DirectoryOrCreate
+    name: etcd-data
 ```
 
 - 바뀐 디렉토리의 경로를 적용하기 위해 `ETCD` Static Pod를 수정해야한다.
 - 이를 위해 `etc/kubernetes/manifests/etcd.yaml`을 수정한다.
 
 ```bash
-systemctl daemon-reload
+mv /etc/kubernetes/manifests/kube-apiserver.yaml.bak /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
 
-- 적용하기 위한 systemd 리로드
-
-```bash
-service etcd restart
-```
-
-- `ETCD` 재시작
-
-```bash
-service kube-apiserver start
-```
-
-- `kube-apiserver` 재시작
+- 원복하여 `kube-apiserver` 재시작
 
 ---
 ## 상황별 백업 선택
