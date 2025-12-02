@@ -80,6 +80,7 @@ service kube-apiserver stop
 ```
 
 - `kube-apiserver`를 중지한다.
+- 위 방법이 통하지 않을 경우 `/etc/kubernetes/manifests/kube-apiserver.yaml` 파일을 `/etc/kubernetes/manifests/kube-apiserver.yaml.bak` 이런식으로 Static Pod로 못읽게 해놓고 나중에 복구한다.
 
 ```bash
 ETCDCTL_API=3 etcdctl snapshot restore snapshot.db \
