@@ -1,5 +1,5 @@
 ---
-title: HPA
+title: HPA (Horizontal Pod Autoscaler)
 description: Kubernetes 클러스터에서 수동 스케일링의 비효율성을 해소하는 **HPA(Horizontal Pod Autoscaler)**의 핵심 개념과 동작 원리를 쉽고 명확하게 설명합니다. CPU, 메모리 또는 커스텀 메트릭을 기반으로 Deployment, StatefulSet 등의 Pod 개수를 자동으로 증설(Scale-out) 및 축소(Scale-in)하는 방법을 알아봅니다. Metric Server를 사용한 동작 방식과 Imperative(명령형) 및 Declarative(선언적) YAML을 이용한 HPA 설정 및 관리를 위한 실용적인 가이드를 제공합니다. 자동화된 자원 관리를 통해 클러스터 운영 효율성을 극대화하세요.
 keywords:
   - Kubernetes
