@@ -57,10 +57,10 @@ sudo apt install etcd-client
 - `kubeadm`으로 설치했을 경우 `etcd-client`를 설치해야 `etcdctl` 명령어가 작동한다.
 
 ```bash
-sudo ETCDCTL_API=3 etcdctl snapshot save snapshot.db \ 
-	--endpoints=https://127.0.0.1:2379 \ 
-	--cacert=/etc/kubernetes/pki/etcd/ca.crt \ 
-	--cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \ 
+sudo ETCDCTL_API=3 etcdctl snapshot save snapshot.db \
+	--endpoints=https://127.0.0.1:2379 \
+	--cacert=/etc/kubernetes/pki/etcd/ca.crt \
+	--cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
 	--key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 ```
 
