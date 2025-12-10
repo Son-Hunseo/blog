@@ -1,5 +1,5 @@
 ---
-title: 쿠버네티스 컴포넌트 별 인증서 발급 방법
+title: 쿠버네티스 컴포넌트 별 인증서 발급 방법 (수동)
 description: 쿠버네티스(Kubernetes) 클러스터 구축을 위한 OpenSSL 인증서 수동 발급 방법을 단계별로 상세히 알아봅니다. CA 구축부터 Admin, ETCD, API Server, Kubelet 등 주요 컴포넌트별 인증서 생성 과정과 CKA 시험 대비 핵심 개념을 정리했습니다.
 keywords:
   - Kubernetes
