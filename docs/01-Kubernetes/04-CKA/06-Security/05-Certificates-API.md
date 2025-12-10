@@ -57,6 +57,7 @@ kind: CertificateSigningRequest
 metadata:
   name: jane
 spec:
+  signerName: kubernetes.io/kube-apiserver-client
   groups:
   - system:authenticated
   usages:
