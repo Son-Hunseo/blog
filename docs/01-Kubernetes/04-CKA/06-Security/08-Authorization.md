@@ -74,6 +74,7 @@ rules:
 - apiGroups: [""] # ""는 코어 API 그룹을 의미 (Pod 등이 포함됨)
   resources: ["pods"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  resourceNames: ["blue"] # 이렇게 리소스를 특정할 수도 있다.
 ```
 
 ```yaml
@@ -159,6 +160,23 @@ spec:
 - `kube-apiserver`의 yaml 파일에서 `--authorization-mode`에 설정한다.
 - 지정을 하면 이러한 인가 메커니즘이 chaining되면서 순서대로 동작한다.
 	- 위 예시의 경우 Node -> RBAC 순서
+
+---
+## 권한 확인 명령어
+
+```bash
+kubectl auth can-i create deployments
+```
+
+- 위 명령어로 현재 본인(유저)가 `Deployement`를 만들 수 있는 권한이 있는지 알 수 있다.
+- 출력으로 `yes`/`no`가 나온다.
+
+```bash
+kubectl auth can-i create deployments --as dev-user1 --namespace test
+```
+
+- 관리자 권한이 있다면, 특정 유저가 어떤 권한을 가지고 있는지 여부를 확인할 수 있다.
+- 위 명령어는 관리자가 `dev-user1`은 `test` 네임스페이스에서 `Deployment`를 만드는 권한이 있는지 확인하는 명령어이다.
 
 ---
 ## 레퍼런스
