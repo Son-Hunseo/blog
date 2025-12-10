@@ -137,7 +137,6 @@ openssl x509 -req -in etcd-server.csr -CA ca.crt -CAkey ca.key -out etcd-server.
 ```
 
 - 인증서와 키의 위치는 보통 `/etc/kubernetes/pki/etcd` 디렉토리에 저장한다. (따로 설정 가능)
-- `ETCD`의 인증서 경로는 `ETCD` `Static Pod` yaml 뿐만 아니라 `kube-apiserver` `Static Pod` yaml 에도 작성해야한다.
 
 :::info
 `ETCD`를 HA로 구성할 경우, `Peer Cert`를 추가로 생성해서 `ETCD` `Static Pod` yaml에 `Server Cert`와 `Peer Cert`의 경로를 각각 지정해주면 된다.
