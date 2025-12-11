@@ -26,16 +26,15 @@ metadata:
   name: web-pod
 spec:
   securityContext:
-    runAsUser:
-    capabilities: 
-      add: ["KILL"]
+    runAsUser: 1000
   containers:
   - name: ubuntu
     image: ubuntu
     command: ["sleep", "3600"]
 ```
 
-- 위처럼 설정하면 해당 `Pod`에 존재하는 모든 컨테이너는 User ID 1000으로 실행되며, `KILL` Linux Capabilities를 얻는다.
+- 위처럼 설정하면 해당 `Pod`에 존재하는 모든 컨테이너는 User ID 1000으로 실행된다.
+- `Pod`레벨에서는 `capabilities`를 설정할 수 없다.
 
 
 **컨테이너 레벨 예시**
