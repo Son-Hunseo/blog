@@ -52,7 +52,7 @@ User(쿠버네티스 리소스는 아님)와 `ServiceAccount`는 각각 'Authent
 **Imperative**
 
 ```bash
-kubectl create service account dashboard-sa
+kubectl create serviceaccount dashboard-sa
 ```
 
 - yaml 로 생성할 수도 있지만, 넣을 리소스가 많지 않기 때문에 그냥 위처럼 imperative하게 생성하는 것이 빠르다.
@@ -96,7 +96,7 @@ spec:
 - CI/CD 툴이나 외부 모니터링 도구처럼 클러스터 외부에서 접속해야 할 때는 수동으로 토큰을 생성해서 이 토큰으로 `ServiceAccount`의 권한을 가지고 클러스터에 접근해야한다.
 
 ```bash
-kubectl create toekn <serviceAccount이름>
+kubectl create token <serviceAccount이름>
 ```
 
 - 위 명령어로 토큰 값을 출력할 수 있다.
