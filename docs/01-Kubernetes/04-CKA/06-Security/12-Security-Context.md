@@ -7,6 +7,10 @@ keywords:
   - SecurityContext
 ---
 ---
+:::info
+Docker Security에 대한 사전 지식이 없다면 [Docker Security](../../../05-Docker/01-Docker-Security.md) 글 참조
+:::
+
 ## Security Context
 ### 개념
 
