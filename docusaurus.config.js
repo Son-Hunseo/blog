@@ -100,7 +100,7 @@ const config = {
 
       // docusaurus 사이트 소유주 인증 과정
       metadata: [
-        {name: 'algolia-site-verification', content: 'BE3ADB86ED244DC6'},
+        {name: 'algolia-site-verification', content: 'A5D8FB314CFC1441'},
       ],
 
       // 검색 기능 algolia - github 소셜 로그인으로 가입함
