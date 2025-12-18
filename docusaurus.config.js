@@ -112,7 +112,7 @@ const config = {
       },
 
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/default-image.jpg',
       navbar: {
         title: 'Son\'s Blog', // 메뉴 바의 웹사이트 메인 제목
         logo: {
