@@ -20,7 +20,7 @@ const config = {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
-    // mermaid 추가
+  // mermaid 추가
   markdown: {
     mermaid: true,
   },
@@ -46,8 +46,8 @@ const config = {
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
-  // 번역 파일 따로 안넣어서 영어로 작성한 것도 어색하게 한국어로 번역될까봐 수정 안함
   i18n: {
+    // 번역 파일 따로 안넣어서 영어로 작성한 것도 어색하게 한국어로 번역될까봐 수정 안함
     defaultLocale: 'en', // 기본 언어
     locales: ['en'], // 지원하는 언어
   },
