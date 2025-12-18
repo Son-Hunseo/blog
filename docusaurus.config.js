@@ -105,9 +105,9 @@ const config = {
 
       // 검색 기능 algolia - github 소셜 로그인으로 가입함
       algolia: {
-        appId: 'KIQYIOJ2YW',
-        apiKey: 'e2d2f3d71fe1ee88a72d8798417c0a02',
-        indexName: 'blog_sonhs_com_kiqyioj2yw_pages',
+        appId: 'CY65KO6RH6',
+        apiKey: '350cd5efedaa3c8e59890af4244fdbe7',
+        indexName: 'my_blog_crawler_pages',
       },
 
       // Replace with your project's social card
