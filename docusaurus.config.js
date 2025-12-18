@@ -108,6 +108,7 @@ const config = {
         appId: 'CY65KO6RH6',
         apiKey: '350cd5efedaa3c8e59890af4244fdbe7',
         indexName: 'my_blog_crawler_pages',
+        contextualSearch: false, // 언어 필터 끄기
       },
 
       // Replace with your project's social card
