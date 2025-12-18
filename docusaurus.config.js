@@ -109,22 +109,6 @@ const config = {
         apiKey: '350cd5efedaa3c8e59890af4244fdbe7',
         indexName: 'my_blog_crawler_pages',
         contextualSearch: false, // 언어 필터 끄기
-
-        // Docusaurus가 기대하는 데이터: hierarchy.lvl0, hierarchy.lvl1 ...
-        // 현재 검색 결과 데이터: title, description, keywords, content
-        // 이에 그냥 변환해주는 함수 만들기로함
-        // @ts-ignore
-        transformItems: (items) => {
-          // @ts-ignore
-          return items.map((item) => ({
-            ...item,
-            hierarchy: {
-              lvl0: item.title || 'Docs',
-              lvl1: item.title,
-              lvl2: item.description,
-            },
-          }));
-        },
       },
 
       // Replace with your project's social card
