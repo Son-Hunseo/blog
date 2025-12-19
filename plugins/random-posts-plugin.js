@@ -10,12 +10,10 @@ module.exports = function (context, options) {
       
       const docsDir = path.join(context.siteDir, 'docs');
       
-      // 숫자 프리픽스 제거 함수
       function removeNumberPrefix(str) {
         return str.replace(/^\d+-/, '');
       }
       
-      // 모든 문서 파일 재귀적으로 찾기
       function getAllMdFiles(dir, fileList = []) {
         const files = fs.readdirSync(dir);
         
@@ -33,7 +31,6 @@ module.exports = function (context, options) {
         return fileList;
       }
       
-      // 폴더의 slug를 찾는 함수
       function getFolderSlug(folderPath) {
         const indexPath = path.join(folderPath, 'index.mdx');
         const indexMdPath = path.join(folderPath, 'index.md');
@@ -54,7 +51,6 @@ module.exports = function (context, options) {
         return null;
       }
       
-      // 카테고리 이름을 얻는 함수
       function getCategoryName(folderPath) {
         const indexPath = path.join(folderPath, 'index.mdx');
         const indexMdPath = path.join(folderPath, 'index.md');
@@ -75,10 +71,9 @@ module.exports = function (context, options) {
         return null;
       }
       
-      // 🔥 [삭제됨] findFirstImage 함수가 여기 있었으나 제거했습니다.
-      
       const mdFiles = getAllMdFiles(docsDir);
       const posts = [];
+      const postsByCategory = {}; // 카테고리별로 글을 저장할 객체
       
       mdFiles.forEach(filePath => {
         const fileName = path.basename(filePath, path.extname(filePath));
@@ -94,13 +89,24 @@ module.exports = function (context, options) {
           return;
         }
         
-        // --- (경로/URL 생성 로직은 그대로 유지) ---
         const fileDir = path.dirname(filePath);
         const relativePath = path.relative(docsDir, filePath);
         const pathParts = relativePath.split(path.sep);
         
         let urlPath = '';
         const fileDirParts = pathParts.slice(0, -1);
+        
+        // 카테고리 경로 추출 (첫 번째 폴더)
+        let categoryPath = '';
+        if (fileDirParts.length > 0) {
+          const firstFolder = path.join(docsDir, fileDirParts[0]);
+          const folderSlug = getFolderSlug(firstFolder);
+          if (folderSlug) {
+            categoryPath = folderSlug.replace(/^\//, '').split('/')[0];
+          } else {
+            categoryPath = removeNumberPrefix(fileDirParts[0]);
+          }
+        }
         
         if (fileDirParts.length > 0) {
           const folderSlugs = [];
@@ -143,15 +149,11 @@ module.exports = function (context, options) {
           }
           categoryName = categoryParts.join(' / ');
         }
-        // ---------------------------------------------
 
-        // 설명글 추출 로직은 유지 (Description이 메타데이터에 없을 경우를 대비해 본문 앞부분 자르기)
         const description = contentText
           .split('\n')
           .find(line => line.trim() && !line.startsWith('#') && !line.startsWith('import') && !line.startsWith('!'))
           ?.substring(0, 150) || '';
-        
-        // 🔥 [삭제됨] const firstImage = findFirstImage(...) 호출 제거
         
         const stats = fs.statSync(filePath);
         let postDate;
@@ -162,21 +164,34 @@ module.exports = function (context, options) {
           postDate = stats.mtime;
         }
         
-        posts.push({
+        const postData = {
           title: frontMatter.title || 'Untitled',
           description: frontMatter.description || description,
           link: `/${urlPath}`,
           category: categoryName,
+          categoryPath: categoryPath, // 카테고리 경로 추가
           date: postDate,
           tags: frontMatter.tags || [],
-          // ✅ [수정됨] 이제 무조건 frontMatter.image만 믿으면 됩니다.
+          keywords: frontMatter.keywords || [],
           image: frontMatter.image || null, 
-        });
+        };
+        
+        posts.push(postData);
+        
+        // 카테고리별로 글 그룹화
+        if (!postsByCategory[categoryPath]) {
+          postsByCategory[categoryPath] = [];
+        }
+        postsByCategory[categoryPath].push(postData);
       });
       
       posts.sort((a, b) => b.date - a.date);
       
-      // 날짜 텍스트 변환 로직 유지
+      // 각 카테고리 내의 글들도 날짜순 정렬
+      Object.keys(postsByCategory).forEach(category => {
+        postsByCategory[category].sort((a, b) => b.date - a.date);
+      });
+      
       posts.forEach(post => {
         const now = new Date();
         const diffTime = Math.abs(now - new Date(post.date));
@@ -199,7 +214,37 @@ module.exports = function (context, options) {
         delete post.date;
       });
       
-      setGlobalData({recentPosts: posts});
+      // 카테고리별 글들도 dateText 처리
+      Object.keys(postsByCategory).forEach(category => {
+        postsByCategory[category].forEach(post => {
+          if (post.date) {
+            const now = new Date();
+            const diffTime = Math.abs(now - new Date(post.date));
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) {
+              post.dateText = '오늘';
+            } else if (diffDays === 1) {
+              post.dateText = '어제';
+            } else if (diffDays < 30) {
+              post.dateText = `${diffDays}일 전`;
+            } else if (diffDays < 365) {
+              const months = Math.floor(diffDays / 30);
+              post.dateText = `${months}개월 전`;
+            } else {
+              const years = Math.floor(diffDays / 365);
+              post.dateText = `${years}년 전`;
+            }
+            
+            delete post.date;
+          }
+        });
+      });
+      
+      setGlobalData({
+        recentPosts: posts,
+        postsByCategory: postsByCategory // 카테고리별 글 데이터 추가
+      });
     },
   };
 };
