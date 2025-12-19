@@ -136,3 +136,55 @@ files.forEach((filePath) => {
 
 console.log(`---------------------------------------------------`);
 console.log(`[결과] 문법 수정: ${fixedCount}건, 썸네일 추가: ${updateCount}건 완료.`);
+
+/*
+[사이드바에 글 안 보이게 하기]
+- sidebar_class_name: hidden-sidebar-item 주입
+*/
+
+console.log(`[Update-FM] sidebar_class_name 주입 시작...`);
+
+const files2 = glob.sync(`${TARGET_DIR}/**/*.md*`);
+let sidebarHideCount = 0;
+let skippedCount = 0;
+
+// (선택) 사이드바 허브 문서는 제외
+const EXCLUDE_BASENAMES = new Set([
+  'index.mdx',
+  'index.md',
+]);
+
+files2.forEach((filePath) => {
+  try {
+    const base = path.basename(filePath).toLowerCase();
+
+    // index 문서는 제외 (원하면 이 블록 제거)
+    if (EXCLUDE_BASENAMES.has(base)) {
+      skippedCount++;
+      return;
+    }
+
+    const rawContent = fs.readFileSync(filePath, 'utf8');
+    const { data, content } = matter(rawContent);
+
+    // 이미 sidebar_class_name 이 있으면 건드리지 않음
+    if (data.sidebar_class_name !== undefined) return;
+
+    data.sidebar_class_name = 'hidden-sidebar-item';
+
+    const newContent = matter.stringify(content, data);
+    fs.writeFileSync(filePath, newContent);
+
+    sidebarHideCount++;
+    console.log(`  ✓ sidebar 숨김 적용: ${path.basename(filePath)}`);
+
+  } catch (e) {
+    console.error(
+      `  ⚠️ [SKIP] sidebar pass 에러: ${path.basename(filePath)} / ${String(e.message || e).split('\n')[0]}`
+    );
+  }
+});
+
+console.log(`---------------------------------------------------`);
+console.log(`[결과] sidebar 숨김(class) 주입: ${sidebarHideCount}건`);
+console.log(`[결과] 제외됨(index 등): ${skippedCount}건`);
