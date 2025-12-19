@@ -34,6 +34,11 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+
+/*
+원래 모든 글의 Home이 되는 Index.mdx(docs/index.mdx)도 좌측 사이드바에 보여야하는데
+그게 보이는게 싫어서 이 설정으로 숨겨둔 것
+*/
 .hidden-sidebar-item {
   display: none !important;
 }
