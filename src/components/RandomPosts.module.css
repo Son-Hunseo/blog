@@ -3,98 +3,96 @@
 }
 
 .randomPosts h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: var(--ifm-font-color-base);
-}
-
-.postsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
+  font-size: 1.75rem;
+  font-weight: 700;
   margin-bottom: 2rem;
 }
 
+.postsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
 .postCard {
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding-bottom: 2.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.postCard:last-child {
+  border-bottom: none;
 }
 
 .postCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0.8;
 }
 
 .postLink {
   text-decoration: none;
   color: inherit;
-  display: block;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1.5rem;
 }
 
-/* 이미지가 있는 경우 */
+.postLink:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
 .imageWrapper {
-  position: relative;
-  width: 100%;
-  height: 200px;
+  width: 150px;
+  min-width: 150px;
+  height: 150px;
   overflow: hidden;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .postImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
 }
 
-.postCard:hover .postImage {
-  transform: scale(1.05);
-}
-
-.imageOverlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-  padding: 1.5rem 1rem 1rem;
-}
-
-.imageOverlay .cardTitle {
-  color: white;
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* 이미지가 없는 경우 */
 .noImageWrapper {
-  background: linear-gradient(135deg, var(--ifm-color-primary-darker) 0%, var(--ifm-color-primary) 100%);
-  padding: 2rem 1.5rem;
-  min-height: 120px;
+  width: 150px;
+  min-width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, var(--ifm-color-primary-lighter) 0%, var(--ifm-color-primary-light) 100%);
   display: flex;
   align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
-.noImageWrapper .cardTitle {
-  color: white;
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: var(--ifm-heading-color);
+  line-height: 1.4;
 }
 
-/* 본문 콘텐츠 */
+.postLink:hover .cardTitle {
+  color: var(--ifm-color-primary);
+}
+
 .postContent {
-  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 0.25rem;
 }
 
 .description {
+  font-size: 0.95rem;
   color: var(--ifm-color-emphasis-700);
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem 0;
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -107,60 +105,47 @@
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
-  font-size: 0.85rem;
 }
 
 .category {
-  color: var(--ifm-color-primary);
-  font-weight: 600;
-}
-
-.date {
-  color: var(--ifm-color-emphasis-600);
-  display: none;  /* 날짜 숨김 */
-}
-
-.separator {
-  color: var(--ifm-color-emphasis-400);
-  display: none;  /* 구분자도 숨김 */
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-emphasis-800);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 400;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-top: auto;
 }
 
 .tag {
-  background: var(--ifm-color-emphasis-200);
+  background: var(--ifm-color-emphasis-100);
   color: var(--ifm-color-emphasis-800);
   padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 500;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 400;
 }
 
-/* 다크 모드 지원 */
-[data-theme='dark'] .postCard {
-  border-color: var(--ifm-color-emphasis-200);
-}
-
-[data-theme='dark'] .description {
-  color: var(--ifm-color-emphasis-600);
-}
-
-[data-theme='dark'] .tag {
-  background: var(--ifm-color-emphasis-300);
-  color: var(--ifm-color-emphasis-900);
-}
-
-/* 반응형 */
 @media (max-width: 768px) {
-  .postsGrid {
-    grid-template-columns: 1fr;
+  .postLink {
+    flex-direction: column;
+    gap: 1rem;
   }
   
-  .imageWrapper {
-    height: 180px;
+  .imageWrapper,
+  .noImageWrapper {
+    width: 100%;
+    min-width: 100%;
+    height: 200px;
+  }
+  
+  .cardTitle {
+    font-size: 1.25rem;
   }
 }

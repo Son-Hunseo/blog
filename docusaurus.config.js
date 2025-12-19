@@ -241,7 +241,7 @@ const config = {
     [
       './plugins/random-posts-plugin.js',
       {
-        limit: 6, // 표시할 랜덤 글 개수 (원하는 대로 조정)
+        limit: 10, // 표시할 랜덤 글 개수 (원하는 대로 조정)
       },
     ],
   ],
