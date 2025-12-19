@@ -1,14 +1,47 @@
 ---
 title: Son's Blog
-description: 콘텐츠 목차
 sidebar_class_name: hidden-sidebar-item
 slug: /
-pagination_prev: null
-pagination_next: null
+pagination_prev:
+pagination_next:
+hide_title: "true"
 ---
 
+import { useState, useEffect } from 'react';
 import RandomPosts from "@site/src/components/RandomPosts";
+import DocCardList from "@theme/DocCardList";
 
-Obsidian에서 블로그로 글 옮기는 중...
+export const TypewriterText = () => {
+  const [text, setText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const fullText = "I'm a DevOps Engineer focused on automation and reliability.";
+  
+  useEffect(() => {
+    if (text.length < fullText.length) {
+      const timer = setTimeout(() => {
+        setText(fullText.slice(0, text.length + 1));
+      }, 60); // 타이핑 속도
+      return () => clearTimeout(timer);
+    } else {
+      setIsTyping(false);
+    }
+  }, [text]);
+
+  return (
+    <p className="heroSubtitle">
+      {text}
+      <span className="typewriterCursor">&nbsp;</span>
+    </p>
+  );
+};
+
+<header className="heroSection">
+  <h1 className="heroTitle">Hi there, my name is Hunseo Son.</h1>
+  <TypewriterText />
+</header>
+
+<DocCardList />
+
+---
 
 <RandomPosts />

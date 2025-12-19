@@ -71,3 +71,55 @@
   padding: 0 0.2em;                      /* 좌우 여백 */
   border-radius: 2px;
 }
+
+/*
+아래는 홈 index.mdx 페이지 스타일임
+*/
+
+/* 상단 여백 및 인덱스 제목 제거 */
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* 상단 여백을 1.5rem(약 24px)으로 설정하여 숨통을 틔워줍니다 */
+  padding: 1.5rem 0 0.5rem 0 !important; 
+  margin-top: 0; /* 음수 마진 제거 */
+}
+
+/* 타이틀 스타일 */
+.heroTitle {
+  /* h1의 기본 위쪽 마진만 제거하여 여백 컨트롤을 heroSection에 일임합니다 */
+  margin-top: 0 !important; 
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.2;
+  color: var(--ifm-color-emphasis-900);
+}
+
+/* 서브타이틀 (타이핑 효과) */
+.heroSubtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--ifm-color-emphasis-700);
+  font-family: var(--ifm-font-family-monospace);
+  min-height: 1.6rem;
+  /* 아래 글 목록(최근 포스트)과의 간격 */
+  margin-bottom: 2.5rem !important; 
+  display: flex;
+  align-items: center;
+}
+
+/* 커서 스타일 유지 */
+.typewriterCursor {
+  display: inline-block;
+  margin-left: 4px;
+  width: 3px;
+  height: 1.2em;
+  background-color: var(--ifm-color-primary);
+  animation: typewriterBlink 1s infinite;
+}
+
+@keyframes typewriterBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
