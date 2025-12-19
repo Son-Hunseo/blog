@@ -1,3 +1,4 @@
 { 
-	"label": "Install"
+	"label": "Install",
+	"collapsible": false
 }

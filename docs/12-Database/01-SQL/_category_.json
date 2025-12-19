@@ -1,3 +1,4 @@
 { 
-	"label": "SQL"
+	"label": "SQL",
+	"collapsible": false
 }

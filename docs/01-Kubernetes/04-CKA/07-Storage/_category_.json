@@ -1,3 +1,4 @@
 { 
-	"label": "Storage"
+	"label": "Storage",
+	"collapsible": false
 }

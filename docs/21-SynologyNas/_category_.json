@@ -1,3 +1,4 @@
 { 
-	"label": "SynologyNAS"
+	"label": "SynologyNAS",
+	"collapsible": false
 }

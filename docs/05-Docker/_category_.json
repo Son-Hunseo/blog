@@ -1,3 +1,4 @@
 { 
-	"label": "Docker"
+	"label": "Docker",
+	"collapsible": false
 }

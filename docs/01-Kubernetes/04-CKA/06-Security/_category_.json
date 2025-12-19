@@ -1,3 +1,4 @@
 { 
-	"label": "Security"
+	"label": "Security",
+	"collapsible": false
 }

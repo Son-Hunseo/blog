@@ -1,3 +1,4 @@
 { 
-	"label": "Proxmox"
+	"label": "Proxmox",
+	"collapsible": false
 }

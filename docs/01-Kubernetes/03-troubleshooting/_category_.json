@@ -1,3 +1,4 @@
 { 
-	"label": "TroubleShooting"
+	"label": "TroubleShooting",
+	"collapsible": false
 }
