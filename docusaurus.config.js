@@ -64,8 +64,12 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          remarkPlugins: [require('remark-math')], // latex 문법 추가
-          rehypePlugins: [require('rehype-katex')], // latex 문법 추가
+          
+          
+          remarkPlugins: [require('remark-math')], // latex 문법 추가 설정
+          rehypePlugins: [require('rehype-katex')], // latex 문법 추가 설정
+
+
         },
         blog: {
           showReadingTime: true,

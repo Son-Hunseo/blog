@@ -4,6 +4,9 @@
  * work well for content-centric websites.
  */
 
+/*
+블로그 내 Latex 수식 적용하기 위한 설정
+*/
  @import "katex/dist/katex.min.css";
 
 /* You can override the default Infima variables here. */
