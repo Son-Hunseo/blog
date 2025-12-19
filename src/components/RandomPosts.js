@@ -1,6 +1,6 @@
 /*
 메인 화면에 아무것도 없으니 처음 사람이 들어왔을 때 뭘 읽어야할지 허전할 것 같아서 만듬
-전체 글 중 설정한 n개 카드형식으로 랜덤하게 배치됨
+전체 글 중 설정한 n개 리스트 형식으로 랜덤하게 배치됨
 */
 import React, { useState, useEffect } from 'react';
 import Link from '@docusaurus/Link';
@@ -30,25 +30,22 @@ function RandomPosts() {
 
   return (
     <section className={styles.randomPosts}>
-      <h2>추천 게시글</h2>
+      <h2>추천 글</h2>
       <div className={styles.postsGrid}>
         {randomPosts.map((post, idx) => (
           <article key={idx} className={styles.postCard}>
             <Link to={post.link} className={styles.postLink}>
-              {post.image && (
+              {post.image ? (
                 <div className={styles.imageWrapper}>
                   <img src={post.image} alt={post.title} className={styles.postImage} />
-                  <div className={styles.imageOverlay}>
-                    <h3 className={styles.cardTitle}>{post.title}</h3>
-                  </div>
                 </div>
-              )}
-              {!post.image && (
+              ) : (
                 <div className={styles.noImageWrapper}>
-                  <h3 className={styles.cardTitle}>{post.title}</h3>
+                  <span style={{fontSize: '2rem', opacity: 0.5}}>📄</span>
                 </div>
               )}
               <div className={styles.postContent}>
+                <h3 className={styles.cardTitle}>{post.title}</h3>
                 <p className={styles.description}>{post.description}</p>
                 <div className={styles.postMeta}>
                   <span className={styles.category}>{post.category}</span>
