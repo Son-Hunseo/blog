@@ -20,7 +20,9 @@ const config = {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
-  // mermaid 추가
+  /*
+  mermaid 문법 지원 설정
+  */
   markdown: {
     mermaid: true,
   },
