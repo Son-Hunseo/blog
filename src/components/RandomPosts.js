@@ -30,7 +30,7 @@ function RandomPosts() {
 
   return (
     <section className={styles.randomPosts}>
-      <h2>추천 글</h2>
+      <h2>글 목록</h2>
       <div className={styles.postsGrid}>
         {randomPosts.map((post, idx) => (
           <article key={idx} className={styles.postCard}>
@@ -52,7 +52,7 @@ function RandomPosts() {
                 </div>
                 {post.tags && post.tags.length > 0 && (
                   <div className={styles.tags}>
-                    {post.tags.map((tag, tagIdx) => (
+                    {post.tags.slice(0, 3).map((tag, tagIdx) => (
                       <span key={tagIdx} className={styles.tag}>
                         {tag}
                       </span>
