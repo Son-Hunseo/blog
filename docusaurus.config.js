@@ -199,6 +199,10 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+        
+        /*
+        코드블럭에서 지원할 언어 리스트 (추가 가능)
+        */
         additionalLanguages: ['java', 'bash', 'markup', 'sql'],
       },
     }),
