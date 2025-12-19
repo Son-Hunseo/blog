@@ -1,3 +1,4 @@
 { 
-	"label": "Nginx"
+	"label": "Nginx",
+	"collapsible": false
 }

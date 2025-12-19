@@ -1,3 +1,4 @@
 { 
-	"label": "Application LifeCycle Management"
+	"label": "Application LifeCycle Management",
+	"collapsible": false
 }

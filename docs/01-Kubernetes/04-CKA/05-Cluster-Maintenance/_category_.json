@@ -1,3 +1,4 @@
 { 
-	"label": "Cluster Maintenance"
+	"label": "Cluster Maintenance",
+	"collapsible": false
 }

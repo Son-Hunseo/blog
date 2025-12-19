@@ -1,3 +1,4 @@
 { 
-	"label": "OpenStack"
+	"label": "OpenStack",
+	"collapsible": false
 }

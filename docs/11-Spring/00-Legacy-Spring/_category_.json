@@ -1,3 +1,4 @@
 { 
-	"label": "Legacy Spring"
+	"label": "Legacy Spring",
+	"collapsible": false
 }

@@ -1,3 +1,4 @@
 { 
-	"label": "Spring Framework"
+	"label": "Spring Framework",
+	"collapsible": false
 }

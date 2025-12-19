@@ -1,3 +1,4 @@
 { 
-	"label": "Algorithm"
+	"label": "Algorithm",
+	"collapsible": false
 }
