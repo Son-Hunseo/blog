@@ -5,20 +5,19 @@ import {useLocation} from '@docusaurus/router';
 import styles from './CategoryPosts.module.css';
 
 function CategoryPosts() {
-  const {postsByCategory} = usePluginData('random-posts-plugin');
+  const {postsByPath} = usePluginData('random-posts-plugin');
   const location = useLocation();
   
-  // 현재 경로에서 카테고리 추출
-  const pathParts = location.pathname.split('/').filter(Boolean);
-  const currentCategory = pathParts[0] || '';
+  // 현재 경로에서 전체 카테고리 경로 추출 (마지막 슬래시 제거)
+  let currentPath = location.pathname.replace(/^\/|\/$/g, '');
   
-  // 현재 카테고리의 글들 가져오기
-  const categoryPosts = postsByCategory?.[currentCategory] || [];
+  // 현재 경로의 글들 가져오기
+  const categoryPosts = postsByPath?.[currentPath] || [];
   
   // index 페이지는 제외
   const filteredPosts = categoryPosts.filter(post => 
-    !post.link.endsWith(`/${currentCategory}`) && 
-    !post.link.endsWith(`/${currentCategory}/`)
+    post.link !== `/${currentPath}` && 
+    post.link !== `/${currentPath}/`
   );
   
   if (!filteredPosts || filteredPosts.length === 0) {
