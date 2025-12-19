@@ -10,6 +10,20 @@ import isInternalUrl from '@docusaurus/isInternalUrl';
 import {translate} from '@docusaurus/Translate';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
+
+// --- 추가된 재귀 카운트 함수 ---
+const countItemsRecursive = (items) => {
+  let count = 0;
+  items?.forEach((item) => {
+    if (item.type === 'category') {
+      count += countItemsRecursive(item.items); // 카테고리면 안으로 더 들어감
+    } else if (item.type === 'link') {
+      count += 1; // 링크면 1개 추가
+    }
+  });
+  return count;
+};
+
 function useCategoryItemsPlural() {
   const {selectMessage} = usePluralForm();
   return (count) =>
@@ -19,8 +33,7 @@ function useCategoryItemsPlural() {
         {
           message: '1 item|{count} items',
           id: 'theme.docs.DocCard.categoryDescription.plurals',
-          description:
-            'The default description for a category card in the generated index about how many items this category includes',
+          description: 'Description for category card',
         },
         {count},
       ),
@@ -57,17 +70,21 @@ function CardLayout({className, href, icon, title, description}) {
 function CardCategory({item}) {
   const href = findFirstSidebarItemLink(item);
   const categoryItemsPlural = useCategoryItemsPlural();
-  // Unexpected: categories that don't have a link have been filtered upfront
+  
   if (!href) {
     return null;
   }
+
+  // 변경된 부분: item.items.length 대신 countItemsRecursive(item.items) 사용
+  const totalItems = countItemsRecursive(item.items);
+
   return (
     <CardLayout
       className={item.className}
       href={href}
       icon=""
       title={item.label}
-      description={item.description ?? categoryItemsPlural(item.items.length)}
+      description={item.description ?? categoryItemsPlural(totalItems)}
     />
   );
 }
