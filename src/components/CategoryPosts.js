@@ -5,7 +5,7 @@ import {useLocation} from '@docusaurus/router';
 import styles from './CategoryPosts.module.css';
 
 function CategoryPosts() {
-  const {postsByPath} = usePluginData('random-posts-plugin');
+  const {postsByPath} = usePluginData('gather-meta-plugin');
   const location = useLocation();
   
   // 현재 경로에서 전체 카테고리 경로 추출 (마지막 슬래시 제거)

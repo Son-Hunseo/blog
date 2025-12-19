@@ -4,7 +4,7 @@ const matter = require('gray-matter');
 
 module.exports = function (context, options) {
   return {
-    name: 'random-posts-plugin',
+    name: 'gather-meta-plugin',
     async contentLoaded({content, actions}) {
       const {setGlobalData} = actions;
       
