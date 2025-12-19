@@ -90,7 +90,7 @@ module.exports = function (context, options) {
         const fileContent = fs.readFileSync(filePath, 'utf-8');
         const {data: frontMatter, content: contentText} = matter(fileContent);
         
-        if (frontMatter.slug === '/' || frontMatter.sidebar_class_name === 'hidden-sidebar-item') {
+        if (frontMatter.slug === '/') {
           return;
         }
         
