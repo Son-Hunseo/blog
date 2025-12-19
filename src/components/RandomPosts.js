@@ -19,8 +19,8 @@ function RandomPosts() {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
       }
-      // 6개만 선택
-      setRandomPosts(shuffled.slice(0, 6));
+      // 10개만 선택
+      setRandomPosts(shuffled.slice(0, 10));
     }
   }, [recentPosts]);
   

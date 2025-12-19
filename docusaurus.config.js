@@ -238,12 +238,7 @@ const config = {
   
   // plugins 섹션 추가
   plugins: [
-    [
-      './plugins/random-posts-plugin.js',
-      {
-        limit: 10, // 표시할 랜덤 글 개수 (원하는 대로 조정)
-      },
-    ],
+    './plugins/random-posts-plugin.js',
   ],
 };
 
