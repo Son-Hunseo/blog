@@ -10,6 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+
   // 탭에 뜨는 부분들
   title: 'Son\'s Blog',
   tagline: '개발, 인프라(클라우드, 플랫폼), 홈랩(홈서버) 등의 주제로 글을 작성하는 블로그입니다.',
@@ -29,7 +30,7 @@ const config = {
   themes: ['@docusaurus/theme-mermaid'],
 
   // Set the production url of your site here
-  // 검색 최적화 등에 사용
+  //SEO에 도움 됨
   url: 'https://blog.sonhs.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
@@ -62,6 +63,7 @@ const config = {
         docs: {
           sidebarPath: './sidebars.js',
           routeBasePath: '/', // 랜딩 페이지 없이 docs 페이지만 놔두기 위함
+          
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -108,9 +110,9 @@ const config = {
     ({
 
       // docusaurus 사이트 소유주 인증 과정
-      metadata: [
-        {name: 'algolia-site-verification', content: 'E4E0793C52EF1DEC'},
-      ],
+      // metadata: [
+      //   {name: 'algolia-site-verification', content: 'E4E0793C52EF1DEC'},
+      // ],
 
       // 검색 기능 algolia - github 소셜 로그인으로 가입함
       algolia: {
@@ -126,7 +128,7 @@ const config = {
         title: 'Son\'s Blog', // 메뉴 바의 웹사이트 메인 제목
         logo: {
           alt: 'My Site Logo',
-          src: 'img/logo.png', // 필요없을 것 같아서 비워 둠
+          src: 'img/logo.png', // 안보이게 하려고 비워 둠 (없는 이미지임)
         },
         items: [
         {
@@ -134,15 +136,21 @@ const config = {
           position: 'left',
           label: 'Blog',
         },
-          // doc 타입의 메뉴
+          /* 
+          nav바 필요없어서 없앰
+          */
           // {
           //   type: 'docSidebar',
           //   sidebarId: 'tutorialSidebar',
           //   position: 'left',
           //   label: 'Blog',
           // },
-          // 블로그 타입 필요없어서 없앰
+
+          /*
+          블로그 타입 필요없어서 없앰
+          */
           // {to: '/blog', label: 'Blog', position: 'left'},
+
           {
             href: 'https://github.com/Son-Hunseo', // 깃허브 링크
             label: 'GitHub',
@@ -162,7 +170,10 @@ const config = {
               },
             ],
           },
-          // 커뮤니티 없어서 없앰
+
+          /*
+          커뮤니티 필요없어서 없앰
+          */
           // {
           //   title: 'Community',
           //   items: [
@@ -180,9 +191,13 @@ const config = {
           //     },
           //   ],
           // },
+
           {
             title: 'More',
             items: [
+              /*
+              포폴 임시로 숨겨둔 상태
+              */
               // {
               //   label: 'Portfolio',
               //   to: 'https://pf.sonhs.com',
@@ -194,6 +209,10 @@ const config = {
             ],
           },
         ],
+
+        /*
+        저작권 표시 필요 없어서 없애놓음
+        */
         // copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
       colorMode: {
@@ -217,7 +236,7 @@ const config = {
     [
       './plugins/random-posts-plugin.js',
       {
-        limit: 6, // 표시할 최신 글 개수 (원하는 대로 조정)
+        limit: 6, // 표시할 랜덤 글 개수 (원하는 대로 조정)
       },
     ],
   ],
