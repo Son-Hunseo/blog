@@ -197,7 +197,7 @@ const config = {
         // copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
       colorMode: {
-        defaultMode: 'dark',
+        defaultMode: 'dark', // 기본으로 다크모드를 디폴트로 설정
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },
