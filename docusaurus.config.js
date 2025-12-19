@@ -50,9 +50,14 @@ const config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    // 번역 파일 따로 안넣어서 영어로 작성한 것도 어색하게 한국어로 번역될까봐 수정 안함
-    defaultLocale: 'en', // 기본 언어
-    locales: ['en'], // 지원하는 언어
+    /*
+    번역같은거 지원하는 옵션
+    일단 다른 언어 번역본을 내가 넣어둔게 아니라 (기술 docs 등에서는 이런걸로 여러 언어 지원하나 봄)
+    한국어인 ko만 설정해둠
+    내용이 한국어이고 한국사람에게 노출되기 위해서는 ko로 설정하는게 나음
+    */
+    defaultLocale: 'ko', // 기본 언어
+    locales: ['ko'], // 지원하는 언어
   },
 
   presets: [
