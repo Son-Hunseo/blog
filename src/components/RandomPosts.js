@@ -1,4 +1,8 @@
-import React, {useState, useEffect} from 'react';
+/*
+메인 화면에 아무것도 없으니 처음 사람이 들어왔을 때 뭘 읽어야할지 허전할 것 같아서 만듬
+전체 글 중 설정한 n개 카드형식으로 랜덤하게 배치됨
+*/
+import React, { useState, useEffect } from 'react';
 import Link from '@docusaurus/Link';
 import {usePluginData} from '@docusaurus/useGlobalData';
 import styles from './RandomPosts.module.css';
