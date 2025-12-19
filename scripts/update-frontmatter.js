@@ -127,7 +127,7 @@ console.log(`[결과] 문법 수정: ${fixedCount}건, 썸네일 추가: ${updat
 // ===================================================================
 // sidebar_class_name 주입 (index 제외)
 // ===================================================================
-console.log(`[Update-FM] sidebar_class_name 및 comments 주입 시작...`);
+console.log(`[Update-FM] sidebar_class_name 주입 시작...`);
 
 const files2 = glob.sync(`${TARGET_DIR}/**/*.md*`);
 let sidebarHideCount = 0;
@@ -181,7 +181,6 @@ files2.forEach((filePath) => {
 
 console.log(`---------------------------------------------------`);
 console.log(`[결과] sidebar 숨김: ${sidebarHideCount}건`);
-console.log(`[결과] comments 추가: ${commentsUpdateCount}건`);
 console.log(`[결과] 제외됨(index): ${skippedCount}건`);
 
 // ===================================================================
