@@ -8,7 +8,7 @@ import {usePluginData} from '@docusaurus/useGlobalData';
 import styles from './RandomPosts.module.css';
 
 function RandomPosts() {
-  const {recentPosts} = usePluginData('random-posts-plugin');
+  const {recentPosts} = usePluginData('gather-meta-plugin');
   const [randomPosts, setRandomPosts] = useState([]);
   
   useEffect(() => {

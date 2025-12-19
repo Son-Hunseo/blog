@@ -238,7 +238,7 @@ const config = {
   
   // plugins 섹션 추가
   plugins: [
-    './plugins/random-posts-plugin.js',
+    './plugins/gather-meta-plugin.js',
   ],
 };
 
