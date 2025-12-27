@@ -23,3 +23,6 @@ yarn-error.log*
 /static/img/dev
 /static/img/homelab
 /static/img/infra
+
+# for jetbrain
+.idea/*
