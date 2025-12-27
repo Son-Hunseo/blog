@@ -20,6 +20,7 @@ const DEFAULT_IMAGES = {
   'Security': '/img/default/security.png',
   'Network': '/img/default/network.png',
   'SynologyNas': '/img/default/synologynas.png',
+  'Golang': '/img/default/golang.png',
 };
 
 // 2. 숫자 접두어 제거 함수
