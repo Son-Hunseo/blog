@@ -342,6 +342,11 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ### calico 설치 및 설정
 
+:::tip
+https://docs.tigera.io/calico/latest/getting-started/kubernetes/self-managed-onprem/onpremises
+위 공식 문서에서 온프레미스, EKS 등의 다양한 환경에서의 calico 설치 방법을 안내하고 있다.
+:::
+
 ```bash
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/tigera-operator.yaml
 ```
