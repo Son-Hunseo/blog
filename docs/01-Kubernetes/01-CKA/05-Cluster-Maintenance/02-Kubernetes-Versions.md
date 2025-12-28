@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Versions
+title: 쿠버네티스 버전 관리
 description: Kubernetes의 **버전 구조(Major, Minor, Patch)**와 **기능 안정화 단계(Alpha, Beta, Stable)**를 자세히 설명합니다. 또한, kube-apiserver, kubelet 등 Kubernetes 구성 요소들의 버전 관리 정책과 etcd, CoreDNS와 같은 독립적인 버전 체계를 갖는 컴포넌트에 대한 정보를 제공하여, 쿠버네티스 버전 관리에 대한 심층적인 이해를 돕습니다.
 keywords:
   - Kubernetes 버전 구조

@@ -1,5 +1,5 @@
 ---
-title: Cluster Upgrade
+title: 클러스터 업데이트
 description: 쿠버네티스(Kubernetes) 클러스터를 안전하게 업그레이드하는 완벽 가이드입니다. **버전 호환성 규칙(Version Skew)**부터 시작해, 지원 정책, 그리고 Control Plane 및 Worker Node의 업그레이드 기본 원칙과 상세한 kubeadm 절차를 알아봅니다. 버전 건너뛰기 없이 순차적으로 업그레이드하고, 마스터 노드와 워커 노드에 대한 apt-get upgrade 및 kubeadm upgrade 명령어를 통해 서비스 중단 없이 시스템을 최신 상태로 유지하는 방법을 확인하세요.
 keywords:
   - Kubernetes 업그레이드

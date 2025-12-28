@@ -1,5 +1,5 @@
 ---
-title: Reboot Node (Drain, Uncordon)
+title: 노드 다운(재부팅) 시 고려해야할 점 (Drain, Uncordon)
 description: Kubernetes 노드를 안전하게 재부팅하고 OS 업데이트 및 패치를 적용하는 방법을 알아보세요. kubectl drain과 uncordon 명령어를 사용하여 서비스 다운타임과 데이터 손실 위험을 최소화하는 단계별 운영 전략 및 노드 다운 시 Pod의 동작(Eviction Timeout)을 상세히 설명합니다.
 keywords:
   - Kubernetes

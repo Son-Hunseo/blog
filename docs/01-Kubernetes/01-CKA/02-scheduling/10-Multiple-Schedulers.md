@@ -1,5 +1,5 @@
 ---
-title: Multiple Schedulers
+title: 다중 스케줄러
 description: Kubernetes 환경에서 기본 스케줄러로 해결할 수 없는 고급 스케줄링 요구를 충족하기 위한 Custom Scheduler 개념과 사용 사례를 상세히 설명합니다. GPU 실시간 부하 기반 스케줄링, 외부 시스템 상태를 고려한 스케줄링, 시간 기반 비용 최적화 스케줄링 등 실제 활용 예시를 포함하며, 바이너리 실행 방식과 Deployment 기반 배포 방식(권장 방식)의 차이를 명확히 정리합니다. 또한 ServiceAccount·RBAC·ConfigMap·Leader Election 구성 이유와, schedulerName을 통한 Pod 지정 방식까지 실무 중심으로 안내합니다.
 keywords:
   - Kubernetes Custom Scheduler

@@ -1,5 +1,5 @@
 ---
-title: Authorization
+title: 인가(Authorization)
 description: Kubernetes 클러스터 인가(Authorization)의 핵심 개념과 종류(Node, RBAC, ABAC, Webhook)를 상세히 설명합니다. 표준 인가 방식인 RBAC의 Role 및 RoleBinding 구조와 함께, API 서버의 --authorization-mode 설정을 통한 인가 메커니즘 체이닝 방식을 이해하고 관리할 수 있습니다.
 keywords:
   - Kubernetes
