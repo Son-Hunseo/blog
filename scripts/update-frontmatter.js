@@ -66,10 +66,15 @@ function findFirstImage(content, filePath) {
   return `/img/${pathParts.join('/')}/${imageName}`;
 }
 
-// 4. 기본 이미지 찾기 함수
+// 4. 기본 이미지 찾기 함수 (수정됨)
 function findDefaultImage(filePath) {
+  // 파일 경로를 디렉토리 단위로 쪼갭니다. (예: ['docs', 'Etc', 'files.md'])
+  // 기존에는 그냥 경로 이름에 특정 네이밍이 들어갓나로 판단햇는데 이제는 '폴더'만 검증
+  const pathParts = filePath.split(path.sep);
+
   for (const [keyword, imagePath] of Object.entries(DEFAULT_IMAGES)) {
-    if (filePath.includes(keyword)) {
+    // 단순히 글자가 포함된 게 아니라, "폴더 이름 중 하나"가 키워드와 정확히 일치하는지 확인
+    if (pathParts.includes(keyword)) {
       return imagePath;
     }
   }
