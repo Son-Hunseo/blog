@@ -56,7 +56,7 @@ AND employee_id = 100;
 ---
 ## INNER JOIN
 
-![join1](./assets/join1.png)
+![join1](assets/join1.png)
 
 - 가장 일반적인 `JOIN`의 종류이며 <span style={{color: 'red'}}>교집합</span>이다.
 - 동등 조인(`Equi-JOIN`)이라고도 하며, N개의 테이블 `JOIN` 시 N-1개의 `JOIN` 조건이 필요함
@@ -109,7 +109,7 @@ WHERE e.employee_id = 100; -- 일반 조건
 ---
 ## OUTER JOIN
 
-![join2](./assets/join2.png)
+![join2](assets/join2.png)
 
 :::tip
 MySQL에는 `FULL OUTER JOIN`이 없기 때문에, `LEFT OUTER JOIN` 이후 `RIGHT OUTER JOIN`을 하는 방법을 사용한다.

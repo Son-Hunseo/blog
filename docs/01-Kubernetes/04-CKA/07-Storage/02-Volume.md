@@ -10,7 +10,7 @@ keywords:
 ---
 :::info
 도커 스토리지, 도커 볼륨에 대한 사전 지식이 필요하다.
-없다면 [도커 스토리지](../../../05-Docker/02-Docker-Storage.md), [도커 볼륨](../../../05-Docker/03-Docker-Volume.md) 글 참조
+없다면 [도커 스토리지](../../../03-Docker/02-Docker-Storage.md), [도커 볼륨](../../../03-Docker/03-Docker-Volume.md) 글 참조
 :::
 
 ## Volume

@@ -116,7 +116,7 @@ WHERE department_id IS NULL; -- 이렇게해야 검색이 된다.
 
 ## LIKE ( wild card : %, \_ )
 
-![select6](./assets/select6.jpg)
+![select6](assets/select6.jpg)
 
 ```sql
 SELECT employee_id, first_name
@@ -138,4 +138,4 @@ WHERE first_name LIKE '%x__';
 
 ## 논리연산시 주의점: NULL
 
-![select5](./assets/select5.png)
+![select5](assets/select5.png)

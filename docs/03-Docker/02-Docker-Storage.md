@@ -40,7 +40,7 @@ description: Docker의 데이터 저장 구조( /var/lib/docker)와 레이어드
 
 ### 개념
 
-![dockerstorage1](./assets/dockerstorage1.png)
+![dockerstorage1](assets/dockerstorage1.png)
 
 - Docker 이미지의 핵심 개념은 '레이어 구조'이다.
 - Dockerfile의 각 명령어 한 줄 = 하나의 레이어
@@ -49,7 +49,7 @@ description: Docker의 데이터 저장 구조( /var/lib/docker)와 레이어드
 
 ### 장점
 
-![dockerstorage2](./assets/dockerstorage2.png)
+![dockerstorage2](assets/dockerstorage2.png)
 
 - 위와 같이 비슷한 Dockerfile을 가진 두 애플리케이션이 있다고 가정해보자.
 - 레이어 1 ~ 3은 재사용하고 변경된 레이어 4 ~ 5만 새로 생성해서 사용하면 된다.
@@ -60,7 +60,7 @@ description: Docker의 데이터 저장 구조( /var/lib/docker)와 레이어드
 ## Container Layer
 ### 개념 및 차이점
 
-![dockerstorage3](./assets/dockerstorage3.png)
+![dockerstorage3](assets/dockerstorage3.png)
 
 - 위에서 이전까지 봤던 Layer 구조는 Image Layers들이다.
 - 컨테이너가 실행될 때는 Container Layer도 사용된다.
