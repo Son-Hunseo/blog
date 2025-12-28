@@ -120,7 +120,7 @@ cat /proc/sys/net/ipv4/ip_forward
     - `1`: 활성화 (패킷을 다른 인터페이스로 전달 가능)
     - `0`: 비활성화
 - 쿠버네티스 파드(Pod) 간 통신을 위해 반드시 `1`로 설정되어 있어야 합니다.
-	- 이에 대한 내용 정리 -> [IP 포워딩 활성화](../../../15-Network/01-Switching-Routing-Gateway#활성-방법)
+	- 이에 대한 내용 정리 -> [IP 포워딩 활성화](../../../15-Network/01-Switching-Routing-Gateway.md###활성%20방법)
 
 ---
 ## 레퍼런스
