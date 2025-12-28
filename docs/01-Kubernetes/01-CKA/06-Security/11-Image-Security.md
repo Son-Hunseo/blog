@@ -10,7 +10,7 @@ keywords:
 ---
 ## 컨테이너 이미지 이름의 구조
 
-![image-security1](./assets/image-security1.png)
+![image-security1](assets/image-security1.png)
 
 ```yaml
 apiVersion: v1

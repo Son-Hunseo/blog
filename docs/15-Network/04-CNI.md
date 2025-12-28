@@ -14,7 +14,7 @@ keywords:
 ### 배경
 
 - `Docker`, `rkt(Rocket)`, `containerd`, `CRI-O` 등 다양한 컨테이너 런타임들이 존재한다. (사실 여기서 `Docker`는 CNI를 지원하지 않으므로 제외해아한다)
-	- `Docker`의 독자적 노선 이유는 다음 글 참조 - [Docker vs Containerd](../01-Kubernetes/04-CKA/01-concept/02-docker-containerd)
+	- `Docker`의 독자적 노선 이유는 다음 글 참조 - [Docker vs Containerd](../01-Kubernetes/01-CKA/01-concept/02-docker-containerd.md)
 - 이들은 모두 네트워크 네임스페이스 생성, 브리지 연결, IP 할당, NAT 설정 등 유사한 네트워킹 문제를 해결해야한다.
 	- 예: [도커 브리지 네트워크 모드 구현 원리](../03-Docker/04-Docker-Network.md#bridge-네트워크-deep-dive) 글 참조 
 	- `Docker`는 CNI를 지원하지 않지만, 이 글을 참조하면 컨테이너 런타임에서 어떤 부분을 구현해야하는지 이해할 수 있다.

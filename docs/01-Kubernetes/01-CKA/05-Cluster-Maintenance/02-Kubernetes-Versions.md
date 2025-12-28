@@ -9,7 +9,7 @@ keywords:
 ---
 ## Kubernetes 버전 구조
 
-![version1](./assets/version1.png)
+![version1](assets/version1.png)
 
 - Major: 큰 변화가 있을 때
 - Minor: 몇 달 주기로 출시, 새로운 기능 포함

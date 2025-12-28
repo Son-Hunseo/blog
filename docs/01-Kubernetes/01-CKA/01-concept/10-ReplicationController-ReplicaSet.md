@@ -11,13 +11,13 @@ keywords:
 ## Replication Controller가 필요한 이유
 ### High Availability (고가용성)
 
-![replicaset1](./assets/replicaset1.png)
+![replicaset1](assets/replicaset1.png)
 
 - `Pod`가 하나이더라도, `Replication Controller`는 기존 `Pod`에 장애가 생기면, 자동으로 새로운 `Pod`를 생성해서 고가용성을 유지한다. 즉, `Replication Controller`는 정해진 갯수의 `Pod`가 항상 실행되도록 보장한다.
 
 ### Load Balancing & Scaling
 
-![replicaset2](./assets/replicaset2.png)
+![replicaset2](assets/replicaset2.png)
 
 - 처음에 단일 `Pod`라고 가정하자.
 - 트래픽이 증가하면 추가 `Pod`를 배포한다.

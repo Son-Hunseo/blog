@@ -37,7 +37,7 @@ keywords:
 ---
 ## Deployment Rollout 전략
 
-![rolling1](./assets/rolling1.png)
+![rolling1](assets/rolling1.png)
 
 ### Recreate
 
@@ -69,7 +69,7 @@ keywords:
 
 ### Recreate vs Rolling Update
 
-![rolling2](./assets/rolling2.png)
+![rolling2](assets/rolling2.png)
 
 ---
 ## 업데이트 방법
