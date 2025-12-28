@@ -66,7 +66,7 @@ LIMIT 1 offset 4;
 - 급여 순 정렬 후 5번째로 높은 급여를 받는 사원의 사번, 이름, 급여
 
 
-![select7](./assets/select7.jpg)
+![select7](assets/select7.jpg)
 
 ```sql
 SELECT employee_id, first_name, salary

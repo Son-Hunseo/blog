@@ -56,7 +56,7 @@ sudo snap get microstack config.credentials.keystone-password
 
 ### 접속
 
-![microstack1](./assets/microstack1.jpg)
+![microstack1](assets/microstack1.jpg)
 
 - https://설치한환경의IP 로 접속 (`http`가 아닌 `https`임에 유의)
 - 로그인
@@ -94,34 +94,34 @@ sudo sed -i "s/^export OS_PASSWORD=.*/export OS_PASSWORD=새비밀번호/" \
 
 ### GUI
 
-![microstack2](./assets/microstack2.jpg)
+![microstack2](assets/microstack2.jpg)
 
 - Compute > Instances 클릭
 - Launch Instance 클릭
 
 
-![microstack3](./assets/microstack3.jpg)
+![microstack3](assets/microstack3.jpg)
 
 - Instance Name 설정
 
 
-![microstack4](./assets/microstack4.jpg)
+![microstack4](assets/microstack4.jpg)
 
 - Create New Volume: No 설정 (`Cinder` 없기 때문)
 - Available에 있는 이미지 중 하나를 Allocated (나는 기본 테스트용 이미지인 `cirros` 선택)
 
 
-![microstack5](./assets/microstack5.jpg)
+![microstack5](assets/microstack5.jpg)
 
 - 원하는 `Flavor`(VM 하드웨어 스펙 템플릿) 를 선택해서 Allocated
 
 
-![microstack6](./assets/microstack6.jpg)
+![microstack6](assets/microstack6.jpg)
 
 - 원하는 Networks Allocated
 
 
-![microstack7](./assets/microstack7.jpg)
+![microstack7](assets/microstack7.jpg)
 
 - 잘 생성된 것을 볼 수 있다.
 
@@ -146,6 +146,6 @@ microstack.openstack server create test-cli \
 - GUI에서 했던 똑같은 설정에 Instance Name만 `test-cli`인 VM을 생성하는 CLI 명령어이다.
 
 
-![microstack8](./assets/microstack8.jpg)
+![microstack8](assets/microstack8.jpg)
 
 - 잘 생성된 것을 볼 수 있다.

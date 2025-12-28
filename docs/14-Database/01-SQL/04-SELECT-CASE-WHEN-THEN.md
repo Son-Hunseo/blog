@@ -24,7 +24,7 @@ END
 ```
 
 
-![select4](./assets/select4.jpg)
+![select4](assets/select4.jpg)
 
 ```sql
 SELECT employee_id, 

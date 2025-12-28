@@ -19,7 +19,7 @@ keywords:
 ---
 ## 생성 & 마운트
 
-![dockerstorage4](./assets/dockerstorage4.png)
+![dockerstorage4](assets/dockerstorage4.png)
 
 ### Volume Mount
 

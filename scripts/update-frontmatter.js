@@ -29,7 +29,7 @@ function removeNumberPrefix(str) {
   return str.replace(/^\d+[-.]/, '');
 }
 
-// 3. 이미지 찾기 함수
+// 3. 이미지 찾기 함수 (수정됨)
 function findFirstImage(content, filePath) {
   const mdRegex = /!\[.*?\]\((.*?)\)/;
   const mdMatch = content.match(mdRegex);
@@ -48,18 +48,21 @@ function findFirstImage(content, filePath) {
     return null;
   }
 
+  // 1. 절대 경로(/)나 외부 링크(http)는 그대로 반환
   if (imagePath.startsWith('/') || imagePath.startsWith('http')) {
     return imagePath;
   }
 
-  if (imagePath.startsWith('./') || imagePath.startsWith('../')) {
-    const fileDir = path.dirname(filePath);
-    const docPath = path.relative(docsDir, fileDir);
-    const pathParts = docPath.split(path.sep).map(p => removeNumberPrefix(p));
-    const imageName = path.basename(imagePath);
-    return `/img/${pathParts.join('/')}/${imageName}`;
-  }
-  return imagePath;
+  // 2. 그 외 모든 경우 (./, ../, 또는 assets/ 등 문자로 시작하는 상대 경로)
+  // 기존 코드: if (imagePath.startsWith('./') || imagePath.startsWith('../')) { ... }
+  // 수정 코드: 위에서 절대/외부 경로를 걸러냈으므로, 여기는 무조건 상대 경로 로직을 태웁니다.
+
+  const fileDir = path.dirname(filePath);
+  const docPath = path.relative(docsDir, fileDir);
+  const pathParts = docPath.split(path.sep).map(p => removeNumberPrefix(p));
+  const imageName = path.basename(imagePath); // 경로(assets/)는 떼고 파일명만 가져옴
+
+  return `/img/${pathParts.join('/')}/${imageName}`;
 }
 
 // 4. 기본 이미지 찾기 함수
