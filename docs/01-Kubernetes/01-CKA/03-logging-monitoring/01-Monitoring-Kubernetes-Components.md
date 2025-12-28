@@ -1,5 +1,5 @@
 ---
-title: Monitoring Kubernetets Components
+title: 쿠버네티스 기본 모니터링
 description: 쿠버네티스 모니터링이 왜 중요한지, 어떤 리소스를 추적해야 하는지, Heapster·Metrics Server 등 기본 제공 모니터링 도구의 특징과 한계를 상세히 정리했습니다. Metrics Server 설치 방법부터 kubectl top 명령어 활용까지, Kubernetes 메트릭 수집 기초를 이해하고 모니터링 아키텍처를 구축하는 데 필요한 핵심 내용을 제공합니다.
 keywords:
   - Kubernetes 모니터링

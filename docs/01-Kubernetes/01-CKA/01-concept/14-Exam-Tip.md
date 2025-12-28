@@ -1,5 +1,5 @@
 ---
-title: Exam Tip
+title: 시험 팁
 ---
 ---
 ## Imperative Commands

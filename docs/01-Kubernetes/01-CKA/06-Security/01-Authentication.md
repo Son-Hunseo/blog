@@ -1,5 +1,5 @@
 ---
-title: Authentication
+title: 인증(Authentication)
 description: Kubernetes 인증(Authentication)의 기본 개념과 작동 원리를 알아보세요. User Account와 Service Account의 차이점을 이해하고, Static Token File을 사용한 인증 방식의 설정 예시를 단계별로 자세히 설명합니다. (보안상 권장되는 Certificates와 Service Account는 다음 글에서 다룰 예정입니다.)
 keywords:
   - Kubernetes

@@ -1,5 +1,5 @@
 ---
-title: Manual Scheduling
+title: 수동 스케줄링
 description: Kubernetes에서 nodeName 필드와 Binding 객체를 활용해 Pod를 특정 노드에 수동으로 스케줄링하는 방법을 자세히 설명합니다. kube-scheduler의 기본 동작 원리와 Scheduler가 없는 경우 Pod 상태가 Pending으로 남는 이유까지 함께 다룹니다.
 keywords:
   - Kubernetes Scheduling
