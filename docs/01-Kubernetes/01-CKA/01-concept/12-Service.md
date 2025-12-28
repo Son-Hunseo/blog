@@ -74,7 +74,7 @@ graph TD
 ---
 ## Service의 유형
 
-![service1](./assets/service1.png)
+![service1](assets/service1.png)
 
 ## NodePort
 ### 개념
@@ -110,7 +110,7 @@ graph TD
 
 ### Yaml
 
-![service2](./assets/service2.png)
+![service2](assets/service2.png)
 
 ```yaml
 apiVersion: v1
@@ -161,7 +161,7 @@ kubectl get services
 
 ### 다중 노드 환경 아키텍처
 
-![service3](./assets/service3.png)
+![service3](assets/service3.png)
 
 - 모든 `Node`의 해당 포트가 `Service`로 연결되며, `Service`는 `Pod`들로 트래픽을 분배한다.
 
@@ -169,7 +169,7 @@ kubectl get services
 ## ClusterIP
 ### 개념
 
-![service4](./assets/service4.png)
+![service4](assets/service4.png)
 
 - 애플리케이션 내에서 여러 시스템이 서로 통신해야하는 경우가 있다. (프론트엔드-백엔드, 백엔드-데이터베이스, 메시지 큐 등)
 - 클러스터 내에서 `Pod` 간 통신은 각 `Pod`의 IP를 통해서 가능하지만, `Pod`의 IP는 고정되지 않기 때문에 안정적인 통신 엔드포인트로 사용하기 어렵다.

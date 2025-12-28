@@ -10,7 +10,7 @@ keywords:
 ## Kubernetes에서의 TLS 통신
 ### 개념
 
-![TLS1](./assets/TLS1.png)
+![TLS1](assets/TLS1.png)
 
 - 쿠버네티스는 '`Node` to `Node`', 'User to `kube-apiserver'', '`kube-apiserver` to kube-sceduler`' 등 모든 컴포넌트 간 통신을 TLS로 한다.
 - 여기서 의문이 들 수 있다. '클러스터 내부인데 굳이 내부안에서 TLS 같은 보안 통신을 할 필요가 있나?'
@@ -18,7 +18,7 @@ keywords:
 
 ### 흐름도
 
-![TLS2](./assets/TLS2.png)
+![TLS2](assets/TLS2.png)
 
 ---
 ## Kubernetes 클러스터 내부의 인증서 종류
@@ -62,7 +62,7 @@ keywords:
 ---
 ## Kubernetes 구성 요소별 인증서
 
-![TLS3](./assets/TLS3.png)
+![TLS3](assets/TLS3.png)
 
 **Server Certificates**
 - `kube-apiserver`, `etcd`, `kubelet` 등이 '요청을 받는' 역할을 수행하므로 '서버 인증서'가 필요하다.

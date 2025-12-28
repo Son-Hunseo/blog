@@ -14,7 +14,7 @@ keywords:
 ## API Groups
 ### Kubernetes API 그룹
 
-![api-group1](./assets/api-group1.png)
+![api-group1](assets/api-group1.png)
 
 - 우리가 `kubectl`을 사용하던, 직접 REST API를 호출하던, 클러스터와 상호작용하는 모든 작업은 Kubernetes API를 통해서 이루어진다.
 - 이러한 Kubernetes API 는 목적에 따라 여러 그룹으로 나뉜다.
@@ -25,7 +25,7 @@ keywords:
 
 ### Core Group
 
-![api-group2](./assets/api-group2.png)
+![api-group2](assets/api-group2.png)
 
 - 특징: `Kubernetes`의 가장 핵심적이고 오래된 기능들이 포함된다.
 - API 경로: `/api/v1` (보통 `v1`이라고 불림)
@@ -44,7 +44,7 @@ keywords:
 
 ### Named Group
 
-![api-group3](./assets/api-group3.png)
+![api-group3](assets/api-group3.png)
 
 - 특징: 더 자세히 분류되어 있으며 새로운 기능들은 대부분 이 그룹을 통해 제공된다.
 - API 경로: `/apis`

@@ -24,7 +24,7 @@ keywords:
 ---
 **아키텍처**
 
-![cluster-arch1](./assets/cluster-arch1.png)
+![cluster-arch1](assets/cluster-arch1.png)
 
 ---
 
