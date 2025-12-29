@@ -189,6 +189,10 @@ spec:
 		- 우리가 원하는 것은 `http://<ingress-service>:<ingress-port>/watch` -> `http://<watch-service>:<port>/` 인데
 		- `rewrite-target`이 없다면 `http://<ingress-service>:<ingress-port>/watch` -> `http://<watch-service>:<port>/watch` 이렇게 가버린다.
 		- 이에 `rewrite-target` 설정을 해줘야 한다.
+		- 다만, 위처럼 설정하면 `/wear/account`로 요청이 들어와도 `/account`로 가는 것이 아니라 강제로 `/`로 보낸다.
+		- 정규표현식을 활용하면 이를 해결할 수 있다. 
+			- `nginx.ingress.logging.io/rewrite-target: /$2`
+			- `path: /something(/|$)(.*)
 
 ### 도메인 기반
 
@@ -197,8 +201,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: host-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - host: wear.myonlinestore.com
@@ -226,6 +228,8 @@ spec:
     - myonlinestore.com
     secretName: my-tls-secret
 ```
+
+- 도메인 기반은 `rewrite-target`이 필요 없는 경우가 많다.
 
 ---
 ## 레퍼런스
