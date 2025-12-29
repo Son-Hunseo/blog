@@ -66,8 +66,7 @@ metadata:
   name: shared-gateway
   namespace: infra-ns
 spec:
-  gatewayClassRef:
-    name: nginx-gateway # 위에서 정의한 Class 참조
+  gatewayClassName: nginx-gateway # 위에서 정의한 Class 참조
   listeners:
   - name: https
     protocol: HTTPS
@@ -164,8 +163,7 @@ metadata:
   name: shared-gateway
   namespace: infra-ns
 spec:
-  gatewayClassRef:
-    name: nginx-gateway
+  gatewayClassName: nginx-gateway
   listeners:
   # For A Team
   - name: wear-listener
