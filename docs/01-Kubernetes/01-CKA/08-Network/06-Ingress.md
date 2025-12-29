@@ -157,6 +157,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: path-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - host: myonlinestore.com
@@ -182,6 +184,12 @@ spec:
     secretName: my-tls-secret
 ```
 
+- `annotations`
+	- `nginx.ingress.kubernetes.io/rewrite-target`
+		- 우리가 원하는 것은 `http://<ingress-service>:<ingress-port>/watch` -> `http://<watch-service>:<port>/` 인데
+		- `rewrite-target`이 없다면 `http://<ingress-service>:<ingress-port>/watch` -> `http://<watch-service>:<port>/watch` 이렇게 가버린다.
+		- 이에 `rewrite-target` 설정을 해줘야 한다.
+
 ### 도메인 기반
 
 ```yaml
@@ -189,6 +197,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: host-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - host: wear.myonlinestore.com
