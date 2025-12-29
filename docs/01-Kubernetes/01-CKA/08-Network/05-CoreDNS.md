@@ -49,7 +49,7 @@ v1.12 부터는 `CoreDNS`가 쿠버네티스의 표준 DNS 서버로 사용된�
 ### 원리
 
 - `kubelet`
-	- `kubelet`이 새로운 `Pod`가 생성될 때 `Pod`의 `/etc/resolv.conf` 파일의 `nameserver`로 `CoreDNS` 서비스의 IP를 기입한다. (참고: [네임서버 설정](../../../15-network/02-DNS.md#dns-서버-설정))
+	- `kubelet`이 새로운 `Pod`가 생성될 때 `Pod`의 `/etc/resolv.conf` 파일의 `nameserver`로 `CoreDNS` 서비스의 IP를 기입한다. (참고: [네임서버 설정](../../../15-Network/02-DNS.md#dns-서버-설정))
 - `kube-apiserver`
 	- `CoreDNS`의 `kubernetes`라는 이름의 플러그인이 주기적으로 `kube-apiserver`와 통신하며 새로운 `Service`/`Pod` 혹은 삭제된 `Service`/`Pod`를 Watch하고 있다가 이를 `CoreDNS`에 반영한다.
 
