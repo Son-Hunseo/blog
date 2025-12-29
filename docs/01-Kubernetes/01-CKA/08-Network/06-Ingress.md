@@ -193,6 +193,7 @@ spec:
 		- 정규표현식을 활용하면 이를 해결할 수 있다. 
 			- `nginx.ingress.logging.io/rewrite-target: /$2`
 			- `path: /something(/|$)(.*)
+- 해당하는 경로가 없다면 `ingress-controller`의 `deploy` 설정에 있는 `default-backend-service`로 보낸다.
 
 ### 도메인 기반
 
