@@ -38,6 +38,19 @@ keywords:
 - **업그레이드 및 롤백:** 명령어 하나로 앱을 업그레이드할 수 있으며, 변경 이력을 추적하므로 문제 발생 시 이전 버전(Revision)으로 즉시 되돌릴(Rollback) 수 있다.
 - **깔끔한 삭제:** 앱과 관련된 모든 객체를 추적하고 있으므로, 명령어 한 번으로 찌꺼기 없이 깨끗하게 삭제(Uninstall)할 수 있다.
 
+## 설치
+
+```bash
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+
+:::tip
+- 위 방법은 스크립트로 설치하는 방법이고 각 OS 및 환경 별 설치 방법은 아래 공식 docs에 나와있다.
+- https://helm.sh/ko/docs/intro/install
+:::
+
 ---
 ## 레퍼런스
 
