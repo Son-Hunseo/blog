@@ -1,5 +1,5 @@
 ---
-title: 쿠버네티스 설치
+title: Kubeadm으로 쿠버네티스 설치
 description: Ubuntu 환경에서 kubeadm을 이용한 쿠버네티스 클러스터 구축 가이드. containerd 설치, 마스터/워커 노드 설정, Calico 네트워크 플러그인 구성까지 단계별로 안내합니다.
 keywords:
   - 쿠버네티스 클러스터 구축
@@ -7,29 +7,33 @@ keywords:
   - containerd 설정
 ---
 ---
-## UFW 방화벽 설정
+## 사전 설정
+### 포트 설정
 
-쿠버네티스 클러스터를 구성하기 위한 노드는 각 노드별로 포트 통신이 원활해야 하기 때문에, 기존에 사용하던 ufw를 정지시켜야 한다. (ufw: Uncomplicated FireWall - 리눅스 방화벽)
+:::info
+**공식문서**
+- https://kubernetes.io/docs/reference/networking/ports-and-protocols/
+:::
 
-```bash
-sudo ufw status
-```
+- 마스터 노드
+	- 6443: API 서버(kube-apiserver)가 연결을 수락하는 포트
+	- 2379, 2380: etcd 서버 통신용 포트
+	- 10259: kube-scheduler가 사용하는 포트
+	- 10257: kube-controller-manager가 사용하는 포트
 
-- 방화벽 상태 확인
-- inactive면 이 과정을 스킵 / active라면 아래 과정 진행
+- 워커 노드
+	- 10250: kubelet이 사용하는 포트
+	- 30000-32767: NodePort 서비스에 사용되는 포트 범위
+	- cf) calico vxlan 모드인 경우(vpn으로 피어링 되었거나 하는 상황) udp/4789도 인바운드 규칙에 추가
 
-```bash
-sudo ufw disable
-```
-
-- ufw 정지
-
----
-## 네트워크 설정
+:::tip
+위 포트를 클라우드 보안 그룹, os 방화벽(ex: ufw) 등 에서 허용해주어야 한다.
+:::
 
 ### IPv4 포워딩
 
-IPv4를 포워딩하여 iptables가 연결된 트래픽을 볼 수 있게 한다.
+- 아래 과정은 IPv4를 포워딩하여 iptables가 연결된 트래픽을 볼 수 있게 하는 과정이다.
+	- 이유는 다음 글 참조 -> [IP Forwarding](../../../15-Network/01-Switching-Routing-Gateway.md#linux를-router로-사용하기-ip-forwarding)
 
 ```bash
 sudo -i
@@ -76,9 +80,7 @@ sudo sysctl --system
 
 - 재부팅하지 않고 `sysctl` 매개변수 적용
 
----
-## containerd
-### 설치
+### 컨테이너 런타임(containerd) 설치 및 설정
 
 ```bash
 sudo apt update && sudo apt upgrade -y
@@ -108,7 +110,7 @@ echo \
 | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
-- Docker 리포지토리를 등록한다.
+- `Docker` 리포지토리를 등록한다.
 
 ```bash
 sudo apt update
@@ -116,15 +118,13 @@ sudo apt install -y containerd.io
 ```
 
 - `containerd`를 설치한다.
-
-### 설정
-
-containerd를 쿠버네티스에서 컨테이너 런타임으로 사용할 수 있도록 설정을 해주어야 한다.
+- 여기까지가 `containerd` 설치
 
 ```bash
 sudo mkdir -p /etc/containerd
 ```
 
+- containerd를 쿠버네티스에서 컨테이너 런타임으로 사용할 수 있도록 설정을 해주어야 한다.
 - 설정값을 저장할 디렉토리 생성
 
 ```bash
@@ -152,31 +152,24 @@ sudo systemctl restart containerd
 sudo systemctl enable containerd
 ```
 
-- containerd 재시작
+- `containerd` 재시작
 
 ```bash
 sudo systemctl status containerd
 ```
 
-- containerd 설정 변경 확인 (아래처럼 `CGroup`이 나오면 된다)
+- `containerd` 설정 변경 확인 (아래처럼 `CGroup`이 나오면 된다)
 
-```bash info=9-10
- containerd.service - containerd container runtime
-     Loaded: loaded (/usr/lib/systemd/system/containerd.service; enabled; preset: enabled)
-     Active: active (running) since Wed 2025-02-26 14:45:12 KST; 13s ago
-       Docs: https://containerd.io
-   Main PID: 389582 (containerd)
-      Tasks: 21
-     Memory: 20.9M (peak: 24.5M)
-        CPU: 189ms
+```bash
+...
      CGroup: /system.slice/containerd.service
              └─389582 /usr/bin/containerd
+...
 ```
 
----
-## swap 메모리 비활성화
+### swap 메모리 비활성화
 
-쿠버네티스에서 스왑메모리는 지원하지 않는다. 이에 비롯한 여러 문제가 발생할 수 있기 때문에 스왑메모리를 비활성화 한다.
+- 쿠버네티스에서 스왑메모리는 지원하지 않는다. 이에 비롯한 여러 문제가 발생할 수 있기 때문에 스왑메모리를 비활성화 한다.
 
 ```bash
 free -h
@@ -211,7 +204,7 @@ shutdown -r now
 - 시스템 재부팅
 
 ---
-## 쿠버네티스 설치 (마스터, 워커 공통)
+## `kubeadm`으로 쿠버네티스 설치 (마스터, 워커 공통)
 
 ```bash
 sudo apt-get update
@@ -308,15 +301,15 @@ kubeadm config images pull
 - 쿠버네티스 설치에 필요한 config 이미지를 다운로드 
 
 ```bash
-kubeadm init --apiserver-advertise-address=내private아이피 --pod-network-cidr=192.168.0.0/16
+kubeadm init --apiserver-advertise-address=<내private아이피> --pod-network-cidr=192.168.0.0/16
 ```
 
 - `kubeadm init`을 사용해 초기화한다. `--apiserver-advertise-address` 옵션을 통해 쿠버네티스 마스터 노드의 IP 주소를 입력한다. 그리고 `--pod-network-cidr` 을 통해 네트워크 대역을 설정한다. (`calico`의 경우 `192.168.0.0/16` / `flannel`의 경우 `10.244.0.0./16`를 주로 사용한다)
-	- 나는 `calico`이지만, 해당 대역이 내 사설망 대역과 겹쳐서 `10.0.0.0/8` 대역을 사용했다. 이 경우 `calico` 설치 시 `custom-resources.yaml` 파일을 꼭 수정해주어야한다.
-
+	- 나는 `calico`이지만, 해당 대역이 내 사설망 대역과 겹쳐서 `10.244.0.0/16` 대역을 사용했다. 이 경우 `calico` 설치 시 `custom-resources.yaml` 파일을 꼭 수정해주어야한다.
+	- 주의) 서비스의 기본 대역은 `10.96.0.0/12`이다. `Pod` 대역이 이 대역과 겹치지 않게 설정해야한다. -> [관련 글](../08-Network/Service-Networking.md#proxy-mode)
 - 마지막에 나오는 join 구문은 워커 노드와 마스터 노드를 연결하라 때 사용할 구문이니 따로 저장한다. (다시 보고싶다면, `kubeadm token create --print-join-command`)
 - 이후 다시 `kubeadm certs check-expiration` 해보면 인증 되어있는 것을 볼 수 있다.
----
+
 ### 기타 설정
 
 ```bash
@@ -340,7 +333,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 - 설정 디렉토리 소유자와 그룹을 변경해 현재 사용자가 사용할 수 있도록 변경한다.
 - 이렇게하면 기본 사용자도 쿠버네티스를 사용할 수 있다.
 
-### calico 설치 및 설정
+### CNI(calico) 설치 및 설정
 
 :::tip
 https://docs.tigera.io/calico/latest/getting-started/kubernetes/self-managed-onprem/onpremises
@@ -372,18 +365,21 @@ watch kubectl get pods -n calico-system
 
 - 해당 명령어를 입력해 calico에 대한 파드들이 실행 중인지 확인한다. (약 2분 소요)
 
-
-### 설치 확인
+### 노드 상태
 
 ```bash
 kubectl get node -o wide
 ```
 
 - 위 명령어로 쿠버네티스 클러스터 노드를 확인한다.
+- `STATUS`가 `Ready`가 된 것을 확인한다.
 
-### cf) 마스터 노드에도 pod를 스케줄링하는 방법
+:::tip
+cf) 마스터 노드에도 pod를 스케줄링하는 방법
 
-일반적으로 마스터 노드의 안정성을 위해 마스터노드에 pod를 추가하지는 않는다. 하지만, 테스트/학습 환경이라 마스터 노드에도 pod를 스케줄링해야할 경우 혹은 리소스가 부족할 경우 아래 과정을 따른다. (권장하지 않는다)
+- 일반적으로 마스터 노드의 안정성을 위해 마스터노드에 pod를 추가하지는 않는다. 
+- 이 때문에 `kubeadm`이 설치시 자동으로 마스터 노드에 `taint`를 설정해둔다.
+- 하지만, 테스트/학습 환경이라 마스터 노드에도 pod를 스케줄링해야할 경우 혹은 리소스가 부족할 경우 아래 과정을 따른다. (권장하지 않는다)
 
 ```bash
 kubectl get node
@@ -401,48 +397,11 @@ kubectl describe node 마스터노드명 | grep Taints
 kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
 ```
 
-- 마스터 노드에는 원래 `NoSchedule` taint가 설정되어 있어서 일반 워크로드 pod들이 스케줄링 되지 않는다. 이 taint를 제거하는 명령어이다.
+-  taint를 제거하는 명령어
+:::
 
 ---
 ## 워커 노드 설정
-### 마스터 노드의 설정 파일 가져오기 (선택)
-
-:::info
-- 워커 노드에서도 `kubectl` 등으로 클러스터 상태를 확인하거나, 배포 작업을 수행하기 위해 마스터 노드에서 사용하는 `kubeconfig` 파일(즉 `/root/.kube/config` 또는 `$HOME/.kube/config`)을 워커 노드로 복사해온다.
-- `kubectl`은 해당 설정 파일을 통해 인증(Token, Certificate 등)을 처리하고, 어떤 API 서버에 연결해야 하는지 정보를 얻는다.
-- 즉, 워커 노드에서 `kubectl`을 사용할 일(예: 파드 상태 조회 등)이 전혀 없다면 굳이 옮기지 않아도 되지만, 워커 노드에서도 직접 `kubectl`을 사용해야 하는 상황이라면 아래 과정을 진행한다.
-:::
-
-```bash
-exit
-```
-
-- `exit` 로 `root`가 아닌 원래 사용자로 돌아온다.
-
-```bash
-mkdir -p $HOME/.kube
-```
-
-- 관련 디렉토리를 만든다.
-
-```bash
-scp -P 포트 -p 마스터노드사용자이름@마스터노드서버IP:~/.kube/config ~/.kube/config
-```
-
-- 마스터 노드의 설정 파일을 그대로 가져온다.
-
-```bash
-cd .kube/
-```
-
-- `.kube` 디렉토리로 이동한다.
-
-```bash
-ls
-```
-
-- config 파일이 잘 이동되었는지 확인한다.
-
 ### 클러스터 Join
 
 - `sudo -i` 로 root 권한을 얻는다.
@@ -453,21 +412,6 @@ kubeadm join 172.31.4.220:6443 --token bb4al8.a3nnsnjmac125a5b --discovery-token
 ```
 
 ---
-## 포트 설정
+## 레퍼런스
 
-**공식문서**
-
-- https://kubernetes.io/docs/reference/networking/ports-and-protocols/
-
-### 마스터 노드
-
-- 6443: API 서버(kube-apiserver)가 연결을 수락하는 포트입니다
-- 2379, 2380: etcd 서버 통신용 포트입니다
-- 10259: kube-scheduler가 사용하는 포트입니다
-- 10257: kube-controller-manager가 사용하는 포트입니다
-
-### 워커 노드
-
-- 10250: kubelet이 사용하는 포트입니다
-- 30000-32767: NodePort 서비스에 사용되는 포트 범위입니다
-- 추가) calico vxlan 모드인 경우(vpn으로 연결되었거나 하는 상황) udp/4789도 인바운드 규칙에 추가
+- https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
