@@ -30,12 +30,32 @@ keywords:
 
 1. 학습용
 	- `Minikube` 또는 `kubeadm`을 사용한 단일 노드 클러스터 (로컬 VM 또는 클라우드)
+	- `Minikube`: `VirtualBox` 같은 가상화 도구로 알아서 VM을 생성하고 그 위에 구성요소를 실행함
+	- `kubeadm`: VM 프로비저닝은 사용자가 직접 해야함
 2. 개발 및 테스트용
 	- 단일 마스터 노드 + 다중 워커 노드
 	- 도구: `kubeadm`, GKE, AKS 등
 3. 프로덕션용
 	- 고가용성(HA) 구성 필수: 다중 마스터 노드(Multi-master) 권장
-	- 도구: `kubeadm`, GKE, AKS 등
+	- `Turnkey Solutions`
+		- AWS (`Kops`), `OpenShift`, `Cloud Foundry`, `VMware Cloud PKS`, `Vagrant` 등
+	- `Hosted Solutions`
+		- `GKE`, `AKS`, `EKS`, `OpenShift Online` 등
+
+:::info
+`Hosted Solutions`는 어느정도 이해가 되는데, 왜 오픈소스 사용하지 않고 비용이 드는 `Turnkey Solutions` 사용하나요?
+- 전체 유지보수 비용 측면에서 바라봐야한다.
+- 문제 해결 측면
+	- 오픈 소스 쿠버네티스를 사용하다가 장애가 발생하면 직접 해결해야함
+	- `Turnkey Solutions`를 사용하다가 장애가 발생하면 SLA에 따른 기술 지원을 받을 수 있음
+- 보안
+	- 오픈 소스는 업데이트가 매우 빠르지만 그만큼 취약점이 노출될 가능성도 큼
+	- `Turnkey Solution` 업체들은 취약점을 점검한 뒤 안정성이 검정된 버전을 제공함.
+	- 기업 입장에서는 보안 사고 한 번의 비용보다 솔루션 비용이 훨씬 저렴함
+	- 책임 소재의 리스크도 줄일 수 있음
+- 통합된 부가기능
+	- 모니터링, CI/CD, GUI 기능 등등 많은 기능들을 직접 오픈소스 쿠버네티스에 설치하고 운영할 수 있지만, 이들을 운영하는데 사용되는 인력또한 비용이다.
+:::
 
 ### 클러스터 규모 및 리소스
 
