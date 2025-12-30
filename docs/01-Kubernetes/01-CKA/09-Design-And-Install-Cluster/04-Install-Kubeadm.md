@@ -306,7 +306,7 @@ kubeadm init --apiserver-advertise-address=<내private아이피> --pod-network-c
 
 - `kubeadm init`을 사용해 초기화한다. `--apiserver-advertise-address` 옵션을 통해 쿠버네티스 마스터 노드의 IP 주소를 입력한다. 그리고 `--pod-network-cidr` 을 통해 네트워크 대역을 설정한다. (`calico`의 경우 `192.168.0.0/16` / `flannel`의 경우 `10.244.0.0./16`를 주로 사용한다)
 	- 나는 `calico`이지만, 해당 대역이 내 사설망 대역과 겹쳐서 `10.244.0.0/16` 대역을 사용했다. 이 경우 `calico` 설치 시 `custom-resources.yaml` 파일을 꼭 수정해주어야한다.
-	- 주의) 서비스의 기본 대역은 `10.96.0.0/12`이다. `Pod` 대역이 이 대역과 겹치지 않게 설정해야한다. -> [관련 글](../08-Network/Service-Networking.md#proxy-mode)
+	- 주의) 서비스의 기본 대역은 `10.96.0.0/12`이다. `Pod` 대역이 이 대역과 겹치지 않게 설정해야한다. -> [관련 글](../08-Network/04-Service-Networking.md#proxy-mode)
 - 마지막에 나오는 join 구문은 워커 노드와 마스터 노드를 연결하라 때 사용할 구문이니 따로 저장한다. (다시 보고싶다면, `kubeadm token create --print-join-command`)
 - 이후 다시 `kubeadm certs check-expiration` 해보면 인증 되어있는 것을 볼 수 있다.
 
@@ -415,3 +415,17 @@ kubeadm join 172.31.4.220:6443 --token bb4al8.a3nnsnjmac125a5b --discovery-token
 ## 레퍼런스
 
 - https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+- https://kubernetes.io/ko/docs/reference/setup-tools/kubeadm/
+
+
+:::info
+시험에서 `kubeadm`을 사용해서 클러스터 구성하는 요구사항이 나왔을 경우?
+
+1. docs에서 Container Runtimes 검색 -> 페이지 접속
+	- 여기에 IPv4 포워딩 작업이 나와있다. (아마 컨테이너 런타임은 설치되어 있을거라 이 문서에서는 이것만 하면 될듯?)
+	- (컨테이너 런타임이 설치되어있지 않다면)이 문서에서 안내된 대로 컨테이너 런타임 설치 (Cgroup 설정까지)
+2. 이후 docs에서 kubeadm 검색 -> 페이지 접속
+	- 아마 Installing kubeadm 설치 페이지일텐데 이에 따라 설정
+3. 그리고 해당 페이지 다음 다음에 있는 Creating a cluster with kubeadm 문서로 접속
+	- 여기서 나머지 과정 진행
+:::
