@@ -412,11 +412,7 @@ kubeadm join 172.31.4.220:6443 --token bb4al8.a3nnsnjmac125a5b --discovery-token
 ```
 
 ---
-## 레퍼런스
-
-- https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
-- https://kubernetes.io/ko/docs/reference/setup-tools/kubeadm/
-
+## 시험 팁
 
 :::info
 시험에서 `kubeadm`을 사용해서 클러스터 구성하는 요구사항이 나왔을 경우?
@@ -429,3 +425,9 @@ kubeadm join 172.31.4.220:6443 --token bb4al8.a3nnsnjmac125a5b --discovery-token
 3. 그리고 해당 페이지 다음 다음에 있는 Creating a cluster with kubeadm 문서로 접속
 	- 여기서 나머지 과정 진행
 :::
+
+---
+## 레퍼런스
+
+- https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+- https://kubernetes.io/ko/docs/reference/setup-tools/kubeadm/
