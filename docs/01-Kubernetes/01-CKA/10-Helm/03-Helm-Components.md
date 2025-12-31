@@ -72,6 +72,8 @@ my-nginx/
     └── service.yaml
 ```
 
+- 이 구조에서 추가적으로 `charts/` 라는 디렉토리가 존재할 수 있는데 여기에는 `Chart.yaml`이 의존하는 다른 차트들이 포함되어있다.
+
 **`Chart.yaml`**
 
 ```yaml
@@ -82,6 +84,14 @@ type: application
 version: 0.1.0
 appVersion: "1.16.0"
 ```
+
+- `apiVersion`: `Helm 3`부터는 `v2`를 사용한다. (`Helm 3` 부터 `dependencies`, `type` 필드가 추가되면서 도입됨)
+- `appVersion`: 애플리케이션의 버전
+- `version`: 차트의 버전
+- `type`: `application`(애플리케이션 배포용 차트), `library`(다른 차트 작성을 돕는 유틸리티 제공용 차트)
+- `dependencies`: 애플리케이션 차트가 의존하는 다른 차트를 정의
+	- 예: 워드프레스 차트가 MariaDB 차트를 의존성으로 포함하여 구성됨
+- 기타: `keywords`(검색용), `maintainers`(관리자 정보), `home`/`icon` (프로젝트 URL 및 아이콘)
 
 **`values.yaml`**
 
