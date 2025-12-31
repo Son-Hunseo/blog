@@ -89,6 +89,24 @@ spec:
 - `Helm`에서 사용하는 것과 같은 별도의 템플릿 언어가 없어서 추가적인 무언가를 배울 필요가 없다.
 - 모든 설정이 순수 YAML 파일이므로 가독성이 좋고 기존 YAML 검증 도구들을 그대로 사용할 수 있다.
 
+### 설치 방법
+
+```bash
+cd /usr/local/bin
+```
+
+```bash
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+```
+
+- https://kubectl.docs.kubernetes.io/installation/kustomize/binaries/ 참조
+
+```bash
+kustomize version
+```
+
+- 버전 확인명령어로 설치 확인
+
 ---
 ## 레퍼런스
 
