@@ -104,6 +104,33 @@ helm install my-release ./wordpress
 - 위 명령어로 차트 전체를 pull 해서 이 안에 있는 `values.yaml`을 수정한다.
 - 이후 pull한 차트를 기밚으로 설치한다.
 
+### Upgrade
+
+```bash
+helm upgrade my-release bitnami/wordpress
+```
+
+- 예를들어 내가 설치한 버전의 워드프레스가 보안 취약점이 발견되어 업데이트 되었다고 하자.
+- 이 때 나의 클러스터에 `Helm`으로 배포된 워드프레스도 업그레이드 해야할 때
+- 단순히 위 명령어로 업데이트 할 수 있다. (같은 Release 내에 새로운 Revision이 생긴다)
+
+### History & Rollback
+
+```bash
+helm history my-release
+```
+
+- 이러한 업그레이드나 특정 옵션 수정과 같은 변경 사항이 Revision에 기록된다.
+- 이를 조회하는 명령어이다.
+
+```bash
+helm rollback my-release 1
+```
+
+- 1번 Revision으로 롤백하는 명령어이다. (현재 Revision 2라고 하자)
+- 실제로 1번 Revision으로 돌아가는 것이 아니라, 1번 Revision과 똑같은 Revision 3을 만드는 것이다.
+- 당연한 얘기이지만, 이 롤백 과정을 수행하는 것은 `Helm`이 관리하는 쿠버네티스 리소스들의 롤백이다. 외부에 연결된 DB와 같은 외부 자원은 롤백되는 것이 아니다.
+
 ### List & Uninstall
 
 ```bash
