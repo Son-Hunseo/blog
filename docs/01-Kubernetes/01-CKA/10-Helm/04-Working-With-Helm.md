@@ -57,7 +57,7 @@ helm repo list
 
 - 로컬에 현재 등록된 레포지토리 목록 확인 명령어
 
-### Install
+### Install (Default)
 
 ```bash
 helm install my-release bitnami/wordpress
@@ -65,19 +65,44 @@ helm install my-release bitnami/wordpress
 
 - `bitnami` 레포지토리의 `wordpress`를 설치하는 명령어 (기본 설정값 그대로 설치)
 
-```bash
-helm show values bitnami/wordpress > my-values.yaml
-```
+### Install (Custom)
 
 - 이전 명령어는 기본 설정값을 그대로 사용하여 설치하엿지만, 보통 설정을 수정하여 사용한다.
-- 이럴 때, 해당 차트의 `values.yaml`을 추출하여 이를 수정하여 설치한다.
-- 위 명령어는 `values.yaml`을 추출하는 명령어이다.
+- 이렇게 커스텀하는 방법은 여러가지가 있다.
 
 ```bash
-helm install my-release bitnami/wordpress -f my-values.yaml
+helm install my-release bitnami/wordpress \
+  --set wordpressBlogName="Helm Tutorials" \
+  --set userEmail="john@example.com"
 ```
 
-- 수정한 `values.yaml`로 설치하는 명령어이다.
+- 방법1
+- `--set` 옵션을 사용할 수 있다.
+- 변경할 설정이 적을 때 사용하면 좋은 방법이다.
+
+```bash
+helm install my-release bitnami/wordpress -f custom-values.yaml
+```
+
+- 방법2
+- `custom-values.yaml` 과 같은 이름으로 파일을 생성한다.
+- 변경할 변수들을 `key: value` 형식의 yaml 형식으로 작성한다.
+- 설치시 `-f` 옵션으로 파일을 지정하여 설치한다.
+- 그러면 디폴트 `values.yaml`의 값보다 `custom-values.yaml`의 값이 우선된다.
+
+```bash
+helm pull bitnami/wordpress --untar
+```
+
+```bash
+helm install my-release ./wordpress
+```
+
+- 방법3
+- 이전 명령어는 기본 설정값을 그대로 사용하여 설치하엿지만, 보통 설정을 수정하여 사용한다.
+- 이럴 때, 해당 차트의 `values.yaml`를 수정하여 설치한다.
+- 위 명령어로 차트 전체를 pull 해서 이 안에 있는 `values.yaml`을 수정한다.
+- 이후 pull한 차트를 기밚으로 설치한다.
 
 ### List & Uninstall
 
