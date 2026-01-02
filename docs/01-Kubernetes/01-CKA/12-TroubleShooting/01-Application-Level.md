@@ -58,4 +58,5 @@ kubectl logs <pod-name> --previous  # 재시작 전의 마지막 로그 확인
 ---
 ## 레퍼런스
 
+- https://kubernetes.io/ko/docs/tasks/debug/debug-application/
 - Udemy - Certified Kubernetes Administrator (CKA) with Practice Tests (Mumshad)
