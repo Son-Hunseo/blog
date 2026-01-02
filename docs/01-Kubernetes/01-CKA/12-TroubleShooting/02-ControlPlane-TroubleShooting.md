@@ -56,3 +56,4 @@ sudo journalctl -u kube-apiserver
 ## 레퍼런스
 
 - https://kubernetes.io/ko/docs/tasks/debug/debug-cluster/
+- Udemy - Certified Kubernetes Administrator (CKA) with Practice Tests (Mumshad)
