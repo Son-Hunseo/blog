@@ -80,7 +80,7 @@ kubectl get nodes --sort-by=.metadata.name
 kubectl get nodes --sort-by=.status.capacity.cpu
 ```
 
-- 특정 필드값을 기준으로 결과를 정렬할 수 있다.
+- 특정 필드값을 기준으로 결과를 정렬할 수 있다. (`items`는 제외한다)
 
 ---
 ## 레퍼런스
