@@ -1,5 +1,6 @@
 ---
 title: CKA 문제 정리 1 (Udemy Mumshad 강의 Lightning Lab)
+description: Udemy Mumshad 강의의 Lightning Lab 문제 오답 정리
 ---
 ---
 :::tip
@@ -9,7 +10,7 @@ title: CKA 문제 정리 1 (Udemy Mumshad 강의 Lightning Lab)
 :::
 
 ---
-### Udemy Mumshad - Lightning Labs
+## Udemy Mumshad - Lightning Labs
 ### 1. 클러스터 업그레이드
 
 Q)
