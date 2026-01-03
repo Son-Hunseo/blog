@@ -55,7 +55,7 @@ spec:
 	- `Recycle`(Deprecated) - PVC가 삭제되면 PV를 재활용 가능하게 만듬, PVC에 할당될 수 있음
 - 이외 필드는 해당 스토리지 구현체에 따라 다르므로 생략
 
-:::
+:::info
 `Recycle`이 Deprecated 된 이유
 - `rm -rf` 수준의 단순 삭제
 - 보안 삭제를 보장하지 않음
