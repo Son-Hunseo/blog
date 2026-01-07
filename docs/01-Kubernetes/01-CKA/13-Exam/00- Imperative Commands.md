@@ -1,5 +1,5 @@
 ---
-title: 시험 팁
+title: Imperative Commands 로 시간 단축하기
 ---
 ---
 ## Imperative Commands
