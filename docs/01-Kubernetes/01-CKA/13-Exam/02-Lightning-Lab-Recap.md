@@ -1,24 +1,21 @@
 ---
-title: CKA 문제 정리 1 (Udemy Mumshad 강의 Lightning Lab)
+title: Lightning Lab 오답 정리
 description: Udemy Mumshad 강의의 Lightning Lab 문제 오답 정리
 ---
 ---
 :::tip
-- CKA 시험 중 k8s docs 뿐만 아니라, helm 공식 문서는 허용되고, etcd docs는 허용되지 않는다.
+- CKA 시험 중 k8s docs 뿐만 아니라, helm 공식 문서, Gateway API docs는 허용되고, etcd docs는 허용되지 않는다.
 - 또한, k8s docs에서 discussion은 접근 금지이다.
-- 아래 내용은 정석적으로 어떻게 하면 된다 ~ 가 아니라, 문제를 맞닥뜨렸을 때, 가용할 수 있는 자원(docs) 등으로 어떻게 할 지에 대한 행동양식을 작성한 것이다.
 :::
 
 ---
-## Udemy Mumshad - Lightning Labs
-### 1. 클러스터 업그레이드
+## 1. 클러스터 업그레이드 (X)
 
 Q)
 Upgrade the current version of kubernetes from `1.33.0` to `1.34.0` exactly using the `kubeadm` utility. Make sure that the upgrade is carried out one node at a time starting with the controlplane node. To minimize downtime, the deployment `gold-nginx` should be rescheduled on an alternate node before upgrading each node.
 
 Upgrade `controlplane` node first and drain node `node01` before upgrading it. Pods for `gold-nginx` should run on the `controlplane` node subsequently.
 
----
 A)
 
 1. docs에 'upgrade kubeadm cluster' 검색한다.
@@ -46,7 +43,7 @@ A)
 			- uncordon node
 
 ---
-### 2. Custom columns 사용
+## 2. Custom columns 사용 (O)
 
 Q) 
 Print the names of all deployments in the `admin2406` namespace in the following format:  
@@ -62,7 +59,6 @@ Example:
 `deploy0 nginx:alpine 1 admin2406`  
 Write the result to the file `/opt/admin2406_data`.
 
----
 A)
 
 1. custom columns를 docs에 검색 -> 딱히 해당 섹션은 없네..? -> 검색결과 중 kubectl 이 관련되어있으니 해당 docs 페이지 들어감
@@ -72,19 +68,18 @@ A)
 	- `-o json` 옵션으로 살펴보고 어떤 계층으로 작성해야하는지 확인한다.
 
 ---
-### 3. kubeconfig 트러블 슈팅
+## 3. kubeconfig 트러블 슈팅 (O)
 
 Q)
 A kubeconfig file called `admin.kubeconfig` has been created in `/root/CKA`. There is something wrong with the configuration. Troubleshoot and fix it.
 
----
 A)
 
 1. nano /root/CKA/admin.kubeconfig` 하고 이상한게 없는지 확인
 2. 6443 포트가 정상인데 이상한 포트로 되어있길래 수정함
 
 ---
-### 4. deployment 생성 및 업그레이드
+## 4. deployment 생성 및 업그레이드 (O)
 
 Q) 
 Create a new deployment called `nginx-deploy`, with image `nginx:1.16` and `1` replica.  
@@ -92,21 +87,19 @@ Next, upgrade the deployment to version `1.17` using `rolling update` and ad
 `Updated nginx image to 1.17`.
 
 
----
 A)
 
 1. deploy yaml 포맷을 외우고 있지는 않기 때문에 docs에 deployment 검색하고 페이지 들어감.
 2. 샘플 yaml 파일 복사해서 필요한 부분만 작성함
 
 ---
-### 5. 애플리케이션 레벨 트러블 슈팅
+## 5. 애플리케이션 레벨 트러블 슈팅 (X)
 
 Q)
 A new deployment called `alpha-mysql` has been deployed in the `alpha` namespace. However, the pods are not running. Troubleshoot and fix the issue. The deployment should make use of the persistent volume `alpha-pv` to be mounted at `/var/lib/mysql` and should use the environment variable `MYSQL_ALLOW_EMPTY_PASSWORD=1` to make use of an empty root password.
 
 Important: Do not alter the persistent volume.
 
----
 A)
 1. `Pod`가 `Pending`이다. -> describe로 이벤트를 확인해보니 `pvc`에 문제가 있어 볼륨이 바인딩이 안된다.
 2. `pvc`를 조회해본다. `pvc`도 `Pending`이다. 정상이라면 `Bound`이어야 한다.
@@ -123,12 +116,11 @@ A)
 	- 참고: [바인딩 규칙](../07-Storage/03-PV-And-PVC.md#바인딩-규칙)
 
 ---
-### 6. ETCD 백업
+## 6. ETCD 백업 (X)
 
 Q)
 Take the backup of ETCD at the location `/opt/etcd-backup.db` on the `controlplane` node.
 
----
 A)
 1. docs에 'backup etcd' 검색한다.
 2. 최상단 페이지로 들어간다.
@@ -139,14 +131,13 @@ A)
 6. 해당 페이지의 Backing up an etcd cluster 페이지로 가서 지침을 따른다.
 
 ---
-### 7. 주어진 조건에 맞는 Pod 생성
+## 7. 주어진 조건에 맞는 Pod 생성 (X)
 
 Q)
 Create a pod called `secret-1401` in the `admin1401` namespace using the `busybox` image. The container within the pod should be called `secret-admin` and should sleep for `4800` seconds.  
 
 The container should mount a `read-only` secret volume called `secret-volume` at the path `/etc/secret-volume`. The secret being mounted has already been created for you and is called `dotfile-secret`.
 
----
 A)
 1. 먼저 `Secret`이 생성되어있다고 하니까 실제로 있는지 확인해보자.
 2. docs에 `Secret`을 검색해서 페이지에 접속한다.
