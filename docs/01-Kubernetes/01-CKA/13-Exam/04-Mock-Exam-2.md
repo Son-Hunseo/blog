@@ -2,7 +2,7 @@
 title: Mock Exam 2 오답 정리
 description: Udemy Mumshad 강의의 Mock Exam 2 문제 오답 정리
 ---
-# 1 (O)
+## 1 (O)
 
 Create a StorageClass named `local-sc` with the following specifications and set it as the default storage class:
 
@@ -27,7 +27,7 @@ volumeBindingMode: WaitForFirstConsumer
 
 
 ---
-# 2 (X)
+## 2 (X)
 
 Create a deployment named `logging-deployment` in the namespace `logging-ns` with 1 replica, with the following specifications:
 The main container should be named `app-container`, use the image `busybox`, and should run the following command to simulate writing logs:
@@ -128,7 +128,7 @@ spec:
 
 
 ---
-# 3 (X)
+## 3 (X)
 
 A Deployment named `webapp-deploy` is running in the `ingress-ns` namespace and is exposed via a Service named `webapp-svc`.
 Create an Ingress resource called `webapp-ingress` in the same namespace that will route traffic to the service. The Ingress must:
@@ -200,7 +200,7 @@ spec:
 
 
 ---
-# 4 (O)
+## 4 (O)
 
 Create a new deployment called `nginx-deploy`, with image `nginx:1.16` and `1` replica. Next, upgrade the deployment to version `1.17` using rolling update.
 
@@ -228,7 +228,7 @@ spec:
 ```
 
 ---
-# 5 (X)
+## 5 (X)
 
 Create a new user called `john`. Grant him access to the cluster using a csr named `john-developer`. Create a role `developer` which should grant John the permission to `create, list, get, update and delete pods` in the `development` namespace . The private key exists in the location: `/root/CKA/john.key` and csr at `/root/CKA/john.csr`.  
 
@@ -289,7 +289,7 @@ Please refer to the documentation to see an example. The documentation tab is av
 - 나와있는 Role과 RoleBinding 객체로 인가를 마무리한다.
 
 ---
-# 6 (X)
+## 6 (X)
 
 Create an nginx pod named `nginx-resolver` using the `nginx` image and expose it internally using a `ClusterIP` service called `nginx-resolver-service`.
 From within the cluster, verify:
@@ -325,7 +325,7 @@ kubectl exec bb -- nslookup http://<pod ip> > /root/CKA/nginx.pod
 - cf) Pod의 경우 Pod DNS가 비활성화 되어있을 수도 있으므로 문제에서 Pod는 IP lookup으로 명시해준 것 같다.
 
 ---
-# 7 (O)
+## 7 (O)
 
 Create a static pod on `node01` called `nginx-critical` with the image `nginx`. Make sure that it is recreated/restarted automatically in case of a failure.
 For example, use `/etc/kubernetes/manifests` as the static Pod path.
@@ -353,7 +353,7 @@ spec:
 ```
 
 ---
-# 8 (O)
+## 8 (O)
 
 Create a Horizontal Pod Autoscaler with name `backend-hpa` for the deployment named `backend-deployment` in the **backend namespace** with the `webapp-hpa.yaml` file located under the root folder.  
 Ensure that the HPA scales the deployment based on **memory utilization**, maintaining an average memory usage of **65%** across all pods.  
@@ -388,7 +388,7 @@ spec:
 
 
 ---
-# 9 (X)
+## 9 (X)
 
 Modify the existing `web-gateway` on `cka5673` namespace to handle **HTTPS traffic** on port `443` for `kodekloud.com`, using a **TLS certificate** stored in a **secret** named `kodekloud-tls`.
 
@@ -415,7 +415,7 @@ kubectl describe gateway web-gatway -n cka5673
 
 
 ---
-# 10 (X)
+## 10 (X)
 
 On the cluster, the team has installed multiple helm charts on a different namespace. By mistake, those deployed resources include one of the vulnerable images called `kodekloud/webapp-color:v1`. Find out the release name and uninstall it.
 
@@ -431,7 +431,7 @@ On the cluster, the team has installed multiple helm charts on a different names
 - 위 명령어로 조회된 helm 릴리즈들의 이미지를 확인해서 지우면 된다.
 
 ---
-# 11 (O)
+## 11 (O)
 
 You are requested to create a NetworkPolicy to allow traffic from frontend apps located in the `frontend` namespace, to backend apps located in the `backend` namespace, but not from the databases in the `databases` namespace. There are three policies available in the `/root` folder. Apply the most restrictive policy from the provided YAML files to achieve the desired result. Do not delete any existing policies.
 
