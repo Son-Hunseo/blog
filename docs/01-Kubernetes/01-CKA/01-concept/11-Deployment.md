@@ -92,7 +92,7 @@ kubectl get deployment
 kubectl get replicaset
 ```
 
-- `Deployment` 생성으로 인해 생성도니 `ReplicaSet` 확인
+- `Deployment` 생성으로 인해 생성된 `ReplicaSet` 확인
 
 ---
 ## Deployment로 Pod 수정하기
