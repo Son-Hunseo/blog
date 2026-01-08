@@ -19,14 +19,21 @@ keywords:
 
 ### Scheduler Profile
 
-- 이러한 문제점을 해결하기 위해서 `Scheduler Profile` 방식이 도입되었다. (since, kubernetes 1.18)
+- 이러한 문제점을 해결하기 위해서 `Scheduler Profile` 방식이 도입되었다. (kubernetes 1.18 ~)
 - `Scheduler Profile` 방식은 하나의 스케줄러 안에서 여러 `Profile`을 지정하여, `Pod`들이 필요에따라, `Profile`을 선택하여, 마치 여러 스케줄러를 선택적으로 사용하는 것과 같은 효과를 낸다.
 - `Scheduler Profile` 방식은 각 `Profile`에서 어떠한 `Plugin`을 채택/제외할지 선택하는 방법으로 적용된다.
 - `Plugin`은 Kubernetes Scheduling 과정의 각 단계에서 적용되며, 사용자 커스텀으로 개발하여 적용할 수 도 있다.
 - `Plugin`을 이해하기 위해서는 Kubernetes Scheduling 과정을 이해해야한다.
 
+:::info
+결정적으로, Custom Scheduler를 하나 만들기 위해서는 A ~ Z 까지의 로직을 직접 개발하고 빌드하고 실행시켜야한다. 하지만, Scheduler Profile의 경우에는 따로 로직을 작성하지 않고, 이미 개발되어있는 여러 플러그인들을 조합하여 사용(혹은 조금 수정하여 사용)하여 훨씬 편리하게 사용할 수 있다. (그러나, 커스텀 자유도는 낮음)
+:::
+
 ---
 ## Kubernetes Scheduling 과정
+
+![scheduler-profile1](assets/scheduler-profile1.jpg)
+
 ### Stages
 
 1. `Scheduling Queue` 
