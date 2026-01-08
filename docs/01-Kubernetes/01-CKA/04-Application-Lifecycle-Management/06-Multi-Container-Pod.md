@@ -13,7 +13,7 @@ keywords:
 ### 개념
 
 - `Multi Container Pod`란 하나의 `Pod` 내부에 여러 컨테이너를 함께 배치하는 개념이다.
-- `Pod` 내부의 여러 컨테이너는 생명주기(생성, 삭제)를 함께하며, 네트워크(localhost)와 `Volume`을 공유한다. (별도의 `Service` 없이, 각 컨테이너끼리 localhost로 통신이 가능하며, 같은 볼륨을 공유)
+- `Pod` 내부의 여러 컨테이너는 생명주기(생성, 삭제)를 함께하며, 네트워크(localhost)와 `Volume`을 공유한다. (별도의 `Service` 없이, 각 컨테이너끼리 localhost로 통신이 가능하며, <span style={{color: 'red'}}>같은 볼륨을 공유</span>)
 
 ### 왜 사용?
 
@@ -26,6 +26,12 @@ keywords:
 
 ---
 ## Multi Container Pod 디자인 패턴
+
+:::tip
+멀티 컨테이너 `Pod`는 CKA 시험에 상당히 자주 나온다.
+기억해야할 점은, 여러 컨테이너가 실행되어야하는 `Pod` 내에서 "먼저" 생성해야하는 컨테이너가 있을 경우 Init Container를 떠올리고 docs에 검색하면 된다.
+:::
+
 ### Co-located Containers 패턴 (기본)
 
 - `spec.containers` 배열에 2개 이상 컨테이너를 넣는 형태
