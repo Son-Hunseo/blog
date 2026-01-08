@@ -12,25 +12,26 @@ keywords:
 ## Static Pod
 ### 개념
 
-- `kube-apiserver`, `kube-scheduler`, `etcd` 없이도 `kubelet`이 독립적으로 생성/관리 하는 `Pod`
+- <span style={{color: 'red'}}>kube-apiserver, kube-scheduler, etcd 없이도 kubelet이 독립적으로 생성/관리 하는 Pod</span>
 - 즉, Kubernetes Control Plane의 지시 없이도 동작한다.
 - 오직 `Pod`만 가능하다.
 	- `Deployment`, `ReplicaSet`, `Service` 등은 Controller가 필요하므로 Static으로 생성이 불가능하다.
 - 장점
-	- `static pod`로 관리하는 `Pod`들은 죽을 경우, 컨트롤플레인과 상관없이 자동으로 재시작된다. (`kubelet`이 상태를 지속적으로 확인하고 문제가 생기면 자동으로 재시작한다)
+	- `Static Pod`로 관리하는 `Pod`들은 죽을 경우, 컨트롤플레인과 상관없이 자동으로 재시작된다. (`kubelet`이 상태를 지속적으로 확인하고 문제가 생기면 자동으로 재시작한다)
 	- 컨테이너화된 환경을 사용하므로 격리, 이식성, 버전 관리 측면에서 일반 OS 서비스(예: `systemd`)보다 유리하다.
 
-### Use-case
+### Use-case: Control Plane
 
-**Kubernetes Control Plane 구축**
-- `kube-apiserver`, `etcd`, `controller-manater` 등은 `static-pod`로 실행되어 Control Plane을 구축한다.
+- `kube-apiserver`, `etcd`, `controller-manater` 등은 `Static Pod`로 실행되어 Control Plane을 구축한다.
+	- 확인 방법
+		- `kubectl get pod -n kube-system`
 - 실제로 Control Plane(Master Node)의 `/etc/kubernetes/manifests`를 들어가보면, `etcd.yaml`, `kube-apiserver.yaml`, `kube-controller-manager.yaml`, `kube-scheduler.yaml`이 존재하는 것을 볼 수 있다.
 
 ### 동작 방식
 
 **`Kubelet`**
 
-- `Pod` yaml을 실행하고자하는 `Node`의 특정 디렉토리에 두면 `kubelet`이 자동으로 감지하여 실행한다.
+- `Pod` yaml을 실행하고자하는 `Node`의 특정 디렉토리(`/etc/kubernetes/manifests`)에 두면 `kubelet`이 자동으로 감지하여 실행한다.
 - 이 디렉토리를 `Static Pod Manifest Directory`라고 한다.
 
 **생성 과정**
@@ -39,7 +40,7 @@ keywords:
 2. `Kubelet`이 주기적으로 해당 폴더를 스캔한다.
 3. `Kubelet`이 `Pod`를 생성한다.
 
-- `Pod`가 죽으면 `Kubelet`이 자동으로 `Pod`를 잿시작한다.
+- `Pod`가 죽으면 `Kubelet`이 자동으로 `Pod`를 재시작한다.
 - Yaml 파일 수정 -> `Pod` 재생성
 - Yaml 파일 삭제 -> `Pod`삭제
 
@@ -50,13 +51,19 @@ keywords:
 **방법 1**: `Kubelet` 실행 옵션에서 지정
 
 ```bash
+sudo nano /etc/systemd/system/kubelet.service
+```
+
+```bash
+...
 --pod-manifest-path=/my-manifest-dir
+...
 ```
 
 **방법 2**: `Kubelet` 설정 파일에서 지정
 
 ```bash
-nano /var/lib/kubelet/config.yaml
+sudo nano /var/lib/kubelet/config.yaml
 ```
 
 ```yaml
