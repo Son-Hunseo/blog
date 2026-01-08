@@ -11,20 +11,20 @@ keywords:
 ---
 ## 개요
 
-- kube-scheduler는 pod를 어느 노드에 배치할지 결정하는 역할을 한다.
-- 중요한 점: kube-scheduler는 단지 <span style={{color: 'red'}}>"어디에 둘지 결정"</span>만 하며, 실제로 pod를 생성하여 실행하는 것은 각 노드의 kubelet이 담당한다.
+- `kube-scheduler`는 `Pod`를 어느 노드에 배치할지 결정하는 역할을 한다.
+- 중요한 점: `kube-scheduler`는 단지 <span style={{color: 'red'}}>"어디에 둘지 결정"</span>만 하며, 실제로 `Pod`를 생성하여 실행하는 것은 각 노드의 `kubelet`이 담당한다.
 
 ---
 ## 스케줄러가 필요한 이유
 
 - 클러스터에는 여러 노드가 있고, 각 노드의 리소스 상태(cpu, memory 등)가 다르다.
-- 특정 pod가 필요한 리소스를 만족할 수 있는 노드에 배치하지 않으면 실행이 불가능하다.
-- 따라서 스케줄러는 pod의 요구사항과 클러스터 상태를 바탕으로 최적의 노드를 선택한다.
+- 특정 `Pod`가 필요한 리소스를 만족할 수 있는 노드에 배치하지 않으면 실행이 불가능하다.
+- 따라서 스케줄러는 `Pod`의 요구사항과 클러스터 상태를 바탕으로 최적의 노드를 선택한다.
 
 ---
 ## Pod 배치 과정 (스케줄링 흐름)
 
-예시: cpu 10을 요구하는 pod가 있고, 노드들의 cpu 상태가 각각 4/4/12/16이라고 가정할 때
+예시: cpu 10을 요구하는 `Pod`가 있고, 노드들의 cpu 상태가 각각 4/4/12/16이라고 가정할 때
 1. Filter 단계
     - 조건에 맞지 않는 노드들을 걸러낸다.
     - 예시: cpu 4/4인 노드는 pod 요구사항(cpu 10)을 충족하지 못하므로 제외
@@ -47,29 +47,75 @@ keywords:
 
 ### Kubeadm Setup
 
+**설치**
+
+- `kubeadm`으로 클러스터 설치 시 `kube-scheduler`는 자동으로 설치된다. (`Pod` 형태로)
+
+
+**설정 조회**
+
  ```bash
- kubectl get pods -n kube-system cat /etc/kubernetes/manifests/kube-scheduler.yaml
+sudo nano /etc/kubernetes/manifests/kube-scheduler.yaml
  ```
 
-- kubeadm 사용 시(kubeadm 설치시 kube scheduler 자동으로 설치된다)
-- kubeadm 설치 명령어: `sudo apt-get install -y kubeadm=1.31.6-1.1` (이외 많은 설정들이 있어서 자세한건 쿠버네티스 설치 글을 참조)
-- kube-system 네임스페이스에 pod로 배포됨
-- 위 명령어는 확인 명령어
+- 위 경로에 yaml 형태로 설정이 저장되어있다.
+- 설정 변경도 위 yaml 파일을 변경하면 자동으로 된다.
+	- Static Pod 이기 때문인데, 이는 나중에 자세히 다루도록 한다.
 
-### Manual Setup
+### Manual Setup (Kubernetes The Hard Way)
 
-```bash
-wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-scheduler
-```
-
-- 수동 설치
-    - Kubernetes release 페이지에서 바이너리를 다운로드해 서비스로 실행
+**설치**
 
 ```bash
-ps -aux | grep kube-scheduler
+wget https://dl.k8s.io/v1.31.14/bin/linux/amd64/kube-scheduler
+
+sudo mv kube-scheduler /usr/local/bin/ 
+sudo chmod +x /usr/local/bin/kube-scheduler
+
+sudo nano /etc/systemd/system/kube-scheduler.service
 ```
 
-- 실행 중 옵션 확인 명령어
+```ini
+[Unit]
+Description=Kubernetes Scheduler
+Documentation=https://kubernetes.io/docs/
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/kube-scheduler \
+  --kubeconfig=/etc/kubernetes/kube-scheduler.kubeconfig \
+  --leader-elect=true \
+  --v=2
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start kube-scheduler
+sudo systemctl enable kube-scheduler
+```
+
+- 위 명령어는 `kube-scheduler`를 바이너리를 직접 다운로드하여 설치하는 명령어이다.
+	- https://www.downloadkubernetes.com/ 참조
+- `/usr/local/bin/` 으로 이동시켜 PATH에 등록한다.
+- 이에 시스템 전역 실행 파일로 사용가능한 것이다.
+
+
+**설정 조회**
+
+```bash
+cat /etc/systemd/system/kube-scheduler.service
+```
+
+- `systemd`에 설치했기 때문에 위 경로에서 설정을 조회하고 수정할 수 있다.
+- 해당 파일을 수정한 뒤 아래 명령어 수행해야 적용된다.
+	- `sudo systemctl daemon-reload`
+	- `sudo systemctl restart kube-scheduler`
 
 ---
 ## 레퍼런스
