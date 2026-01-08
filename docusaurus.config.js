@@ -12,8 +12,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
 
   // 탭에 뜨는 부분들
-  title: 'Son\'s Blog',
-  tagline: '개발, 인프라(클라우드, 플랫폼), 홈랩(홈서버) 등의 주제로 글을 작성하는 블로그입니다.',
+  title: 'Pipes\' Blog',
+  tagline: 'Cloud, DevOps 관련 기록을 남깁니다.',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -128,9 +128,9 @@ const config = {
       },
 
       // Replace with your project's social card
-      image: 'img/default-image.jpg',
+      image: 'img/default-image.png',
       navbar: {
-        title: 'Son\'s Blog', // 메뉴 바의 웹사이트 메인 제목
+        title: 'Pipes\' Blog', // 메뉴 바의 웹사이트 메인 제목
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.png', // 안보이게 하려고 비워 둠 (없는 이미지임)
