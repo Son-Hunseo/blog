@@ -25,7 +25,7 @@ keywords:
 | `NoSchedule`       | `Toleration` 없으면 이 `Node`에 Scheduling 안 됨     |
 | `PreferNoSchedule` | 가능하면 스케줄링하지 않음. 강제는 아님                        |
 | `NoExecute`        | 신규 Pod 스케줄링 금지 + 기존 Pod도 `toleration` 없으면 쫓아냄 |
-- `NoSchedule`의 경우 기존에 해당 `Node`에 실행되고 있던 `Pod`들이 `Toleration`이 없어도 영향을 받지 않는다. (쫓아내지 않는다)
+- `NoSchedule`의 경우 기존에 해당 `Node`에 실행되고 있던 `Pod`들이 `Toleration`이 없어도 영향을 받지 않는다. (쫓아내지 않는다 = `evict` 하지 않는다)
 - 하지만, `NoExecute`의 경우 `Toleration`이 없는 기존 `Pod`들도 쫓아낸다.
 
 ### 헷갈리기 쉬운 부분
