@@ -321,12 +321,10 @@ spec:
     kind: Deployment
     name: analytics-deployment
   updatePolicy:
-    updateMode: Auto
+    updateMode: Recreate
 ```
 
 - VPA는 HPA와 다르게 메인 docs 페이지에서 full example이 있다.
-- Auto는 Deprecated되서 시험에는 나오지 않지 않을까? 싶다.
-
 
 ---
 ## 11 (X)
