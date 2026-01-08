@@ -8,6 +8,12 @@ keywords:
 ---
 ---
 ## Admission Controller
+
+:::warning
+- 스케줄링 섹션에 있어서 헷갈릴 수 있는데, Custom Scheduler나 Scheduler Profile은 어디까지나 "`Pod` 스케줄링"을 컨트롤하는 역할이고, 
+- 이 글에서 다루는 Admission Controller는 스케줄링과정 이전에 "`kube-apiserver`로 들어오는 요청" 자체를 검증, 수정, 차단하는 역할이다.
+:::
+
 ### 왜 Admission Controller?
 
 - 우리가 `kubectl`로 `Pod` 생성과 같은 요청을 보내면 요청은 Kubernetes API Server로 전달되고 다음과 같은 단계를 거친다.
@@ -62,23 +68,33 @@ keywords:
 
 ---
 ## Admission Controller 활성화 방법
-### 바이너리
+### Manual Setup으로 설치했을 경우
+
+```bash
+sudo nano /etc/systemd/system/kube-apiserver.service
+```
 
 ```bash
 ExecStart=/usr/local/bin/kube-apiserver \\
---advertise-address=${INTERNAL_IP} \\
---allow-privileged=true \\
---apiserver-count=3 \\
---authorization-mode=Node, RBAC \\
---bind-address=0.0.0.0 \\
---enable-swagger-ui=true \\
---etcd-servers=https://127.0.0.1:2379 \\
---event-ttl=1h \\
---runtime-config=api/all \\
---service-cluster-ip-range=10.32.0.0/24 \\
---service-node-port-range=30000-32767 \\
---v=2
---enable-admission-plugins=NodeRestriction, # 이 부분이 중요
+	--advertise-address=${INTERNAL_IP} \\
+	--allow-privileged=true \\
+	--apiserver-count=3 \\
+	--authorization-mode=Node, RBAC \\
+	--bind-address=0.0.0.0 \\
+	--enable-swagger-ui=true \\
+	--etcd-servers=https://127.0.0.1:2379 \\
+	--event-ttl=1h \\
+	--runtime-config=api/all \\
+	--service-cluster-ip-range=10.32.0.0/24 \\
+	--service-node-port-range=30000-32767 \\
+	--v=2
+	--enable-admission-plugins=NodeRestriction, # 이 부분에 사용할 Admission Controller들 추가
+```
+
+```bash
+sudo systemctl daemon-reload  
+sudo systemctl start kube-apiserver  
+sudo systemctl enable kube-apiserver
 ```
 
 - 위 명령어로 `kube-apiserver` 바이너리 실행 (예시이므로 명령어 본인 환경에 맞게 변경해서 사용)
@@ -100,28 +116,16 @@ spec:
     - --advertise-address=${INTERNAL_IP}
     - --allow-privileged=true
     - --enable-bootstrap-token-auth=true
-    - --enable-admission-plugins=NodeRestriction, # 이 부분이 중요
+    - --enable-admission-plugins=NodeRestriction, # 이 부분에 사용할 Admission Controller들 추가
     image: k8s.gcr.io/kube-apiserver-amd64:v1.11.3
     name: kube-apiserver
-```
-
-- 예시이므로 명령어 본인 환경에 맞게 변경해서 사용
-
-### 조회
-
-```bash
-ps -ef | grep kube-apiserver | grep admission-plugins
-
-# 또는
-
-kubectl exec kube-apiserver-마스터노드이름 -n kube-system -- kube-apiserver -h | grep enable-admission-plugins
 ```
 
 ---
 ## Admission Webhook
 ### 개념
 
-- 커스텀 `Admission Webhook`을 사용하고 싶을 경우 사용하는 방법이다.
+- 기존에 정의되어있는 플러그인들이 아니라 커스텀 `Admission Webhook`을 사용하고 싶을 경우 사용하는 방법이다.
 - `Webhook Server`로 요청(`AdmissionReview`)을 보내서 `Webhook Server`에서 요청을 처리하고 결과(Validate의 경우 true/false, Mutate의 경우 바뀐 `patch`)를 받는 방식이다.
 	- `Webhook Server`의 경우 클러스터 밖에 놓든, 안에(`Deployment`+`Service`) 놓든 상관없다. 또한, 요청을 받고 가공해서 응답할 수 있는 API 서버라면, `Spring`으로 개발하든 `FastAPI`로 개발하든 `Go`로 개발하든 상관없다.
 
