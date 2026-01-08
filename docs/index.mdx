@@ -1,10 +1,11 @@
 ---
-title: Son's Blog
+title: Home
 sidebar_class_name: hidden-sidebar-item
 slug: /
 pagination_prev:
 pagination_next:
 hide_title: "true"
+description: Cloud, DevOps 관련 기록을 남깁니다.
 ---
 
 import { useState, useEffect } from 'react';
@@ -13,7 +14,7 @@ import RandomPosts from "@site/src/components/RandomPosts";
 export const TypewriterText = () => {
   const [text, setText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
-  const fullText = "I'm a DevOps Engineer focused on automation and reliability.";
+  const fullText = "Cloud, DevOps 관련 기록을 남깁니다.";
   
   useEffect(() => {
     if (text.length < fullText.length) {
@@ -35,10 +36,11 @@ export const TypewriterText = () => {
 };
 
 <header className="heroSection">
-  <h1 className="heroTitle">Hi there, my name is Hunseo Son.</h1>
+  <h1 className="heroTitle">Pipes' Blog</h1>
   <TypewriterText />
 </header>
 
 ---
+## 추천 글
 
 <RandomPosts />

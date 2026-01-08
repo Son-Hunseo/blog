@@ -30,7 +30,6 @@ function RandomPosts() {
 
   return (
     <section className={styles.randomPosts}>
-      <h2>추천 글 ✨</h2>
       <div className={styles.postsGrid}>
         {randomPosts.map((post, idx) => (
           <article key={idx} className={styles.postCard}>

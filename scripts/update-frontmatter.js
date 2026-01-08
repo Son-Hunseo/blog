@@ -22,7 +22,7 @@ const DEFAULT_IMAGES = {
   'SynologyNas': '/img/default/synologynas.png',
   'Golang': '/img/default/golang.png',
   'OS': '/img/default/os.png',
-  'Etc': '/img/default/etc.png',
+  'Etc': '/img/default/default-image.png',
 };
 
 // 2. 숫자 접두어 제거 함수
