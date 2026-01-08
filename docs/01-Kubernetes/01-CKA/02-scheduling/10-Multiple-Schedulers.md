@@ -38,27 +38,8 @@ keywords:
 ## 배포 방식
 ### 바이너리 실행 (예전 방식, 추천 X)
 
-```bash
-wget https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux/amd64/kube-scheduler
-```
-
-- 예시를 위해 쿠버네티스 기본 스케줄러 바이너리를 다운받았다. (경로: `/usr/local/bin`에 다운받았다고 가정하자)
-- 실제 본인이 만든 커스텀 스케줄러 바이너리가 있다면 해당 바이너리를 다운받아서 특정 경로에 넣어두면 된다.
-
-```bash
-ExecStart=/usr/local/bin/kube-scheduler \\
-  --config=/etc/kubernetes/config/kube-scheduler.yaml \\
-  --scheduler-name=my-scheduler
-```
-
-- 바이너리 파일을 실행한다.
-- `--config`: 설정파일 경로를 지정한다.
-- `--scheduler-name`: 스케줄러의 이름을 지정한다.
-
-**추천하지 않는 이유**
-- 과거의 Kubernetes는 Control Plane을 구성하는 컴포넌트(`kube-apiserver`, `kube-scheduler` 등)을 현재처럼 `Pod`로 실행하는 것이 아닌 리눅스 시스템 프로세스(`systemd` 등)로 이러한 컴포넌트들을 실행하고, 이 컴포넌트들이 Kubernetes API 서버와 통신하면서 클러스터가 작동하였다.
-- 이러한 시스템 프로세스로 Control Plane 컴포넌트를 실행하는 방식은 버전 관리, 업데이트, 로그 관리, 설정 등의 측면에서 불편하고 위험하기 때문에 현재는 대부분 `Pod` 방식이 사용되고 있다.
-- 이에 커스텀 스케줄러의 경우에도 이러한 바이너리를 실행하는 방식보다는 `Pod`로 실행하는 방식을 추천한다.
+- [Kube-Scheduler Manual Setup](../01-concept/06-kube-scheduler.md#manual-setup-kubernetes-the-hard-way) <- 이 방법처럼 나 혹은 다른 사람이 만든 Cusom Scheduler를 `systemd`의 서비스로 사용할 수 있게 설정하면 된다.
+- 하지만, 이 방법은 추천되지 않는다.
 
 ### Deployment로 배포 (추천)
 
@@ -69,7 +50,7 @@ ExecStart=/usr/local/bin/kube-scheduler \\
 	- `Deployment`로 실행하면 rolling update, self-healing, replica 수 조절을 통한 HA 구성이 쉬워 운영이 편리하다.
 
 ---
-## Custom Scheduler 사용 방법
+## Pod에서 Custom Scheduler 지정하기
 
 ```yaml
 apiVersion: v1
