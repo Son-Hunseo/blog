@@ -12,14 +12,14 @@ keywords:
 쿠버네티스에서는 다음과 같은 리소스 사용량을 모니터링해야한다.
 
 **Node 수준**
-- 전체 노드 숫
-- 각 노드의 상태(헬스 체크)
+- 전체 노드 수
+- 각 노드의 상태 (헬스 체크)
 - CPU, 메모리 사용량
-- 네트워크/디스크 I/O
+- 네트워크, 디스크 I/O
 
 **Pod 수준**
-- Pod 수
-- 각 Pod의 CPU / 메모리 사용량
+- `Pod` 수
+- 각 `Pod`의 CPU / 메모리 사용량
 
 그런데 ,쿠버네티스에는 기본적으로 완전한 모니터링 솔루션이 내장되어있지 않다. 이에 별도의 도구를 사용해야한다.
 - ex: `Prometheus`, `Elastic Stack`, `Datadog`, `Dynatrace`
@@ -35,7 +35,7 @@ keywords:
 ### Metrics Server
 
 - Heapster의 경량화 버전
-- HPA / VPA /`kubectl top` 명령 등에 필요한 실시간 메트릭 제공
+- `HPA` / `VPA` /`kubectl top` 명령 등에 필요한 실시간 메트릭 제공
 - 그러나, 메모리에만 저장 -> 과거 데이터 조회 불가
 - 작동방식
 	- 모든 노드의 `kubelet`에서 `Metrics Server`로 전달한다. 
@@ -43,7 +43,12 @@ keywords:
 
 
 ---
-## Metrics Server 설치 방법 (하지만, 외부 솔루션 추천!)
+## Metrics Server 설치 방법
+
+:::tip
+실제 모니터링 자체는 외부 솔루션을 추천하지만, `HPA`, `VPA` 등이 Metrics Server를 기준으로 이루어지기 때문에 해당 기능을 사용하기 위해서 Metrics Server 설치는 필수이다.
+:::
+
 ### 설치
 
 ```bash
