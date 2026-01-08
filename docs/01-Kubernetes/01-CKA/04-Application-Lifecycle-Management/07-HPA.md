@@ -24,7 +24,7 @@ keywords:
 ### 동작 방식
 
 - 메트릭 수집
-	- `Metric Server` 필수
+	- <span style={{color: 'red'}}>Metric Server 필수</span>
 	- 혹은, `DataDog`나 `Dynatrace`와 같은 외부 메트릭을 통합하여 동작하게도 가능하다.
 - `Pod`의 리소스 `request`/`limit` 기반으로 사용률을 계산하여 동작
 	- 예: CPU limit = 500m일 때, 사용률 50%가 임계치라면 250m 사용시 스케일러가 동작한다.
