@@ -90,6 +90,10 @@ kubectl get replicationcontroller
 
 ### ReplicaSet
 
+:::tip
+사실 `Deployment` yaml 을 작성하고 적용하면 이에 맞는 `ReplicaSet`이 자동으로 생성되기 때문에, `ReplicaSet` yaml을 작성할 일은 거의 없다.
+:::
+
 ```yaml
 # replicaset-definition.yaml
 apiVersion: apps/v1
