@@ -99,7 +99,7 @@ ingress:
 - 이에 지원하는 CNI도 있고 지원하지 않는 CNI도 있다.
 	- 지원하는 CNI - `Kube-router`, `Calico`, `Romana`, `Weave-net` 등
 	- 지원하지 않는 CNI - `Flannel`
-- 주의) `Flannel`을 사용하는 환경에서 Network Policy를 생성한다고 해서 에러 메시지가 나오지 않는다. 그냥 동작을 하지 않는 것이다.
+- 주의) <span style={{color: 'red'}}>Flannel을 사용하는 환경에서 Network Policy를 생성한다고 해서 에러 메시지가 나오지 않는다. 그냥 동작을 하지 않는 것이다.</span>
 
 ---
 ## 레퍼런스
