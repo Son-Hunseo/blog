@@ -37,7 +37,7 @@ openssl x509 -in <인증서파일경로> -text -noout
 	- `Issuer`: 발급자 정보 (`kubeadm`의 경우 보통 Kubernetes CA)
 
 ---
-## 트러블 슈팅
+## (중요) 트러블 슈팅
 ### 검증 체크리스트
 
 - [ ] 인증서 이름이 올바른가?
