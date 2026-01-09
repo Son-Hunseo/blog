@@ -134,6 +134,7 @@ spec:
 - 이러한 쿠버네티스의 기능을 확장하여 새로운 리소스를 선언하고 해당 리소스를 정의한 방식에 따라 선언한 상태로 유지하기 위해서 오퍼레이터를 사용한다.
 - 예시:
 	- `cert-manager`는 오퍼레이터 패턴으로 구현되었는데, `Issuer`/`ClusterIssuer`/`Certificate`/`Order`/`Challenge` 등의 CRD를 정의하고 컨트롤러가 이 `CRD` 들을 watch(`etcd`에 기록된 리소스들을 `kube-apiserver`를 통해 watch)하며 인증서들을 갱신하는 기능을 자동화한다.
+	- 추가적으로 내가 예전에 프로젝트를 진행할 때, `external-secrets-operator`를 사용하여 AWS Secret Manager에서 관리하는 비밀 값들을 가져와서 적용했었다.
 
 ---
 ## 레퍼런스
