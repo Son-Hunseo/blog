@@ -22,8 +22,7 @@ keywords:
 ## Kubernetes 버전 지원 정책
 
 - 최근 3개의 minor 버전만 공식 지원한다.
-- 예
-	- 최신 버전이 1.33이라면, 1.31까지 지원한다.
+	- 예: 최신 버전이 1.33이라면, 1.31까지 지원한다.
 - <span style={{color: 'red'}}>이에 본인이 관리하는 클러스터의 버전이 지원 종료되기 전에 업그레이드를 해두는 것이 좋다.</span>
 
 ---
@@ -64,6 +63,8 @@ keywords:
 1. CSP (EKS, GKE)와 같은 경우는 대시보드 등에서 클릭 등으로 간단하게 업그레이드 할 수 있다.
 2. `kubeadm`을 사용하지 않고 모든 요소를 manual로 설치한 경우 각각을 업그레이드 해주면 된다. (복잡)
 3. 여기서는 `kubeadm`으로 설치를 한 클러스터 기준으로 업그레이드 방법을 설명한다.
+
+- 아래 내용을 참고하되 정확한 내용은 docs에서 확인한다 -> https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/
 :::
 
 ### Master Node
