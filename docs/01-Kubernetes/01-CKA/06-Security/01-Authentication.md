@@ -20,7 +20,9 @@ keywords:
 	2. 클러스터 내에서 어떠한 리소스들에 권한이 있는지(인가 - Authorization)에 대한 확인
 - 을 거쳐야한다.
 
-- Authentication을 하는 주체는 `kube-apiserver`이다.
+- 이 글에서는 인증(Authentication)을 다룰 것이다. 
+- 그럼 이 인증은 어디서 검증해주는걸까?
+- 유저가 클러스터에 `kubectl`로 요청을 했을 때, Authentication을 하는 주체는 `kube-apiserver`이다.
 
 ### Authentication 대상
 
@@ -31,7 +33,8 @@ keywords:
 - 대상 - 쿠버네티스 클러스터 내의 리소스를 조작하는 사람
 	- 클러스터 관리자
 	- 개발자
-- <span style={{color: 'red'}}>Kubernetes는 User Account 객체가 존재하지 않는다. - 다른 방법으로 관리</span>
+- <span style={{color: 'red'}}>Kubernetes는 User Account 라는 객체가 존재하지 않는다. - 다른 방법으로 관리</span>
+	- cf) 미리 말하자면, 유저가 개인키로 <span style={{color: 'red'}}>CSR을 만들 때 넣는 CN(Common Name)</span>이 유저의 이름이 된다.
 
 **Service Account**
 
