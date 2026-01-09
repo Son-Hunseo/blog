@@ -46,6 +46,7 @@ CSP 쿠버네티스 클러스터(EKS, GKE)의 경우 `etcd`에 직접 접근할 
 
 - `ETCD`는 Kubernetes의 모든 클러스터의 상태 정보가 저장되는 key-value DB이다.
 - 이에 백업해야한다.
+- 참조: https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#snapshot-using-etcdctl-options
 
 ### 방법 - 백업
 
