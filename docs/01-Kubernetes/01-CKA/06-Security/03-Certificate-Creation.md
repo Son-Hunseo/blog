@@ -63,7 +63,7 @@ openssl req -new -key admin.key -subj "/CN=kube-admin/O=system:masters" -out adm
 ```
 
 - CN: `kube-admin`
-	- User 이름을 `kube-admin`이라고 지정하는 것과 같음
+	- User 이름을 `kube-admin`이라고 지정하는 것과 같음 (이후 `RoleBinding` 객체를 만들 때 유저의 이름으로 쓰인다)
 	- 도메인과 같은 식별자이므로 `kube-admin`이라는 이름을 가진 유저만 이 인증서를 사용이 가능하다.
 - O (Organization): `system:masters`
 	- `system:masters`는 클러스터 관리자 권한을 가지는 그룹이다.
