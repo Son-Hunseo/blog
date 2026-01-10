@@ -38,7 +38,7 @@ keywords:
 ## 배포 방식
 ### 바이너리 실행 (예전 방식, 추천 X)
 
-- [Kube-Scheduler Manual Setup](../01-concept/06-kube-scheduler.md#manual-setup-kubernetes-the-hard-way) <- 이 방법처럼 나 혹은 다른 사람이 만든 Cusom Scheduler를 `systemd`의 서비스로 사용할 수 있게 설정하면 된다.
+- [Kube-Scheduler Manual Setup](../01-concept/06-kube-scheduler.md#manual-setup-kubernetes-the-hard-way) - 이 방법처럼 나 혹은 다른 사람이 만든 Cusom Scheduler를 `systemd`의 서비스로 사용할 수 있게 설정하면 된다.
 - 하지만, 이 방법은 추천되지 않는다.
 
 ### Deployment로 배포 (추천)
