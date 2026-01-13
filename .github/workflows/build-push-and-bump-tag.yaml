@@ -1,4 +1,3 @@
-# .github/workflows/build-push-and-bump-tag.yml
 name: Build & Push to ECR and Update k8s deploy tag
 
 on:
@@ -19,7 +18,7 @@ jobs:
       IMAGE_NAME: son-blog
       DEPLOY_FILE: k8s/deploy.yaml
       AWS_REGION: ap-northeast-2
-      ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+      ECR_REPOSITORY: son/blog
 
     steps:
       - name: Checkout
@@ -39,56 +38,36 @@ jobs:
 
       - name: Set ECR registry env
         run: |
-          echo "ECR_REGISTRY=${{ steps.ecr_login.outputs.registry }}" >> $GITHUB_ENV
+          echo "ECR_REGISTRY=${{ steps.ecr_login.outputs.registry }}" >> $GITHUB_ENV  
 
-      # 최신 태그 조회 + 0.1 증가 (파이썬 코드 사용)
+      # 최신 태그 조회 + 0.1 증가 (외부 파이썬 스크립트 사용)
       - name: Calculate next image tag
         id: next_tag
         run: |
-          JSON="$(aws ecr describe-images \
-            --repository-name "${ECR_REPOSITORY}" \
-            --query 'imageDetails' \
-            --output json || echo '[]')"
+          JSON="$(aws ecr describe-images \  
+            --repository-name "${ECR_REPOSITORY}" \  
+            --query 'imageDetails' \  
+            --output json || echo '[]')"  
+          
+          NEXT_TAG="$(echo "$JSON" | python3 .github/scripts/calc_next_tag.py)"  
+          echo "NEXT_TAG=${NEXT_TAG}" >> $GITHUB_ENV  
 
-          NEXT_TAG="$(python3 - << 'PY'
-  import json, re, sys
-  data = json.loads(sys.stdin.read())
-  tags=[]
-for d in data:
-  for t in d.get("imageTags") or []:
-    if re.match(r'^\d+\.\d+$', t):
-      tags.append(t)
-if not tags:
-  print("0.1")
-  sys.exit(0)
-  tags.sort(key=lambda x:(int(x.split('.')[0]),int(x.split('.')[1])))
-  major, minor = map(int, tags[-1].split('.'))
-  minor += 1
-if minor >= 10:
-  major += 1
-  minor = 0
-  print(f"{major}.{minor}")
-  PY
-  <<< "$JSON")"
-  
-  echo "NEXT_TAG=${NEXT_TAG}" >> $GITHUB_ENV
+      - name: Build & Push Docker image
+        run: |
+          docker build -t ${IMAGE_NAME}:${NEXT_TAG} .  
+          docker tag ${IMAGE_NAME}:${NEXT_TAG} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${NEXT_TAG}  
+          docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${NEXT_TAG}  
 
-- name: Build & Push Docker image
-  run: |
-    docker build -t son-blog:${NEXT_TAG} .
-    docker tag son-blog:${NEXT_TAG} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${NEXT_TAG}
-    docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${NEXT_TAG}
-
-- name: Update deploy.yaml image tag
-  run: |
-    sed -i \
-      "s|\(image: .*son-blog:\).*|\1${NEXT_TAG}|" \
-      k8s/deploy.yaml
-
-- name: Commit and push
-  run: |
-    git config user.name github-actions[bot]
-    git config user.email github-actions[bot]@users.noreply.github.com
-    git add k8s/deploy.yaml
-    git commit -m "chore(k8s): bump image tag to ${NEXT_TAG} [skip ci]" || exit 0
-    git push
+      - name: Update deploy.yaml image tag
+        run: |
+          sed -i -E \
+            "s|(image:\s*.*${ECR_REPOSITORY}:)[^[:space:]]+|\1${NEXT_TAG}|" \
+            "${DEPLOY_FILE}"
+    
+      - name: Commit and push  
+        run: |  
+          git config user.name github-actions[bot]  
+          git config user.email github-actions[bot]@users.noreply.github.com  
+          git add "${DEPLOY_FILE}"  
+          git commit -m "chore(k8s): bump image tag to ${NEXT_TAG} [skip ci]" || exit 0  
+          git push
