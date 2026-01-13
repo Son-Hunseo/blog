@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: son-blog-deploy
+  namespace: blog
+  labels:
+    app: son-blog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: son-blog
+  template:
+    metadata:
+      labels:
+        app: son-blog
+    spec:
+      imagePullSecrets:
+      - name: ecr-registry-key
+      containers:
+      - name: son-blog
+        image: 211125633965.dkr.ecr.ap-northeast-2.amazonaws.com/son/blog:v0.0
+        ports:
+        - containerPort: 80
