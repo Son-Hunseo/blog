@@ -7,6 +7,10 @@ spec:
   parentRefs:
     - name: web-gateway
       namespace: gateway # Gateway가 있는 ns
+      sectionName: http-blog
+    - name: web-gateway
+      namespace: gateway # Gateway가 있는 ns
+      sectionName: https-blog
   hostnames:
     - blog.sonhs.com
   rules:
