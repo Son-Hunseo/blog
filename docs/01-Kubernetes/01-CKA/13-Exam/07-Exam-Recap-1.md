@@ -138,3 +138,20 @@ systemctl enable crio
 즉, `systemctl status kubelet` 해보면 된다.
 
 ---
+## cf
+
+```yaml
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: my-user-request
+spec:
+  request: LS0tLS1CRUdJTiBDRVJU... (중략) ...S1FTVAtLS0tLQo=
+  signerName: kubernetes.io/kube-apiserver-client
+  expirationSeconds: 86400  # 1일 (선택 사항)
+  usages:
+  - client auth
+```
+
+- 위처럼 CSR 객체의 request 를 base64 디코딩해서 저장해야하는 문제인데 저걸 `nano`로 여니까 오른쪽으로 넘겨가면서 거의 10번을 따로 복사해서 합치면서 실수나와서 다시하고 이런 작업으로 시간이 불필요하게 오래걸렸다.
+- `cat`으로 출력하면 한줄에 이어진 값들이 모두 출력되서 편하게 복사할 수 있다.
