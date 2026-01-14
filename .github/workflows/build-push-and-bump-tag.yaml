@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "k8s/**"          # k8s 폴더 아래만 변경된 경우 워크플로우 실행 안 함
+      - ".github/**"      # (선택) 워크플로우/스크립트만 바뀐 경우도 제외하고 싶으면
 
 permissions:
   contents: write
