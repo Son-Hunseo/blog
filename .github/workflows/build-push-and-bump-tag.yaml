@@ -16,7 +16,7 @@ jobs:
 
     env:
       IMAGE_NAME: son-blog
-      DEPLOY_FILE: k8s/deploy.yaml
+      DEPLOY_FILE: k8s/resource/deploy.yaml
       AWS_REGION: ap-northeast-2
       ECR_REPOSITORY: son/blog
 
@@ -38,25 +38,25 @@ jobs:
 
       - name: Set ECR registry env
         run: |
-          echo "ECR_REGISTRY=${{ steps.ecr_login.outputs.registry }}" >> $GITHUB_ENV  
+          echo "ECR_REGISTRY=${{ steps.ecr_login.outputs.registry }}" >> $GITHUB_ENV
 
       # 최신 태그 조회 + 0.1 증가 (외부 파이썬 스크립트 사용)
       - name: Calculate next image tag
         id: next_tag
         run: |
-          JSON="$(aws ecr describe-images \  
-            --repository-name "${ECR_REPOSITORY}" \  
-            --query 'imageDetails' \  
-            --output json || echo '[]')"  
+          JSON="$(aws ecr describe-images \
+            --repository-name "${ECR_REPOSITORY}" \
+            --query 'imageDetails' \
+            --output json || echo '[]')"
           
-          NEXT_TAG="$(echo "$JSON" | python3 .github/scripts/calc_next_tag.py)"  
-          echo "NEXT_TAG=${NEXT_TAG}" >> $GITHUB_ENV  
+          NEXT_TAG="$(echo "$JSON" | python3 .github/scripts/calc_next_tag.py)"
+          echo "NEXT_TAG=${NEXT_TAG}" >> $GITHUB_ENV
 
       - name: Build & Push Docker image
         run: |
-          docker build -t ${IMAGE_NAME}:${NEXT_TAG} .  
-          docker tag ${IMAGE_NAME}:${NEXT_TAG} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${NEXT_TAG}  
-          docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${NEXT_TAG}  
+          docker build -t ${IMAGE_NAME}:${NEXT_TAG} .
+          docker tag ${IMAGE_NAME}:${NEXT_TAG} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${NEXT_TAG}
+          docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${NEXT_TAG}
 
       - name: Update deploy.yaml image tag
         run: |
@@ -66,8 +66,8 @@ jobs:
     
       - name: Commit and push  
         run: |  
-          git config user.name github-actions[bot]  
-          git config user.email github-actions[bot]@users.noreply.github.com  
-          git add "${DEPLOY_FILE}"  
-          git commit -m "chore(k8s): bump image tag to ${NEXT_TAG} [skip ci]" || exit 0  
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git add "${DEPLOY_FILE}"
+          git commit -m "chore(k8s): bump image tag to ${NEXT_TAG} [skip ci]" || exit 0
           git push
