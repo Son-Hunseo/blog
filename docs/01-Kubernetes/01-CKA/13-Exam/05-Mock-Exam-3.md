@@ -471,11 +471,10 @@ While preparing to install a CNI plugin on your Kubernetes cluster, you typicall
 **Right Answer**
 
 ```bash
-kubectl get node -o jsonpath='{.items[0].spec.podCIDR}' > /root/pod-cidr.txt
+kubectl get configmap kubeadm-config -n kube-system -o yaml
 ```
 
-- 중요) pod CIDR은 노드의 정보에서 찾을 수 있다.
-- `kubectl get node -o yaml` 혹은 `kubectl get node -o json`에서 찾고 JSONPATH로 찾아서 저장하면 되는 문제였다.
+- 중요) pod cidr은 kubeadm으로 설치할 때 설정하는데 이는 kube-system 네임스페이스의 kubeadm-config 라는 ConfigMap에 존재한다.
 
 
 
