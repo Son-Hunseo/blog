@@ -124,11 +124,8 @@ Take the backup of ETCD at the location `/opt/etcd-backup.db` on the `control
 A)
 1. docs에 'backup etcd' 검색한다.
 2. 최상단 페이지로 들어간다.
-3. 해당 페이지의 선행 작업은 `etcdctl`이 설치되어야한다.
-	- 해맸던 요소) `apt install etcd-client` < 이 `etcdctl` 설치 명령어는 docs에 찾아봐도 없다. 외워야 한다.
-4. `kubectl get all -n kube-system -o wide`로 `etcd` `Pod`의 IP를 확인한다.
-5. 헤맸던 요소) etcd 독스에서 Securing communication 이 부분이 선행되어야 한다.
-6. 해당 페이지의 Backing up an etcd cluster 페이지로 가서 지침을 따른다.
+3. Snapshot using etcdctl options 에서 명령어를 찾는다.
+4. 해당 명령어에 필요한 인증서 등의 위치를 etcd yaml 파일에서 찾아서 넣는다.
 
 ---
 ## 7. 주어진 조건에 맞는 Pod 생성 (X)
