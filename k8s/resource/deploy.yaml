@@ -19,6 +19,6 @@ spec:
       - name: ecr-registry-key
       containers:
       - name: son-blog
-        image: 211125633965.dkr.ecr.ap-northeast-2.amazonaws.com/son/blog:1.0
+        image: 211125633965.dkr.ecr.ap-northeast-2.amazonaws.com/son/blog:1.1
         ports:
         - containerPort: 80
