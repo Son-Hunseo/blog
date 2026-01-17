@@ -26,3 +26,17 @@ yarn-error.log*
 
 # for jetbrain
 .idea/*
+
+# image after build
+static/img/Algorithm
+static/img/Database
+static/img/Docker
+static/img/HomeLab
+static/img/Kubernetes
+static/img/Network
+static/img/Nginx
+static/img/Openstack
+static/img/OS
+static/img/Proxmox
+static/img/Spring
+static/img/SynologyNas
