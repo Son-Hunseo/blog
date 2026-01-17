@@ -9,7 +9,7 @@ description: Cloud, DevOps 관련 기록을 남깁니다.
 ---
 
 import { useState, useEffect } from 'react';
-import RandomPosts from "@site/src/components/RandomPosts";
+import SelectedPosts from "@site/src/components/SelectedPosts";
 
 export const TypewriterText = () => {
   const [text, setText] = useState('');
@@ -44,4 +44,4 @@ export const TypewriterText = () => {
 ---
 ## 추천 글
 
-<RandomPosts />
+<SelectedPosts />
