@@ -288,7 +288,7 @@ kubectl apply -f 매니페스트파일.yml -n guacamole
 
 ### 로그인
 
-![guacamole1](./assets/guacamole1.png)
+![guacamole1](assets/guacamole1.png)
 
 - guacamole 서비스가 클러스터에 떠있는 경로로 접속하면 위와 같은 로그인 화면이 뜬다.
   - Docker로 설치한 경우 https://ip:8443
@@ -296,22 +296,22 @@ kubectl apply -f 매니페스트파일.yml -n guacamole
   - id: guacadmin
   - pw: guacadmin
 
-![guacamole2](./assets/guacamole2.png)
+![guacamole2](assets/guacamole2.png)
 
 - Google Authenticator 등으로 2FA 인증 등록을 한다.
   - Docker 버전의 경우 2FA가 기본으로 되어있지 않다. (개인적으로 특정 VM에 직접 접근하는 것이므로 외부에 노출할 경우 2FA 인증 설정을 하는 것을 권장한다)
 
 ### 새로운 계정 생성 & 기본 계정 삭제
 
-![guacamole3](./assets/guacamole3.png)
+![guacamole3](assets/guacamole3.png)
 
 - 우측 상단 계정 클릭 > 세팅
 
-![guacamole4](./assets/guacamole4.png)
+![guacamole4](assets/guacamole4.png)
 
 - 사용자 > 새 사용자
 
-![guacamole5](./assets/guacamole5.png)
+![guacamole5](assets/guacamole5.png)
 
 - 새롭게 사용할 계정의 id 와 pw를 입력하고 기본 계정을 지우고 이 계정을 admin으로 사용할 것이기 때문에 모든 권한을 체크해준다.
 - 계정 생성 이후 현재 기본 계정을 로그아웃한다.
@@ -319,13 +319,13 @@ kubectl apply -f 매니페스트파일.yml -n guacamole
 
 ### 연결 생성
 
-![guacamole6](./assets/guacamole6.png)
+![guacamole6](assets/guacamole6.png)
 
 - 우측 상단 계정 클릭 > 세팅
 - 연결 > 새 연결
 
-![guacamole7](./assets/guacamole7.png)
-![guacamole8](./assets/guacamole8.png)
+![guacamole7](assets/guacamole7.png)
+![guacamole8](assets/guacamole8.png)
 
 - 정말 많은 설정이 있지만 필수적으로 해야할 세팅을 하고 나머지 세팅은 추후 용도에 맞게 설정하자.
   - 연결 편집
@@ -343,12 +343,12 @@ kubectl apply -f 매니페스트파일.yml -n guacamole
 
 ### 연결
 
-![guacamole9](./assets/guacamole9.png)
+![guacamole9](assets/guacamole9.png)
 
 - 우측 상단 계정 클릭 > 홈
 - 생성한 연결 클릭
 
-![guacamole10](./assets/guacamole10.png)
+![guacamole10](assets/guacamole10.png)
 
 - 연결 성공!
 - 이후 세부 설정 세팅 후 사용하면 된다.

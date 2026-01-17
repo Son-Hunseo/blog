@@ -90,7 +90,7 @@ sudo systemctl start wol.service
 **KT 공유기 기준**
 - 공유기에 따라 MAC주소를 입력하는 경우가있고 IP주소를 입력하는 경우가 있다.
 
-![wol1](./assets/wol1.png)
+![wol1](assets/wol1.png)
 
 - 장치설정 - 부가 기능 - 스마트 부팅 설정
 	- MAC 주소와 PC이름을 설정하고 PC켜기를 누르면 원격으로 컴퓨터를 부팅할 수 있다.
