@@ -1,6 +1,6 @@
 ---
-title: "[홈랩 리팩토링] Gateway API 도입"
-description: "[홈랩 리팩토링] Gateway API 도입"
+title: "[홈랩 리팩토링 - 3] Gateway API 도입"
+description: "[홈랩 리팩토링 - 3] Gateway API 도입"
 ---
 
 ---

@@ -1,6 +1,6 @@
 ---
-title: "[홈랩 리팩토링] Jenkins to Github Action"
-description: "[홈랩 리팩토링] Jenkins to Github Action"
+title: "[홈랩 리팩토링 - 2] Jenkins to Github Action"
+description: "[홈랩 리팩토링 - 2] Jenkins to Github Action"
 ---
 
 ---
