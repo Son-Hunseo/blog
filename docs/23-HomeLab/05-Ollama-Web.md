@@ -30,7 +30,7 @@ ollama pull 모델이름
 ollama run 모델이름
 ```
 
-![ollama1](./assets/ollama1.jpg)
+![ollama1](assets/ollama1.jpg)
 
 ---
 ## 웹 UI
@@ -38,7 +38,7 @@ ollama run 모델이름
 
 Ollama에서 네트워크 활성화 상태로 실행하고 API형태로 요청을 보낼 수도 있지만, 아래 사진처럼 응답이 오기 때문에 읽기 힘들다. 또한 대화 기록을 아카이빙할 수 없다.
 
-![ollama2](./assets/ollama2.jpg)
+![ollama2](assets/ollama2.jpg)
 
 ### open-webui 설치
 
@@ -53,7 +53,7 @@ docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-
 
 ### 결과
 
-![ollama3](./assets/ollama3.jpg)
+![ollama3](assets/ollama3.jpg)
 
 - http://localhost:3000 으로 접속해서 이름, 계정 설정 후 사용해본다.
 - 계정은 로컬에 저장되므로 안전하다.
