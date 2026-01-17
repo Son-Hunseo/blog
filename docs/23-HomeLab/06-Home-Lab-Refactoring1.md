@@ -5,15 +5,8 @@ description: "[홈랩 리팩토링 - 1] 리팩토링 하는 이유"
 
 ---
 ## 리팩토링 아키텍처
-### AS-IS
 
-![home-lab-refactoring1](assets/home-lab-refactoring1.png)
-
-
-### TO-BE
-
-![home-lab-refactoring2](assets/home-lab-refactoring2.png)
-
+![home-refac3](assets/home-refac3.png)
 
 ---
 ## 리팩토링 계기
