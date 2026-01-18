@@ -146,7 +146,7 @@ vmgenid: 9676e07b-7c44-4610-91af-dca4f2240eec
 ---
 ### VM에 GPU 연결
 
-![gpu-passthrough1](./assets/gpu-passthrough1.png)
+![gpu-passthrough1](assets/gpu-passthrough1.png)
 
 - Proxmox 콘솔에 들어간 후 GPU를 장착할 VM 선택
 - Hardware - Add - PCI Device

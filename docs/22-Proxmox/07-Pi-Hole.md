@@ -9,7 +9,7 @@ keywords:
 ---
 ## 왜?
 
-![pi-hole0](./assets/pi-hole0.png)
+![pi-hole0](assets/pi-hole0.png)
 
 내부망에서 사용하는 서비스가 많아질 수록 ip를 직접 입력하고 접속하는 것 보다. dns로 접속하고 싶었다. 추가적으로 광고 차단도 되는 Pi-Hole을 사용해보았다.
 
@@ -65,7 +65,7 @@ pihole setpassword
 
 ## DNS 등록
 
-![pi-hole1](./assets/pi-hole1.jpg)
+![pi-hole1](assets/pi-hole1.jpg)
 
 - 공유기 설정 페이지로 가서 DNS 주소에 Pi-Hole 서버의 IP를 등록한다.
 - 대체로 여기에 각 통신사 DNS서버 주소가 들어가 있을 것이다.
@@ -77,13 +77,13 @@ pihole setpassword
 ## 추가 기능
 ### 내부 DNS
 
-![pi-hole2](./assets/pi-hole2.jpg)
+![pi-hole2](assets/pi-hole2.jpg)
 
 - Settings > Local DNS Records
 
 
 ### 추가 허용 및 차단
 
-![pi-hole3](./assets/pi-hole3.jpg)
+![pi-hole3](assets/pi-hole3.jpg)
 
 - Domains

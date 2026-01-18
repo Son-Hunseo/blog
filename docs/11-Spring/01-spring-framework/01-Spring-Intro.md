@@ -22,7 +22,7 @@ keywords:
 
 ### EJB의 문제점
 
-![spring-intro1](./assets/spring-intro1.png)
+![spring-intro1](assets/spring-intro1.png)
 
 - 복잡한 스펙으로 인한 개발 효율성이 떨어진다.
 - 애플리케이션을 테스트하기 위해서는 반드시 EJB 서버(매우 비싸고 무거움)가 필요하다.
@@ -30,7 +30,7 @@ keywords:
 
 ### Rod Johnson
 
-![spring-intro2](./assets/spring-intro2.png)
+![spring-intro2](assets/spring-intro2.png)
 
 - Rod Johnson이 'Expert One-on-One J2EE Development without EJB'라는 저서에서 EJB를 사용하지 않고 엔터프라이즈 어플리케이션을 개발하는 방법을 소개했다. (스프링의 모태)
 - AOP나 DI같은 새로운 프로그래밍 방법론이 제시되었다. 
@@ -53,7 +53,7 @@ keywords:
 ---
 ## Spring 설계 철학 (Spring 삼각형)
 
-![spring-intro3](./assets/spring-intro3.png)
+![spring-intro3](assets/spring-intro3.png)
 
 ### POJO
 

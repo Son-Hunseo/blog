@@ -32,9 +32,9 @@ keywords:
 
 **연산 예**
 
-![disjoint-set-1](./assets/disjoint-set-1.png)
-![disjoint-set-2|500](./assets/disjoint-set-2.png)
-![disjoint-set-3|500](./assets/disjoint-set-3.png)
+![disjoint-set-1](assets/disjoint-set-1.png)
+![disjoint-set-2|500](assets/disjoint-set-2.png)
+![disjoint-set-3|500](assets/disjoint-set-3.png)
 
 ### 서로소 집합에 대한 연산
 
@@ -126,7 +126,7 @@ public class DisjointSet {
 
 - 최악의 경우의 수 - 대표자를 찾는데 **O(H)** 가 걸린다.
 
-![disjoint-set-4|500](./assets/disjoint-set-4.png)
+![disjoint-set-4|500](assets/disjoint-set-4.png)
 
 ### 최적화
 
@@ -134,14 +134,14 @@ public class DisjointSet {
    - 각 노드는 자신을 루트로하는 subtree의 높이를 rank로 저장한다.
    - 두 집합을 합칠 때 rank가 낮은 집합을 rank가 높은 집합에 붙인다.
 
-![disjoint-set-5|700](./assets/disjoint-set-5.png)
+![disjoint-set-5|700](assets/disjoint-set-5.png)
 
 2. **Path compression**
    - Find-Set을 행하는 과정에서 만나는 모든 노드들이 직접 root를 가리키도록 포인터를 바꾸어 준다.
    - 모든 경로를 압축하고 싶다면, 모든 노드에 대해서 Find-Set을 행해주면 된다.
    - 즉, 각 노드의 최상단 부모를 찾는 연산을 행하고 그 결과를 저장하는 것이다.
 
-![disjoint-set-6|700](./assets/disjoint-set-6.png)
+![disjoint-set-6|700](assets/disjoint-set-6.png)
 
 ## Tip
 

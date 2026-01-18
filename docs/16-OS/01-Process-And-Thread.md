@@ -19,7 +19,7 @@ keywords:
 ## 프로세스
 ### 개념
 
-![process1](./assets/process1.jpg)
+![process1](assets/process1.jpg)
 
 - 프로그램이 그냥 실행되기 전의 정적인 상태라면, 프로세스는 실행되고 있는 '동적인 상태'의 프로그램인 것이다.
 - 프로그램은 OS로부터 실행되기 위한 메모리 공간을 할당받는다. 이렇게 프로그램이 메모리에 올라가면 프로세스가 되는 것이다. (이후 이 메모리에 올라간 프로세스를 실행하기 위한 CPU 자원을 할당받는다)
@@ -28,7 +28,7 @@ keywords:
 
 ### 자원 구조
 
-![process2](./assets/process2.jpeg)
+![process2](assets/process2.jpeg)
 
 - OS로부터 프로세스가 메모리를 할당받을 때, 다음과 같은 4가지의 메모리 영역을 할당 받는다.
 - `Code`:  프로그램을 구성하는 프로그래밍 언어가 컴파일되어 기계어형태로 저장된다.
@@ -43,7 +43,7 @@ keywords:
 ## 쓰레드
 ### 개념
 
-![process3](./assets/process3.jpg)
+![process3](assets/process3.jpg)
 
 - 쓰레드는 프로세스가 할당 받은 자원을 이용하는 실행 단위이다.
 - 크롬처럼 여러 프로세스를 사용하는 프로그램이 아닐지라도 프로그램이 한번에 여러 작업을 수행하는 것을 당연하게 생각할 것이다. (예를들어, 디스코드에서 음성채팅를 하며 동시에 텍스트채팅도 할 수 있다)
@@ -53,7 +53,7 @@ keywords:
 
 ### 자원 구조
 
-![process4](./assets/process4.jpeg)
+![process4](assets/process4.jpeg)
 
 - 쓰레드는 프로세스 내에서 각자의 `Stack` 메모리를 갖고, 하나의 프로세스 내의 모든 쓰레드는 프로세스의 `Code`, `Data`, `Heap` 을 공유한다.
 - 이러한 구조로 인해 쓰레드를 사용하는 것이 여러 프로세스를 사용하는 것에 비해 이점을 가진다.
@@ -72,7 +72,7 @@ keywords:
 ---
 ## cf) CPU 코어, 쓰레드와의 관계
 
-![process5](./assets/process5.jpg)
+![process5](assets/process5.jpg)
 
 - 어떠한 시점을 딱 잘랐을 때 하나의 CPU 코어는 하나의 쓰레드 작업만을 수행하나요?
 	- (하이퍼 쓰레딩 기술을 제외한다면) 그렇다.
@@ -83,7 +83,7 @@ keywords:
 ---
 ## cf) 동시성?
 
-![process6](./assets/process6.jpg)
+![process6](assets/process6.jpg)
 
 - 동시성 프로그래밍에서의 '동시성'이라는 말은 우리가 느끼기에는 하나의 시점을 잘랐을 때 여러 작업이 동시에 수행되는 듯한 느낌이 든다.
 	- 우리가 느끼는 동시성은 사실 병렬성(Parallelism)에 가깝다.

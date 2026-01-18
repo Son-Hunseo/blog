@@ -15,7 +15,7 @@ keywords:
 ## Network Namespace
 ### 개념
 
-![namespace1](./assets/namespace1.png)
+![namespace1](assets/namespace1.png)
 
 - Linux 호스트를 '집'이라고 한다면, Namespace는 집 안에 있는 각각의 '방'과 같다.
 - 각 네임스페이스에 있는 프로세스는 자기 자신 네임스페이스 내부만 볼 수 있고, 네임스페이스 외부 혹은 다른 네임스페이스의 프로세스는 알 수 없다.
@@ -91,7 +91,7 @@ ip netns exec red ping 192.168.15.2
 
 ### 다수의 네임스페이스 연결 (Linux Bridge)
 
-![namespace2](./assets/namespace2.png)
+![namespace2](assets/namespace2.png)
 
 - 실제 여러 물리 기기들을 하나의 네트워크에 연결하기 위해 스위치가 필요하듯이, 여러 네임스페이스를 연결하려면 가상 스위치가 필요하다.
 - Linux에서는 Bridge가 이 가상 스위치 역할을 한다.
@@ -138,7 +138,7 @@ ip link set dev veth-red-br up
 
 ### 외부 네트워크 통신 (NAT & Routing)
 
-![namespace3](./assets/namespace3.png)
+![namespace3](assets/namespace3.png)
 
 - 네임스페이스 내부에서 외부 인터넷(예: 8.8.8.8)으로 통신하려면 라우팅과 NAT 설정이 필요하다.
 
