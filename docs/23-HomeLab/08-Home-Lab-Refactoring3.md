@@ -5,7 +5,7 @@ description: "[홈랩 리팩토링 - 3] Gateway API 도입"
 
 ---
 :::tip
-리팩토링 아키텍처는 [이전 글](./06-Home-Lab-Refactoring1.md) 참조
+리팩토링 아키텍처는 [이전 글](06-Home-Lab-Refactoring1.md) 참조
 :::
 
 ---

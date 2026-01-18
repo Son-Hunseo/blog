@@ -24,7 +24,7 @@ GPU가 장착되어있지 않은 일반적인 서버 환경에서는 위 오류�
 
 ## 해결 방법
 
-![proxmox-install-error1](./assets/pve-install-error1.png)
+![proxmox-install-error1](assets/pve-install-error1.png)
 
 - Proxmox 설치 이미지가 있는 usb로 부팅을 하면 위와 같은 화면이 나온다.
 - 위 화면에서 설치할 옵션을 선택(엔터 누르지말고 커서만 올려두기)해놓고 e키를 누른다.

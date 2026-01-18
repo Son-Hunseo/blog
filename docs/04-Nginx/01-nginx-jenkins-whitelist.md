@@ -90,10 +90,10 @@ sudo systemctl restart nginx
 
 ## 결과
 
-![whitelist1](./assets/whitelist1.png)
+![whitelist1](assets/whitelist1.png)
 
 - 기존 주소로 접근하면 이렇게 차단되는 것을 알 수 있다.
 
-![whitelist2](./assets/whitelist2.png)
+![whitelist2](assets/whitelist2.png)
 
 - 그리고 웹훅을 보내보면 웹훅은 기존 주소로 잘 오는 것을 알 수 있다.

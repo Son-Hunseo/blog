@@ -26,11 +26,11 @@ keywords:
 
 ### 시놀로지 나스에서 NFS 활성화
 
-![vm-to-nfs1](./assets/vm-to-nfs1.png)
+![vm-to-nfs1](assets/vm-to-nfs1.png)
 
 - DSM에서 제어판 > 파일 서비스로 이동
 
-![vm-to-nfs2](./assets/vm-to-nfs2.png)
+![vm-to-nfs2](assets/vm-to-nfs2.png)
 
 - NFS 탭 선택
 - NFS 서비스 활성화
@@ -38,19 +38,19 @@ keywords:
 
 ### 공유 폴더 NFS 설정
 
-![vm-to-nfs3](./assets/vm-to-nfs3.png)
+![vm-to-nfs3](assets/vm-to-nfs3.png)
 
 - 제어판 > 공유 폴더 이동
 
-![vm-to-nfs4](./assets/vm-to-nfs4.png)
+![vm-to-nfs4](assets/vm-to-nfs4.png)
 
 - VM 볼륨으로 사용하고자하는 공유 폴더 선택 > 편집
 
-![vm-to-nfs5](./assets/vm-to-nfs5.png)
+![vm-to-nfs5](assets/vm-to-nfs5.png)
 
 - NFS 권한 > 생성
 
-![vm-to-nfs6](./assets/vm-to-nfs6.png)
+![vm-to-nfs6](assets/vm-to-nfs6.png)
 
 - 호스트이름 또는 IP
   - proxmox 호스트의 IP 입력
@@ -60,11 +60,11 @@ keywords:
 
 ## Proxmox 설정
 
-![vm-to-nfs7](./assets/vm-to-nfs7.png)
+![vm-to-nfs7](assets/vm-to-nfs7.png)
 
 - Datacenter > Storage > Add > NFS
 
-![vm-to-nfs8](./assets/vm-to-nfs8.png)
+![vm-to-nfs8](assets/vm-to-nfs8.png)
 
 - `ID`: 원하는 이름
 - `Server`: 나스 서버 ip
@@ -76,11 +76,11 @@ keywords:
 
 ## VM 볼륨 이동
 
-![vm-to-nfs9](./assets/vm-to-nfs9.png)
+![vm-to-nfs9](assets/vm-to-nfs9.png)
 
 - 볼륨 이동을 원하는 VM 선택 > Hardware > Hard Disk > Disk Action > Move Storage
 
-![vm-to-nfs10](./assets/vm-to-nfs10.png)
+![vm-to-nfs10](assets/vm-to-nfs10.png)
 
 - Target Storage: 만들었던 NFS 스토리지를 선택 > Move disk
 
