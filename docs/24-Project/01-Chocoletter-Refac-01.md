@@ -17,7 +17,7 @@ description: "[초코레터 리팩토링 - 0] 프로젝트 리팩토링을 하�
 ---
 ## 초코레터 프로젝트
 
-![chocoletter1][assets/chocoletter1.gif]
+![chocoletter1](assets/chocoletter1.gif)
 
 ### 개요
 
