@@ -13,7 +13,7 @@ keywords:
 ## Gateway API 배경
 ### Ingress의 문제점
 
-- 이전 [`Ingress`글에서의 예시](./06-Ingress.md#ingress-설정-예시)를 생각해보자.
+- 이전 [`Ingress`글에서의 예시](06-Ingress.md#ingress-설정-예시)를 생각해보자.
 - `wear-service`와 `video-service`가 각각 다른 팀에서 관리한다고 했을 때(멀티 테넌시 환경) 충돌이 발생할 위험이 높다.
 	- 각각 다른 `Ingress` 객체로 관리하거나, 다른 네임스페이스에서 사용하면 조금 더 낫긴 하지만, 단순한 '호스트 이름'과 '경로'라는 한정된 자원을 여럿이서 나눠 쓰는 구조이기 때문에 개선이 필요한 것이다. 
 	- 이를 방지하기 위해 `GitOps`, CICD 파이프라인에서의 검증 등의 방법이 있지만 논리적으로 이러한 설정 충돌을 방지할 장치가 필요하다.
@@ -40,7 +40,7 @@ keywords:
 ### 경로 기반
 
 :::info
-[`Ingress`글에서의 경로 기반 예시](./06-Ingress.md#경로-기반)
+[`Ingress`글에서의 경로 기반 예시](06-Ingress.md#경로-기반)
 :::
 
 **`GatewayClass`**

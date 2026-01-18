@@ -33,7 +33,7 @@ Trie는 문자열을 효율적으로 저장하고 검색하기 위한 '트리' �
 
 ### Trie의 구조
 
-![trie1](./assets/trie1.png)
+![trie1](assets/trie1.png)
 
 - 루트 노드는 빈 문자열을 나타내야 하므로 항상 비어있어야한다.
 - 각 노드는 문자(`Character`) 1개를 가진다.

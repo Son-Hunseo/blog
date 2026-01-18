@@ -19,15 +19,15 @@ keywords:
 - Spring Boot를 사용할 때는 주로 IntelliJ를 사용하지만, 레거시 Spring에서는 주로 STS(Spring에 특화된 Eclipse)를 많이 사용한다.
 - https://spring.io/tools 여기서 Spring Tools for Eclipse에서 본인 os와 cpu 아키텍처와 맞는 버전 다운로드 후 압축해제
 
-![legacy-spring-setting1](./assets/legacy-spring-setting1.jpg)
+![legacy-spring-setting1](assets/legacy-spring-setting1.jpg)
 
-![legacy-spring-setting2](./assets/legacy-spring-setting2.jpg)
+![legacy-spring-setting2](assets/legacy-spring-setting2.jpg)
 
 - 설치 이후, 상단의 Help - Eclipse Marketplace -> java web 검색 -> Eclipse Enterprise Java and Web Developer Tools -> Install
 - 설치 버튼 누른 이후 우측 하단에 Installing Software이 완료되고, 재시작을 자동으로 물을 때 까지 기다린다.
 - 재시작을 묻는 창이 나온다면 재시작한다.
 
-![legacy-spring-setting3](./assets/legacy-spring-setting3.jpg)
+![legacy-spring-setting3](assets/legacy-spring-setting3.jpg)
 
 - 이후 좌측에서 New Project -> Wizards에 dynamic web project 검색을 하면 Dynamic Web Project가 나오는 것을 볼 수 있다.
 
@@ -40,20 +40,20 @@ keywords:
 
 - 좌측에서 New Proejct -> Dynamic Web Project를 선택후 프로젝트를 생성한다.
 
-![legacy-spring-setting4](./assets/legacy-spring-setting4.jpg)
+![legacy-spring-setting4](assets/legacy-spring-setting4.jpg)
 
 - Project name을 입력한다.
 - Target runtime -> New Runtime 선택
 
-![legacy-spring-setting5](./assets/legacy-spring-setting5.jpg)
+![legacy-spring-setting5](assets/legacy-spring-setting5.jpg)
 
 - Tomcat을 검색하고 설치한 톰캣의 버전을 선택하고 Next를 누른다.
 
-![legacy-spring-setting6](./assets/legacy-spring-setting6.jpg)
+![legacy-spring-setting6](assets/legacy-spring-setting6.jpg)
 
 - Browse를 선택하고 이전에 다운로드 받은 Tomcat이 있는 폴더를 선택한다.(안에 bin, lib 등이 있는 폴더)
 
-![legacy-spring-setting7](./assets/legacy-spring-setting7.jpg)
+![legacy-spring-setting7](assets/legacy-spring-setting7.jpg)
 
 - 프로젝트 우클릭 -> Configure -> Convert to Maven Project 클릭하면 프로젝트 생성은 끝난다.
 
@@ -349,11 +349,11 @@ public class HelloController {
 
 **실행**
 
-![legacy-spring-setting8](./assets/legacy-spring-setting8.jpg)
+![legacy-spring-setting8](assets/legacy-spring-setting8.jpg)
 
 - 프로젝트 우클릭 -> Run As ->Run On Server
 - 프로젝트를 생성할 때 등록했던 런타임인 Tomcat을 선택 -> Finish
 
-![legacy-spring-setting9](./assets/legacy-spring-setting9.jpg)
+![legacy-spring-setting9](assets/legacy-spring-setting9.jpg)
 
 - 웹서버가 실행된다.

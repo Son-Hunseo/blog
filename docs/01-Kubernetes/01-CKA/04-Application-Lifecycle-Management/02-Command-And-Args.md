@@ -97,7 +97,7 @@ docker run --entrypoint sleep ubuntu 10
 ## Kubernetes
 ### yaml
 
-![command1](./assets/command1.png)
+![command1](assets/command1.png)
 
 ```yaml
 apiVersion: v1

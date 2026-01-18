@@ -41,7 +41,7 @@ keywords:
 
 **Top-down approach**
 
-![divide1|500](./assets/divide1.png)
+![divide1|500](assets/divide1.png)
 
 ### 예제: 거듭 제곱
 
@@ -75,7 +75,7 @@ Recursive_Power(C, n)
 
 ### 예제: 같은 색 공간 만들기
 
-![divide2|300](./assets/divide2.png)
+![divide2|300](assets/divide2.png)
 
 :::info
 **같은 색 공간 만들기**
@@ -86,7 +86,7 @@ Recursive_Power(C, n)
 - 전체 공간의 크기는 N x N (N = 2, 4, 8, 16, 32, 64, 128 중 하나)
   :::
 
-![divide3|700](./assets/divide3.png)
+![divide3|700](assets/divide3.png)
 
 :::info
 솔루션
