@@ -141,11 +141,11 @@ const config = {
           position: 'left',
           label: 'Blog',
         },
-        {
-          to: '/About/About',
-          position: 'left',
-          label: 'About',
-        },
+        // {
+        //   to: '/About/About',
+        //   position: 'left',
+        //   label: 'About',
+        // },
           /* 
           nav바 필요없어서 없앰
           */
