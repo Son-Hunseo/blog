@@ -24,6 +24,7 @@ const DEFAULT_IMAGES = {
   'OS': '/img/default/os.png',
   'HomeLab': '/img/default/etc.png',
   'Project': '/img/default/etc.png',
+  'AI': '/img/default/etc.png',
 };
 
 // 2. 숫자 접두어 제거 함수
