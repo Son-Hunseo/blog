@@ -191,8 +191,8 @@ git diff | claude "이 변경사항을 리뷰해줘"
 ### Skills
 
 **정의 마크다운 파일 위치**
-- 프로젝트 단위: `./.claude/skills/my-skill.md`
-- 유저 단위: `~/.claude/skills/my-skill.md`
+- 프로젝트 단위: `./.claude/skills/my-skill/SKILL.md`
+- 유저 단위: `~/.claude/skills/my-skill/SKILL.md`
 
 **예시**
 ```md
