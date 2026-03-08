@@ -1,6 +1,12 @@
 ---
 title: "[초코레터 프로젝트 고도화 - 2] Kafka에서 Redis Streams로 마이그레이션"
-description: "[초코레터 프로젝트 고도화 - 2] Kafka에서 Redis Streams로 마이그레이션"
+description: 채팅 기능의 메시지 큐를 Kafka에서 Redis Streams로 마이그레이션한 과정입니다. 실시간성, 멀티 인스턴스 동기화, 메시지 저장 등 핵심 요구사항 분석과 함께 Producer, Consumer 코드 변경 내용을 설명합니다.
+keywords:
+  - Kafka Redis Streams
+  - 메시지 큐 마이그레이션
+  - 실시간 채팅
+  - Spring Kafka
+  - Spring Redis
 ---
 
 ---

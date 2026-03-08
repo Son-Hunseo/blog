@@ -5,6 +5,8 @@ keywords:
   - Kubernetes
   - 트러블슈팅
   - 쿠버네티스 애플리케이션 레벨 트러블 슈팅
+  - kubectl logs
+  - CrashLoopBackOff 해결
 ---
 ---
 ## 애플리케이션 레벨 트러플 슈팅 과정

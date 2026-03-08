@@ -5,6 +5,8 @@ keywords:
   - SQL Subquery
   - 서브쿼리 예제
   - SQL SELECT
+  - Nested Inline View Scalar
+  - EXISTS NOT EXISTS
 ---
 ---
 ## SUBQUERY

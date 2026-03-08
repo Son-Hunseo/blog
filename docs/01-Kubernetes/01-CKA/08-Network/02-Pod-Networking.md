@@ -5,6 +5,8 @@ keywords:
   - 쿠버네티스 Pod 네트워크
   - Pod 통신 원리
   - CNI
+  - veth pair
+  - 가상 브리지 네트워크
 ---
 ## Pod 네트워크
 ### 요구 사항

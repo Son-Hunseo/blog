@@ -5,6 +5,8 @@ keywords:
   - Kubernetes 로그 조회
   - kubectl logs
   - 다중 컨테이너 로그
+  - Pod 로그 스트리밍
+  - CKA 로그 관리
 ---
 ---
 ## Kubernetes에서의 로그 관리

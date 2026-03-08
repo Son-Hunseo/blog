@@ -4,6 +4,9 @@ description: 쿠버네티스(Kubernetes) 워커 노드가 NotReady 또는 Unknow
 keywords:
   - 쿠버네티스 트러블 슈팅
   - 워커노드 트러블 슈팅
+  - NotReady Unknown 상태
+  - kubelet 인증서 검증
+  - kubectl describe node
 ---
 ---
 ## 워커 노드 트러블 슈팅 과정

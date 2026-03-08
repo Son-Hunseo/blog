@@ -1,6 +1,12 @@
 ---
 title: "[초코레터 프로젝트 고도화 - 3] 잘못된 편지 내용 암호화 기능 수정"
-description: "[초코레터 프로젝트 고도화 - 3] 잘못된 편지 내용 암호화 기능 수정"
+description: 프론트엔드에 하드코딩된 대칭키로 인한 보안 취약점을 분석하고 서버 사이드 AES-GCM 암호화로 개선한 과정입니다. AWS Secret Manager와 External Secret 오퍼레이터를 활용한 안전한 키 관리 방법도 설명합니다.
+keywords:
+  - AES GCM 암호화
+  - 암호화 보안 취약점
+  - AWS Secret Manager
+  - 대칭키 암호화
+  - 서버 사이드 암호화
 ---
 ---
 ## 암호화 기능 수정 이유

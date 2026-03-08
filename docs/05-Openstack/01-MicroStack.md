@@ -6,6 +6,7 @@ keywords:
   - OpenStack
   - OpenStack 설치
   - MicroStack 설정
+  - OpenStack 학습 환경
 ---
 ---
 ## 왜 `MicroStack`?

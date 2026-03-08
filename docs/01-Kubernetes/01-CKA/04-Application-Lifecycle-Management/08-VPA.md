@@ -5,6 +5,8 @@ keywords:
   - Kubernetes
   - Kubernetes VPA
   - In-Place Pod Resizing
+  - Vertical Pod Autoscaler
+  - Pod 리소스 최적화
 ---
 ---
 ## 개념

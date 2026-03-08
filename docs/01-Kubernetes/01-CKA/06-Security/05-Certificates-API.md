@@ -5,6 +5,8 @@ keywords:
   - Kubernetes
   - 쿠버네티스
   - Kubernetes Certificate API
+  - CSR CertificateSigningRequest
+  - 쿠버네티스 인증서 관리
 ---
 ---
 ## 기존의 방식의 문제점
