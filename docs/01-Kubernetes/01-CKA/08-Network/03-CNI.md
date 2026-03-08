@@ -5,6 +5,8 @@ keywords:
   - 쿠버네티스 CNI
   - CNI 동작 원리
   - 컨테이너 런타임 CNI 호출
+  - opt/cni/bin
+  - etc/cni/net.d
 ---
 ---
 :::info

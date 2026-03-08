@@ -6,6 +6,7 @@ keywords:
   - Docker Bridge Network
   - Network Namespace
   - Docker Network Mode
+  - docker0 veth pair
 ---
 ---
 ## Docker 네트워크 모드

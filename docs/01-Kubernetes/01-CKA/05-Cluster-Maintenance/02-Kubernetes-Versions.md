@@ -5,6 +5,8 @@ keywords:
   - Kubernetes 버전 구조
   - Kubernetes 릴리즈 단계
   - Kubernetes Alpha Beta Stable
+  - 쿠버네티스 버전 관리
+  - kube-apiserver 버전
 ---
 ---
 ## Kubernetes 버전 구조

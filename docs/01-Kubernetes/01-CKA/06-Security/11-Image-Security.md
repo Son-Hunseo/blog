@@ -2,10 +2,11 @@
 title: Image Security
 description: 컨테이너 이미지 이름 구조(레지스트리/사용자/이미지)를 이해하고, 비공개 이미지(Private Registry)에 접근하기 위해 쿠버네티스(Kubernetes)에서 Secret을 생성하고 imagePullSecrets를 사용하여 인증하는 방법을 단계별로 학습합니다.
 keywords:
-  - Kubernets
+  - Kubernetes
   - 쿠버네티스
   - imagePullSecrets
   - AWS ECR
+  - Private Registry
 ---
 ---
 ## 컨테이너 이미지 이름의 구조

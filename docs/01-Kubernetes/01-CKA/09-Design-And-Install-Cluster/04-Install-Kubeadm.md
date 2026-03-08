@@ -5,6 +5,8 @@ keywords:
   - 쿠버네티스 클러스터 구축
   - kubeadm 설치
   - containerd 설정
+  - Calico CNI 설치
+  - kubeadm init
 ---
 ---
 ## 사전 설정

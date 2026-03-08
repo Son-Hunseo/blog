@@ -1,6 +1,12 @@
 ---
 title: Mock Exam 1 오답 정리
-description: Udemy Mumshad 강의의 Mock Exam 1 문제 오답 정리
+description: CKA 모의고사 1회 오답 정리입니다. Multi-container Pod 생성, CRD 조회, Service 생성, NodePort 설정, PersistentVolume 생성, HPA/VPA 설정, Gateway API, Helm 업그레이드 등 다양한 유형의 문제 풀이와 해결 방법을 설명합니다.
+keywords:
+  - CKA Mock Exam
+  - HPA VPA 설정
+  - Gateway API
+  - Helm 명령어
+  - CKA 모의고사
 ---
 ## 1 (O)
 

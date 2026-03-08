@@ -5,6 +5,8 @@ keywords:
   - 다익스트라 알고리즘
   - 최단 경로
   - PriorityQueue
+  - 그래프 탐색
+  - 가중치 그래프
 ---
 ---
 :::tip

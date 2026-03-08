@@ -5,6 +5,8 @@ keywords:
   - Pi-hole 설치
   - 내부 DNS 서버
   - Proxmox 컨테이너
+  - 광고 차단 DNS
+  - 홈랩 네트워크
 ---
 ---
 ## 왜?

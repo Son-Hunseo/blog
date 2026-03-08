@@ -5,6 +5,8 @@ keywords:
   - Kubernetes
   - Kubernetes HPA
   - Metrics Server
+  - Horizontal Pod Autoscaler
+  - Pod 자동 스케일링
 ---
 ---
 ## 개념

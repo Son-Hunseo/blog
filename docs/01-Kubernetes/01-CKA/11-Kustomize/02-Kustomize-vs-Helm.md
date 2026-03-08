@@ -5,6 +5,8 @@ keywords:
   - Kustomize vs Helm
   - Kustomize
   - Helm
+  - 쿠버네티스 배포 도구 비교
+  - GitOps 도구 선택
 ---
 ---
 ## Kustomize vs Helm
