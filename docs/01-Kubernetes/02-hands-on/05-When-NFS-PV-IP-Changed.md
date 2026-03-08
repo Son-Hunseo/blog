@@ -5,6 +5,8 @@ keywords:
   - Kubernetes
   - NFS Provisioner
   - PersistentVolume
+  - NFS 서버 IP 변경
+  - PV 재설정
 ---
 ---
 ## NFS Provisioner Helm 설정 수정

@@ -5,6 +5,8 @@ keywords:
   - Kubernetes Calico DNS 오류
   - Pod CIDR 내부망 충돌
   - Jenkins UnknownHostException 해결
+  - 쿠버네티스 네트워크 대역 설정
+  - Pod 외부 통신 오류
 ---
 ---
 ## 문제 상황

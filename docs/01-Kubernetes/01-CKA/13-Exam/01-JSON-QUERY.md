@@ -5,6 +5,8 @@ keywords:
   - kubectl jsonpath 사용법
   - kubectl 출력 형식 변경
   - kubectl 노드 정보 추출
+  - custom-columns
+  - CKA 시험 팁
 ---
 ---
 ## JSON Path 사용법

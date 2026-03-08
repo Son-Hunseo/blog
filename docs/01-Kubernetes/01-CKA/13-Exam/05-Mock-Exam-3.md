@@ -1,6 +1,12 @@
 ---
 title: Mock Exam 3 오답 정리
-description: Udemy Mumshad 강의의 Mock Exam 3 문제 오답 정리
+description: CKA 모의고사 3회 오답 정리입니다. 네트워크 파라미터 설정, ServiceAccount와 ClusterRole 바인딩, ConfigMap 환경변수, PriorityClass, NetworkPolicy, HPA 커스텀 메트릭, HTTPRoute 트래픽 분배, Helm lint/install, Pod CIDR 확인 등의 문제 풀이와 해결 방법을 설명합니다.
+keywords:
+  - CKA Mock Exam
+  - ServiceAccount RBAC
+  - HPA 커스텀 메트릭
+  - HTTPRoute 트래픽
+  - Helm 명령어
 ---
 ## 1 (O)
 

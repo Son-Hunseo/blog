@@ -5,6 +5,8 @@ keywords:
   - 쿠버네티스 트러블슈팅
   - 컨트롤 플레인 점검
   - 컨트롤 플레인 트러블 슈팅
+  - kube-system Pod 상태
+  - journalctl kubelet
 ---
 ---
 ## 컨트롤플레인 트러블 슈팅

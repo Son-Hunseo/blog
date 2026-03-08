@@ -2,18 +2,11 @@
 title: 문자열 1 - 기본 유형
 description: 자바(Java)로 배우는 문자열 알고리즘 유형 정리. 회문(Palindrome), 문자열 뒤집기, 조건부 정렬, 단어 빈도수 계산, 애너그램(Anagram) 등 코딩 테스트에서 자주 등장하는 문자열 문제를 예제 코드와 함께 설명합니다.
 keywords:
-  [
-    문자열 알고리즘,
-    Java 문자열,
-    Palindrome,
-    애너그램,
-    문자열 뒤집기,
-    코딩테스트,
-    Java 알고리즘,
-    String Manipulation,
-    자바 예제,
-    알고리즘 문제풀이,
-  ]
+  - 문자열 알고리즘
+  - Java 문자열
+  - Palindrome 회문
+  - 애너그램 Anagram
+  - 코딩테스트 문자열
 sidebar_position: 4
 ---
 ---

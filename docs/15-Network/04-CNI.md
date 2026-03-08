@@ -4,6 +4,9 @@ description: 컨테이너 네트워크 표준인 CNI(Container Network Interface
 keywords:
   - CNI
   - Container Network Interface
+  - Calico Cilium Flannel
+  - 컨테이너 네트워크 플러그인
+  - Kubernetes 네트워크 설정
 ---
 ---
 ## CNI

@@ -5,6 +5,8 @@ keywords:
   - Helm 명령어
   - Helm CLI
   - Helm 사용법
+  - helm install
+  - helm upgrade rollback
 ---
 ---
 ## Helm 주요 CLI 명령어

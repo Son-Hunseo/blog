@@ -5,6 +5,8 @@ keywords:
   - Kubernetes 모니터링
   - Heapster
   - Metrics Server
+  - kubectl top
+  - cAdvisor
 ---
 ---
 ## 왜 쿠버네티스를 모니터링 해야할까?

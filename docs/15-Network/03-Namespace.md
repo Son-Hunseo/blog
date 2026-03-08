@@ -4,6 +4,9 @@ description: 리눅스 커널의 Network Namespace 개념부터 veth pair를 이
 keywords:
   - 리눅스 네트워크 네임스페이스
   - Network Namespace
+  - veth pair 가상 케이블
+  - Linux Bridge 가상 스위치
+  - 컨테이너 네트워킹 원리
 ---
 ---
 :::tip

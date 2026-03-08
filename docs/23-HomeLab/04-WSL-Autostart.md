@@ -4,6 +4,9 @@ description: Windows 부팅 시 자동으로 WSL(Ubuntu 등)을 실행하는 방
 keywords:
   - WSL 자동 실행
   - Windows 작업 스케줄러 설정
+  - Node Exporter 자동 실행
+  - taskschd.msc
+  - Windows 부팅 스크립트
 ---
 ---
 ## 왜?

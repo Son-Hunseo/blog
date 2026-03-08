@@ -5,6 +5,8 @@ keywords:
   - Ollama 설치
   - Open WebUI 연동
   - 로컬 LLM 실행
+  - GPU 기반 LLM
+  - 로컬 AI 챗봇
 ---
 ---
 ## Ollama 설치
