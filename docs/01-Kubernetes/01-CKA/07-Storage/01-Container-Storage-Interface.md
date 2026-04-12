@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Container Storage Interface
 description: 컨테이너 스토리지 인터페이스(CSI)의 개념, 특징, 작동 원리를 상세히 알아봅니다. CSI는 CRI/CNI와 같이 다양한 스토리지 솔루션을 Kubernetes, Mesos, Nomad 등의 컨테이너 오케스트레이션 플랫폼에 연동하기 위한 표준 인터페이스이며, RPC를 통해 볼륨 관리 작업을 수행합니다.
 keywords:

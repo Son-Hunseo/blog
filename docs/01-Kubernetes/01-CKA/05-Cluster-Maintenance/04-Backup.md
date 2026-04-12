@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Backup
 description: "SEO 최적화 메타데이터Description쿠버네티스(Kubernetes) 클러스터의 핵심 백업 전략: 리소스 구성(Manifest)과 ETCD 백업 및 복원 방법에 대해 자세히 알아보세요. YAML 파일을 이용한 리소스 백업부터, Velero를 사용한 API 기반 백업, 그리고 ETCD 데이터베이스를 etcdctl로 스냅샷을 만들어 백업하고 복원하는 단계별 명령어 및 설정을 제공합니다. Managed Kubernetes와 Self-Managed Kubernetes 환경별 최적의 백업 방식을 비교하고, 클러스터 안정성을 높이는 방법을 안내합니다."
 keywords:

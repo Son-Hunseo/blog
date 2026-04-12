@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-03-07
 title: Claude Code 사용법
 description: Claude Code의 사용법과 주요 기능을 상세히 설명합니다. Normal, Auto-Accept, Plan 모드의 차이점과 권장 워크플로우를 안내하며, CLAUDE.md를 통한 프로젝트 규칙 정의 방법을 다룹니다. 컨텍스트 관리, 프롬프팅 기법, Skills 및 SubAgent 활용법, 그리고 Hooks와 단축키 등 효율적인 개발을 위한 다양한 팁과 모범 사례를 제공합니다.
 keywords: [Claude Code, AI 코딩 도구, CLAUDE.md, 프롬프트 엔지니어링, 개발 생산성]

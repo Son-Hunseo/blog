@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-03-26
 title: IPC(Inter Process Communication)
 description: IPC(프로세스 간 통신)의 개념과 주요 방식들을 정리합니다. 파이프, 메시지 큐, 공유 메모리, 소켓 등 다양한 IPC 종류와 특징, 차이점을 한 번에 이해할 수 있는 운영체제 핵심 개념 설명입니다.
 keywords:

@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: 스위칭, 라우팅, 게이트웨이, IP 포워딩
 description: 네트워크의 기본 원리인 스위칭(Switching)과 라우팅(Routing)의 차이점을 배우고, 리눅스 서버를 라우터로 활용하기 위한 IP Forwarding 설정 방법을 예제와 함께 알아봅니다. CKA 자격증 준비 및 네트워크 기초 입문에 최적화된 가이드입니다.
 keywords:

@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Storage Class
 description: 쿠버네티스(Kubernetes)의 StorageClass를 활용한 동적 프로비저닝(Dynamic Provisioning) 개념과 작동 흐름을 완벽하게 이해하세요. 기존 정적 프로비저닝의 비효율성을 해소하고, 클라우드 환경(AWS, GCP 등)에서 스토리지(PV)를 자동으로 생성하여 운영 부담을 줄이는 방법을 구체적인 YAML 예시와 함께 설명합니다.
 keywords:

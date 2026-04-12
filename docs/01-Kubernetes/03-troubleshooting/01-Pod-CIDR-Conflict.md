@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Pod 대역과 사설망 대역이 겹치는 문제
 description: 쿠버네티스에서 Jenkins Pod가 java.net.UnknownHostException 오류로 외부 도메인에 접근하지 못하는 문제를 해결한 사례입니다. Calico 네트워크의 Pod CIDR과 내부망 IP 대역이 겹쳐 발생한 DNS 실패 원인을 분석하고, 클러스터 재설치로 해결한 과정을 정리했습니다.
 keywords:

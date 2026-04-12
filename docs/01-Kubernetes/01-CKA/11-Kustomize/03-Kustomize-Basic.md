@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Kustomize 기본 기능
 description: 쿠버네티스 Kustomize의 핵심 파일인 kustomization.yaml의 개념과 구성 요소, 적용 방법을 정리합니다. kubectl apply -k를 활용한 효율적인 리소스 관리법을 확인하세요.
 keywords:

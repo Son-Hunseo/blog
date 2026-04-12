@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Helm의 구성 요소
 description: 쿠버네티스 패키지 매니저 Helm의 기본 개념인 Chart, Release, Revision을 입문자 눈높이에서 정리합니다. NGINX와 WordPress 예시 코드를 통해 Helm 템플릿 구조와 values.yaml 활용법을 확인해 보세요.
 keywords:

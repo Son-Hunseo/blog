@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Java Thread vs Go Goroutine
 description: 자바(Java)의 synchronized와 volatile의 차이부터 Go 언어 고루틴(Goroutine)의 동작 원리까지, 멀티 스레드 환경의 고질적인 문제인 Race Condition과 Visibility 해결법을 상세히 비교 분석합니다. Java 21 가상 스레드(Virtual Thread) 도입 배경과 성능 이점도 함께 확인해 보세요.
 keywords:

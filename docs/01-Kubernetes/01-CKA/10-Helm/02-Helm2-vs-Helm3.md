@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Helm 2 vs Helm 3
 description: Helm 2와 Helm 3의 차이점을 완벽 정리합니다. Tiller 제거를 통한 보안 강화 아키텍처와 3-Way Strategic Merge Patch를 이용한 안전한 롤백 및 업그레이드 원리를 확인하세요.
 keywords:

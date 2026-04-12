@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: 워커 노드 트러블 슈팅
 description: 쿠버네티스(Kubernetes) 워커 노드가 NotReady 또는 Unknown 상태일 때 해결하는 5단계 가이드를 확인하세요. kubectl describe, kubelet 로그 분석, 리소스 점검 및 인증서 검증까지 CKA 자격증 대비와 실무 장애 대응을 위한 필수 명령어를 정리했습니다.
 keywords:

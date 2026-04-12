@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Docker Network
 description: Docker의 3가지 주요 네트워크 모드(None, Host, Bridge)의 차이점과 작동 원리를 상세히 설명합니다. 특히 docker0 인터페이스, 가상 케이블(veth pair), 네트워크 네임스페이스 및 iptables 포트 매핑 등 Docker 브리지 네트워크의 내부 구조를 Deep Dive하여 정리했습니다.
 keywords:

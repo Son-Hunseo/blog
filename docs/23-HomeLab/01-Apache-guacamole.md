@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Apache Guacamole로 개인 vdi를 만들어보자
 description: Apache Guacamole을 활용하여 홈랩 환경에서 VDI(가상 데스크톱 인프라)를 구축하는 방법을 설명합니다. 브라우저 기반 원격 접속 환경 구성 가이드입니다
 keywords:

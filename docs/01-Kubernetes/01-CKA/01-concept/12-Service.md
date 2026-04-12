@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Service
 description: Kubernetes의 Service 개념과 역할을 정리하고, ClusterIP·NodePort·LoadBalancer 타입의 차이와 동작 원리를 예시와 YAML 코드로 설명합니다. Pod 간 통신 구조부터 외부 트래픽 처리까지 한눈에 이해할 수 있습니다.
 keywords:
