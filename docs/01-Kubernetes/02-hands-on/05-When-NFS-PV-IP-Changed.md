@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: NFS 서버 IP 변경 시 PV 재설정 방법
 description: 쿠버네티스 환경에서 NFS 서버 IP 변경 시 Helm으로 NFS Provisioner를 수정하고, 기존 PV(PersistentVolume)와 연결된 Pod를 안전하게 재기동하는 방법을 단계별로 정리한 가이드입니다.
 keywords:

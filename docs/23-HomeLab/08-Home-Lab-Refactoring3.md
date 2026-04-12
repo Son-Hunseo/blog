@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: "[홈랩 리팩토링 - 3] Gateway API 도입"
 description: Nginx 리버스 프록시에서 Kubernetes Gateway API로 전환하는 과정을 설명합니다. Nginx Gateway Fabric과 MetalLB를 활용해 SPOF 문제를 해결하고, 트래픽 관리를 일원화한 클라우드 네이티브 아키텍처 구현 방법을 다룹니다.
 keywords:

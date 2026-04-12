@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: 레거시 Spring 프로젝트 세팅
 description: 레거시 Spring 개발 환경 구축을 위한 STS 설치부터 Tomcat 다운로드, Dynamic Web Project 생성 및 Maven 변환 과정을 단계별로 설명합니다. 또한, Spring Core 및 Spring MVC 설정을 위한 pom.xml 의존성 추가, applicationContext.xml, spring-servlet.xml, web.xml 파일을 포함한 스프링 컨테이너 및 DispatcherServlet 설정 방법을 자세히 다룹니다.
 keywords:

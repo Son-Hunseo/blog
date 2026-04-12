@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: API Groups, kubectl proxy
 description: Kubernetes 클러스터와 상호작용하는 핵심 경로인 API 그룹(Core, Named)의 구조와 주요 리소스를 상세히 설명하고, 인증 없이 API 서버에 편리하게 접근할 수 있도록 돕는 kubectl proxy의 사용법 및 네트워킹을 담당하는 kube-proxy와의 차이점을 명확히 정리합니다.
 keywords:

@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: VPA (Vertical Pod Autoscaler)
 description: Kubernetes VPA(Vertical Pod Autoscaler)의 개념, 구성 요소, 동작 과정 및 설치 방법을 완벽하게 정리했습니다. HPA(Horizontal Pod Autoscaler)와의 비교 분석, Pod 리소스 최적화, In-Place Resizing(v1.33 베타) 등의 최신 정보를 통해 쿠버네티스 리소스 관리 효율성을 극대화하는 방법을 알아보세요.
 keywords:

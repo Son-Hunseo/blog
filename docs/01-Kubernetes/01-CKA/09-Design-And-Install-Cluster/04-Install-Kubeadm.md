@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Kubeadm으로 쿠버네티스 설치
 description: Ubuntu 환경에서 kubeadm을 이용한 쿠버네티스 클러스터 구축 가이드. containerd 설치, 마스터/워커 노드 설정, Calico 네트워크 플러그인 구성까지 단계별로 안내합니다.
 keywords:

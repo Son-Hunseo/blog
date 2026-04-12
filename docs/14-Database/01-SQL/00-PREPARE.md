@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: "[DML] 사전 데이터 준비"
 description: Oracle의 HR 스키마를 MySQL 환경에서 직접 실습할 수 있도록 CREATE와 INSERT SQL 스크립트를 제공하고, ERD를 통해 테이블 간 관계를 시각적으로 이해합니다.
 keywords:

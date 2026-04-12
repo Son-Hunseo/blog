@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: "[Core] Spring 개요"
 description: Spring Framework는 복잡한 EJB의 한계를 극복하고, POJO 기반의 객체지향적 개발을 가능하게 한 경량 자바 프레임워크입니다. IoC/DI, AOP, PSA 등 핵심 철학을 바탕으로 유연하고 테스트 가능한 애플리케이션 구조를 제공합니다.
 keywords:

@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Node Selectors
 description: nodeSelector는 Kubernetes에서 특정 레이블을 가진 노드에 Pod를 배치하도록 강제하는 가장 기본적인 스케줄링 방법이다. 노드에 레이블을 설정하고 Pod에 nodeSelector를 추가함으로써 고사양 워크로드를 원하는 노드에 배치해 스케줄링을 제어할 수 있다. 본 문서는 nodeSelector 개념, 사용 방법, 예시 YAML, 그리고 레이블 설정 명령어까지 상세히 정리한다.
 keywords:
