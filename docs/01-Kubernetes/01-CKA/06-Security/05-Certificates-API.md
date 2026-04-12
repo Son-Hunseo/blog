@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Certificates API 로 인증서 발급 자동화하기
 description: Kubernetes 인증서 관리의 고통을 해결하는 Certificate API 완벽 가이드. 수동 발급의 문제점부터 CSR 생성, 승인, kube-controller-manager의 동작 원리까지 상세히 알아봅니다. CKA 시험 대비 및 보안 강화 필수 지식.
 keywords:

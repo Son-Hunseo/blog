@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: "[DML] SELECT - GROUP BY와 HAVING"
 description: 데이터를 그룹화하고 요약하는 GROUP BY와, 그룹 조건을 지정하는 HAVING 절의 차이와 활용법을 예제로 설명합니다.
 keywords:

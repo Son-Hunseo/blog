@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Replication Controller & ReplicaSet
 description: Replication Controller와 ReplicaSet의 차이점과 역할을 이해하고, YAML 예시를 통해 Pod의 고가용성(High Availability), 로드 밸런싱, 스케일링, 그리고 Deployment와의 관계까지 단계별로 배워보세요.
 keywords:

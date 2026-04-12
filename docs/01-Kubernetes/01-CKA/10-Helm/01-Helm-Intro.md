@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-01-18
 title: Helm 개요
 description: Kubernetes 운영의 필수 도구 Helm 입문 가이드. Deployment, Service 등 수많은 객체를 values.yaml 하나로 제어하는 방법과 중앙 집중식 설정 관리의 효율성을 확인하세요. CKA 시험 준비와 실무 환경 모두에 유용한 내용을 담고 있습니다.
 keywords:

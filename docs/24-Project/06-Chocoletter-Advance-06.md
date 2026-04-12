@@ -1,4 +1,5 @@
----
+﻿---
+date: 2026-02-05
 title: "[초코레터 프로젝트 고도화 -6] Spring Event로 결합도 낮추기"
 description: 서비스 계층의 다른 도메인 레포지토리 의존성을 Spring Event로 분리하여 결합도를 낮춘 리팩토링 과정입니다. ApplicationEventPublisher를 활용한 이벤트 기반 아키텍처 구현과 도메인 간 의존성 제거 방법을 설명합니다.
 keywords:
