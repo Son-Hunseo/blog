@@ -99,20 +99,31 @@
   overflow: hidden;
 }
 
-.keywords {
+.postMeta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
   margin-top: auto;
 }
 
-.keyword {
-  background: var(--ifm-color-emphasis-100);
-  color: var(--ifm-color-emphasis-800);
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  font-weight: 400;
+.metaItem {
+  color: var(--ifm-color-emphasis-600);
+}
+
+.metaSeparator {
+  color: var(--ifm-color-emphasis-400);
+  margin: 0 0.25rem;
+}
+
+.metaCategory {
+  color: var(--ifm-color-primary);
+}
+
+.metaTags {
+  color: var(--ifm-color-emphasis-700);
 }
 
 @media (max-width: 768px) {
