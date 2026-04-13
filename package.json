@@ -3,10 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "copy-images": "node scripts/copy-images.js",
-    "update-fm": "node scripts/update-frontmatter.js",
-    "prestart": "npm run copy-images && npm run update-fm",
-    "prebuild": "npm run copy-images && npm run update-fm",
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
