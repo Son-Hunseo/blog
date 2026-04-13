@@ -35,9 +35,10 @@ son-blog/
 │   ├── components/                # 커스텀 컴포넌트 추가
 │   │   ├── CategoryPosts.js       # 카테고리별 포스트 목록
 │   │   ├── GiscusComponent.js     # GitHub Discussions 댓글
-│   │   ├── RandomPosts.js         # 랜덤 포스트 표시
 │   │   ├── SelectedPosts.js       # 선택된 포스트 표시
-│   │   └── SimpleDocList.js       # 단순 문서 목록
+│   │   ├── SimpleDocList.js       # 단순 문서 목록
+│   │   ├── Posts.module.css       # 포스트 목록 공통 스타일
+│   │   └── SimpleDocList.module.css  # 단순 문서 목록 스타일
 │   ├── css/custom.css             # 확장된 스타일
 │   └── theme/                     # 테마 오버라이드
 │       ├── DocCard/               # 문서 카드 커스터마이징
@@ -45,9 +46,6 @@ son-blog/
 │       └── DocSidebar/            # 사이드바 (글 개수 표시)
 ├── plugins/
 │   └── gather-meta-plugin.js      # 커스텀 플러그인
-├── scripts/
-│   ├── copy-images.js             # 이미지 복사 스크립트
-│   └── update-frontmatter.js      # 프론트매터 자동 업데이트
 └── package.json
 ```
 
@@ -55,32 +53,28 @@ son-blog/
 
 ## 2. package.json 차이점
 
-### 추가된 의존성
+### 버전 차이
+
+| 항목 | basic-docu | son-blog |
+|------|------------|----------|
+| Docusaurus | 3.10.0 | 3.8.1 |
+| Node.js (engines) | >=20.0 | >=18.0 |
+
+### basic-docu 추가 패키지
+
+| 패키지 | 용도 |
+|--------|------|
+| `@docusaurus/faster` | 빌드 성능 최적화 (rspack 기반) |
+
+### son-blog 추가된 의존성
 
 | 패키지 | 용도 |
 |--------|------|
 | `@docusaurus/theme-mermaid` | Mermaid 다이어그램 지원 |
 | `@giscus/react` | GitHub Discussions 기반 댓글 시스템 |
-| `glob` | 파일 패턴 매칭 (스크립트용) |
 | `gray-matter` | Markdown 프론트매터 파싱 |
 | `rehype-katex` | LaTeX 수식 렌더링 |
 | `remark-math` | 수학 문법 파싱 |
-| `fs-extra` (devDep) | 확장된 파일 시스템 유틸리티 |
-
-### 추가된 NPM 스크립트
-
-```json
-{
-  "scripts": {
-    "copy-images": "node scripts/copy-images.js",
-    "update-fm": "node scripts/update-frontmatter.js",
-    "prestart": "npm run copy-images && npm run update-fm",
-    "prebuild": "npm run copy-images && npm run update-fm"
-  }
-}
-```
-
-- `prestart/prebuild`: 개발/빌드 전 자동으로 이미지 복사 및 프론트매터 업데이트 실행
 
 ---
 
@@ -209,77 +203,13 @@ plugins: [
 
 **사용처:**
 - `SelectedPosts.js` - 선택된 포스트 표시
-- `RandomPosts.js` - 랜덤 포스트 표시
 - `CategoryPosts.js` - 카테고리별 포스트 표시
 
 ---
 
-## 5. 커스텀 스크립트
+## 5. 커스텀 컴포넌트
 
-### 5.1 copy-images.js
-
-**목적:** `docs/*/assets/` 폴더의 이미지를 `static/img/`로 복사
-
-**왜 필요한가:**
-- Docusaurus는 `static/` 폴더 내 파일만 정적 자산으로 서빙함
-- 문서 작성 시 `docs/01-Kubernetes/assets/pod.png`처럼 문서 옆에 이미지를 두는 게 편리함
-- 빌드 시 이를 `static/img/Kubernetes/pod.png`로 복사하여 웹에서 접근 가능하게 만듦
-
-**동작 흐름:**
-1. `docs/` 폴더를 재귀 탐색
-2. `assets` 폴더 발견 시 이미지 파일(jpg, png, gif, svg, webp)만 복사
-3. 경로에서 숫자 프리픽스 제거 (`01-Kubernetes` → `Kubernetes`)
-4. `static/img/`로 복사
-
-**예시:**
-```
-docs/01-Kubernetes/assets/pod.png → static/img/Kubernetes/pod.png
-```
-
-### 5.2 update-frontmatter.js
-
-**목적:** Markdown 파일의 프론트매터 자동 관리 (매번 수동 작성 번거로움 해결)
-
-3단계로 나뉘어 동작:
-
-#### 1단계: 썸네일 이미지 자동 설정
-
-프론트매터에 `image`가 없으면:
-1. 본문에서 첫 번째 이미지 찾기 (마크다운 `![]()` 또는 HTML `<img>`)
-2. 없으면 `DEFAULT_IMAGES` 맵에서 카테고리별 기본 이미지 사용
-3. 상대 경로 이미지는 `/img/카테고리/파일명` 형태로 변환
-
-```js
-const DEFAULT_IMAGES = {
-  'Kubernetes': '/img/default/kubernetes.png',
-  'Docker': '/img/default/docker.png',
-  'Openstack': '/img/default/openstack.png',
-  // ...
-};
-```
-
-#### 2단계: sidebar_class_name 주입
-
-- `index.md(x)` 제외한 모든 문서에 `sidebar_class_name: hidden-sidebar-item` 추가
-- CSS에서 이 클래스가 `display: none`으로 처리되어 사이드바에서 숨겨짐
-- **결과:** 사이드바에 카테고리(index)만 표시되고, 개별 글은 숨김
-
-#### 3단계: index 파일 pagination 설정
-
-- 모든 `index.md(x)` 파일에:
-  - `pagination_prev: null`
-  - `pagination_next: null`
-- **결과:** index 페이지에서 "이전/다음 글" 네비게이션 제거
-
-#### YAML 문법 오류 수정
-
-- 중복 `---` 구분자 자동 수정
-
----
-
-## 6. 커스텀 컴포넌트
-
-### 6.1 GiscusComponent.js
+### 5.1 GiscusComponent.js
 
 **목적:** GitHub Discussions 기반 댓글 시스템
 
@@ -293,7 +223,7 @@ const DEFAULT_IMAGES = {
 />
 ```
 
-### 6.2 SelectedPosts.js
+### 5.2 SelectedPosts.js
 
 **목적:** 홈페이지에 수동 선택한 포스트 표시
 
@@ -305,39 +235,33 @@ const SELECTED_POST_IDS = [
 ];
 ```
 
-### 6.3 RandomPosts.js
+- `Posts.module.css` 공통 스타일 사용
 
-**목적:** 전체 포스트 중 랜덤 10개 표시
-
-- Fisher-Yates 셔플 알고리즘 사용
-- 카드 형태 UI로 표시
-
-### 6.4 CategoryPosts.js
+### 5.3 CategoryPosts.js
 
 **목적:** 현재 카테고리의 포스트 목록 표시
 
 - URL 경로 기반 자동 필터링
 - index 페이지 제외
+- `Posts.module.css` 공통 스타일 사용
 
-### 6.5 SimpleDocList.js
+### 5.4 SimpleDocList.js
 
 **목적:** 단순한 문서 목록 표시
 
 ---
 
-## 7. 테마 오버라이드 (Swizzling)
+## 6. 테마 오버라이드 (Swizzling)
 
-### 7.1 DocItem/Layout/index.js
+### 6.1 DocItem/Layout/index.js
 
 **변경 내용:**
-- 문서 상단에 날짜 표시 추가
 - 문서 하단에 Giscus 댓글 추가
 
 ```jsx
 export default function LayoutWrapper(props) {
   return (
     <>
-      <DocDate />           {/* 날짜 표시 */}
       <Layout {...props} />
       <GiscusComponent />   {/* 댓글 */}
     </>
@@ -345,7 +269,7 @@ export default function LayoutWrapper(props) {
 }
 ```
 
-### 7.2 DocCard/index.js
+### 6.2 DocCard/index.js
 
 **변경 내용:**
 - 카테고리 카드에 하위 항목 총 개수 표시
@@ -365,7 +289,7 @@ const countItemsRecursive = (items) => {
 };
 ```
 
-### 7.3 DocSidebar/index.js
+### 6.3 DocSidebar/index.js
 
 **변경 내용:**
 - 사이드바 카테고리에 글 개수 표시
@@ -389,15 +313,15 @@ const addCountToItems = (items) => {
 
 ---
 
-## 8. CSS 커스터마이징
+## 7. CSS 커스터마이징
 
-### 8.1 KaTeX 지원
+### 7.1 KaTeX 지원
 
 ```css
 @import "katex/dist/katex.min.css";
 ```
 
-### 8.2 사이드바 아이템 숨김
+### 7.2 사이드바 아이템 숨김
 
 ```css
 .hidden-sidebar-item {
@@ -405,10 +329,10 @@ const addCountToItems = (items) => {
 }
 ```
 
-- `update-frontmatter.js`와 함께 사용
-- index 파일만 사이드바에 표시
+- 프론트매터에 `sidebar_class_name: hidden-sidebar-item` 설정 시 사이드바에서 숨김
+- index 파일만 사이드바에 표시하려면 개별 글에 이 클래스 적용
 
-### 8.3 Algolia 검색 하이라이트
+### 7.3 Algolia 검색 하이라이트
 
 ```css
 /* 검색 팝업 */
@@ -425,7 +349,7 @@ const addCountToItems = (items) => {
 }
 ```
 
-### 8.4 홈페이지 히어로 섹션
+### 7.4 홈페이지 히어로 섹션
 
 ```css
 .heroSection {
@@ -449,7 +373,7 @@ const addCountToItems = (items) => {
 
 ---
 
-## 9. 랜딩 페이지 차이
+## 8. 랜딩 페이지 차이
 
 ### 기본 Docusaurus
 
@@ -477,7 +401,13 @@ const addCountToItems = (items) => {
 
 ---
 
-## 10. 파일별 변경 요약
+## 9. 파일별 변경 요약
+
+### 버전 비교
+- **basic-docu**: Docusaurus 3.10.0, Node.js >=20.0, `@docusaurus/faster` 포함
+- **son-blog**: Docusaurus 3.8.1, Node.js >=18.0
+
+### 파일 변경 내역
 
 | 파일 | 상태 | 설명 |
 |------|------|------|
@@ -485,27 +415,20 @@ const addCountToItems = (items) => {
 | `sidebars.js` | 동일 | 자동 생성 사용 |
 | `src/css/custom.css` | 확장 | KaTeX, 검색 하이라이트, 홈페이지 스타일 |
 | `src/pages/` | 삭제 | docs/index.mdx로 대체 |
-| `src/components/` | 신규 | 5개 커스텀 컴포넌트 |
+| `src/components/` | 신규 | 4개 커스텀 컴포넌트 + 공통 CSS |
 | `src/theme/` | 신규 | 3개 테마 오버라이드 |
 | `plugins/` | 신규 | gather-meta-plugin.js |
-| `scripts/` | 신규 | copy-images.js, update-frontmatter.js |
 
 ---
 
-## 11. 개발 시 참고사항
+## 10. 글작성 시 참고사항
 
 ### 새 문서 추가 시
 
 1. `docs/` 하위에 `.md` 또는 `.mdx` 파일 생성
-2. 이미지는 같은 폴더의 `assets/`에 저장
-3. `npm start` 실행 시 자동으로:
-   - 이미지가 `static/img/`로 복사됨
-   - 프론트매터에 `image`, `sidebar_class_name` 자동 추가
+2. 이미지는 `static/img/` 폴더에 직접 저장
+3. 프론트매터에 필요한 메타데이터 직접 작성 (`image`, `sidebar_class_name` 등)
 
 ### 추천 글 변경 시
 
 `src/components/SelectedPosts.js`의 `SELECTED_POST_IDS` 배열 수정
-
-### 카테고리 기본 이미지 추가 시
-
-`scripts/update-frontmatter.js`의 `DEFAULT_IMAGES` 객체에 추가
