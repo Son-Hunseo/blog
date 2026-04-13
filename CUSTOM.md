@@ -43,6 +43,7 @@ son-blog/
 │   └── theme/                     # 테마 오버라이드
 │       ├── DocCard/               # 문서 카드 커스터마이징
 │       ├── DocItem/Layout/        # 문서 레이아웃 (댓글 추가)
+│       ├── DocItem/Content/       # 문서 콘텐츠 (제목 아래 날짜 표시)
 │       └── DocSidebar/            # 사이드바 (글 개수 표시)
 ├── plugins/
 │   └── gather-meta-plugin.js      # 커스텀 플러그인
@@ -269,7 +270,38 @@ export default function LayoutWrapper(props) {
 }
 ```
 
-### 6.2 DocCard/index.js
+### 6.2 DocItem/Content/index.js
+
+**변경 내용:**
+- 문서 제목(h1) 바로 아래에 날짜 표시
+- 프론트매터의 `date` 필드를 파싱하여 표시
+
+```jsx
+export default function DocItemContent({children}) {
+  const syntheticTitle = useSyntheticTitle();
+  const {metadata} = useDoc();
+  const {frontMatter} = metadata;
+  const formattedDate = formatDate(frontMatter.date);
+
+  return (
+    <div className={clsx(ThemeClassNames.docs.docMarkdown, 'markdown')}>
+      {syntheticTitle && (
+        <header>
+          <Heading as="h1">{syntheticTitle}</Heading>
+        </header>
+      )}
+      {formattedDate && (
+        <div className={styles.docDate}>
+          {formattedDate}
+        </div>
+      )}
+      <MDXContent>{children}</MDXContent>
+    </div>
+  );
+}
+```
+
+### 6.3 DocCard/index.js
 
 **변경 내용:**
 - 카테고리 카드에 하위 항목 총 개수 표시
@@ -289,7 +321,7 @@ const countItemsRecursive = (items) => {
 };
 ```
 
-### 6.3 DocSidebar/index.js
+### 6.4 DocSidebar/index.js
 
 **변경 내용:**
 - 사이드바 카테고리에 글 개수 표시
@@ -416,7 +448,7 @@ const addCountToItems = (items) => {
 | `src/css/custom.css` | 확장 | KaTeX, 검색 하이라이트, 홈페이지 스타일 |
 | `src/pages/` | 삭제 | docs/index.mdx로 대체 |
 | `src/components/` | 신규 | 4개 커스텀 컴포넌트 + 공통 CSS |
-| `src/theme/` | 신규 | 3개 테마 오버라이드 |
+| `src/theme/` | 신규 | 4개 테마 오버라이드 |
 | `plugins/` | 신규 | gather-meta-plugin.js |
 
 ---
