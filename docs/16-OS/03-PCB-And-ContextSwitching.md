@@ -1,13 +1,8 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-03-26
 title: PCB와 Context Switching
 description: PCB(Process Control Block)와 Context Switching의 개념을 쉽게 설명합니다. 프로세스 메타데이터 관리 방식과 CPU 레지스터 기반의 컨텍스트 스위칭 동작 원리를 이해할 수 있는 운영체제 핵심 정리입니다.
-keywords:
-  - PCB
-  - Process Control Block
-  - 컨텍스트 스위칭
-  - context switching
-  - 운영체제
 ---
 
 ---

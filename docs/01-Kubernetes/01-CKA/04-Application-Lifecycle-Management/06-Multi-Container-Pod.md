@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Multi Container Pod
 description: Multi-Container Pods는 **쿠버네티스(Kubernetes)**에서 여러 컨테이너를 하나의 Pod에 묶어 네트워크와 볼륨을 공유하며 생명주기를 함께하도록 관리하는 방식입니다. 이 아키텍처는 Sidecar, Init Container, Co-located Containers 등의 디자인 패턴을 통해 로깅, 프록시, 초기화 작업 등 메인 애플리케이션을 보조하는 기능을 효율적으로 통합합니다. 특히 Init Containers는 메인 앱 시작 전 필수 사전 작업을 순차적으로 수행하며, Sidecar Containers는 메인 앱과 함께 지속적으로 실행되는 보조 기능을 제공합니다. 이 패턴들은 마이크로 서비스 아키텍처(MSA) 환경에서 긴밀하게 협력해야 하는 구성 요소들의 배포 및 확장(Scaling) 효율성을 높이는 핵심 전략입니다.
-keywords:
-  - Kubernetes
-  - Multi-Container Pod
-  - Sidecar Container
-  - Native Sidecar Container
-  - Init Container
 ---
+
 ---
 ## Multi Container Pod
 ### 개념

@@ -1,13 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Network Policies
 description: 쿠버네티스(Kubernetes) Network Policy의 개념, Ingress/Egress 트래픽 규칙 설정 방법, 다양한 Selector 종류(pod, namespace, ipBlock), 그리고 AND/OR 조건 YAML 구조를 완벽하게 정리했습니다. Calico, Weave-net 등 지원 CNI와 Flannel 등 미지원 CNI 정보까지 포함하여 Pod 간 통신 보안을 설정하는 방법을 자세히 알아봅니다.
-keywords:
-  - Kubernets
-  - 쿠버네티스
-  - Network Policy
-  - 네트워크 정책
 ---
+
 ---
 :::info
 - Ingress: 들어오는 트래픽

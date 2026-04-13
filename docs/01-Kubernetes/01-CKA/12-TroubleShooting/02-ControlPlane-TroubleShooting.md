@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: 컨트롤플레인 트러블슈팅
 description: 쿠버네티스(Kubernetes) 컨트롤 플레인 장애 해결을 위한 노드 상태 점검, kube-system 포드 상태 확인, systemd 서비스 로그 분석 등 필수적인 트러블슈팅 단계와 명령어를 정리합니다.
-keywords:
-  - 쿠버네티스 트러블슈팅
-  - 컨트롤 플레인 점검
-  - 컨트롤 플레인 트러블 슈팅
-  - kube-system Pod 상태
-  - journalctl kubelet
 ---
+
 ---
 ## 컨트롤플레인 트러블 슈팅
 ### 클러스터 기본 상태 확인

@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: CKA 시험 후기 & 못푼 문제 복기
 description: CKA 자격증 첫 시험에서 65점으로 1점 차이로 불합격 후 못 푼 문제를 복기한 글입니다. 리소스 부족 트러블슈팅, cert-manager CRD 조회, Gateway API 마이그레이션, Helm template 명령어, 컨테이너 런타임 점검 등의 문제 풀이를 정리했습니다.
-keywords:
-  - CKA 시험 후기
-  - CKA 불합격 복기
-  - Gateway API 마이그레이션
-  - Helm template
-  - 쿠버네티스 트러블슈팅
 ---
+
 ---
 ## 시험 후기
 

@@ -1,25 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Docker vs ContainerD
 description: Kubernetes에서 Docker 지원이 중단된 이유와 containerd, nerdctl, crictl 등 주요 컨테이너 런타임 및 CLI 도구의 차이를 정리합니다. CKA 학습을 위한 핵심 개념을 이해하고, Docker 없이 Kubernetes를 운영하는 방법을 배웁니다.
-keywords:
-  - Kubernetes
-  - Docker
-  - containerd
-  - nerdctl
-  - crictl
-  - ctr
-  - CRI
-  - dockershim
-  - CKA
-  - Kubernetes 런타임
-  - Docker 지원 종료
-  - OCI 표준
-  - container runtime interface
-  - container runtime
-  - Kubernetes containerd 설치
-  - nerdctl 사용법
 ---
+
 ---
 ## Docker와 Containerd의 관계
 

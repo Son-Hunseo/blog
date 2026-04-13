@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: 윈도우에 장착된 GPU를 Prometheus & Grafana로 모니터링 해보자
 description: Windows PC에서도 GPU 상태를 Prometheus와 Grafana로 모니터링할 수 있다. WSL(Windows Subsystem for Linux) 환경에서 DCGM Exporter를 Docker로 실행하고, 포트포워딩을 통해 Prometheus와 Grafana 대시보드에서 실시간 GPU 사용량과 온도, 메모리 정보를 시각화하는 방법을 단계별로 정리했다.
-keywords:
-  - Windows GPU Monitoring
-  - DCGM Exporter
-  - Prometheus Grafana
-  - WSL Docker
-  - NVIDIA GPU Metrics
 ---
+
 ---
 ## 왜?
 

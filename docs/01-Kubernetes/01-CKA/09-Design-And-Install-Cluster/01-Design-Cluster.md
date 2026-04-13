@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: 클러스터 설계
 description: CKA 자격증 대비 및 실무를 위한 쿠버네티스(Kubernetes) 클러스터 설계 가이드를 확인하세요. 학습용부터 프로덕션 환경까지 목적별 구성 방법, 노드 규모 산정, 스토리지 및 인프라 고려 사항 등 핵심 아키텍처 설계 노하우를 정리했습니다.
-keywords:
-  - 쿠버네티스 클러스터 설계
-  - Kubernetes 클러스터 아키텍처
-  - Turnkey Solutions
-  - 프로덕션 클러스터
-  - CKA 클러스터 설계
 ---
+
 ---
 :::tip
 클러스터 설계 및 설치 섹션 전체는 시험을 위해 외워야할 내용은 없다. (docs에 나와있기 때문)

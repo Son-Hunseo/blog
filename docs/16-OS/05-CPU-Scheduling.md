@@ -1,19 +1,8 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-03-26
 title: CPU 스케줄링
 description: CPU 스케줄링의 개념, 프로세스 상태 전이, 선점/비선점 스케줄링의 차이, 그리고 FCFS, SJF, Round Robin, 다단계 피드백 큐 등 주요 스케줄링 알고리즘을 정리한 글입니다.
-keywords:
-  - CPU 스케줄링
-  - 프로세스 상태
-  - 선점 스케줄링
-  - 비선점 스케줄링
-  - FCFS
-  - SJF
-  - HRN
-  - Round Robin
-  - Time Quantum
-  - 다단계 큐
-  - 다단계 피드백 큐
 ---
 
 ---

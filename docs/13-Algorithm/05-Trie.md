@@ -1,29 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: 문자열 2 - Trie
 description: Trie(트라이)는 문자열을 효율적으로 저장하고 탐색하기 위한 트리 기반 자료구조입니다. 이 글에서는 Trie의 구조, 시간·공간 복잡도, 장단점부터 Java로 구현한 삽입·탐색·삭제 코드까지 자세히 설명합니다.
-keywords:
-  - Trie
-  - 트라이
-  - 자료구조
-  - 문자열 탐색
-  - 트리 구조
-  - Trie 구현
-  - Trie Java
-  - Java 자료구조
-  - Trie 삭제
-  - Trie 삽입
-  - Trie 탐색
-  - 알고리즘
-  - 자동완성
-  - 사전 자료구조
-  - 문자열 검색
-  - 데이터 구조
-  - CS 공부
-  - 코딩 테스트
-  - 컴퓨터공학
-  - Java 예제
 ---
+
 ---
 ## Trie
 ### Tire(트라이) 란?

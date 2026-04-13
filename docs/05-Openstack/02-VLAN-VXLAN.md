@@ -1,13 +1,8 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-04-11
 title: VLAN과 VXLAN
 description: 언더레이 네트워크와 오버레이 네트워크의 차이, VLAN과 VXLAN의 개념·장단점·MTU 이슈까지 정리합니다. VLAN이 오버레이가 아닌 이유, VXLAN의 VTEP 캡슐화 원리, Jumbo Frame 해결법을 알아봅니다.
-keywords:
-  - VLAN vs VXLAN
-  - 오버레이 네트워크
-  - VXLAN VTEP 캡슐화
-  - 브로드캐스트 도메인
-  - VXLAN MTU Jumbo Frame
 ---
 
 ---

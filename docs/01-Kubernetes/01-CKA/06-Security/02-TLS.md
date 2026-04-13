@@ -1,12 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: TLS in Kubernetes
 description: 쿠버네티스(Kubernetes) 클러스터 내부의 TLS(Transport Layer Security) 통신 구조와 Zero Trust 보안 모델을 상세히 설명합니다. kube-apiserver, etcd, kubelet 등 각 컴포넌트가 사용하는 서버 인증서 및 클라이언트 인증서의 역할과, 클러스터 내부 CA(인증 기관)의 생성 및 관리 방식에 대해 다룹니다. CKA 시험 및 보안 관련 지식을 위한 핵심 가이드입니다.
-keywords:
-  - Kubernetes
-  - Kubernetes TLS
-  - Kubernetes Certificate
 ---
+
 ---
 ## Kubernetes에서의 TLS 통신
 ### 개념

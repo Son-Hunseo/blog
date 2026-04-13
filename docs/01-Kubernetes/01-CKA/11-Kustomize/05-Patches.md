@@ -1,13 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Patches
 description: Kubernetes Kustomize의 핵심 기능인 Patch 개념과 JSON 6902, Strategic Merge Patch의 차이점을 완벽 정리합니다. 리스트 수정, 값 변경 등 실무 예시를 통해 효율적인 리소스 관리 방법을 확인하세요.
-keywords:
-  - Kustomize Patch
-  - JSON 6902 Patch
-  - 3-Way Strategic Merge Patch
-  - 쿠버네티스 Kustomize 사용법
 ---
+
 ---
 :::info
 `Patch`는 이전 글에서 다른 `Transformer`의 한 종류라고 이해하면 된다.

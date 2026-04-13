@@ -1,15 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: DNS
 description: 리눅스(Linux) 시스템의 네임 레졸루션(Name Resolution) 원리부터 /etc/hosts, DNS 서버 설정(/etc/resolv.conf), 우선순위 변경(nsswitch.conf) 및 도메인 구조와 레코드 타입까지 핵심 내용을 완벽 정리합니다.
-keywords:
-  - Name Resolution
-  - /etc/hosts
-  - DNS서버 설정
-  - DNS 우선순위 변경
-  - 도메인 구조
-  - 레코드 타입
 ---
+
 ---
 ## Name Resolution
 

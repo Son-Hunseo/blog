@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: 네트워크 네임스페이스
 description: 리눅스 커널의 Network Namespace 개념부터 veth pair를 이용한 통신, Linux Bridge(가상 스위치) 설정, 그리고 NAT와 포트 포워딩을 통한 외부 네트워크 연결까지 컨테이너 네트워킹의 핵심 원리를 실습 명령어와 함께 상세히 정리합니다.
-keywords:
-  - 리눅스 네트워크 네임스페이스
-  - Network Namespace
-  - veth pair 가상 케이블
-  - Linux Bridge 가상 스위치
-  - 컨테이너 네트워킹 원리
 ---
+
 ---
 :::tip
 아래 내용은 특히 컨테이너를 이해하기 위해 중요하다.

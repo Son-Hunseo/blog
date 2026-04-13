@@ -1,27 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: 쿠버네티스 아키텍처
 description: Kubernetes 클러스터의 핵심 아키텍처를 이해하기 쉽게 정리했습니다. Control Plane(마스터 노드)와 Worker Node 구성요소인 etcd, kube-apiserver, kube-scheduler, Controller Manager, kubelet, kube-proxy의 역할을 자세히 설명합니다.
-keywords:
-  - Kubernetes
-  - CKA
-  - 쿠버네티스
-  - Cluster Architecture
-  - Control Plane
-  - Worker Node
-  - kube-apiserver
-  - etcd
-  - kube-scheduler
-  - Controller Manager
-  - kubelet
-  - kube-proxy
-  - containerd
-  - 클러스터 구성요소
-  - 쿠버네티스 아키텍처
-  - CKA 정리
-  - 쿠버네티스 기초
-  - 쿠버네티스 공부
 ---
+
 ---
 **아키텍처**
 
