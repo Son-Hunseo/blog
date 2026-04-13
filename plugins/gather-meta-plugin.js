@@ -160,7 +160,11 @@ module.exports = function (context, options) {
           .split('\n')
           .find(line => line.trim() && !line.startsWith('#') && !line.startsWith('import') && !line.startsWith('!'))
           ?.substring(0, 150) || '';
-        
+
+        // 읽는 시간 계산 (평균 200단어/분 기준)
+        const wordCount = contentText.trim().split(/\s+/).length;
+        const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+
         const postData = {
           title: frontMatter.title || 'Untitled',
           description: frontMatter.description || description,
@@ -168,8 +172,8 @@ module.exports = function (context, options) {
           category: categoryName,
           categoryPath: categoryPath, // 전체 경로
           tags: frontMatter.tags || [],
-          keywords: frontMatter.keywords || [],
-          image: frontMatter.image || null, 
+          date: frontMatter.date || null,
+          readingTime: readingTime,
         };
         
         posts.push(postData);

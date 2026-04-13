@@ -2,7 +2,17 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import {usePluginData} from '@docusaurus/useGlobalData';
 import {useLocation} from '@docusaurus/router';
-import styles from './CategoryPosts.module.css';
+import styles from './Posts.module.css';
+
+function formatDate(dateString) {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
 
 function CategoryPosts() {
   const {postsByPath} = usePluginData('gather-meta-plugin');
@@ -30,27 +40,32 @@ function CategoryPosts() {
         {filteredPosts.map((post, idx) => (
           <article key={idx} className={styles.postCard}>
             <Link to={post.link} className={styles.postLink}>
-              {post.image ? (
-                <div className={styles.imageWrapper}>
-                  <img src={post.image} alt={post.title} className={styles.postImage} />
-                </div>
-              ) : (
-                <div className={styles.noImage}>
-                  <span className={styles.noImageIcon}>📄</span>
-                </div>
-              )}
               <div className={styles.postContent}>
                 <h3 className={styles.postTitle}>{post.title}</h3>
                 <p className={styles.description}>{post.description}</p>
-                {post.keywords && post.keywords.length > 0 && (
-                  <div className={styles.keywords}>
-                    {post.keywords.slice(0, 3).map((keyword, keyIdx) => (
-                      <span key={keyIdx} className={styles.keyword}>
-                        {keyword}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                <div className={styles.postMeta}>
+                  {post.date && (
+                    <span className={styles.metaItem}>{formatDate(post.date)}</span>
+                  )}
+                  {post.readingTime && (
+                    <>
+                      <span className={styles.metaSeparator}>·</span>
+                      <span className={styles.metaItem}>{post.readingTime} min</span>
+                    </>
+                  )}
+                  {post.category && (
+                    <>
+                      <span className={styles.metaSeparator}>·</span>
+                      <span className={styles.metaCategory}>{post.category}</span>
+                    </>
+                  )}
+                  {post.tags && post.tags.length > 0 && (
+                    <>
+                      <span className={styles.metaSeparator}>·</span>
+                      <span className={styles.metaTags}>{post.tags.join(', ')}</span>
+                    </>
+                  )}
+                </div>
               </div>
             </Link>
           </article>
