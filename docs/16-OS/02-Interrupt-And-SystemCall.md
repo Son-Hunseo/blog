@@ -1,13 +1,8 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-03-26
 title: 인터럽트(Interrupt)와 시스템콜(System Call)
 description: 운영체제 핵심 개념인 인터럽트와 시스템 콜을 쉽게 정리합니다. 인터럽트의 동작 원리와 종류, 폴링과의 차이, 시스템 콜의 역할까지 한 번에 이해할 수 있는 OS 기초 정리 글입니다.
-keywords:
-  - 운영체제
-  - 인터럽트
-  - interrupt
-  - 시스템콜
-  - system call
 ---
 
 ---

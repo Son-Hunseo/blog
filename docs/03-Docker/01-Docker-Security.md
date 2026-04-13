@@ -1,15 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Docker 보안 (Namespace, User Security, Linux Capabilities)
 description: Docker 컨테이너의 핵심 보안 원리인 Linux Namespace를 사용한 격리, 비-Root 사용자로 컨테이너를 실행하는 방법, 그리고 Linux Capabilities를 통해 컨테이너 Root 권한을 제한하는 메커니즘을 상세히 설명합니다. Docker 환경의 안정성과 보안을 강화하는 방법을 알아보세요.
-keywords:
-  - Docker 보안
-  - Docker Security
-  - Docker
-  - namespace
-  - User Security
-  - Linux Capabilities
 ---
+
 ---
 ## Docker 보안
 

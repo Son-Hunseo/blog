@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: OpenStack 테스트 환경을 위한 MicroStack 설치 및 실습
 description: MicroStack은 복잡한 OpenStack 설치 과정을 단순화한 경량 버전으로, 학습용 또는 테스트 환경에 최적화되어 있다. 이 글에서는 MicroStack의 설치, 초기 설정, 관리자 비밀번호 변경, GUI 및 CLI를 통한 VM 생성 방법까지 단계별로 정리하였다.
-keywords:
-  - MicroStack
-  - OpenStack
-  - OpenStack 설치
-  - MicroStack 설정
-  - OpenStack 학습 환경
 ---
+
 ---
 ## 왜 `MicroStack`?
 

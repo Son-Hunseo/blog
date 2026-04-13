@@ -1,14 +1,8 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-03-29
 title: 데드락(DeadLock)
 description: 데드락(DeadLock)이란 무엇인지, 발생 조건 4가지(상호배제, 점유대기, 비선점, 순환대기)와 해결 방법(예방, 회피, 탐지, 회복)을 쉽게 정리했습니다. 은행원 알고리즘, 자원 할당 그래프 등 면접 빈출 개념까지 한 번에 확인하세요.
-keywords:
-  - 데드락
-  - DeadLock
-  - 교착상태
-  - 데드락 발생조건
-  - 데드락 해결방법
-  - 은행원 알고리즘
 ---
 
 ---

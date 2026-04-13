@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Priority Classes
 description: Kubernetes PriorityClass는 워크로드 간 우선순위를 정의하여 중요한 Pod가 항상 스케줄링되도록 보장하는 기능이다. 이 글에서는 PriorityClass의 개념, 숫자 기반 우선순위 구조, Preemption 동작 방식, globalDefault 설정, 그리고 Pod에서 priorityClassName을 사용하는 방법을 상세히 설명한다. CKA 시험 준비 및 Kubernetes 스케줄링 최적화에 도움이 되는 실전 YAML 예제와 함께 PriorityClass의 핵심 개념을 쉽게 이해할 수 있다.
-keywords:
-  - Kubernetes PriorityClass
-  - Kubernetes preemption
-  - Kubernetets scheduling
-  - PriorityClass
-  - 쿠버네티스 우선순위
 ---
+
 ---
 ## Priority Classes
 ### 개념

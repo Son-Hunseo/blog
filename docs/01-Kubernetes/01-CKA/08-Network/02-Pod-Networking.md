@@ -1,13 +1,8 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Pod 네트워크
 description: 쿠버네티스 클러스터의 Pod 간 통신 원리와 CNI의 역할을 알아봅니다. 가상 브리지 설정, veth pair 생성, 노드 간 라우팅 등 Pod 네트워크가 구축되는 수동 과정을 통해 CNI 자동화의 핵심 원리를 파악하세요
-keywords:
-  - 쿠버네티스 Pod 네트워크
-  - Pod 통신 원리
-  - CNI
-  - veth pair
-  - 가상 브리지 네트워크
 ---
 ## Pod 네트워크
 ### 요구 사항

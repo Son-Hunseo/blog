@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Node Affinity
 description: "Kubernetes Node Affinity 완전 정복: nodeSelector와의 차이, In·NotIn·Exists 등 주요 operator, required/preferred 타입별 동작, 실행 중(label 변경 시) 동작까지 상세하게 설명합니다. OR 조건 매칭 방식과 고급 스케줄링 개념을 YAML 예제와 함께 쉽게 이해할 수 있습니다."
-keywords:
-  - Kubernetes
-  - node affinity
-  - node selector
-  - Kubernetes Scheduling
-  - 쿠버네티스 스케줄링
 ---
+
 ---
 ## Node Affinity
 ### 개념

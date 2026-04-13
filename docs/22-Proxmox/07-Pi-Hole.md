@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Pi-Hole로 광고 차단과 내부 DNS 설정하기
 description: Proxmox 환경에서 Debian 기반 LXC 컨테이너로 Pi-hole을 설치하고 내부망 DNS 서버 및 광고 차단 시스템을 구축하는 방법을 단계별로 설명합니다. 정적 IP 설정, 공유기 DNS 등록, 내부 도메인 관리와 화이트리스트 추가 방법까지 자세히 다룹니다.
-keywords:
-  - Pi-hole 설치
-  - 내부 DNS 서버
-  - Proxmox 컨테이너
-  - 광고 차단 DNS
-  - 홈랩 네트워크
 ---
+
 ---
 ## 왜?
 

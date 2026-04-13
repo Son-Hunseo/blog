@@ -1,17 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: NFS를 이용한 동적 프로비저닝
 description: 쿠버네티스에서 NFS 스토리지를 볼륨으로 사용하는 동적 프로비저닝 방법을 설명합니다. Jenkins와 같은 stateful 애플리케이션의 데이터 영속성 문제를 해결합니다
-keywords:
-  - NFS
-  - 쿠버네티스
-  - PV
-  - PVC
-  - Jenkins
-  - stateful
-  - 스토리지
-  - 쿠버네티스 동적 프로비저닝
 ---
+
 ---
 ## 왜?
 

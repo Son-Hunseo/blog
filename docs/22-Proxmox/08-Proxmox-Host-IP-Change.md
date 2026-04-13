@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Proxmox 호스트 IP가 변경되었을 때 네트워크 설정 변경
 description: 공유기 교체 등으로 Proxmox 호스트의 IP가 변경되었을 때, /etc/network/interfaces와 /etc/hosts 파일을 수정하여 네트워크 설정을 업데이트하는 방법을 단계별로 설명합니다.
-keywords:
-  - Proxmox
-  - Proxmox Host IP 변경
-  - Proxmox 네트워크 설정
-  - vmbr0 브리지 설정
-  - 홈랩 네트워크 변경
 ---
+
 ---
 ## 왜?
 

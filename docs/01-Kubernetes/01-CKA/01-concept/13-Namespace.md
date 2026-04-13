@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Namespace
 description: Kubernetes의 Namespace 개념부터 필요성, 기본 네임스페이스, 네임스페이스 간 통신 방법, 명령어, YAML 예제, 리소스 제한(ResourceQuota) 설정까지 단계별로 정리한 완벽 가이드입니다.
-keywords:
-  - Kubernetes
-  - namespace
-  - 쿠버네티스 네임스페이스
-  - resource quota
-  - kube-system
 ---
+
 ---
 ![namespace1](assets/namespace1.png)
 ## Namespace란?

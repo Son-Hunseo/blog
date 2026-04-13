@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Kustomize vs Helm
 description: Kustomize와 Helm 중 무엇을 선택해야 할까요? 쿠버네티스 매니페스트 관리 도구의 특징, 가독성, 복잡도 및 환경별 설정 방식을 완벽 비교합니다. 자체 서비스 개발인지 패키징 배포인지에 따른 명확한 선택 기준을 확인해 보세요.
-keywords:
-  - Kustomize vs Helm
-  - Kustomize
-  - Helm
-  - 쿠버네티스 배포 도구 비교
-  - GitOps 도구 선택
 ---
+
 ---
 ## Kustomize vs Helm
 ###  Helm으로 환경을 나눠서 관리한다면?

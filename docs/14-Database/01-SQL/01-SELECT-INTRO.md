@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: "[DML] SELECT - 기본 문법과 별칭(alias), NULL 처리"
 description: SQL의 핵심인 SELECT와 FROM 문법을 이해하고, 별칭(alias), 상수 반환, NULL 처리 등 기본 문법을 실습 예제와 함께 배웁니다.
-keywords:
-  - SQL SELECT
-  - FROM 절
-  - alias 별칭
-  - NULL 처리
-  - IFNULL 함수
 ---
+
 ---
 ## SELECT, FROM
 

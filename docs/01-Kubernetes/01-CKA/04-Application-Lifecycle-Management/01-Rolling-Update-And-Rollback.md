@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Rolling Update & Rollback
 description: 쿠버네티스(Kubernetes) Deployment Rollout의 핵심 개념과 전략을 자세히 정리합니다. Rollout과 Rolling Update 용어의 차이점, 배포 과정(최초 배포, 업그레이드, 롤백), 주요 배포 전략인 Recreate와 Rolling Update의 장단점 및 절차를 비교합니다. 또한, YAML 수정이나 kubectl set image 명령을 사용한 업데이트 방법과 kubectl rollout 관련 핵심 명령어를 안내하여 무중단 배포의 이해를 돕습니다.
-keywords:
-  - Kubernetes
-  - Kubernetes Deployment
-  - Rollout
-  - Rolling Update
-  - Revision
 ---
+
 ---
 :::warning
 헷갈렸던 용어 정리

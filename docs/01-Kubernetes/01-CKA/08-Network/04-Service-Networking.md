@@ -1,13 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Service 네트워크
 description: Kubernetes Service의 네트워크 원리와 kube-proxy의 역할을 정리합니다. 실체 없는 가상 객체인 Service가 어떻게 iptables와 DNAT를 통해 Pod로 트래픽을 전달하는지 확인해 보세요.
-keywords:
-  - Kubernetes
-  - kubernetes service
-  - kube-proxy
-  - 쿠버네티스 서비스 네트워크
 ---
+
 ---
 :::info
 `Service` 개념 참고 글 - [Service](../01-concept/12-Service.md)

@@ -1,11 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Components 기능
 description: Kustomize Components를 활용해 Kubernetes 설정의 중복을 제거하는 방법을 알아봅니다. Base와 Overlay 구조의 한계를 넘어서, 특정 환경(Dev, Premium, Self-hosted)에만 필요한 기능을 모듈화하고 재사용하는 실전 예제를 제공합니다.
-keywords:
-  - Kustomize
-  - Kustomize Components
 ---
+
 ---
 ## 배경
 

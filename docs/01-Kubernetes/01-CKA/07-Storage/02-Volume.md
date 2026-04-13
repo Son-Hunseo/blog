@@ -1,13 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: 볼륨(Volume)
 description: 쿠버네티스(Kubernetes) Pod에서 데이터의 영속성을 확보하는 핵심 개념인 Volume에 대해 알아봅니다. hostPath의 작동 방식과 한계점을 이해하고, AWS EBS와 같은 외부 스토리지 볼륨의 필요성 및 사용 예시를 상세한 YAML 코드로 확인해보세요.
-keywords:
-  - 쿠버네티스
-  - Kubernetes
-  - Volume Driver Plugin
-  - hostPath
 ---
+
 ---
 :::info
 도커 스토리지, 도커 볼륨에 대한 사전 지식이 필요하다.
