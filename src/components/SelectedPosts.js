@@ -1,11 +1,21 @@
 /*
 사용자가 직접 선택한 글들을 메인 화면에 보여주는 컴포넌트
-RandomPosts와 동일한 스타일을 사용하며, 파일 경로(ID)를 기준으로 글을 선택함
+파일 경로(ID)를 기준으로 글을 선택함
 */
 import React, { useState, useEffect } from 'react';
 import Link from '@docusaurus/Link';
 import {usePluginData} from '@docusaurus/useGlobalData';
-import styles from './RandomPosts.module.css'; // RandomPosts와 동일한 스타일 사용
+import styles from './Posts.module.css';
+
+function formatDate(dateString) {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
 
 // 여기에 메인에 띄우고 싶은 글의 ID(경로)를 입력하세요.
 // 예: 'docs/category/my-post' 또는 'my-post' 등 docusaurus가 생성하는 ID 기준
@@ -53,35 +63,37 @@ function SelectedPosts() {
   }
 
   return (
-    <section className={styles.randomPosts}>
+    <section className={styles.categoryPosts}>
       <div className={styles.postsGrid}>
         {displayPosts.map((post, idx) => (
           <article key={idx} className={styles.postCard}>
             <Link to={post.link} className={styles.postLink}>
-              {post.image ? (
-                <div className={styles.imageWrapper}>
-                  <img src={post.image} alt={post.title} className={styles.postImage} />
-                </div>
-              ) : (
-                <div className={styles.noImageWrapper}>
-                  <span style={{fontSize: '2rem', opacity: 0.5}}>📄</span>
-                </div>
-              )}
               <div className={styles.postContent}>
-                <h3 className={styles.cardTitle}>{post.title}</h3>
+                <h3 className={styles.postTitle}>{post.title}</h3>
                 <p className={styles.description}>{post.description}</p>
                 <div className={styles.postMeta}>
-                  <span className={styles.category}>{post.category}</span>
+                  {post.date && (
+                    <span className={styles.metaItem}>{formatDate(post.date)}</span>
+                  )}
+                  {post.readingTime && (
+                    <>
+                      <span className={styles.metaSeparator}>·</span>
+                      <span className={styles.metaItem}>{post.readingTime} min</span>
+                    </>
+                  )}
+                  {post.category && (
+                    <>
+                      <span className={styles.metaSeparator}>·</span>
+                      <span className={styles.metaCategory}>{post.category}</span>
+                    </>
+                  )}
+                  {post.tags && post.tags.length > 0 && (
+                    <>
+                      <span className={styles.metaSeparator}>·</span>
+                      <span className={styles.metaTags}>{post.tags.join(', ')}</span>
+                    </>
+                  )}
                 </div>
-                {post.tags && post.tags.length > 0 && (
-                  <div className={styles.tags}>
-                    {post.tags.slice(0, 3).map((tag, tagIdx) => (
-                      <span key={tagIdx} className={styles.tag}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
               </div>
             </Link>
           </article>
