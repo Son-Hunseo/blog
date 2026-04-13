@@ -1,0 +1,511 @@
+# Docusaurus 커스터마이징 문서
+
+이 문서는 기본 Docusaurus 프로젝트(`../basic-docu`)와 현재 프로젝트(`son-blog`)의 차이점을 상세하게 정리합니다.
+
+---
+
+## 1. 프로젝트 구조 비교
+
+### 기본 Docusaurus 구조
+```
+basic-docu/
+├── docs/                          # 문서 폴더
+│   ├── tutorial-basics/
+│   └── tutorial-extras/
+├── src/
+│   ├── components/
+│   │   └── HomepageFeatures/      # 홈페이지 피처 컴포넌트
+│   ├── css/
+│   │   └── custom.css
+│   └── pages/
+│       ├── index.js               # 별도 랜딩 페이지
+│       └── index.module.css
+├── static/img/                    # 정적 이미지
+├── docusaurus.config.js
+├── sidebars.js
+└── package.json
+```
+
+### 현재 프로젝트 구조 (추가/변경된 부분)
+```
+son-blog/
+├── docs/                          # 번호 프리픽스로 정렬 (01-Kubernetes/, 03-Docker/ 등)
+│   └── index.mdx                  # docs가 랜딩 페이지 역할 (src/pages 없음)
+├── src/
+│   ├── components/                # 커스텀 컴포넌트 추가
+│   │   ├── CategoryPosts.js       # 카테고리별 포스트 목록
+│   │   ├── GiscusComponent.js     # GitHub Discussions 댓글
+│   │   ├── RandomPosts.js         # 랜덤 포스트 표시
+│   │   ├── SelectedPosts.js       # 선택된 포스트 표시
+│   │   └── SimpleDocList.js       # 단순 문서 목록
+│   ├── css/custom.css             # 확장된 스타일
+│   └── theme/                     # 테마 오버라이드
+│       ├── DocCard/               # 문서 카드 커스터마이징
+│       ├── DocItem/Layout/        # 문서 레이아웃 (댓글 추가)
+│       └── DocSidebar/            # 사이드바 (글 개수 표시)
+├── plugins/
+│   └── gather-meta-plugin.js      # 커스텀 플러그인
+├── scripts/
+│   ├── copy-images.js             # 이미지 복사 스크립트
+│   └── update-frontmatter.js      # 프론트매터 자동 업데이트
+└── package.json
+```
+
+---
+
+## 2. package.json 차이점
+
+### 추가된 의존성
+
+| 패키지 | 용도 |
+|--------|------|
+| `@docusaurus/theme-mermaid` | Mermaid 다이어그램 지원 |
+| `@giscus/react` | GitHub Discussions 기반 댓글 시스템 |
+| `glob` | 파일 패턴 매칭 (스크립트용) |
+| `gray-matter` | Markdown 프론트매터 파싱 |
+| `rehype-katex` | LaTeX 수식 렌더링 |
+| `remark-math` | 수학 문법 파싱 |
+| `fs-extra` (devDep) | 확장된 파일 시스템 유틸리티 |
+
+### 추가된 NPM 스크립트
+
+```json
+{
+  "scripts": {
+    "copy-images": "node scripts/copy-images.js",
+    "update-fm": "node scripts/update-frontmatter.js",
+    "prestart": "npm run copy-images && npm run update-fm",
+    "prebuild": "npm run copy-images && npm run update-fm"
+  }
+}
+```
+
+- `prestart/prebuild`: 개발/빌드 전 자동으로 이미지 복사 및 프론트매터 업데이트 실행
+
+---
+
+## 3. docusaurus.config.js 차이점
+
+### 3.1 기본 설정 변경
+
+| 항목 | 기본값 | 현재 값 |
+|------|--------|---------|
+| `title` | `'My Site'` | `'Pipes\' Blog'` |
+| `tagline` | `'Dinosaurs are cool'` | `'Cloud, DevOps 관련 기록을 남깁니다.'` |
+| `url` | `'https://your-docusaurus-site.example.com'` | `'https://blog.sonhs.com'` |
+| `i18n.defaultLocale` | `'en'` | `'ko'` |
+
+### 3.2 Mermaid 다이어그램 지원 (신규)
+
+```js
+markdown: {
+  mermaid: true,
+},
+themes: ['@docusaurus/theme-mermaid'],
+```
+
+### 3.3 Docs 설정 변경
+
+```js
+docs: {
+  routeBasePath: '/',  // docs가 루트 페이지가 됨 (기본: '/docs')
+  remarkPlugins: [require('remark-math')],   // LaTeX 수식
+  rehypePlugins: [require('rehype-katex')],  // LaTeX 렌더링
+}
+```
+
+- 기본 Docusaurus는 `/docs`에서 문서가 시작되지만, 현재 프로젝트는 `/`에서 바로 문서가 표시됨
+
+### 3.4 Google Analytics 추가 (신규)
+
+```js
+gtag: {
+  trackingID: 'G-Q9GGC935DY',
+  anonymizeIP: true,
+}
+```
+
+### 3.5 Algolia 검색 추가 (신규)
+
+```js
+algolia: {
+  appId: 'CY65KO6RH6',
+  apiKey: '350cd5efedaa3c8e59890af4244fdbe7',
+  indexName: 'my_blog_crawler_pages',
+  contextualSearch: false,
+}
+```
+
+### 3.6 Navbar 변경
+
+**기본:**
+- Tutorial 링크
+- Blog 링크
+- Facebook Docusaurus GitHub 링크
+
+**현재:**
+- Blog 링크 (`/`)
+- 개인 GitHub 링크 (Son-Hunseo)
+
+### 3.7 Footer 간소화
+
+**기본:**
+- Docs, Community, More 섹션
+- Stack Overflow, Discord, X 링크
+- Copyright 표시
+
+**현재:**
+- Docs, More 섹션만 유지
+- Community 섹션 제거
+- Copyright 제거
+
+### 3.8 Color Mode 설정
+
+```js
+colorMode: {
+  defaultMode: 'dark',           // 기본 다크모드
+  disableSwitch: false,
+  respectPrefersColorScheme: false,  // 시스템 설정 무시
+}
+```
+
+### 3.9 추가 언어 지원 (Prism)
+
+```js
+prism: {
+  additionalLanguages: ['java', 'bash', 'markup', 'sql'],
+}
+```
+
+### 3.10 커스텀 플러그인
+
+```js
+plugins: [
+  './plugins/gather-meta-plugin.js',
+]
+```
+
+---
+
+## 4. 커스텀 플러그인
+
+### 4.1 gather-meta-plugin.js
+
+**목적:** 모든 문서의 메타데이터를 수집하여 전역 데이터로 제공
+
+**기능:**
+- 모든 `.md`/`.mdx` 파일 스캔
+- 프론트매터에서 제목, 설명, 태그, 이미지, 날짜 추출
+- URL 경로 자동 생성 (숫자 프리픽스 제거)
+- 카테고리 경로별 그룹화
+
+**제공 데이터:**
+```js
+{
+  recentPosts: [...],    // 모든 포스트 배열
+  postsByPath: {...}     // 경로별 포스트 그룹
+}
+```
+
+**사용처:**
+- `SelectedPosts.js` - 선택된 포스트 표시
+- `RandomPosts.js` - 랜덤 포스트 표시
+- `CategoryPosts.js` - 카테고리별 포스트 표시
+
+---
+
+## 5. 커스텀 스크립트
+
+### 5.1 copy-images.js
+
+**목적:** `docs/*/assets/` 폴더의 이미지를 `static/img/`로 복사
+
+**왜 필요한가:**
+- Docusaurus는 `static/` 폴더 내 파일만 정적 자산으로 서빙함
+- 문서 작성 시 `docs/01-Kubernetes/assets/pod.png`처럼 문서 옆에 이미지를 두는 게 편리함
+- 빌드 시 이를 `static/img/Kubernetes/pod.png`로 복사하여 웹에서 접근 가능하게 만듦
+
+**동작 흐름:**
+1. `docs/` 폴더를 재귀 탐색
+2. `assets` 폴더 발견 시 이미지 파일(jpg, png, gif, svg, webp)만 복사
+3. 경로에서 숫자 프리픽스 제거 (`01-Kubernetes` → `Kubernetes`)
+4. `static/img/`로 복사
+
+**예시:**
+```
+docs/01-Kubernetes/assets/pod.png → static/img/Kubernetes/pod.png
+```
+
+### 5.2 update-frontmatter.js
+
+**목적:** Markdown 파일의 프론트매터 자동 관리 (매번 수동 작성 번거로움 해결)
+
+3단계로 나뉘어 동작:
+
+#### 1단계: 썸네일 이미지 자동 설정
+
+프론트매터에 `image`가 없으면:
+1. 본문에서 첫 번째 이미지 찾기 (마크다운 `![]()` 또는 HTML `<img>`)
+2. 없으면 `DEFAULT_IMAGES` 맵에서 카테고리별 기본 이미지 사용
+3. 상대 경로 이미지는 `/img/카테고리/파일명` 형태로 변환
+
+```js
+const DEFAULT_IMAGES = {
+  'Kubernetes': '/img/default/kubernetes.png',
+  'Docker': '/img/default/docker.png',
+  'Openstack': '/img/default/openstack.png',
+  // ...
+};
+```
+
+#### 2단계: sidebar_class_name 주입
+
+- `index.md(x)` 제외한 모든 문서에 `sidebar_class_name: hidden-sidebar-item` 추가
+- CSS에서 이 클래스가 `display: none`으로 처리되어 사이드바에서 숨겨짐
+- **결과:** 사이드바에 카테고리(index)만 표시되고, 개별 글은 숨김
+
+#### 3단계: index 파일 pagination 설정
+
+- 모든 `index.md(x)` 파일에:
+  - `pagination_prev: null`
+  - `pagination_next: null`
+- **결과:** index 페이지에서 "이전/다음 글" 네비게이션 제거
+
+#### YAML 문법 오류 수정
+
+- 중복 `---` 구분자 자동 수정
+
+---
+
+## 6. 커스텀 컴포넌트
+
+### 6.1 GiscusComponent.js
+
+**목적:** GitHub Discussions 기반 댓글 시스템
+
+```jsx
+<Giscus
+  repo="Son-Hunseo/blog"
+  category="Q&A"
+  mapping="pathname"
+  theme={colorMode}  // 다크/라이트 모드 자동 전환
+  lang="ko"
+/>
+```
+
+### 6.2 SelectedPosts.js
+
+**목적:** 홈페이지에 수동 선택한 포스트 표시
+
+```js
+const SELECTED_POST_IDS = [
+  'AI/Claude-Code-Tips',
+  'Kubernetes/CKA/Exam/Exam-Recap-2',
+  // ...
+];
+```
+
+### 6.3 RandomPosts.js
+
+**목적:** 전체 포스트 중 랜덤 10개 표시
+
+- Fisher-Yates 셔플 알고리즘 사용
+- 카드 형태 UI로 표시
+
+### 6.4 CategoryPosts.js
+
+**목적:** 현재 카테고리의 포스트 목록 표시
+
+- URL 경로 기반 자동 필터링
+- index 페이지 제외
+
+### 6.5 SimpleDocList.js
+
+**목적:** 단순한 문서 목록 표시
+
+---
+
+## 7. 테마 오버라이드 (Swizzling)
+
+### 7.1 DocItem/Layout/index.js
+
+**변경 내용:**
+- 문서 상단에 날짜 표시 추가
+- 문서 하단에 Giscus 댓글 추가
+
+```jsx
+export default function LayoutWrapper(props) {
+  return (
+    <>
+      <DocDate />           {/* 날짜 표시 */}
+      <Layout {...props} />
+      <GiscusComponent />   {/* 댓글 */}
+    </>
+  );
+}
+```
+
+### 7.2 DocCard/index.js
+
+**변경 내용:**
+- 카테고리 카드에 하위 항목 총 개수 표시
+- 재귀적으로 모든 하위 문서 카운트
+
+```js
+const countItemsRecursive = (items) => {
+  let count = 0;
+  items?.forEach((item) => {
+    if (item.type === 'category') {
+      count += countItemsRecursive(item.items);
+    } else if (item.type === 'link') {
+      count += 1;
+    }
+  });
+  return count;
+};
+```
+
+### 7.3 DocSidebar/index.js
+
+**변경 내용:**
+- 사이드바 카테고리에 글 개수 표시
+- 예: `Kubernetes (13)`, `CKA (12)`
+
+```js
+const addCountToItems = (items) => {
+  return items?.map(item => {
+    if (item.type === 'category') {
+      const itemCount = countItems(item.items);
+      return {
+        ...item,
+        label: `${item.label} (${itemCount})`,
+        items: addCountToItems(item.items)
+      };
+    }
+    return item;
+  });
+};
+```
+
+---
+
+## 8. CSS 커스터마이징
+
+### 8.1 KaTeX 지원
+
+```css
+@import "katex/dist/katex.min.css";
+```
+
+### 8.2 사이드바 아이템 숨김
+
+```css
+.hidden-sidebar-item {
+  display: none !important;
+}
+```
+
+- `update-frontmatter.js`와 함께 사용
+- index 파일만 사이드바에 표시
+
+### 8.3 Algolia 검색 하이라이트
+
+```css
+/* 검색 팝업 */
+.DocSearch-Hit mark {
+  background-color: #fff566 !important;
+  color: #000000 !important;
+}
+
+/* 검색 결과 페이지 */
+[class^="searchResultItem"] em {
+  background-color: #fff566 !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+```
+
+### 8.4 홈페이지 히어로 섹션
+
+```css
+.heroSection {
+  padding: 1.5rem 0 0.5rem 0 !important;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+}
+
+.heroSubtitle {
+  font-family: var(--ifm-font-family-monospace);
+}
+
+/* 타이핑 커서 애니메이션 */
+.typewriterCursor {
+  animation: typewriterBlink 1s infinite;
+}
+```
+
+---
+
+## 9. 랜딩 페이지 차이
+
+### 기본 Docusaurus
+
+- `src/pages/index.js` 사용
+- `HomepageFeatures` 컴포넌트로 3개 피처 카드 표시
+- Hero 배너 + 버튼
+
+### 현재 프로젝트
+
+- `src/pages/` 디렉토리 없음
+- `docs/index.mdx`가 `/` 경로로 서빙
+- MDX 내 React 컴포넌트 사용
+  - 타이핑 애니메이션 효과
+  - `SelectedPosts` 컴포넌트로 추천 글 표시
+
+```mdx
+<header className="heroSection">
+  <h1 className="heroTitle">Pipes' Blog</h1>
+  <TypewriterText />
+</header>
+
+## 추천 글
+<SelectedPosts />
+```
+
+---
+
+## 10. 파일별 변경 요약
+
+| 파일 | 상태 | 설명 |
+|------|------|------|
+| `docusaurus.config.js` | 수정 | 한국어, Algolia, Analytics, Mermaid, LaTeX 등 |
+| `sidebars.js` | 동일 | 자동 생성 사용 |
+| `src/css/custom.css` | 확장 | KaTeX, 검색 하이라이트, 홈페이지 스타일 |
+| `src/pages/` | 삭제 | docs/index.mdx로 대체 |
+| `src/components/` | 신규 | 5개 커스텀 컴포넌트 |
+| `src/theme/` | 신규 | 3개 테마 오버라이드 |
+| `plugins/` | 신규 | gather-meta-plugin.js |
+| `scripts/` | 신규 | copy-images.js, update-frontmatter.js |
+
+---
+
+## 11. 개발 시 참고사항
+
+### 새 문서 추가 시
+
+1. `docs/` 하위에 `.md` 또는 `.mdx` 파일 생성
+2. 이미지는 같은 폴더의 `assets/`에 저장
+3. `npm start` 실행 시 자동으로:
+   - 이미지가 `static/img/`로 복사됨
+   - 프론트매터에 `image`, `sidebar_class_name` 자동 추가
+
+### 추천 글 변경 시
+
+`src/components/SelectedPosts.js`의 `SELECTED_POST_IDS` 배열 수정
+
+### 카테고리 기본 이미지 추가 시
+
+`scripts/update-frontmatter.js`의 `DEFAULT_IMAGES` 객체에 추가
