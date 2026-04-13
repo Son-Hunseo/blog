@@ -1,15 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: External Etcd 토폴로지 (HA)
 description: 쿠버네티스 고가용성을 위한 External Etcd 토폴로지 완벽 가이드. Raft 프로토콜의 리더 선출 원리부터 쿼럼(Quorum) 계산법, 홀수 노드 구성의 이유 및 실제 설치/설정 방법까지 상세히 설명합니다.
-keywords:
-  - etcd
-  - External Etcd
-  - RAFT Protocol
-  - Quorum
-  - HA 구성
-  - Etcd HA
 ---
+
 ---
 ## External Etcd 토폴로지
 ### ETCD 특징

@@ -1,12 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Taints, Tolerations
 description: Kubernetes의 Taints와 Tolerations 개념, 적용 방법, Taint 효과(NoSchedule·PreferNoSchedule·NoExecute) 차이, GPU 노드 활용 전략까지 한 번에 정리한 실전 가이드입니다. Pod 스케줄링 제어가 필요한 엔지니어에게 필수 개념을 쉽게 설명합니다.
-keywords:
-  - Kubernetes Taints Tolerations
-  - Kubernetes Pod Scheduling
-  - NoSchedule NoExecute 설명
 ---
+
 ---
 ## Taints, Tolerations
 ### 개념

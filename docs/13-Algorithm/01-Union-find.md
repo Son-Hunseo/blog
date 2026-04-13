@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: 서로소 집합
 description: Union-Find 자료구조를 활용한 서로소 집합(Disjoint Set) 구현과 경로 압축, 랭크 최적화 기법을 다룹니다
-keywords:
-  - 서로소 집합
-  - Union-Find
-  - Disjoint Set
-  - 경로 압축
-  - 자료구조
 ---
+
 ---
 ## 서로소 집합 - 기본
 

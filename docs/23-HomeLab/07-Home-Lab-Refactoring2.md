@@ -1,13 +1,8 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: "[홈랩 리팩토링 - 2] Jenkins to Github Action"
 description: Jenkins에서 Github Action으로 CI/CD 파이프라인을 마이그레이션한 과정을 설명합니다. 셀프 호스팅 비용, 관리 복잡성, 환경 요구사항을 비교 분석하고, ECR 푸시 및 ArgoCD 연동 워크플로우를 구현한 방법을 다룹니다.
-keywords:
-  - Jenkins Github Action 마이그레이션
-  - CI/CD 파이프라인
-  - AWS ECR 푸시
-  - ArgoCD GitOps
-  - Github Action 워크플로우
 ---
 
 ---

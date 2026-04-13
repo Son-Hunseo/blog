@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Service Account
 description: 쿠버네티스 ServiceAccount의 개념, 동작 원리, 인증 방식(JWT 토큰), Pod 할당 방법 및 최신 버전별(v1.24+) 토큰 관리 변화를 상세히 설명합니다. 애플리케이션이나 봇이 쿠버네티스 API와 안전하게 통신하기 위한 ServiceAccount의 생성과 외부 접속용 토큰 발급(kubectl create token) 방법을 다룹니다.
-keywords:
-  - Kubernetes
-  - 쿠버네티스
-  - ServiceAccount
-  - ServiceAccount 토큰
-  - kubectl create token
 ---
+
 ---
 ## Service Account
 ### 개념

@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: 쿠버네티스 인증서 문제 해결 체크리스트
 description: Kubeadm으로 구축된 쿠버네티스(Kubernetes) 클러스터의 인증서 오류 해결 가이드. 인증서 경로 확인, OpenSSL을 이용한 만료일 및 SAN 검증, 런타임 로그 분석 등 트러블슈팅의 핵심 절차를 정리했습니다.
-keywords:
-  - 쿠버네티스
-  - Kubernetes
-  - 인증서 갱신
-  - Kubernetes 인증서 문제 해결
-  - Kubernetes Certificate Trouble Shooting
 ---
+
 ---
 :::info
 - 본인이 새로운 팀에 합류하였고, 마주한 업무가 인증서에서 생긴 문제를 해결해야한다고 가정하자.

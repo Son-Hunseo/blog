@@ -1,16 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Scheduler Profile
 description: Kubernetes 1.18+에서 도입된 Scheduler Profile을 통해 Multi Scheduler의 운영 복잡도와 Race Condition 위험을 해결하는 방법을 알아보세요. Pod가 스케줄링되는 Filtering, Scoring, Binding 등 핵심 단계와 각 단계에 적용되는 Plugin 및 Extension Point를 상세히 비교하고, 단일 스케줄러 내에서 다양한 스케줄링 정책을 관리하는 모범 사례를 이해할 수 있습니다.
-keywords:
-  - Kubernetes Scheduler Profile
-  - Kubernetes Scheduling Framework
-  - Kubernetes 스케줄링 플러그인
-  - Extension Points
-  - Filtering
-  - Scoring
-  - Pod Binding API
 ---
+
 ---
 ## Scheduler Profile
 ### Multi Scheduler 방식의 문제점

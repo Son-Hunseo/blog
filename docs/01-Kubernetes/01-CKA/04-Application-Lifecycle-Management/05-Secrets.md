@@ -1,15 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Secrets
 description: Kubernetes에서 민감한 정보(DB 접속 정보 등)를 안전하게 관리하고 Pod에 주입하는 방법을 배우세요. 일반 텍스트의 ConfigMap 대신, Secret 객체를 사용해야 하는 이유(RBAC, Encryption at Rest 등)와 함께, 명령형/선언적 방식으로 Secret을 생성하고, 이를 환경 변수 또는 볼륨 마운트 형태로 Pod에 삽입하는 YAML 예시와 실습 명령어를 상세히 설명합니다.
-keywords:
-  - Kubernetes
-  - Secret
-  - ConfigMap vs Secret
-  - Encryption at Rest
-  - 민감 정보 관리
-  - 노드 레벨 보안
 ---
+
 ---
 ## 개념
 

@@ -1,18 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Ubuntu/Debian WOL(Wake-On-LAN) 설정하기
 description: MSI 메인보드와 Ubuntu/Debian에서 Wake-on-LAN(WOL)을 설정하는 방법을 정리했습니다. BIOS 설정부터 ethtool, systemd 서비스 등록, 공유기 설정까지 간단히 안내합니다.
-keywords:
-  - WOL
-  - Wake On LAN
-  - MSI
-  - Ubuntu
-  - Debian
-  - ethtool
-  - BIOS
-  - 원격 부팅
-  - 홈서버 구축
 ---
+
 ---
 :::info
 WOL의 경우 pc가 한 번 이상 켰던 상태여야한다. 왜냐하면 WOL의 경우 S5상태(전원은 종료, 네트워크 카드에 대기 전력은 공급되는 상태)이어야 작동하는데, 한 번도 켜지지 않았던 pc의 경우 G3상태(모든 전력이 차단된 상태)이기 때문이다.

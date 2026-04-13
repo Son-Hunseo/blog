@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Helm 명령어
 description: Helm의 핵심 CLI 명령어를 한눈에 확인하세요. 레포지토리 추가부터 차트 검색, values.yaml 추출 및 사용자 정의 설치, 배포된 릴리즈 관리까지 쿠버네티스 패키지 관리에 꼭 필요한 필수 명령어 가이드를 제공합니다.
-keywords:
-  - Helm 명령어
-  - Helm CLI
-  - Helm 사용법
-  - helm install
-  - helm upgrade rollback
 ---
+
 ---
 ## Helm 주요 CLI 명령어
 ### Help

@@ -1,14 +1,10 @@
 ﻿---
+sidebar_class_name: hidden-sidebar-item
 date: 2026-01-18
 title: Node 네트워크
 description: 쿠버네티스(Kubernetes) 클러스터 구성을 위한 필수 네트워크 설정 가이드입니다. 마스터 및 워커 노드의 포트 요구사항, 호스트네임 및 MAC 주소 중복 주의사항, 그리고 ip, netstat 등 실무 및 CKA 시험에 자주 출현하는 네트워크 디버깅 명령어를 정리했습니다.
-keywords:
-  - 쿠버네티스 네트워크 설정
-  - 마스터 노드 포트
-  - 워커 노드 포트
-  - 쿠버네티스 호스트 네임 중복
-  - 쿠버네티스 맥주소 중복
 ---
+
 ---
 ## Node 네트워크
 ### 모든 노드 공통
