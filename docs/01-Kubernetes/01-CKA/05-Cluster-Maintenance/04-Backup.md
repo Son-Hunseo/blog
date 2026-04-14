@@ -32,9 +32,7 @@ kubectl get all --all-namespaces -o yaml > all-resource.yaml
 - 이에 Kubernetes API 기반으로 전체 리소스를 백업하고 복구하는 솔루션인 `Velero`(구. ARK)를 사용한다.
 - 스케줄링 백업을 지원한다.
 
-:::tip
-CSP 쿠버네티스 클러스터(EKS, GKE)의 경우 `etcd`에 직접 접근할 수 없으므로 `Velero`와 같은 솔루션을 사용하는 등의 API 서버 기반 백업을 사용한다.
-:::
+> [!tip] CSP 쿠버네티스 클러스터(EKS, GKE)의 경우 `etcd`에 직접 접근할 수 없으므로 `Velero`와 같은 솔루션을 사용하는 등의 API 서버 기반 백업을 사용한다.
 
 ---
 ## 백업 대상2: ETCD
@@ -119,9 +117,7 @@ mv /etc/kubernetes/manifests/kube-apiserver.yaml.bak /etc/kubernetes/manifests/k
 - `ETCD` 백업이 가장 확실하고 빠르게 복구 가능하다.
 - 리소스 구성 파일도 Git과 같은 방법으로 저장해두면 더 좋다.
 
-:::tip
-추가적으로 `PersistentVolume`을 사용한다면 해당 볼륨도 백업해야한다.
-:::
+> [!tip] 추가적으로 `PersistentVolume`을 사용한다면 해당 볼륨도 백업해야한다.
 
 ---
 ## 레퍼런스

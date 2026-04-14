@@ -24,9 +24,7 @@ description: 컨테이너 네트워크 표준인 CNI(Container Network Interface
 ---
 ## CNI 스펙
 
-:::info
-명확한 정보는 공식 문서(https://www.cni.dev/docs/spec/) 참조
-:::
+> [!info] 명확한 정보는 공식 문서(https://www.cni.dev/docs/spec/) 참조
 
 ### 컨테이너 런타임의 역할
 

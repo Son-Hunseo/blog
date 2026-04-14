@@ -33,10 +33,8 @@ description: Claude Code의 사용법과 주요 기능을 상세히 설명합니
 	- 검증 후 커밋하고 PR을 생성합니다
 	- (Normal Mode) `"commit with a descriptive message and open a PR"`
 
-:::tip
-내가 이전에 사용하지 않았던 기능
--> `/rewind` 기존에 작성되었던 코드가 사라질까봐 커밋을 하고 시도해보고 아니면 커밋을 없애는 식으로 했었는데 앞으로는 과감하게 시도하고 `/rewind`를 사용하자.
-:::
+> [!tip] 내가 이전에 사용하지 않았던 기능
+> -> `/rewind` 기존에 작성되었던 코드가 사라질까봐 커밋을 하고 시도해보고 아니면 커밋을 없애는 식으로 했었는데 앞으로는 과감하게 시도하고 `/rewind`를 사용하자.
 
 ---
 ## Claude.md
@@ -55,9 +53,7 @@ description: Claude Code의 사용법과 주요 기능을 상세히 설명합니
 
 ### 작성 팁
 
-:::tip
-결국 간결함이 핵심. 안적어도 AI가 알아서 할거같은 정보는 작성하지 않는다. -> 너무 길면 오히려 성능 저하
-:::
+> [!tip] 결국 간결함이 핵심. 안적어도 AI가 알아서 할거같은 정보는 작성하지 않는다. -> 너무 길면 오히려 성능 저하
 
 | ✓ 포함해야 할 것 | ✕ 제외해야 할 것 |
 |---|---|
@@ -95,12 +91,10 @@ description: Claude Code의 사용법과 주요 기능을 상세히 설명합니
 ## Context
 ### 관리 전략
 
-:::tip
-`Claude.md`를 불필요하게 길게 작성하는 것이 성능을 저하시키는 것 처럼. Context가 너무 길어지면(하나의 대화 세션이 너무 길어지는) 성능이 저하된다.
--> LLM은 Context(대화 세션)이 너무 길어지면 성능이 저하된다.
-
-LLM 성능은 컨텍스트가 차면서 저하된다. 컨텍스트 윈도우는 당신이 관리해야 할 가장 중요한 리소스다. (Anthropic 공식 Best Practices)
-:::
+> [!tip] `Claude.md`를 불필요하게 길게 작성하는 것이 성능을 저하시키는 것 처럼. Context가 너무 길어지면(하나의 대화 세션이 너무 길어지는) 성능이 저하된다.
+> -> LLM은 Context(대화 세션)이 너무 길어지면 성능이 저하된다.
+>
+> LLM 성능은 컨텍스트가 차면서 저하된다. 컨텍스트 윈도우는 당신이 관리해야 할 가장 중요한 리소스다. (Anthropic 공식 Best Practices)
 
 | 명령어                 | 기능           | 사용 시점                           |
 | ------------------- | ------------ | ------------------------------- |
@@ -114,11 +108,9 @@ LLM 성능은 컨텍스트가 차면서 저하된다. 컨텍스트 윈도우는 
 
 ### cf) HANDOFF.md
 
-:::tip
-**Handoff 패턴**
-- 아직 해당 작업이 마무리 되지 않았는데 성능 개선을 위한 Context를 초기화하고 싶을 경우 필요한 정보만 넘기는 `HANDOFF.md`를 작성해서 다음 세션에 필요 정보를 이어줄 수 있다.
-- 프롬프트: `"Put the rest of the plan in HANDOFF.md. Explain what you tried, what worked, what didn't."`
-:::
+> [!tip] **Handoff 패턴**
+> - 아직 해당 작업이 마무리 되지 않았는데 성능 개선을 위한 Context를 초기화하고 싶을 경우 필요한 정보만 넘기는 `HANDOFF.md`를 작성해서 다음 세션에 필요 정보를 이어줄 수 있다.
+> - 프롬프트: `"Put the rest of the plan in HANDOFF.md. Explain what you tried, what worked, what didn't."`
 
 ---
 ## 프롬프팅 기법
@@ -229,11 +221,9 @@ description: 종합 보안 리뷰 실행
 ---
 ## SubAgent
 
-:::warning
-`skills`와 `subagent`의 차이
-- `skills` = 메인 에이전트의 컨텍스트에 특정 기능을하는 `skill`을 추가합니다. (Main Context 내부에서)
-- `subagent` = Main Context를 유지하고 별도의 Context에서 병렬적으로 특정 기능을 수행하기위해 사용됩니다. (별도의 Context에서 작업)
-:::
+> [!warning] `skills`와 `subagent`의 차이
+> - `skills` = 메인 에이전트의 컨텍스트에 특정 기능을하는 `skill`을 추가합니다. (Main Context 내부에서)
+> - `subagent` = Main Context를 유지하고 별도의 Context에서 병렬적으로 특정 기능을 수행하기위해 사용됩니다. (별도의 Context에서 작업)
 
 ### 정의 방법
 
@@ -299,11 +289,9 @@ Tab 3: claude --worktree feature-ui
 ---
 ## Agent Teams
 
-:::warning
-Agent Teams는 실험적 기능으로 기본 비활성화입니다. 세션 재개, 태스크 조율, 종료 동작에 알려진 제한이 있습니다. 같은 파일 편집, 순차적 작업, 의존성이 많은 작업에는 단일 세션이나 서브에이전트가 더 효과적입니다.
-
--> 나도 개인적으로 아직 이 기능을 신뢰하지 않아서 사용하지 않는다. 나중에 실험적 기능에서 안정적인 기능으로 업데이트가 되면 적극 사용해볼 예정
-:::
+> [!warning] Agent Teams는 실험적 기능으로 기본 비활성화입니다. 세션 재개, 태스크 조율, 종료 동작에 알려진 제한이 있습니다. 같은 파일 편집, 순차적 작업, 의존성이 많은 작업에는 단일 세션이나 서브에이전트가 더 효과적입니다.
+>
+> -> 나도 개인적으로 아직 이 기능을 신뢰하지 않아서 사용하지 않는다. 나중에 실험적 기능에서 안정적인 기능으로 업데이트가 되면 적극 사용해볼 예정
 
 ### 정의
 

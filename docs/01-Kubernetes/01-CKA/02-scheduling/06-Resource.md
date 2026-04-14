@@ -66,10 +66,8 @@ spec:
 	- Kubernetes는 메모리를 스로틀링할 수 없음
 	- 지속적으로 `limits` 초과시 OOMKill(Out of Memory) 발생 -> `Pod` 재시작 됨
 
-:::tip
-`memory`의 `limits` 때문에 OOM이 발생한다면, `memory`의 `limits`를 걸지 않으면 되는거 아닌가?
--> 꼭 그런 것은 아니다. `memory`의 `limits`는 일종의 안전장치 역할을 한다. 이러한 `limits`를 걸면서 `Pod` 하나를 재시작함으로써 전체 `Node`의 메모리가 부족해 `Node` 전체가 다운되는 상황을 막는 것이다.
-:::
+> [!tip] `memory`의 `limits` 때문에 OOM이 발생한다면, `memory`의 `limits`를 걸지 않으면 되는거 아닌가?
+> -> 꼭 그런 것은 아니다. `memory`의 `limits`는 일종의 안전장치 역할을 한다. 이러한 `limits`를 걸면서 `Pod` 하나를 재시작함으로써 전체 `Node`의 메모리가 부족해 `Node` 전체가 다운되는 상황을 막는 것이다.
 
 ### Yaml
 

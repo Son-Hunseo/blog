@@ -108,9 +108,7 @@ WHERE e.employee_id = 100; -- 일반 조건
 
 ![join2](assets/join2.png)
 
-:::tip
-MySQL에는 `FULL OUTER JOIN`이 없기 때문에, `LEFT OUTER JOIN` 이후 `RIGHT OUTER JOIN`을 하는 방법을 사용한다.
-:::
+> [!tip] MySQL에는 `FULL OUTER JOIN`이 없기 때문에, `LEFT OUTER JOIN` 이후 `RIGHT OUTER JOIN`을 하는 방법을 사용한다.
 
 ### LEFT OUTER JOIN
 

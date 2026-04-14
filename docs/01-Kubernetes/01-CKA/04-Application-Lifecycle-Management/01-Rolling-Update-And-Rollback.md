@@ -6,15 +6,13 @@ description: 쿠버네티스(Kubernetes) Deployment Rollout의 핵심 개념과 
 ---
 
 ---
-:::warning
-헷갈렸던 용어 정리
-
-**Rollout**
-- 일반적으로 새로운 소프트웨어 버전, 기능, 시스템 전체를 배포하는 과정 전체를 의미하는 '포괄적인' 용어
-
-**Rolling Update**
-- 서비스 중단 없이 애플리케이션의 새로운 버전을 배포하는 '특정 Rollout 전략'
-:::
+> [!warning] 헷갈렸던 용어 정리
+>
+> **Rollout**
+> - 일반적으로 새로운 소프트웨어 버전, 기능, 시스템 전체를 배포하는 과정 전체를 의미하는 '포괄적인' 용어
+>
+> **Rolling Update**
+> - 서비스 중단 없이 애플리케이션의 새로운 버전을 배포하는 '특정 Rollout 전략'
 
 ## Deployment Rollout 과정
 

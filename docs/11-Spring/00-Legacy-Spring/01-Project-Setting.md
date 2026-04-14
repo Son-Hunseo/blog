@@ -172,9 +172,7 @@ public class HelloMain {
 
 - 위 파일을 실행하면 `안녕하세요!`가 출력되고, `context.getBean("kor");`을 `context.getBean("eng");`로 바꾸면 `Hello!`가 출력된다.
 
-:::info
-현재는 웹이 아닌 `Spring Core`를 추가하고 스프링 컨테이너만 사용하는 즉, 웹서버를 사용하지 않는 상태이다.
-:::
+> [!info] 현재는 웹이 아닌 `Spring Core`를 추가하고 스프링 컨테이너만 사용하는 즉, 웹서버를 사용하지 않는 상태이다.
 
 ### Spring MVC
 

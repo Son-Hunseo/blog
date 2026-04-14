@@ -86,17 +86,15 @@ status:
 	- 만약 `Local File`의 삭제된 필드가 있다면, `Last Applied Configuration`에는 존재할 것이다. 그렇다면 `apply`시 `Live Object Configuration`에서 해당 필드가 삭제될 것이다.
 	- 이후 `Last Applied Configuration`에서도 삭제된 것이 업데이트 된다.
 
-:::info
-'삭제' 부분에서 잘 이해가 되지 않을 수 있다. (그냥 `Local File`에 없고 `Live Object Configuration`에 있는 필드는 삭제해버리면 되잖아 라는 의문이 들 수 있다)
-
-하지만, 그렇게 되면 Kubernetes 입장에서는 그게 '사용자가 삭제한 필드인지', '시스템이 알아서 추가한 필드인지'를 구분할 수 없다.
-
-예를들어 `Live Object Configuration`에는 `status` 필드나 `metadata.creationTimestamp`와 같은 필드도 존재한다. 이는 Kubernetes가 `apply`를 했을 때 자동으로 붙인 요소들이다.
-
-만약 `Last Applied Configuration`이 없다면, 이러한 시스템이 관리하는 필드까지 삭제될 것이다.
-
-이때문에, Kubernetes는 '사용자가 추가한 필드인지', '시스템이 추가한 필드인지'를 판단할 기준이 필요하고, 그 기준이 바로 `Last Applied Configuration`이다.
-:::
+> [!info] '삭제' 부분에서 잘 이해가 되지 않을 수 있다. (그냥 `Local File`에 없고 `Live Object Configuration`에 있는 필드는 삭제해버리면 되잖아 라는 의문이 들 수 있다)
+>
+> 하지만, 그렇게 되면 Kubernetes 입장에서는 그게 '사용자가 삭제한 필드인지', '시스템이 알아서 추가한 필드인지'를 구분할 수 없다.
+>
+> 예를들어 `Live Object Configuration`에는 `status` 필드나 `metadata.creationTimestamp`와 같은 필드도 존재한다. 이는 Kubernetes가 `apply`를 했을 때 자동으로 붙인 요소들이다.
+>
+> 만약 `Last Applied Configuration`이 없다면, 이러한 시스템이 관리하는 필드까지 삭제될 것이다.
+>
+> 이때문에, Kubernetes는 '사용자가 추가한 필드인지', '시스템이 추가한 필드인지'를 판단할 기준이 필요하고, 그 기준이 바로 `Last Applied Configuration`이다.
 
 ---
 ## 주의할 점

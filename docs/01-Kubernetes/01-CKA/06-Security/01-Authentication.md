@@ -51,9 +51,7 @@ description: Kubernetes 인증(Authentication)의 기본 개념과 작동 원리
 ---
 ## 예시 - Static Token File (For 이해, 권장 X)
 
-:::info
-이 글에서는 Authentication 이해를 위한 가장 쉬운 예시인 `Static Token File` 방법을 소개한다. (토큰이 plain text 그대로 저장되기 때문에 보안상 권장 x) 권장되는 User 인증 방법인 `Certificate`와 객체 끼리의 인증 방법인 `Service Account`는 다른 글에서 자세히 다룬다.
-:::
+> [!info] 이 글에서는 Authentication 이해를 위한 가장 쉬운 예시인 `Static Token File` 방법을 소개한다. (토큰이 plain text 그대로 저장되기 때문에 보안상 권장 x) 권장되는 User 인증 방법인 `Certificate`와 객체 끼리의 인증 방법인 `Service Account`는 다른 글에서 자세히 다룬다.
 
 ### In Kubernetes Cluster
 
