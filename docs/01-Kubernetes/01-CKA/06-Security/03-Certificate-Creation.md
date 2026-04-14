@@ -36,7 +36,7 @@ openssl req -new -key ca.key -subj "/CN=KUBERNETES-CA" -out ca.csr
 openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt
 ```
 
-- 클러스터의 CA인증서는 자신의 개인키로 <span style={{color: 'red'}}>Self-signed</span> 된다.
+- 클러스터의 CA인증서는 자신의 개인키로 <span class="t-red">Self-signed</span> 된다.
 - 권장되는 위치
 	- 아래 경로 위치들은 일반적인 위치이고, 경로들이 필요한 각 컴포넌트의 `Static Pod` 매니페스트 파일에서 지정할 수 있다.
 	- `ca.key`: `/etc/kubernetes/pki/`(마스터 노드)

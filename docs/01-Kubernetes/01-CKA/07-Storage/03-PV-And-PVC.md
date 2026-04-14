@@ -66,7 +66,7 @@ spec:
 
 - 사용자가 스토리를 요청하는 객체 (PV - 자원, PVC - 요청서)
 - Namespace-scoped 리소스이다.
-- <span style={{color: 'red'}}>PV와 PVC는 1 : 1 관계로 바인딩 된다.</span>
+- <span class="t-red">PV와 PVC는 1 : 1 관계로 바인딩 된다.</span>
 - PV에서 PVC와 바인딩 된 이후 남는 용량이 있다고 하더라도 다른 PVC가 사용할 수 없다.
 	- ex: PVC에서 1기가 요청하더라도 할당된 PV가 2기가라면 PVC에는 2기가가 할당된다.
 
