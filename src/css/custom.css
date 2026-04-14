@@ -34,6 +34,40 @@
 
 
 /* ============================================================================
+ * 1-2. Obsidian 콜아웃 스타일 (rehype-callouts)
+ * ============================================================================
+ *
+ * 옵시디언 콜아웃 문법을 도큐사우루스에서 사용하기 위한 CSS
+ *
+ * 사용 예시:
+ * > [!note] 제목
+ * > 내용
+ *
+ * 관련 설정:
+ * - docusaurus.config.js의 rehypePlugins: rehype-callouts
+ */
+@import "rehype-callouts/theme/obsidian";
+
+/* rehype-callouts 다크모드 호환
+ * rehype-callouts는 .dark 클래스를 사용하지만
+ * 도큐사우루스는 [data-theme='dark']를 사용하므로 매핑 필요
+ */
+[data-theme='dark'] .callout {
+  mix-blend-mode: lighten;
+  background-color: rgb(from var(--rc-color-dark, var(--rc-color-default)) r g b / 0.1);
+}
+
+[data-theme='dark'] .callout-title {
+  color: var(--rc-color-dark, var(--rc-color-default));
+}
+
+/* 콜아웃 제목과 내용 사이 간격 */
+.callout-content {
+  margin-top: 0.5em;
+}
+
+
+/* ============================================================================
  * 2. Infima 색상 변수 오버라이드
  * ============================================================================
  *

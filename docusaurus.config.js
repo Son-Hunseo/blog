@@ -5,6 +5,7 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
+import rehypeCallouts from 'rehype-callouts';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -76,7 +77,10 @@ const config = {
           
           
           remarkPlugins: [require('remark-math')], // latex 문법 추가 설정
-          rehypePlugins: [require('rehype-katex')], // latex 문법 추가 설정
+          rehypePlugins: [
+            require('rehype-katex'), // latex 문법 추가 설정
+            [rehypeCallouts, { theme: 'obsidian' }], // 옵시디언 콜아웃 문법 지원
+          ],
 
 
         },
