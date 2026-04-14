@@ -352,13 +352,29 @@ const addCountToItems = (items) => {
 
 ## 7. CSS 커스터마이징
 
-### 7.1 KaTeX 지원
+### 7.1 본문 폰트 (Noto Sans KR)
+
+Google Fonts의 Noto Sans KR을 본문 폰트로 사용하며, 제목은 시스템 기본 폰트를 유지합니다.
+
+```css
+/* Noto Sans KR 웹폰트 import */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+:root {
+  /* 본문 폰트 */
+  --ifm-font-family-base: 'Noto Sans KR', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --ifm-font-weight-base: 300;  /* 가벼운 폰트 굵기 */
+}
+```
+
+### 7.2 KaTeX 지원
 
 ```css
 @import "katex/dist/katex.min.css";
 ```
 
-### 7.2 사이드바 아이템 숨김
+### 7.3 사이드바 아이템 숨김
 
 ```css
 .hidden-sidebar-item {
@@ -369,7 +385,7 @@ const addCountToItems = (items) => {
 - 프론트매터에 `sidebar_class_name: hidden-sidebar-item` 설정 시 사이드바에서 숨김
 - index 파일만 사이드바에 표시하려면 개별 글에 이 클래스 적용
 
-### 7.3 Algolia 검색 하이라이트
+### 7.4 Algolia 검색 하이라이트
 
 ```css
 /* 검색 팝업 */
@@ -386,7 +402,7 @@ const addCountToItems = (items) => {
 }
 ```
 
-### 7.4 홈페이지 히어로 섹션
+### 7.5 홈페이지 히어로 섹션
 
 ```css
 .heroSection {
@@ -408,7 +424,7 @@ const addCountToItems = (items) => {
 }
 ```
 
-### 7.5 Obsidian 콜아웃 스타일 (rehype-callouts)
+### 7.6 Obsidian 콜아웃 스타일 (rehype-callouts)
 
 Obsidian 콜아웃 문법을 Docusaurus에서 사용하기 위한 스타일
 
@@ -445,7 +461,7 @@ Obsidian 콜아웃 문법을 Docusaurus에서 사용하기 위한 스타일
 }
 ```
 
-### 7.6 공용 마크다운 색상 클래스
+### 7.7 공용 마크다운 색상 클래스
 
 Obsidian과 Docusaurus에서 동일한 색상 클래스를 사용하기 위한 스타일
 
