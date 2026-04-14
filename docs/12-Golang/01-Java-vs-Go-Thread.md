@@ -7,10 +7,8 @@ description: 자바(Java)의 synchronized와 volatile의 차이부터 Go 언어 
 
 ---
 
-:::info
-쓰레드에 대한 이해가 필요하다.
-[프로세스와 쓰레드](../16-OS/01-Process-And-Thread.md) 글 참조
-:::
+> [!info] 쓰레드에 대한 이해가 필요하다.
+> [프로세스와 쓰레드](../16-OS/01-Process-And-Thread.md) 글 참조
 
 ---
 ## Java Thread

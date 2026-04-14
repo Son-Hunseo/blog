@@ -142,7 +142,5 @@ dig www.google.com
 - TTL, 레코드 타입 등 확인 가능
 - `/etc/hosts` 무시
 
-:::warning
-- `ping` : `/etc/hosts` + DNS 모두 사용
-- `nslookup`, `dig` : **DNS 서버만 조회**
-:::
+> [!warning] - `ping` : `/etc/hosts` + DNS 모두 사용
+> - `nslookup`, `dig` : **DNS 서버만 조회**

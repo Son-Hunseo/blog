@@ -65,10 +65,8 @@ description: Kubernetes 클러스터와 상호작용하는 핵심 경로인 API 
     - `update` (수정)
     - `watch` (변경 감지)
 
-:::tip
-- Kubernetes API 레퍼런스 문서를 보면 각 오브젝트의 그룹 정보를 확인할 수 있다.
-	- 예: Deployment를 선택하면 그룹이 `apps/v1`임을 확인 가능
-:::
+> [!tip] - Kubernetes API 레퍼런스 문서를 보면 각 오브젝트의 그룹 정보를 확인할 수 있다.
+> 	- 예: Deployment를 선택하면 그룹이 `apps/v1`임을 확인 가능
 
 ---
 ## kubectl proxy

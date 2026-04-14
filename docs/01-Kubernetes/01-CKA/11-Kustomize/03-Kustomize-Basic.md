@@ -34,11 +34,9 @@ commonLabels:
 2. Transformations: 원본 리소스에 적용할 변경 사항이다.
 	- 예: 모든 리소스에 공통 라벨 추가
 
-:::tip
-- `kustomization.yaml` 파일은 Kustomize 단위마다 하나씩 존재한다. 
-- 이전 글에서 환경마다 내부에 하나씩 더 존재했던 것은 `overlay`기능을 통해서 상위 `kustomization.yaml` 파일을 import하는 것이다.
-- 각 환경에 따른 `kustomization.yaml`이 각각 있다고 했을 때(`dev/kustomization.yaml`, `prod/kustomization.yaml`) 상위 `kustomization.yaml`에서는 `resources`에 `dev/`, `prod/` 만 넣어두고 `kubectl apply -k ./` 이렇게 하면 모든 환경의 리소스가 생성된다.
-:::
+> [!tip] - `kustomization.yaml` 파일은 Kustomize 단위마다 하나씩 존재한다. 
+> - 이전 글에서 환경마다 내부에 하나씩 더 존재했던 것은 `overlay`기능을 통해서 상위 `kustomization.yaml` 파일을 import하는 것이다.
+> - 각 환경에 따른 `kustomization.yaml`이 각각 있다고 했을 때(`dev/kustomization.yaml`, `prod/kustomization.yaml`) 상위 `kustomization.yaml`에서는 `resources`에 `dev/`, `prod/` 만 넣어두고 `kubectl apply -k ./` 이렇게 하면 모든 환경의 리소스가 생성된다.
 
 ---
 ## 적용 방법

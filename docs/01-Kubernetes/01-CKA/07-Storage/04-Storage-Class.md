@@ -20,11 +20,9 @@ description: 쿠버네티스(Kubernetes)의 StorageClass를 활용한 동적 프
 - 이때 <span class="t-red">'스토리지가 필요해질 때 자동으로 생성되는 방식'</span>인 동적 프로비저닝(Dynamic Provisioning)을 사용하면 이러한 문제점을 해결할 수 있다.
 - 이러한 동적 프로비저닝을 하기위한 리소스가 `StorageClass`이다.
 
-:::info
-Provisioner란?
-- 실제로 스토리지를 생성하는 주체이다.
-- ex: GCP, AWS, Azure Disk, Azure FIle 등
-:::
+> [!info] Provisioner란?
+> - 실제로 스토리지를 생성하는 주체이다.
+> - ex: GCP, AWS, Azure Disk, Azure FIle 등
 
 ### Dynamic Provisioning 흐름
 

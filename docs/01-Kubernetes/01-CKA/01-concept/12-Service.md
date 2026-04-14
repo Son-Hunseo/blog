@@ -64,9 +64,7 @@ graph TD
 
 ```
 
-:::warning
-관용적으로 `Service`, `Deployment`, `ReplicaSet`을 함께 사용하기 때문에, `Service`는 `Deployment`나 `ReplicaSet`에 연결되는 것 아닌가? 라고 착각하기 쉽지만, `Service`는 `Pod`에 연결되며, 일관된 연결과 로드밸런싱을 제공해줄 뿐이다.
-:::
+> [!warning] 관용적으로 `Service`, `Deployment`, `ReplicaSet`을 함께 사용하기 때문에, `Service`는 `Deployment`나 `ReplicaSet`에 연결되는 것 아닌가? 라고 착각하기 쉽지만, `Service`는 `Pod`에 연결되며, 일관된 연결과 로드밸런싱을 제공해줄 뿐이다.
 
 
 ---

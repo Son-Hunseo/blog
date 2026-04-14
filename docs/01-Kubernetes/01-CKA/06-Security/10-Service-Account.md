@@ -15,9 +15,7 @@ description: 쿠버네티스 ServiceAccount의 개념, 동작 원리, 인증 방
 	- `Prometheus`: 클러스터 성능 지표를 수집하기 위해 API 서버와 통신
 	- `Jenkins`: 애플리케이션 배포를 위해 클러스터에 접근할 때 API 서버와 통신
 
-:::tip
-User(쿠버네티스 리소스는 아님)와 `ServiceAccount`는 각각 'Authentication(인증)' 방식은 인증서 vs 토큰으로 다르지만, 'Authorization(인가)' 단계에서는 똑같이 `Role`/`ClusterRole` - `RoleBinding`/`ClusterRoleBinding` 방식의 RBAC를 사용한다.
-:::
+> [!tip] User(쿠버네티스 리소스는 아님)와 `ServiceAccount`는 각각 'Authentication(인증)' 방식은 인증서 vs 토큰으로 다르지만, 'Authorization(인가)' 단계에서는 똑같이 `Role`/`ClusterRole` - `RoleBinding`/`ClusterRoleBinding` 방식의 RBAC를 사용한다.
 
 ### 인증 방식 (토큰)
 
@@ -38,10 +36,8 @@ User(쿠버네티스 리소스는 아님)와 `ServiceAccount`는 각각 'Authent
 		- `Projected Volume`은 `Secret`, `ConfigMap`, `serviceAccountToken` 등의 리소스를 동일한 디렉토리에 보관하는 '`Pod` 내부 볼륨'이라고 생각하면 된다.
 		- 경로:`/var/run/secrets/kubernetes.io/serviceaccount/token`
 
-:::tip
-- 토큰은 유효기간이 있는데, 이건 누가 자동갱신하나요?
-- `kubelet`이 `ServiceAccount`를 감시하며, 토큰이 만료되기 전에 갱신한다.
-:::
+> [!tip] - 토큰은 유효기간이 있는데, 이건 누가 자동갱신하나요?
+> - `kubelet`이 `ServiceAccount`를 감시하며, 토큰이 만료되기 전에 갱신한다.
 
 ---
 ## 생성
@@ -100,12 +96,10 @@ kubectl create token <serviceAccount이름>
 - 위 명령어로 토큰 값을 출력할 수 있다.
 - 기본 유효기간은 1시간이며, `--duration` 플래그로 연장할 수 있다.
 
-:::tip
-- 근데, 외부에서 토큰을 사용할 경우 `kubelet`이 자동 갱신하지 못하는데, CI/CD 툴이나 외부 모니터링 도구를 사용할 때 위처럼 토큰을 발급받아서 사용한다면 수동으로 갱신해야하는건가?
-- `AWS Secret Manager` 등의 외부 보안 볼트 시스템을 사용하여 토큰을 안전하게 보관하고, 외부 툴은 이 볼트 시스템에 접근하여 토큰을 사용한다.
-	- `cron job`, `AWS Lambda` 등으로 주기적으로 클러스터에 접근하여 새로운 토큰을 발급받는다.
-- 이로써 토큰 수명을 짧게 유지함 + 최소 권한 원칙을 동시에 만족시킬 수 있다.
-:::
+> [!tip] - 근데, 외부에서 토큰을 사용할 경우 `kubelet`이 자동 갱신하지 못하는데, CI/CD 툴이나 외부 모니터링 도구를 사용할 때 위처럼 토큰을 발급받아서 사용한다면 수동으로 갱신해야하는건가?
+> - `AWS Secret Manager` 등의 외부 보안 볼트 시스템을 사용하여 토큰을 안전하게 보관하고, 외부 툴은 이 볼트 시스템에 접근하여 토큰을 사용한다.
+> 	- `cron job`, `AWS Lambda` 등으로 주기적으로 클러스터에 접근하여 새로운 토큰을 발급받는다.
+> - 이로써 토큰 수명을 짧게 유지함 + 최소 권한 원칙을 동시에 만족시킬 수 있다.
 
 ---
 ## 쿠버네티스 버전별 변화

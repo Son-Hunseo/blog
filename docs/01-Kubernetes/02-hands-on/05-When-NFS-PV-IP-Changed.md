@@ -65,6 +65,4 @@ kubectl delete pod POD이름 -n 네임스페이스
 - PV와 연결된 POD들을 종료하고 재시작한다.
 - 만약 제대로 삭제가 되지 않을 경우 `kubectl patch pod POD이름 -n 네임스페이스 -p '{"metadata":{"finalizers":null}}'`, `kubectl delete pod POD이름 -n 네임스페이스 --grace-period 0 --force` 로 종료하기
 
-:::tip
-`Prometheus` 처럼 Lock 파일이 있는 경우 해당 스토리지에서 Lock파일을 삭제한 후 Pod를 재기동해야 에러가 나지 않는다.
-:::
+> [!tip] `Prometheus` 처럼 Lock 파일이 있는 경우 해당 스토리지에서 Lock파일을 삭제한 후 Pod를 재기동해야 에러가 나지 않는다.
