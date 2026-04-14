@@ -352,19 +352,24 @@ const addCountToItems = (items) => {
 
 ## 7. CSS 커스터마이징
 
-### 7.1 본문 폰트 (Noto Sans KR)
+### 7.1 문서 본문 전용 스타일
 
-Google Fonts의 Noto Sans KR을 본문 폰트로 사용하며, 제목은 시스템 기본 폰트를 유지합니다.
+글 본문(`.markdown`)에만 폰트/크기/줄간격을 적용합니다. 사이드바, 네비게이션, 메인페이지 등은 Docusaurus 기본 스타일을 유지합니다.
 
 ```css
-/* Noto Sans KR 웹폰트 import */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+/* 문서 본문 전용 스타일 */
+.markdown {
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif,
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  line-height: 32px;
+  word-break: keep-all;
+}
 
-:root {
-  /* 본문 폰트 */
-  --ifm-font-family-base: 'Noto Sans KR', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --ifm-font-weight-base: 300;  /* 가벼운 폰트 굵기 */
+/* 다크 모드 본문 색상 */
+[data-theme='dark'] .markdown {
+  color: rgba(255, 255, 255, 0.81);
 }
 ```
 

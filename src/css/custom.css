@@ -34,8 +34,6 @@
  */
 @import "katex/dist/katex.min.css";
 
-/* Noto Sans KR 웹폰트 (Google Fonts) */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
 
 /* ============================================================================
@@ -85,12 +83,6 @@
 
 /* 라이트 모드 색상 팔레트 (기본) */
 :root {
-  /* 본문 폰트 (Noto Sans KR) */
-  --ifm-font-family-base: 'Noto Sans KR', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  --ifm-font-weight-base: 300;  /* 가벼운 폰트 굵기 */
-
   /* 메인 브랜드 색상 (녹색 계열) */
   --ifm-color-primary: #2e8555;           /* 기본 색상 */
   --ifm-color-primary-dark: #29784c;      /* 호버 상태 등 어두운 변형 */
@@ -120,6 +112,28 @@
 
   /* 코드 블록 내 하이라이트된 줄 배경색 (다크 모드 - 더 진하게) */
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+
+/* ============================================================================
+ * 2-1. 문서 본문 전용 스타일
+ * ============================================================================
+ *
+ * 글 본문에만 적용되는 폰트/크기/줄간격 설정
+ * 사이드바, 네비게이션, 메인페이지 등에는 적용되지 않음
+ */
+.markdown {
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif,
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  line-height: 32px;
+  word-break: keep-all;
+}
+
+/* 다크 모드 본문 색상 */
+[data-theme='dark'] .markdown {
+  color: rgba(255, 255, 255, 0.81);
 }
 
 
