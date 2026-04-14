@@ -34,6 +34,9 @@
  */
 @import "katex/dist/katex.min.css";
 
+/* Noto Sans KR 웹폰트 (Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
 
 /* ============================================================================
  * 1-2. Obsidian 콜아웃 스타일 (rehype-callouts)
@@ -82,6 +85,12 @@
 
 /* 라이트 모드 색상 팔레트 (기본) */
 :root {
+  /* 본문 폰트 (Noto Sans KR) */
+  --ifm-font-family-base: 'Noto Sans KR', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --ifm-font-weight-base: 300;  /* 가벼운 폰트 굵기 */
+
   /* 메인 브랜드 색상 (녹색 계열) */
   --ifm-color-primary: #2e8555;           /* 기본 색상 */
   --ifm-color-primary-dark: #29784c;      /* 호버 상태 등 어두운 변형 */
