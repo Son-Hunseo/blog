@@ -76,6 +76,7 @@ son-blog/
 | `gray-matter` | Markdown 프론트매터 파싱 |
 | `rehype-katex` | LaTeX 수식 렌더링 |
 | `remark-math` | 수학 문법 파싱 |
+| `rehype-callouts` | Obsidian 콜아웃 문법 지원 |
 
 ---
 
@@ -105,11 +106,15 @@ themes: ['@docusaurus/theme-mermaid'],
 docs: {
   routeBasePath: '/',  // docs가 루트 페이지가 됨 (기본: '/docs')
   remarkPlugins: [require('remark-math')],   // LaTeX 수식
-  rehypePlugins: [require('rehype-katex')],  // LaTeX 렌더링
+  rehypePlugins: [
+    require('rehype-katex'),                    // LaTeX 렌더링
+    [rehypeCallouts, { theme: 'obsidian' }],    // Obsidian 콜아웃 문법 지원
+  ],
 }
 ```
 
 - 기본 Docusaurus는 `/docs`에서 문서가 시작되지만, 현재 프로젝트는 `/`에서 바로 문서가 표시됨
+- `rehype-callouts` 플러그인으로 Obsidian 스타일 콜아웃 지원
 
 ### 3.4 Google Analytics 추가 (신규)
 
@@ -403,6 +408,79 @@ const addCountToItems = (items) => {
 }
 ```
 
+### 7.5 Obsidian 콜아웃 스타일 (rehype-callouts)
+
+Obsidian 콜아웃 문법을 Docusaurus에서 사용하기 위한 스타일
+
+**사용 예시:**
+```markdown
+> [!note] 제목
+> 내용
+
+> [!warning] 경고
+> 경고 내용
+
+> [!tip] 팁
+> 유용한 정보
+```
+
+**CSS 설정:**
+```css
+/* rehype-callouts 기본 테마 import */
+@import "rehype-callouts/theme/obsidian";
+
+/* 다크모드 호환 (Docusaurus는 [data-theme='dark'] 사용) */
+[data-theme='dark'] .callout {
+  mix-blend-mode: lighten;
+  background-color: rgb(from var(--rc-color-dark, var(--rc-color-default)) r g b / 0.1);
+}
+
+[data-theme='dark'] .callout-title {
+  color: var(--rc-color-dark, var(--rc-color-default));
+}
+
+/* 콜아웃 제목과 내용 사이 간격 */
+.callout-content {
+  margin-top: 0.5em;
+}
+```
+
+### 7.6 공용 마크다운 색상 클래스
+
+Obsidian과 Docusaurus에서 동일한 색상 클래스를 사용하기 위한 스타일
+
+**동기화 위치:**
+- Obsidian: `.obsidian/snippets/colors.css`
+- Docusaurus: `src/css/custom.css`
+
+**사용 예시:**
+```html
+<!-- 텍스트 색상 -->
+<span class="t-red">빨간 텍스트</span>
+<span class="t-blue">파란 텍스트</span>
+<span class="t-green">초록 텍스트</span>
+
+<!-- 형광펜 효과 -->
+<span class="hl-amber">주황 하이라이트</span>
+<span class="hl-purple">보라 하이라이트</span>
+<span class="hl-teal">청록 하이라이트</span>
+```
+
+**색상 팔레트:**
+
+| 클래스 | 다크 모드 | 라이트 모드 |
+|--------|-----------|-------------|
+| `.t-red` / `.hl-red` | #F09595 | #A32D2D |
+| `.t-blue` / `.hl-blue` | #85B7EB | #185FA5 |
+| `.t-green` / `.hl-green` | #97C459 | #3B6D11 |
+| `.t-amber` / `.hl-amber` | #EF9F27 | #854F0B |
+| `.t-purple` / `.hl-purple` | #AFA9EC | #534AB7 |
+| `.t-teal` / `.hl-teal` | #5DCAA5 | #0F6E56 |
+
+**테마 구분:**
+- Obsidian 라이트 모드: `.theme-light` 클래스
+- Docusaurus 라이트 모드: `html[data-theme='light']` 속성
+
 ---
 
 ## 8. 랜딩 페이지 차이
@@ -445,7 +523,7 @@ const addCountToItems = (items) => {
 |------|------|------|
 | `docusaurus.config.js` | 수정 | 한국어, Algolia, Analytics, Mermaid, LaTeX 등 |
 | `sidebars.js` | 동일 | 자동 생성 사용 |
-| `src/css/custom.css` | 확장 | KaTeX, 검색 하이라이트, 홈페이지 스타일 |
+| `src/css/custom.css` | 확장 | KaTeX, 검색 하이라이트, 홈페이지 스타일, Obsidian 콜아웃, 공용 색상 클래스 |
 | `src/pages/` | 삭제 | docs/index.mdx로 대체 |
 | `src/components/` | 신규 | 4개 커스텀 컴포넌트 + 공통 CSS |
 | `src/theme/` | 신규 | 4개 테마 오버라이드 |
