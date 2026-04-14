@@ -204,3 +204,56 @@
   0%, 100% { opacity: 1; }                /* 시작/끝: 보임 */
   50% { opacity: 0; }                     /* 중간: 숨김 */
 }
+
+/* ============================================
+   공용 마크다운 색상 클래스
+   Obsidian: .obsidian/snippets/colors.css
+   Docusaurus: src/css/custom.css 에 복붙
+   ============================================ */
+
+/* --- Text colors (글자 색) --- */
+.t-red    { color: #F09595 !important; }
+.t-blue   { color: #85B7EB !important; }
+.t-green  { color: #97C459 !important; }
+.t-amber  { color: #EF9F27 !important; }
+.t-purple { color: #AFA9EC !important; }
+.t-teal   { color: #5DCAA5 !important; }
+
+/* --- Highlight (형광펜) --- */
+.hl-red    { background: rgba(240, 149, 149, 0.2) !important; color: #F09595 !important; padding: 1px 4px; border-radius: 3px; }
+.hl-blue   { background: rgba(133, 183, 235, 0.2) !important; color: #85B7EB !important; padding: 1px 4px; border-radius: 3px; }
+.hl-green  { background: rgba(151, 196, 89,  0.2) !important; color: #97C459 !important; padding: 1px 4px; border-radius: 3px; }
+.hl-amber  { background: rgba(239, 159, 39,  0.2) !important; color: #EF9F27 !important; padding: 1px 4px; border-radius: 3px; }
+.hl-purple { background: rgba(175, 169, 236, 0.2) !important; color: #AFA9EC !important; padding: 1px 4px; border-radius: 3px; }
+.hl-teal   { background: rgba(93,  202, 165, 0.2) !important; color: #5DCAA5 !important; padding: 1px 4px; border-radius: 3px; }
+
+/* --- 라이트 모드 오버라이드 --- */
+/* Obsidian 라이트 모드 */
+.theme-light .t-red    { color: #A32D2D !important; }
+.theme-light .t-blue   { color: #185FA5 !important; }
+.theme-light .t-green  { color: #3B6D11 !important; }
+.theme-light .t-amber  { color: #854F0B !important; }
+.theme-light .t-purple { color: #534AB7 !important; }
+.theme-light .t-teal   { color: #0F6E56 !important; }
+
+.theme-light .hl-red    { background: rgba(226, 75, 74,  0.12) !important; color: #A32D2D !important; }
+.theme-light .hl-blue   { background: rgba(55,  138, 221, 0.12) !important; color: #185FA5 !important; }
+.theme-light .hl-green  { background: rgba(99,  153, 34,  0.12) !important; color: #3B6D11 !important; }
+.theme-light .hl-amber  { background: rgba(186, 117, 23,  0.12) !important; color: #854F0B !important; }
+.theme-light .hl-purple { background: rgba(127, 119, 221, 0.12) !important; color: #534AB7 !important; }
+.theme-light .hl-teal   { background: rgba(29,  158, 117, 0.12) !important; color: #0F6E56 !important; }
+
+/* Docusaurus 라이트 모드 */
+html[data-theme='light'] .t-red    { color: #A32D2D !important; }
+html[data-theme='light'] .t-blue   { color: #185FA5 !important; }
+html[data-theme='light'] .t-green  { color: #3B6D11 !important; }
+html[data-theme='light'] .t-amber  { color: #854F0B !important; }
+html[data-theme='light'] .t-purple { color: #534AB7 !important; }
+html[data-theme='light'] .t-teal   { color: #0F6E56 !important; }
+
+html[data-theme='light'] .hl-red    { background: rgba(226, 75, 74,  0.12) !important; color: #A32D2D !important; }
+html[data-theme='light'] .hl-blue   { background: rgba(55,  138, 221, 0.12) !important; color: #185FA5 !important; }
+html[data-theme='light'] .hl-green  { background: rgba(99,  153, 34,  0.12) !important; color: #3B6D11 !important; }
+html[data-theme='light'] .hl-amber  { background: rgba(186, 117, 23,  0.12) !important; color: #854F0B !important; }
+html[data-theme='light'] .hl-purple { background: rgba(127, 119, 221, 0.12) !important; color: #534AB7 !important; }
+html[data-theme='light'] .hl-teal   { background: rgba(29,  158, 117, 0.12) !important; color: #0F6E56 !important; }
