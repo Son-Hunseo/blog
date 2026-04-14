@@ -82,9 +82,7 @@ mkdir -p /etc/etcd /var/lib/etcd
 
 ### 인증서 발급 및 적용
 
-:::info
-인증서 발급 관련해서는 -> 참고 글: [ETCD 인증서 발급](../06-Security/03-Certificate-Creation.md#etcd)
-:::
+> [!info] 인증서 발급 관련해서는 -> 참고 글: [ETCD 인증서 발급](../06-Security/03-Certificate-Creation.md#etcd)
 
 ```bash
 cp ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/

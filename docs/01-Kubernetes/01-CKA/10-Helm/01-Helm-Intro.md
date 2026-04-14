@@ -22,12 +22,10 @@ description: Kubernetes 운영의 필수 도구 Helm 입문 가이드. Deploymen
 - 쿠버네티스는 개발 객체(`Pod`, `Service` 등)만 인식하지만, `Helm`은 이들을 하나의 '애플리케이션 그룹'으로 인식한다.
 - `Helm`은 쿠버네티스의 패키지 매니저로 불리며 수백 개의 객체가 포함된 앱이라도 패키지 이름만으로 제어할 수 있다.
 
-:::tip
-- 레거시 스프링을 생각해보자. 하나부터 열까지 직접 `web.xml`, `root-context.xml` 등의 수많은 xml 파일과 설정들을 일일히 해야한다.
-- 스프링 부트는 Auto-configuration으로 이러한 설정들을 하나로 묶고 `application.yml`과 같은 파일 하나만 수정해서 설정을 편하게 만들었다.
-- 또한 라이브러리간의 의존성도 알아서 해결해준다.
-- 이와 비슷하게 `Helm`은 이러한 여러 복잡한 리소스들을 `value.yaml`로 하나로 묶어서 관리하며 의존성 또한 묶어서 한번에 관리하여 편의성을 높여준다.
-:::
+> [!tip] - 레거시 스프링을 생각해보자. 하나부터 열까지 직접 `web.xml`, `root-context.xml` 등의 수많은 xml 파일과 설정들을 일일히 해야한다.
+> - 스프링 부트는 Auto-configuration으로 이러한 설정들을 하나로 묶고 `application.yml`과 같은 파일 하나만 수정해서 설정을 편하게 만들었다.
+> - 또한 라이브러리간의 의존성도 알아서 해결해준다.
+> - 이와 비슷하게 `Helm`은 이러한 여러 복잡한 리소스들을 `value.yaml`로 하나로 묶어서 관리하며 의존성 또한 묶어서 한번에 관리하여 편의성을 높여준다.
 
 ### 주요 기능 및 장점
 
@@ -44,10 +42,8 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 ```
 
-:::tip
-- 위 방법은 스크립트로 설치하는 방법이고 각 OS 및 환경 별 설치 방법은 아래 공식 docs에 나와있다.
-- https://helm.sh/ko/docs/intro/install
-:::
+> [!tip] - 위 방법은 스크립트로 설치하는 방법이고 각 OS 및 환경 별 설치 방법은 아래 공식 docs에 나와있다.
+> - https://helm.sh/ko/docs/intro/install
 
 ---
 ## 레퍼런스

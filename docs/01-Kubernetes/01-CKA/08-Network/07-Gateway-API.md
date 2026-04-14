@@ -35,9 +35,7 @@ description: Kubernetes Ingress의 어노테이션 의존성과 멀티 테넌시
 ## 예시: 멀티 테넌시 환경
 ### 경로 기반
 
-:::info
-[`Ingress`글에서의 경로 기반 예시](06-Ingress.md#경로-기반)
-:::
+> [!info] [`Ingress`글에서의 경로 기반 예시](06-Ingress.md#경로-기반)
 
 **`GatewayClass`**
 
@@ -234,13 +232,11 @@ spec:
 
 ### 그래서 경로와 도메인 기반을 어떤 상황에 사용?
 
-:::tip
-`Gateway API` 설계 철학상
-- 서비스/조직/도메인 단위 -> 호스트네임 단위 분리 (`wear.myonlinestore.com`, `video.myonlinestore.com`)
-	- 책임 분리가 필요한 영역
-- 버전/기능 단위 -> 경로 기반 (`myonlinestore.com/v1`, `myonlinestore.com/cart`)
-	- 책임 분리가 상대적으로 덜 필요한 영역
-:::
+> [!tip] `Gateway API` 설계 철학상
+> - 서비스/조직/도메인 단위 -> 호스트네임 단위 분리 (`wear.myonlinestore.com`, `video.myonlinestore.com`)
+> 	- 책임 분리가 필요한 영역
+> - 버전/기능 단위 -> 경로 기반 (`myonlinestore.com/v1`, `myonlinestore.com/cart`)
+> 	- 책임 분리가 상대적으로 덜 필요한 영역
 
 ---
 ## 예시: 설정 표준화

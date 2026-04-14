@@ -6,12 +6,10 @@ description: Kubernetes Kustomize의 핵심 기능인 Patch 개념과 JSON 6902,
 ---
 
 ---
-:::info
-`Patch`는 이전 글에서 다른 `Transformer`의 한 종류라고 이해하면 된다.
-- 차이점
-	- `Transformer`: 전역적인 성격
-	- `Patch`: 특정 리소스에 집중
-:::
+> [!info] `Patch`는 이전 글에서 다른 `Transformer`의 한 종류라고 이해하면 된다.
+> - 차이점
+> 	- `Transformer`: 전역적인 성격
+> 	- `Patch`: 특정 리소스에 집중
 
 ## Patch
 ### 개념

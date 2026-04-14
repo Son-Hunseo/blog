@@ -216,11 +216,9 @@ nvidia-smi
 ---
 ## 참고
 
-:::warning
-예외적인 경우이긴 하나, 나의 경우에는 proxmox와 다른 ssd에 윈도우를 설치하고 멀티부팅으로 사용했었다. 이 때 proxmox의 Window VM 에 GPU Passthrough를 적용하니, VM이 아닌 호스트 윈도우가 부팅이 되지 않았다. 왜냐하면 Window VM에 GPU Passthrough를 하는 과정에서 GPU를 시스템에서 격리하기 때문이다.
-
-이러한 상황에서는 Window VM에 GPU Passthrough를 사용하지 않는 것이 맞다. 혹시나 이런 상황이 생긴다면 아래 과정을 거쳐 호스트 Window OS를 복구하자.
-:::
+> [!warning] 예외적인 경우이긴 하나, 나의 경우에는 proxmox와 다른 ssd에 윈도우를 설치하고 멀티부팅으로 사용했었다. 이 때 proxmox의 Window VM 에 GPU Passthrough를 적용하니, VM이 아닌 호스트 윈도우가 부팅이 되지 않았다. 왜냐하면 Window VM에 GPU Passthrough를 하는 과정에서 GPU를 시스템에서 격리하기 때문이다.
+>
+> 이러한 상황에서는 Window VM에 GPU Passthrough를 사용하지 않는 것이 맞다. 혹시나 이런 상황이 생긴다면 아래 과정을 거쳐 호스트 Window OS를 복구하자.
 
 1. Window VM 삭제
 2. GPU Passthrough를 하기위한 설정 모두 롤백
@@ -232,11 +230,9 @@ nvidia-smi
 8. 안될경우 여러번 재부팅
 9. 해결
 
-:::info
-그러면, 왜 Linux VM의 Passthrough는 다른 호스트 Window에 영향을 주지 않는걸까?
-
-Window VM에 GPU Passthrough시에는 `blacklist` 설정이 필요하지만 Linux에는 필요없기 때문이다. (격리되지 않는다) 
-:::
+> [!info] 그러면, 왜 Linux VM의 Passthrough는 다른 호스트 Window에 영향을 주지 않는걸까?
+>
+> Window VM에 GPU Passthrough시에는 `blacklist` 설정이 필요하지만 Linux에는 필요없기 때문이다. (격리되지 않는다) 
 
 | 구분         | blacklist 필요 여부 | 이유                                                           |
 | ---------- | --------------- | ------------------------------------------------------------ |

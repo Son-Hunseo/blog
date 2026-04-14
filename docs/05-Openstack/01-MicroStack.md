@@ -21,10 +21,8 @@ description: MicroStack은 복잡한 OpenStack 설치 과정을 단순화한 경
 ---
 ## `MicroStack` 설치 및 접속
 
-:::warning
-만약 VM에서 설치한다면, 중첩 가상화(Nested Virtualization)이 활성화 되어있는지 바이오스에서 확인하자.
-활성화되어있지 않다면 활성화해야한다.
-:::
+> [!warning] 만약 VM에서 설치한다면, 중첩 가상화(Nested Virtualization)이 활성화 되어있는지 바이오스에서 확인하자.
+> 활성화되어있지 않다면 활성화해야한다.
 
 ### 설치
 
@@ -86,9 +84,7 @@ sudo sed -i "s/^export OS_PASSWORD=.*/export OS_PASSWORD=새비밀번호/" \
 ---
 ## VM 생성
 
-:::warning
-`MicroStack`은 경량화된 `OpenStack` 이므로 실제 운영환경의 `Storage Node`에서 작동하는 `Cinder`(블록 스토리지)는 설정되지 않는다. (할려면 할 수는 있다. 그런데 어짜피 단일 노드에 설치하는건데 굳이?)
-:::
+> [!warning] `MicroStack`은 경량화된 `OpenStack` 이므로 실제 운영환경의 `Storage Node`에서 작동하는 `Cinder`(블록 스토리지)는 설정되지 않는다. (할려면 할 수는 있다. 그런데 어짜피 단일 노드에 설치하는건데 굳이?)
 
 ### GUI
 

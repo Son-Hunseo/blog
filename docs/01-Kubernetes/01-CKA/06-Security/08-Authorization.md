@@ -127,9 +127,7 @@ current-context: webhook
 	- Webhook 설정파일(`webhook-config.yaml`) 작성
 	- API 서버 yaml 파일에 `--authorization-webhook-config-file=webhook-config.yaml` 옵션으로 지정한다.
 
-:::info
-Authorization 종류에는 `Always Allow`/`Always Deny`도 있다. (총 6개)
-:::
+> [!info] Authorization 종류에는 `Always Allow`/`Always Deny`도 있다. (총 6개)
 
 ---
 ## Authorization Mode 설정

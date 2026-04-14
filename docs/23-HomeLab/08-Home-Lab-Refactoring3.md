@@ -6,9 +6,7 @@ description: Nginx 리버스 프록시에서 Kubernetes Gateway API로 전환하
 ---
 
 ---
-:::tip
-리팩토링 아키텍처는 [이전 글](06-Home-Lab-Refactoring1.md) 참조
-:::
+> [!tip] 리팩토링 아키텍처는 [이전 글](06-Home-Lab-Refactoring1.md) 참조
 
 ---
 ## Gateway API를 도입하는 이유
@@ -81,18 +79,16 @@ server {
 ---
 ## TO-BE (Gateway API)
 
-:::info
-Prerequisite
-- Gateway API crd 설치
-- Nginx Gateway Fabric Operator 설치
-- MetalLB 설치
-
-Nginx Gateway Fabic은 MetalLB에게 IP를 자동으로 할당받는다. (특정 노드가 문제가가 생겨도 일관성있게 접근할 수 있는 가상의 IP)
-
- 참고
- - 홈랩 기본 인프라 설정 파일
-	 - https://github.com/Son-Hunseo/my-k8s-base/tree/main
-:::
+> [!info] Prerequisite
+> - Gateway API crd 설치
+> - Nginx Gateway Fabric Operator 설치
+> - MetalLB 설치
+>
+> Nginx Gateway Fabic은 MetalLB에게 IP를 자동으로 할당받는다. (특정 노드가 문제가가 생겨도 일관성있게 접근할 수 있는 가상의 IP)
+>
+>  참고
+>  - 홈랩 기본 인프라 설정 파일
+> 	 - https://github.com/Son-Hunseo/my-k8s-base/tree/main
 
 ### Gateway
 

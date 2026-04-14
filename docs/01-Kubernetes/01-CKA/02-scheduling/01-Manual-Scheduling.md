@@ -66,10 +66,8 @@ target:
 kubectl create -f Pod-bind-definition.yaml
 ```
 
-:::tip
-`Binding` 객체는 해당 `Pod`를 특정 노드에 배치해라는 요청을 객체화 시킨 것에 가깝다.
-이에 해당 리소스를 만들더라도 이는 '요청'에 가깝고 이에 유지되는 리소스가 아니다. (즉, `kubectl get bindings` 는 없는 명령어이다)
-:::
+> [!tip] `Binding` 객체는 해당 `Pod`를 특정 노드에 배치해라는 요청을 객체화 시킨 것에 가깝다.
+> 이에 해당 리소스를 만들더라도 이는 '요청'에 가깝고 이에 유지되는 리소스가 아니다. (즉, `kubectl get bindings` 는 없는 명령어이다)
 
 
 ---
