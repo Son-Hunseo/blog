@@ -29,8 +29,8 @@ description: Kubernetes 인증(Authentication)의 기본 개념과 작동 원리
 - 대상 - 쿠버네티스 클러스터 내의 리소스를 조작하는 사람
 	- 클러스터 관리자
 	- 개발자
-- <span style={{color: 'red'}}>Kubernetes는 User Account 라는 객체가 존재하지 않는다. - 다른 방법으로 관리</span>
-	- cf) 미리 말하자면, 유저가 개인키로 <span style={{color: 'red'}}>CSR을 만들 때 넣는 CN(Common Name)</span>이 유저의 이름이 된다.
+- <span class="t-red">Kubernetes는 User Account 라는 객체가 존재하지 않는다. - 다른 방법으로 관리</span>
+	- cf) 미리 말하자면, 유저가 개인키로 <span class="t-red">CSR을 만들 때 넣는 CN(Common Name)</span>이 유저의 이름이 된다.
 
 **Service Account**
 

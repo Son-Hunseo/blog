@@ -95,7 +95,7 @@ ip netns exec red ping 192.168.15.2
 
 - 실제 여러 물리 기기들을 하나의 네트워크에 연결하기 위해 스위치가 필요하듯이, 여러 네임스페이스를 연결하려면 가상 스위치가 필요하다.
 - Linux에서는 Bridge가 이 가상 스위치 역할을 한다.
-	- <span style={{color: 'red'}}>Bridge는 가상 스위치임과 동시에 호스트의 가상 네트워크 인터페이스이다.</span>
+	- <span class="t-red">Bridge는 가상 스위치임과 동시에 호스트의 가상 네트워크 인터페이스이다.</span>
 	- 이 때문에 IP Forwarding이 되어있다면, 브릿지로 오는 패킷을 호스트의 물리 인터페이스로 전달할 수 있다.
 - 이전 Virtual Cable 예시에서의 연결(직접)은 없다고 가정하자.
 - 또한 IP Forwarding은 허용이 되어있다고 가정하자.

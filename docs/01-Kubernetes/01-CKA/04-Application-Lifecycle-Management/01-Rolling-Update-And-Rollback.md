@@ -47,7 +47,7 @@ description: 쿠버네티스(Kubernetes) Deployment Rollout의 핵심 개념과 
 2. 새로운 `Pod` 5개 생성
 
 **문제점**
-- 기본 `Pod`를 5개를 모두 삭제하고 새로운 `Pod`를 생성하는 사이에 <span style={{color: 'red'}}>서비스 중단</span> 발생
+- 기본 `Pod`를 5개를 모두 삭제하고 새로운 `Pod`를 생성하는 사이에 <span class="t-red">서비스 중단</span> 발생
 
 ### Rolling Update
 
@@ -62,7 +62,7 @@ description: 쿠버네티스(Kubernetes) Deployment Rollout의 핵심 개념과 
 
 **장점**
 - 서비스가 중단되지 않고 무중단 배포 가능
-- 이러한 장점으로 인해 `Deployment`는 <span style={{color: 'red'}}>기본 Rollout 정책</span>으로 `Rolling Update`를 사용한다.
+- 이러한 장점으로 인해 `Deployment`는 <span class="t-red">기본 Rollout 정책</span>으로 `Rolling Update`를 사용한다.
 
 ### Recreate vs Rolling Update
 
