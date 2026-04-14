@@ -55,7 +55,7 @@ AND employee_id = 100;
 
 ![join1](assets/join1.png)
 
-- 가장 일반적인 `JOIN`의 종류이며 <span style={{color: 'red'}}>교집합</span>이다.
+- 가장 일반적인 `JOIN`의 종류이며 <span class="t-red">교집합</span>이다.
 - 동등 조인(`Equi-JOIN`)이라고도 하며, N개의 테이블 `JOIN` 시 N-1개의 `JOIN` 조건이 필요함
 - `JOIN` == `INNER JOIN`
 

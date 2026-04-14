@@ -14,7 +14,7 @@ FROM table_name
 WHERE conditions;
 ```
 
-- `WHERE` : <span style={{color: 'red'}}>조건에 만족하는 행</span>을 검색
+- `WHERE` : <span class="t-red">조건에 만족하는 행</span>을 검색
 
 
 ## AND, OR, NOT
