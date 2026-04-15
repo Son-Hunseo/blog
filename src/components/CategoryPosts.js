@@ -67,10 +67,17 @@ function CategoryPosts() {
    * index 페이지 자체는 목록에서 제외
    * - 카테고리 index 페이지가 자기 자신을 목록에 포함하지 않도록 필터링
    */
-  const filteredPosts = categoryPosts.filter(post =>
-    post.link !== `/${currentPath}` &&
-    post.link !== `/${currentPath}/`
-  );
+  const filteredPosts = categoryPosts
+    .filter(post =>
+      post.link !== `/${currentPath}` &&
+      post.link !== `/${currentPath}/`
+    )
+    .sort((a, b) => {
+      if (!a.date && !b.date) return 0;
+      if (!a.date) return 1;
+      if (!b.date) return -1;
+      return new Date(b.date) - new Date(a.date);
+    });
 
   // 표시할 글이 없으면 컴포넌트 렌더링 안 함
   if (!filteredPosts || filteredPosts.length === 0) {
