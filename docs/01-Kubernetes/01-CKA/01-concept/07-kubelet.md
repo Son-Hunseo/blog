@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-04
 title: Kubelet
 description: kubelet은 Kubernetes 노드에서 실행되는 핵심 에이전트로, Pod 생성과 컨테이너 실행을 실제로 담당합니다. 이 글에서는 kubelet의 역할, 동작 방식, 설치 및 실행 옵션 확인 방법을 CKA 학습 기준으로 체계적으로 정리했습니다.
 ---

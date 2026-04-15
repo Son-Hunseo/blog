@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-25
 title: Cluster Roles
 description: Kubernetes RBAC의 핵심인 ClusterRole과 ClusterRoleBinding의 개념 및 사용법을 명확히 이해하세요. 네임스페이스 리소스와 클러스터 리소스의 차이점을 배우고, ClusterRole을 사용하여 클러스터 전체에 걸친 권한을 효과적으로 관리하는 방법을 YAML 예시와 함께 정리했습니다.
 ---

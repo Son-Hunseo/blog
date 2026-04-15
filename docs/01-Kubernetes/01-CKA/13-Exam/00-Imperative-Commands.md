@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2026-01-13
 title: Imperative Commands 로 시간 단축하기
 description: CKA/CKAD 시험 합격을 위한 kubectl Imperative(명령형) 명령어 총정리! YAML 작성 시간을 단축하는 run, create, expose 활용법과 --dry-run을 이용한 템플릿 생성, 기억나지 않는 문법을 찾는 explain 명령어까지 실전 팁을 확인하세요.
 ---

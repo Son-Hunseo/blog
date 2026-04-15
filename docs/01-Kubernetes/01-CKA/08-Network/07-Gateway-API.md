@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2026-01-03
 title: Gateway API
 description: Kubernetes Ingress의 어노테이션 의존성과 멀티 테넌시 충돌 문제를 Gateway API로 해결하는 방법을 알아봅니다. GatewayClass, Gateway, HTTPRoute 리소스 분리와 표준화된 트래픽 제어(Rewrite, Redirect, Canary) 설정을 예제와 함께 정리했습니다.
 ---

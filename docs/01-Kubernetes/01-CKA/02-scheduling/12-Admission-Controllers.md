@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-13
 title: Admission Controllers (2025 추가)
 description: Kubernetes Admission Controller는 API Server로 들어오는 요청을 검증·수정·차단하여 클러스터 보안과 정책 준수를 강화하는 핵심 기능이다. 최신 태그 금지, root 권한 방지, 기본 StorageClass 자동 지정 등 다양한 정책을 구현하며, 바이너리 실행 방식과 kubeadm 환경 모두에서 활성화할 수 있다. 본 문서는 Admission Controller의 개념, 활성화 방법, 스케줄러와의 연관성을 자세히 설명한다.
 ---

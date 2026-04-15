@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-07-17
 title: 부팅될 때 WSL 자동으로 실행되게 하기
 description: Windows 부팅 시 자동으로 WSL(Ubuntu 등)을 실행하는 방법을 단계별로 설명합니다. 작업 스케줄러를 이용해 Node Exporter나 DCGM Exporter를 자동 구동하고, Prometheus와 Grafana로 메트릭을 모니터링할 수 있는 환경을 구축할 수 있습니다.
 ---
