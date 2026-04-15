@@ -249,6 +249,7 @@ const SELECTED_POST_IDS = [
 
 - URL 경로 기반 자동 필터링
 - index 페이지 제외
+- **날짜 내림차순 정렬** (최신 글이 상단, `date` 없는 글은 하단)
 - `Posts.module.css` 공통 스타일 사용
 
 ### 5.4 SimpleDocList.js
