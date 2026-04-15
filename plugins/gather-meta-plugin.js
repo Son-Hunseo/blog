@@ -268,6 +268,10 @@ module.exports = function (context, options) {
         const wordCount = contentText.trim().split(/\s+/).length;
         const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
+        // 파일명 숫자 프리픽스 추출 (예: "03-Docker-Install" -> 3)
+        const prefixMatch = fileName.match(/^(\d+)-/);
+        const fileOrder = prefixMatch ? parseInt(prefixMatch[1], 10) : 0;
+
         // 포스트 데이터 객체 생성
         const postData = {
           title: frontMatter.title || 'Untitled',        // 문서 제목
@@ -278,6 +282,7 @@ module.exports = function (context, options) {
           tags: frontMatter.tags || [],                  // 태그 배열
           date: frontMatter.date || null,                // 작성일
           readingTime: readingTime,                      // 예상 읽기 시간 (분)
+          fileOrder: fileOrder,                          // 파일명 숫자 프리픽스 (정렬용)
         };
 
         // 전체 포스트 배열에 추가

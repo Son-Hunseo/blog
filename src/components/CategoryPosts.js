@@ -73,10 +73,12 @@ function CategoryPosts() {
       post.link !== `/${currentPath}/`
     )
     .sort((a, b) => {
-      if (!a.date && !b.date) return 0;
+      if (!a.date && !b.date) return (b.fileOrder || 0) - (a.fileOrder || 0);
       if (!a.date) return 1;
       if (!b.date) return -1;
-      return new Date(b.date) - new Date(a.date);
+      const dateDiff = new Date(b.date) - new Date(a.date);
+      if (dateDiff !== 0) return dateDiff;
+      return (b.fileOrder || 0) - (a.fileOrder || 0);
     });
 
   // 표시할 글이 없으면 컴포넌트 렌더링 안 함
