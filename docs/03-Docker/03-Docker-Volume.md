@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-28
 title: Docker Volume
 description: Docker 컨테이너의 데이터 영속성을 확보하는 핵심 기술인 Docker Volume과 Bind Mount의 원리 및 사용법을 자세히 알아봅니다. Volume 생성, 마운트, 구 방식 -v와 권장 방식 --mount의 차이점, 그리고 외부 스토리지를 연동하는 Volume Driver Plugin의 역할까지 다룹니다.
 ---

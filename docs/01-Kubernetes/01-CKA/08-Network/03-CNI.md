@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-31
 title: 쿠버네티스에서의 CNI
 description: 쿠버네티스에서 CNI 플러그인은 누가, 어떻게 호출할까요? 컨테이너 런타임(Containerd, CRI-O)의 역할부터 CNI 바이너리 경로(/opt/cni/bin) 및 설정 파일(/etc/cni/net.d)의 위치까지, K8s 네트워크 네임스페이스 생성 과정을 쉽고 정확하게 정리해 드립니다.
 ---

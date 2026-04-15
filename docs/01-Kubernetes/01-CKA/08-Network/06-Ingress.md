@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2026-01-02
 title: Ingress
 description: 쿠버네티스(Kubernetes) Ingress의 개념과 필요성을 NodePort, LoadBalancer 서비스와의 비교를 통해 쉽게 설명합니다. 경로 기반 및 도메인 기반 Ingress 설정 예시와 Nginx Ingress Controller의 동작 원리를 확인해 보세요.
 ---

@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2026-01-04
 title: 고가용성(HA)
 description: 쿠버네티스(Kubernetes) 운영 환경의 필수 조건인 HA(고가용성) 구성 원리를 정리합니다. API 서버의 로드 밸런싱, 컨트롤러/스케줄러의 리더 선출 방식(Active-Standby), 그리고 Stacked/External etcd 토폴로지의 차이점을 쉽게 이해해보세요.
 ---

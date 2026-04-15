@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-06-15
 title: Terminating 상태의 Namespace 강제로 삭제하기
 description: Kubernetes에서 네임스페이스가 Terminating 상태로 삭제되지 않을 때, Finalizer를 제거하여 강제로 네임스페이스를 삭제하는 방법을 단계별로 설명합니다.
 ---

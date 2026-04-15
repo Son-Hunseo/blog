@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-01-15
 title: 비트마스킹
 description: 비트 연산을 활용한 집합 표현과 상태 관리 기법을 다룹니다. 비트마스킹의 기본 원리부터 실전 알고리즘 문제 해결까지 설명합니다
 ---

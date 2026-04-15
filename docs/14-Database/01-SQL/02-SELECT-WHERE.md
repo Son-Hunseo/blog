@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-03-05
 title: "[DML] SELECT - WHERE 절과 조건문"
 description: 데이터를 필터링하는 WHERE 절의 모든 문법을 정리합니다. AND, OR, IN, BETWEEN, LIKE 등 조건식의 차이와 NULL 처리 시 주의점을 다룹니다.
 ---

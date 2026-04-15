@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-02
 title: Kube-API Server
 description: kube-apiserver는 Kubernetes 클러스터의 모든 요청을 처리하는 핵심 컴포넌트로, 인증·검증 과정을 거쳐 etcd와 통신하며 클러스터 상태를 관리합니다. 이 글에서는 kube-apiserver의 역할, 동작 방식, 설치 및 확인 방법을 CKA 관점에서 자세히 정리했습니다.
 ---

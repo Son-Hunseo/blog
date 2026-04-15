@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2026-01-09
 title: Transformers
 description: Kustomize의 핵심 기능인 Transformation(Common, Image)을 완벽 정리합니다. commonLabels, namespace 설정부터 이미지 태그 일괄 변경까지, 쿠버네티스 리소스 관리 효율을 높이는 실무 예제를 확인하세요.
 ---

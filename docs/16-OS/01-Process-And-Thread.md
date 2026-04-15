@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-10-15
 title: 프로세스와 쓰레드
 description: 프로그램과 프로세스, 쓰레드의 차이점을 명확하게 정리합니다. 메모리 구조(Code, Data, Stack, Heap)부터 멀티 프로세싱과 멀티 쓰레딩의 장단점, CPU 하이퍼스레딩과 동시성(Concurrency)의 개념까지 한눈에 파악할 수 있는 기술 가이드입니다.
 ---

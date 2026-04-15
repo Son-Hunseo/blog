@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-03
 title: Kube-scheduler
 description: kube-scheduler는 Kubernetes에서 Pod를 어떤 노드에 배치할지 결정하는 핵심 컴포넌트입니다. 이 글에서는 스케줄러의 역할, Filter 및 Rank 단계의 동작 원리, 스케줄링 우선순위 요소, 그리고 설치 및 확인 방법을 CKA 학습 기준으로 정리했습니다.
 ---

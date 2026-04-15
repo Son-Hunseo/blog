@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-28
 title: Docker Storage
 description: Docker의 데이터 저장 구조( /var/lib/docker)와 레이어드 아키텍처(Layered Architecture)의 핵심 개념을 정리합니다. 이미지 레이어와 컨테이너 레이어의 차이점, 복사 시점 쓰기(COW) 방식, 그리고 스토리지 드라이버의 역할을 초보자도 이해하기 쉽게 설명합니다.
 ---

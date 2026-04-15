@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-03-14
 title: "[DML] SELECT - JOIN"
 description: 이 글은 Oracle HR 예제 스키마를 기반으로 INNER JOIN, OUTER JOIN, SELF JOIN, Non-Equi JOIN 등 다양한 SQL JOIN의 개념과 사용법을 단계별 예제와 함께 설명합니다. ON, USING, NATURAL JOIN의 차이와 실제 쿼리 예시를 통해 JOIN의 원리와 활용법을 쉽게 이해할 수 있습니다.
 ---

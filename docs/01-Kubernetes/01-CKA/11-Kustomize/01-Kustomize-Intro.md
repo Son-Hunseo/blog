@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2026-01-08
 title: Kustomize 개요
 description: 쿠버네티스(Kubernetes) 환경별(Dev, Prod) 설정 관리를 위한 Kustomize의 개념, Base와 Overlays 구조, 장점을 예제 코드와 함께 알기 쉽게 설명합니다. YAML 중복 문제를 해결하는 효율적인 배포 관리 방법을 알아보세요.
 ---

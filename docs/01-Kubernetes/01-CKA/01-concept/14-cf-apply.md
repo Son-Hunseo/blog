@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-07
 title: cf) kubectl apply 명령어의 원리
 description: kubectl apply 명령어의 내부 동작 원리와 Local, Live, Last Applied Configuration의 관계를 상세히 설명합니다. Kubernetes에서 선언적 관리가 왜 중요한지, 그리고 apply, create, replace를 혼용하면 관리가 꼬이는 이유를 구체적인 예시와 함께 알아봅니다.
 ---

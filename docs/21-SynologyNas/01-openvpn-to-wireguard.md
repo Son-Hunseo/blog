@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-04-20
 title: OpenVPN -> WireGuard 전환기
 description: Synology NAS에서 OpenVPN을 WireGuard로 교체한 경험을 공유합니다. WireGuard의 장점과 마이그레이션 과정을 실무 관점에서 설명합니다
 ---

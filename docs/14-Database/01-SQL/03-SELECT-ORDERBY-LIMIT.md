@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-03-07
 title: "[DML] SELECT - ORDER BY와 LIMIT"
 description: SQL 결과를 정렬하고 제한하는 ORDER BY와 LIMIT의 작동 원리를 실제 예제와 함께 알아봅니다. OFFSET을 활용한 페이지네이션 기법도 함께 다룹니다.
 ---
