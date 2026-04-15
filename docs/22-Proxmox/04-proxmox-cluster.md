@@ -1,7 +1,7 @@
-﻿---
+---
 sidebar_class_name: hidden-sidebar-item
 date: 2025-05-22
-title: Proxmox 클러스터 구축 및 주의점
+title: Proxmox 클러스터 구축 방법
 description: Proxmox VE에서 클러스터를 구성하는 방법과 join 시 발생하는 오류 해결법을 정리했습니다. 홈서버나 소규모 인프라 환경에서 고가용성(HA)을 구축하기 위한 기초 개념과 방화벽 포트 설정, 호스트네임 변경 절차까지 단계별로 설명합니다.
 ---
 
@@ -25,11 +25,27 @@ pvecm create 클러스터 이름
 ```
 
 - 첫 번째 노드, 즉 원래 메인으로 사용하던 노드에서 위 명령어를 입력해 클러스터를 생성해준다.
-	- 원래 Proxmox에서는 쿼럼을 가진 노드가 제어권을 가지므로 어디서 생성하든 상관없지만, 편의상 이렇게 지칭하겠다.
 - 같은 클러스터 구성이라 따로 언급은 하지 않았지만, 혹시나 각 노드별 방화벽이 있다면 아래 포트를 열어줘야한다.
 	- `22(TCP)` - SSH
 	- `5404-5405(UDP)` - Corosync
-	- `2234(TCP)` - `pve-cluster` 파일 동기화
+
+### hosts 파일 설정
+
+> [!info] 만약 내부에 DNS서버가 있으며, 해당 DNS서버에서 각 노드의 도메인 설정이 되어있고, 각 노드가 DNS서버로 해당 서버를 바라보고 있다면 `hosts` 파일 설정은 필요없다.
+
+```bash
+nano /etc/hosts
+```
+
+```conf
+<클러스터에속한-노드1-IP> node1.local node1
+<클러스터에속한-노드2-IP> node2.local node2
+...
+```
+
+- 각 노드가 서로의 도메인을 알아야하기 때문에 `hosts` 파일을 수정해준다.
+- 도메인은 proxmox 설치시 설정한 값으로 한다.
+- hostname과 IP가 정확히 매핑되어야 하며, FQDN과 short hostname 모두 설정하는 것이 안정적이다.
 
 ### 클러스터 Join
 
@@ -38,13 +54,11 @@ pvecm add 클러스터를생성한노드ip
 ```
 
 - 위 명령어를 입력하면 클러스터에 Join이 된다.
-- 하지만 위 명령어를 입력하면 오류메시지가 뜰 것이다. 원인은 아래 주의점에서 보자.
 
-### 주의점
+---
+## 주의점(hostname)
 
-- Proxmox를 설치하면 기본적으로 호스트의 호스트네임이 `cloud`로 되어있다. Proxmox는 같은 클러스터 내에서 같은 호스트네임을 허용하지 않는다. 이에 오류메시지가 뜨는 것이다.
-
-**Proxmox 호스트네임 바꾸기**
+- hostname이 만약 겹친다면, Join되지 않는다. 만약 hostname을 겹치게 설정하였다면 아래 절차를 따른다.
 
 ```bash
 hostnamectl set-hostname 바꿀호스트명
@@ -57,11 +71,12 @@ hostnamectl set-hostname 바꿀호스트명
 nano /etc/hosts
 ```
 
-- `/etc/hosts` 파일을 변경해주어야한다.
+- `/etc/hosts` 파일을 변경해주어야한다. (모든 노드에서)
 
 ```bash
 ...
-현재노드의ip 도메인 cloud
+현재노드의ip FQDN short-host-name
+# ex: 192.168.99 cloud.local cloud
 ```
 
 - 위 내용 중 `cloud` 부분을 위에서 바꾼 호스트명으로 변경해주고 저장한다.
