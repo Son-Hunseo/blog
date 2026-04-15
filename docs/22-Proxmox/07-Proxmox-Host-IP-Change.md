@@ -1,4 +1,4 @@
-﻿---
+---
 sidebar_class_name: hidden-sidebar-item
 date: 2025-06-19
 title: Proxmox 호스트 IP가 변경되었을 때 네트워크 설정 변경
@@ -66,3 +66,55 @@ reboot
 ```
 
 - 재부팅한다.
+
+---
+## 클러스터에 속한 노드인 경우
+
+> [!tip] 아래 절차를 진행 중 권한 문제가 나오면, 쿼럼이 없는 경우이므로 `pvecm expected 1` 명령어를 입력한다. (쿼럼 강제로 얻는 명령어)
+
+```bash
+nano /etc/pve/corosync.conf
+```
+
+```conf
+...
+nodelist {
+  node {
+    name: cloud
+    nodeid: 1
+    quorum_votes: 1
+    ring0_addr: 기존IP # 여기 부분 변경IP로 수정
+  }
+  ...
+}
+...
+
+totem {
+  ...
+  config_version: 4 # 여기 부분 반드시 1 올려주어야한다. (ex: 원래 4였다면 5로 수정)
+  ...
+}
+
+```
+
+- 위 명령어 입력 후 `ring0_addr`의 기존 ip 부분 변경 ip로 수정
+- 이후 `config_version`을 1 증가시킨다.
+
+```bash
+nano /etc/hosts
+```
+
+```conf
+...
+기존IP mycloud.local mycloud # 여기 기존IP를 변경IP로 수정
+...
+```
+
+- 기존에 다른 노드들의 DNS를 `hosts`에 등록했었다면, 모든 노드들에서 `/etc/hosts`에서 바뀐 노드의 IP를 변경해주어야 한다.
+
+```bash
+systemctl restart corosync
+```
+
+- `corosync`를 재시작해준다.
+
