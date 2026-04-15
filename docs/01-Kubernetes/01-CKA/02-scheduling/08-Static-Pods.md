@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-11
 title: Static Pods
 description: Static Pod는 Kubernetes Control Plane 없이 Kubelet이 독립적으로 생성/관리하며, Control Plane 구성에 주로 사용됩니다. 동작 방식, Mirror Pod의 역할, 그리고 노드별 데몬 배포를 위한 DaemonSet과의 차이점을 자세히 알아보고, kubectl 조작 시 유의사항을 확인하세요.
 ---

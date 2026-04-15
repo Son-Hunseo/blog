@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-01-08
 title: 분할정복 & 이진탐색
 description: 문제를 작은 단위로 나누어 해결하는 분할정복 알고리즘과 정렬된 데이터에서 효율적으로 탐색하는 이진탐색 기법을 설명합니다
 ---

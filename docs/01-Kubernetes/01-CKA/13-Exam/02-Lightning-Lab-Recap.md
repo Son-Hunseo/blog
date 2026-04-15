@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2026-01-14
 title: Lightning Lab 오답 정리
 description: CKA 시험 대비 Udemy Mumshad 강의의 Lightning Lab 실습 문제 오답을 정리했습니다. 클러스터 업그레이드, Custom columns, kubeconfig 트러블슈팅, PV/PVC 바인딩, ETCD 백업, Secret 볼륨 마운트 등의 문제 풀이와 해결 방법을 설명합니다.
 ---

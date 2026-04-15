@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-29
 title: PV(Persistent Volume) & PVC(Persistent Volume Claim)
 description: Kubernetes의 영구 스토리지 관리 핵심 개념인 **PV (Persistent Volume)**와 **PVC (Persistent Volume Claim)**의 개념, 구조, 바인딩 규칙, 그리고 Pod에 적용하는 방법을 상세히 설명합니다. PV/PVC의 YAML 예시와 Deprecated된 Recycle 정책에 대한 최신 정보도 포함되어 있습니다.
 ---

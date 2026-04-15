@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-10-20
 title: Jenkins Webhook을 위해 Nginx 화이트리스트 처리하기
 description: Jenkins를 외부에 노출하지 않고 Github Webhook을 안전하게 받는 방법을 소개합니다. Nginx 화이트리스트를 통한 보안 강화 기법을 다룹니다
 ---

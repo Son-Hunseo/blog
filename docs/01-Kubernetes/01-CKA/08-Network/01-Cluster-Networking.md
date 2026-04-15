@@ -1,6 +1,6 @@
 ﻿---
 sidebar_class_name: hidden-sidebar-item
-date: 2026-01-18
+date: 2025-12-30
 title: Node 네트워크
 description: 쿠버네티스(Kubernetes) 클러스터 구성을 위한 필수 네트워크 설정 가이드입니다. 마스터 및 워커 노드의 포트 요구사항, 호스트네임 및 MAC 주소 중복 주의사항, 그리고 ip, netstat 등 실무 및 CKA 시험에 자주 출현하는 네트워크 디버깅 명령어를 정리했습니다.
 ---
