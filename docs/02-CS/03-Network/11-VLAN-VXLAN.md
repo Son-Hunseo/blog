@@ -1,4 +1,4 @@
-﻿---
+---
 sidebar_class_name: hidden-sidebar-item
 date: 2026-04-11
 title: VLAN과 VXLAN
