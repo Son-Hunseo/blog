@@ -109,6 +109,16 @@ function SelectedPosts() {
           <article key={idx} className={styles.postCard}>
             {/* 카드 전체를 링크로 감싸서 클릭 가능하게 */}
             <Link to={post.link} className={styles.postLink}>
+              {/* 썸네일 이미지 */}
+              {post.image ? (
+                <div className={styles.imageWrapper}>
+                  <img src={post.image} alt={post.title} className={styles.postImage} />
+                </div>
+              ) : (
+                <div className={styles.noImage}>
+                  <span className={styles.noImageIcon}>📄</span>
+                </div>
+              )}
               <div className={styles.postContent}>
                 {/* 글 제목 */}
                 <h3 className={styles.postTitle}>{post.title}</h3>
