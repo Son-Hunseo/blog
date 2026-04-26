@@ -283,6 +283,7 @@ module.exports = function (context, options) {
           date: frontMatter.date || null,                // 작성일
           readingTime: readingTime,                      // 예상 읽기 시간 (분)
           fileOrder: fileOrder,                          // 파일명 숫자 프리픽스 (정렬용)
+          image: frontMatter.image || null,              // 썸네일 이미지 경로
         };
 
         // 전체 포스트 배열에 추가
