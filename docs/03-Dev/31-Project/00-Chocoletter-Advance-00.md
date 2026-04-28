@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-21
 title: "[초코레터 프로젝트 고도화 - 0] 고도화 계기 및 기존 프로젝트 상황"

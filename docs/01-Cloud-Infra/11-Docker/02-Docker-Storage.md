@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/docker.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-28
 title: Docker Storage

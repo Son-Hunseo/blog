@@ -1,4 +1,5 @@
 ---
+image: /img/default/homelab/proxmox.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-06-19
 title: Proxmox 호스트 IP가 변경되었을 때 네트워크 설정 변경

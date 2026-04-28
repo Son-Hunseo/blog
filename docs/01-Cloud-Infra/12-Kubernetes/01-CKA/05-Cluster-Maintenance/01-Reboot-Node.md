@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-19
 title: 노드 다운(재부팅) 시 고려해야할 점 (Drain, Uncordon)

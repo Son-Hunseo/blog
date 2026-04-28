@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/dev/spring.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-04-01
 title: 레거시 Spring 프로젝트 세팅

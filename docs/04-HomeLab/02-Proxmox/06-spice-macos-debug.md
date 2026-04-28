@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/homelab/proxmox.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-06-05
 title: MacOS에서 virt-viewer로 SPICE연결이 되지 않는 현상 해결

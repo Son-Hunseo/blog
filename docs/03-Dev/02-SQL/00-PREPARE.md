@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/dev/sql.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-01
 title: "[DML] 사전 데이터 준비"

@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-08-15
 title: Pod 대역과 사설망 대역이 겹치는 문제

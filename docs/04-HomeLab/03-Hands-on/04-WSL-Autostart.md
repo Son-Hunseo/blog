@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-17
 title: 부팅될 때 WSL 자동으로 실행되게 하기

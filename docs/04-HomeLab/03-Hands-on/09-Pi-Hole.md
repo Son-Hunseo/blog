@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2025-06-12
 title: Pi-Hole로 광고 차단과 내부 DNS 설정하기

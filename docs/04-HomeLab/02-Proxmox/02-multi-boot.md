@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/homelab/proxmox.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-05-08
 title: Proxmox 멀티 부팅 세팅
