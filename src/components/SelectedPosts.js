@@ -54,16 +54,13 @@ function formatDate(dateString) {
  */
 const SELECTED_POST_IDS = [
     'AI/Claude-Code-Tips',
-    'Kubernetes/CKA/Exam/Exam-Recap-2',
-    'Golang/Java-vs-Go-Thread',
-    'Network/Namespace',
-    'Project/Chocoletter-Advance-00',
-    'Project/Chocoletter-Advance-01',
-    'Project/Chocoletter-Advance-02',
-    'Project/Chocoletter-Advance-03',
-    'Project/Chocoletter-Advance-04',
-    'Project/Chocoletter-Advance-05',
-    'Project/Chocoletter-Advance-06',
+    'Cloud-Infra/Kubernetes/CKA/Exam/Exam-Recap-2',
+    'Cloud-Infra/Openstack/Install-OpenStack',
+    'Cloud-Infra/Openstack/Install-Ceph',
+    'Cloud-Infra/Openstack/Connect-OpenStack-Ceph',
+    'Dev/Project/Chocoletter-Advance-01',
+    'Dev/Project/Chocoletter-Advance-02',
+    'Dev/Project/Chocoletter-Advance-06',
 ];
 
 /**
