@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/dev/spring.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-04-15
 title: "[Core] Spring 개요"

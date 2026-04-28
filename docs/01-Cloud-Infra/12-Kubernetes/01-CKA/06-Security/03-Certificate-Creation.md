@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-22
 title: 쿠버네티스 컴포넌트 별 인증서 발급 방법 (수동)

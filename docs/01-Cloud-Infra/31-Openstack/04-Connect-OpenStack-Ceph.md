@@ -1,4 +1,5 @@
 ---
+image: /img/default/cloud/openstack.webp
 title: "[OpenStack 아키텍처 실습3] OpenStack-Ceph 연동"
 description: OpenStack과 Ceph 클러스터를 연동하여 Cinder(볼륨), Glance(이미지), Nova(인스턴스)의 스토리지 백엔드를 Ceph RBD로 전환하고, 실제 인스턴스 생성을 통해 동작을 검증하는 최종 연동 가이드입니다.
 date: 2026-04-24

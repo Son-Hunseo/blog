@@ -1,4 +1,5 @@
 ---
+image: /img/default/homelab/proxmox.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-05-22
 title: Proxmox 클러스터 구축 방법

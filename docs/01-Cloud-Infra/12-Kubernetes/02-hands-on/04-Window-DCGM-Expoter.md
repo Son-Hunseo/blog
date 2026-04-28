@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-15
 title: 윈도우에 장착된 GPU를 Prometheus & Grafana로 모니터링 해보자

@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-27
 title: 오퍼레이터 (커스텀 리소스, 커스텀 컨트롤러)

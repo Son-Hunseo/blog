@@ -1,4 +1,5 @@
 ---
+image: /img/default/cloud/openstack.webp
 title: "[OpenStack 아키텍처 실습1] 전체 설계 및 OpenStack 설치(Kolla-Ansible)"
 description: Proxmox 가상화 환경에서 802.1Q VLAN 스위치를 활용해 실제 데이터센터의 망 분리 구조를 재현하고, Kolla-Ansible로 OpenStack 클러스터를 구축하는 실습 가이드입니다.
 date: 2026-04-22

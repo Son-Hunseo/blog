@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/dev/sql.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-03
 title: "[DML] SELECT - 기본 문법과 별칭(alias), NULL 처리"

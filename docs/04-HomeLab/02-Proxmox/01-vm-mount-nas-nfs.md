@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/homelab/proxmox.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-05-01
 title: 시놀로지 나스의 공유 폴더를 Proxmox VM의 볼륨으로 사용해보자

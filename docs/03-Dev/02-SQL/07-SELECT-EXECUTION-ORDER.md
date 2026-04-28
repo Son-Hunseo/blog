@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/dev/sql.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-13
 title: "[DML] SELECT - 쿼리 실행 순서"

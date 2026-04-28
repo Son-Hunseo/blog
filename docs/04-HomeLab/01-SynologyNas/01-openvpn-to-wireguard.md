@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/homelab/synology.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-04-20
 title: OpenVPN -> WireGuard 전환기

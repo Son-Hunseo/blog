@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/homelab/proxmox.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-05-29
 title: Proxmox VM에 GPU Passthrough를 적용해보자.

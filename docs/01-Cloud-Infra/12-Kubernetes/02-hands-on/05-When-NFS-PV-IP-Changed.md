@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-08-01
 title: NFS 서버 IP 변경 시 PV 재설정 방법

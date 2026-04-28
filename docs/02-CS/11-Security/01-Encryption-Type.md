@@ -1,4 +1,5 @@
 ---
+image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2025-11-01
 title: 암호화의 종류(단방향 암호화, 양방향 암호화)

@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-30
 title: 스위칭, 라우팅, 게이트웨이, IP 포워딩
