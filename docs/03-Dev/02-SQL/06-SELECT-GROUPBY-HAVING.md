@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/dev/sql.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-12
 title: "[DML] SELECT - GROUP BY와 HAVING"

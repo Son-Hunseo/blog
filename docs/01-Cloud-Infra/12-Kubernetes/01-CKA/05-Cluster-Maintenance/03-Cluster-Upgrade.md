@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-20
 title: 클러스터 업데이트

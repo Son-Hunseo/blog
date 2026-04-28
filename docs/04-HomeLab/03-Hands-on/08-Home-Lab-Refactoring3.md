@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2025-08-14
 title: "[홈랩 리팩토링 - 3] Gateway API 도입"

@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-31
 title: "[홈랩 리팩토링 - 1] 리팩토링 하는 이유"

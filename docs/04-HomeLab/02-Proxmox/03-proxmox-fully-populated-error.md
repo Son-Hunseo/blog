@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/homelab/proxmox.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-05-15
 title: Proxmox 설치 waiting for /dev to be fully populated 오류

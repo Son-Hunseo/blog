@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-10
 title: AMD mini pc 안정성을 위한 바이오스 설정

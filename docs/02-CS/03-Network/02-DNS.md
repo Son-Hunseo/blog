@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-02
 title: DNS

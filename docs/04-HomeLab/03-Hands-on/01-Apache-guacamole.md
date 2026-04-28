@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2025-06-26
 title: Apache Guacamole로 개인 vdi를 만들어보자

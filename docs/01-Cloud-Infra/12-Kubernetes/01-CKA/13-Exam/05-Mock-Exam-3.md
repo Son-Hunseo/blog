@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-15
 title: Mock Exam 3 오답 정리

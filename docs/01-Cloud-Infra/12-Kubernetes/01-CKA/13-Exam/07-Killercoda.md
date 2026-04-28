@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-16
 title: Killercoda 트러블슈팅 문제 풀이

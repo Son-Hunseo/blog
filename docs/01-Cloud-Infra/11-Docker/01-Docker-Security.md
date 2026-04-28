@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/docker.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-26
 title: Docker 보안 (Namespace, User Security, Linux Capabilities)

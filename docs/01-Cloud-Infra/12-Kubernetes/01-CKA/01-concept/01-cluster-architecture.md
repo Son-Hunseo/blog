@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-01
 title: 쿠버네티스 아키텍처

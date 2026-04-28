@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-22
 title: 쿠버네티스 인증서 문제 해결 체크리스트

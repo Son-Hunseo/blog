@@ -1,4 +1,5 @@
 ﻿---
+image: /img/default/dev/go.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-08-01
 title: Java Thread vs Go Goroutine
