@@ -1,6 +1,6 @@
 ---
 title: "[OpenStack 아키텍처 실습1] 전체 설계 및 OpenStack 설치(Kolla-Ansible)"
-description: 설명
+description: Proxmox 가상화 환경에서 802.1Q VLAN 스위치를 활용해 실제 데이터센터의 망 분리 구조를 재현하고, Kolla-Ansible로 OpenStack 클러스터를 구축하는 실습 가이드입니다.
 date: 2026-04-22
 sidebar_class_name: hidden-sidebar-item
 ---
@@ -650,7 +650,7 @@ sudo ip route add default via 192.168.10.254
 
 ![[assets/kolla12.png]]
 
-- 이러면 Horizon 접속이 가능하다.
+- 이러면 `http://<VIP IP>` Horizon 접속이 가능하다.
 
 ---
 ## 이후..
