@@ -38,6 +38,14 @@ sudo rbd pool init vms
 - Pool은 Ceph에서 데이터를 저장하는 논리적 공간이다. (OpenStack에서는 서비스별로 Pool을 나눠 사용한다)
 - OpenStack 각 서비스에서 사용할 스토리지 풀을 생성한다.
 
+> [!tip] Nova Emphemeral Disk는 뭐지?
+> OpenStack에서 VM의 루트 디스크를 생성하는 법은 2가지이다.
+> 1. Nova에서 직접 VM 전용 루트 디스크 생성 (Emphemeral Disk) (인스턴스 생성 시 '새 볼륨 생성'을 끄면 됨)
+> 2. Cinder에서 볼륨을 만들고 해당 볼륨을 VM의 루트 디스크로 연결
+> 
+> - 이론적으로는 보통 Stateless한 것들(Stateless한 웹서버, k8s 워커노드, Test용 VM) 등을 Emphemeral Disk로 만드는 것이 좋다고 알려져있다.
+> - 하지만, 보통 현업에서는 대부분 그냥 Cinder에서 볼륨 만들고 루트 디스크로 연결하는 방법만 사용하는 곳이 많다. (실제 성능 테스트 해보면 비슷해서)
+
 ### Replica 설정
 
 ```bash
