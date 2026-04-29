@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/homelab/proxmox.png
+image: /img/posts/04-HomeLab/02-Proxmox/03-proxmox-fully-populated-error/pve-install-error1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-05-15
 title: Proxmox 설치 waiting for /dev to be fully populated 오류

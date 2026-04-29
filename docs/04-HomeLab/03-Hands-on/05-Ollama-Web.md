@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/04-HomeLab/03-Hands-on/05-Ollama-Web/ollama1.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-24
 title: Ollama를 사용한 Local LLM 추론 및 웹 UI 호스팅

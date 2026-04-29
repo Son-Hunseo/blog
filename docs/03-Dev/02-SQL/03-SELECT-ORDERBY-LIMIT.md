@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/dev/sql.jpg
+image: /img/posts/03-Dev/02-SQL/03-SELECT-ORDERBY-LIMIT/select7.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-07
 title: "[DML] SELECT - ORDER BY와 LIMIT"

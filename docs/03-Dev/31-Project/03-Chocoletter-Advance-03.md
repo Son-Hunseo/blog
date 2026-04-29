@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/03-Dev/31-Project/03-Chocoletter-Advance-03/encrypt1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-21
 title: "[초코레터 프로젝트 고도화 - 3] 잘못된 편지 내용 암호화 기능 수정"

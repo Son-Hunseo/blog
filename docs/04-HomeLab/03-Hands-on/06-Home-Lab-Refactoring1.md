@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/04-HomeLab/03-Hands-on/06-Home-Lab-Refactoring1/home-refac3.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-31
 title: "[홈랩 리팩토링 - 1] 리팩토링 하는 이유"

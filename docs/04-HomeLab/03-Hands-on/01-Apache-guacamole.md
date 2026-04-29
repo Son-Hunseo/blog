@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/04-HomeLab/03-Hands-on/01-Apache-guacamole/guacamole1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-06-26
 title: Apache Guacamole로 개인 vdi를 만들어보자

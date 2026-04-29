@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/cloud/k8s.png
+image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/06-Security/11-Image-Security/image-security1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-26
 title: Image Security

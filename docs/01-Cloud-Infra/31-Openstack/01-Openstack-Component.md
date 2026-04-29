@@ -1,5 +1,5 @@
 ---
-image: /img/default/cloud/openstack.webp
+image: /img/posts/01-Cloud-Infra/31-Openstack/01-Openstack-Component/component.webp
 title: 오픈스택 주요 컴포넌트
 description: OpenStack의 주요 컴포넌트인 Nova, Neutron, Cinder, Swift, Glance, Keystone, Horizon의 역할을 정리하고, Heat, Ceilometer, Trove 등 추가 서비스의 개념을 함께 살펴봅니다. 각 컴포넌트가 컴퓨트, 네트워크, 스토리지, 인증, 대시보드 영역에서 어떤 역할을 수행하는지 초보자도 이해하기 쉽게 설명합니다.
 date: 2026-04-17
