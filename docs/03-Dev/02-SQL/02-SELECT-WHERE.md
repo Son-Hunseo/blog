@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/dev/sql.jpg
+image: /img/posts/03-Dev/02-SQL/02-SELECT-WHERE/select6.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-05
 title: "[DML] SELECT - WHERE 절과 조건문"

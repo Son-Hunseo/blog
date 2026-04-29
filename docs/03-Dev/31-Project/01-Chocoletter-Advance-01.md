@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/03-Dev/31-Project/01-Chocoletter-Advance-01/choco-legacy.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-21
 title: "[초코레터 프로젝트 고도화 - 1] 쿠버네티스 환경으로 마이그레이션"

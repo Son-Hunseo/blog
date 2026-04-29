@@ -1,5 +1,5 @@
 ---
-image: /img/default/cloud/aws.png
+image: /img/posts/01-Cloud-Infra/01-AWS/01-AWS-Network-Basic/region.webp
 title: AWS 네트워크 기초
 description: 알고 있다고 생각했지만 막상 설명하려면 헷갈리는 AWS 핵심 개념들을 정리했습니다. 왜 특정 사설 IP 대역 사용이 권장되는지, NAT Gateway가 인바운드를 차단하는 원리는 무엇인지 실무 관점에서 쉽고 명확하게 설명합니다.
 date: 2026-04-14

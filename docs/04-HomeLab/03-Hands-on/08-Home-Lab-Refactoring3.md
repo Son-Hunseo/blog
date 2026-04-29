@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/04-HomeLab/03-Hands-on/08-Home-Lab-Refactoring3/home-refac3.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-08-14
 title: "[홈랩 리팩토링 - 3] Gateway API 도입"

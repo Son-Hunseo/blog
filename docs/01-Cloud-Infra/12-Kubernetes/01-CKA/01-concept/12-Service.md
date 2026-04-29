@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/cloud/k8s.png
+image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/01-concept/12-Service/service1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-06
 title: Service

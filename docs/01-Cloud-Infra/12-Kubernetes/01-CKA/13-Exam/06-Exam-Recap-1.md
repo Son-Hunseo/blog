@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/cloud/k8s.png
+image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/13-Exam/06-Exam-Recap-1/recap1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-16
 title: CKA 시험 후기 & 못푼 문제 복기

@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/dev/spring.png
+image: /img/posts/03-Dev/11-Spring/02-Legacy-Spring-Project-Setting/legacy-spring-setting1.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-04-01
 title: 레거시 Spring 프로젝트 세팅

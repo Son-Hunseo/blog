@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/02-CS/02-OS/06-DeadLock/deadlock.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-03-29
 title: 데드락(DeadLock)

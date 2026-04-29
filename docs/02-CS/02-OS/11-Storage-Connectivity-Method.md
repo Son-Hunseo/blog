@@ -1,5 +1,5 @@
 ---
-image: /img/default/default.webp
+image: /img/posts/02-CS/02-OS/11-Storage-Connectivity-Method/connectivity1.png
 title: 연결 방식에 따른 스토리지 구분 (DAS, NAS, SAN)
 description: 서버와 스토리지의 연결 방식에 따라 구분되는 DAS, NAS, SAN의 개념과 차이를 정리합니다. 각 스토리지 방식의 연결 구조, 접근 단위, 장단점, 적합한 사용 환경을 비교하며 인프라 환경에서 스토리지를 선택할 때 고려해야 할 기준을 설명합니다.
 date: 2026-04-13

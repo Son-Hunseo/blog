@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/dev/sql.jpg
+image: /img/posts/03-Dev/02-SQL/05-SELECT-BUILT-IN-FUNCTION/select8.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-11
 title: "[DML] SELECT - 내장 함수 정리"

@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/03-Dev/31-Project/05-Chocoletter-Advance-05/erd.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-02-05
 title: "[초코레터 프로젝트 고도화 -5] DB 설계 변경 & 데이터 Backfill"

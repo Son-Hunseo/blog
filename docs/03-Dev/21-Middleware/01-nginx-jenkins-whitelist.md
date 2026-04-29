@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/03-Dev/21-Middleware/01-nginx-jenkins-whitelist/whitelist1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-10-20
 title: Jenkins Webhook을 위해 Nginx 화이트리스트 처리하기
