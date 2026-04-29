@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/02-CS/01-Algorithm/01-Union-find/disjoint-set-1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-01-01
 title: 서로소 집합

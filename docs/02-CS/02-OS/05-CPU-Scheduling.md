@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/02-CS/02-OS/05-CPU-Scheduling/cpu-scheduling1.jpeg
 sidebar_class_name: hidden-sidebar-item
 date: 2026-03-26
 title: CPU 스케줄링

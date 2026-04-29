@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/02-CS/01-Algorithm/06-Dijkstra/dijkstra1.jpeg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-02-05
 title: 최단거리 - 다익스트라(Dijkstra)

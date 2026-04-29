@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/03-Dev/31-Project/02-Chocoletter-Advance-02/focus-chat.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-21
 title: "[초코레터 프로젝트 고도화 - 2] Kafka에서 Redis Streams로 마이그레이션"

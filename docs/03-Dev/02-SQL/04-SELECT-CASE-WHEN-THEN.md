@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/dev/sql.jpg
+image: /img/posts/03-Dev/02-SQL/04-SELECT-CASE-WHEN-THEN/select4.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-09
 title: "[DML] SELECT - CASE ~ WHEN 조건 분기"

@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/dev/sql.jpg
+image: /img/posts/03-Dev/02-SQL/08-SELECT-JOIN/join1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-14
 title: "[DML] SELECT - JOIN"

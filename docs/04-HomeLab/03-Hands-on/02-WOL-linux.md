@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/default.webp
+image: /img/posts/04-HomeLab/03-Hands-on/02-WOL-linux/wol1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-03
 title: Ubuntu/Debian WOL(Wake-On-LAN) 설정하기

@@ -1,4 +1,5 @@
 ﻿---
+image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/10-Helm/03-Helm-Components/helm-components1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-07
 title: Helm의 구성 요소

@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/cloud/k8s.png
+image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/06-Security/06-KubeConfig/kubeconfig1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-23
 title: KubeConfig

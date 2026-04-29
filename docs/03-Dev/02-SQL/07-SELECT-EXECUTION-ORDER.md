@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/dev/sql.jpg
+image: /img/posts/03-Dev/02-SQL/07-SELECT-EXECUTION-ORDER/select16.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-13
 title: "[DML] SELECT - 쿼리 실행 순서"

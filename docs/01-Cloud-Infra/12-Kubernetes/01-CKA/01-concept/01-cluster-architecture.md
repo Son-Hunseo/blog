@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/cloud/k8s.png
+image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/01-concept/01-cluster-architecture/cluster-arch1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-01
 title: 쿠버네티스 아키텍처

@@ -1,5 +1,5 @@
 ﻿---
-image: /img/default/cloud/k8s.png
+image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/08-Network/01-Cluster-Networking/cluster-networking.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-30
 title: Node 네트워크

@@ -1,5 +1,5 @@
 ---
-image: /img/default/default.webp
+image: /img/posts/02-CS/02-OS/12-Storage-Data-Storage-Approach/approach1.png
 title: 데이터 접근 방식에 따른 스토리지 구분 (블록, 오브젝트, 파일)
 description: 데이터 접근 방식에 따라 구분되는 파일 스토리지, 블록 스토리지, 오브젝트 스토리지의 개념과 차이를 정리합니다. 각 스토리지 방식의 접근 단위, 사용 구조, 장단점, 적합한 환경을 비교하며 NAS, Ceph RBD, CephFS, Ceph RGW, AWS S3와 같은 대표 예시를 함께 설명합니다.
 date: 2026-04-29
