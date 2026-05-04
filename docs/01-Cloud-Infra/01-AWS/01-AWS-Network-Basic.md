@@ -34,6 +34,10 @@ AWS 인프라의 가장 큰 단위인 <span class="t-red">Region은 최소 2개 
 > [!tip] 특정 AZ를 이용하면 항상 같은 데이터센터의 인프라를 이용하는 것일까?
 > 아니다. 특정 AZ의 위치를 사용자는 알 수 없으며, 하나의 AZ에 쏠림을 방지하기 위해 `ap-northeast-2a`라는 AZ라고 하더라도 인프라가 위치한 데이터센터는 사용자별로 달라질 수 있다.
 
+>[!info] 생소할 수 있는 용어 정리
+> - point of presence (실제 데이터센터의 위치)
+> - edge locations (캐싱 - cloudfront와 같은 cdn)
+
 ---
 ## VPC (Virtual Private Cloud)
 
