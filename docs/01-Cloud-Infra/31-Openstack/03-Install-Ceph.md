@@ -26,7 +26,7 @@ Ceph의 장점은 다음과 같다:
 ## VM 구성
 ### VM 생성
 
-![[assets/ceph1.png]]
+![ceph1](assets/ceph1.png)
 
 - OS 디스크 외에 Ceph용 디스크를 별도로 추가한다.
 - Ceph 디스크는 <span class="t-red">포맷하거나 파티션을 나누지 않고 그대로 둔다.</span>
@@ -42,7 +42,7 @@ Ceph의 장점은 다음과 같다:
 
 ### 네트워크 설정
 
-![[assets/ceph2.png]]
+![ceph2](assets/ceph2.png)
 
 ```bash
 sudo nano /etc/netplan/50-cloud-init.yaml
@@ -226,7 +226,7 @@ sudo ceph status
 
 - OSD 추가 후 상태가 `HEALTH_OK`로 변경된다 (노드 수가 3개 미만이면 WARN이 유지될 수 있음)
 
-![[assets/ceph3.png]]
+![ceph3](assets/ceph3.png)
 
 ```bash
 sudo ceph orch ps
@@ -252,14 +252,14 @@ sudo rados -p test-pool get test-obj -
 ---
 ## 대시보드
 
-![[assets/ceph4.png]]
+![ceph4](assets/ceph4.png)
 
 - `https://<첫 노드 IP>:8443` 접속
 - 계정:
 	- ID: admin
 	- PW: bootstrap 시 출력된 비밀번호
 
-![[assets/ceph5.png]]
+![ceph5](assets/ceph5.png)
 
 - 생성한 pool 및 클러스터 상태를 확인할 수 있다
 

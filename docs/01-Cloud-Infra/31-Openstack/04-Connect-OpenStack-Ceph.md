@@ -350,36 +350,36 @@ sudo docker restart nova_compute
 ## 동작 검증
 ### 이미지 업로드
 
-![[assets/connect1.png]]
+![connect1](assets/connect1.png)
 
 - 테스트를 위한 가벼운 OS인 cirros 로 vm을 만들어 테스트를 해보자.
 - 주소: https://download.cirros-cloud.net/
 - 하나를 골라 다운로드한다.
 
-![[assets/connect2.png]]
+![connect2](assets/connect2.png)
 
 - horizon에서 프로젝트 > Compute > 이미지
 - 이미지 생성 클릭
 
-![[assets/connect3.png]]
+![connect3](assets/connect3.png)
 
 - 이미지 이름 지정
 - 아까 다운로드 받은 cirros 이미지 업로드
 - 포멧 - QCOW2
 - 이미지 공유 - 공유(public)
 
-![[assets/connect4.png]]
+![connect4](assets/connect4.png)
 
 - 업로드하고 ceph의 Block > 이미지 들어가보면 images 데이터풀에 업로드 된 것을 볼 수 있다.
 
 ### Flavor 생성
 
-![[assets/connect5.png]]
+![connect5](assets/connect5.png)
 
 - 관리 > Compute > Flavor
 - Flavor 생성 클릭
 
-![[assets/connect6.png]]
+![connect6](assets/connect6.png)
 
 - 이름 지정
 - vCPU 1개
@@ -389,14 +389,14 @@ sudo docker restart nova_compute
 
 ### 네트워크 생성
 
-![[assets/connect7.png]]
+![connect7](assets/connect7.png)
 
 - 프로젝트 > 네트워크 > 네트워크
 - 네트워크 생성 클릭
 
-![[assets/connect8.png]]
+![connect8](assets/connect8.png)
 
-![[assets/connect9.png]]
+![connect9](assets/connect9.png)
 
 - 네트워크 이름 지정
 - 서브넷 이름 지정
@@ -404,42 +404,42 @@ sudo docker restart nova_compute
 
 ### 인스턴스(VM) 생성
 
-![[assets/connect10.png]]
+![connect10](assets/connect10.png)
 
 - 프로젝트 > Compute > 인스턴스
 - 인스턴스 시작 클릭
 
-![[assets/connect11.png]]
+![connect11](assets/connect11.png)
 
 - 인스턴스 이름 지정
 
-![[assets/connect12.png]]
+![connect12](assets/connect12.png)
 
 - 볼륨 크기 - 5GB 지정
 	- Flavor에서 1GB 설정한건 최소 크기이고 이거 5GB 지정하면 덮어씌워짐
 - 테스트이므로 인스턴스 삭제시 볼륨 삭제 '예' 선택
 - 사용 가능에 있는 cirros 이미지의 화살표를 클릭해서 할당됨으로 옮기기
 
-![[assets/connect13.png]]
+![connect13](assets/connect13.png)
 
 - 아까 만든 Flavor 의 화살표를 클릭해서 할당됨으로 옮기기
 
-![[assets/connect14.png]]
+![connect14](assets/connect14.png)
 
 - 이건 아마 이미 할당됨 일텐데 혹시 사용 가능에 있다면 화살표 눌러서 아까 만든 네트워크 할당됨으로 옮기기
 - 인스턴스 시작 클릭
 
-![[assets/connect15.png]]
+![connect15](assets/connect15.png)
 
 - 조금 기다리면 성공적으로 생성된 것을 볼 수 있다.
 
 ### 최종 확인
 
-![[assets/connect16.png]]
+![connect16](assets/connect16.png)
 
 - ceph의 Block > 이미지 에 들어가보면 아까 images말고도 volumes 데이터풀이 아까 지정한 5GB로 할당된 것을 볼 수 있다.
 
-![[assets/connect17.png]]
+![connect17](assets/connect17.png)
 
 - VM 콘솔에도 정상적으로 접속이 되는 것을 볼 수 있다.
 
