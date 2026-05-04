@@ -1,6 +1,6 @@
 ---
 title: AWS를 사용하는 3가지 방법과 CloudShell
-description: 설명
+description: AWS를 사용하는 대표적인 세 가지 방법인 Management Console, CLI, SDK의 차이를 정리하고, 콘솔에서 바로 CLI 환경을 사용할 수 있는 CloudShell의 특징과 장점을 설명합니다.
 date: 2026-04-28
 sidebar_class_name: hidden-sidebar-item
 ---
