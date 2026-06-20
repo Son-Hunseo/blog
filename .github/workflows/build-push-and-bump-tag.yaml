@@ -50,10 +50,9 @@ jobs:
           HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
           HARBOR_PASSWORD: ${{ secrets.HARBOR_PASSWORD }}
         run: |
-          JSON="$(curl -fsSL \
+          JSON="$(curl -kfsSL \
             -u "${HARBOR_USERNAME}:${HARBOR_PASSWORD}" \
-            "${HARBOR_SCHEME}://${HARBOR_REGISTRY}/api/v2.0/projects/${HARBOR_PROJECT}/repositories/${HARBOR_REPOSITORY}/artifacts?page_size=100" \
-            || echo '[]')"
+            "${HARBOR_SCHEME}://${HARBOR_REGISTRY}/api/v2.0/projects/${HARBOR_PROJECT}/repositories/${HARBOR_REPOSITORY}/artifacts?page_size=100")"
 
           NEXT_TAG="$(echo "$JSON" | python3 .github/scripts/calc_next_tag.py)"
           echo "NEXT_TAG=${NEXT_TAG}" >> $GITHUB_ENV
