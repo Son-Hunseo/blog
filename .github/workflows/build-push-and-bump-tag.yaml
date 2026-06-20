@@ -1,6 +1,7 @@
-name: Build & Push to ECR and Update k8s deploy tag
+name: Build & Push to Harbor and Update k8s deploy tag
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -15,56 +16,58 @@ jobs:
   build-push-update:
     # k8s 리소스 푸시로 다시 재귀적으로 트리거되어 무한으로 호출되는 것을 막음
     if: github.actor != 'github-actions[bot]'
-    runs-on: ubuntu-latest
+    runs-on: my-gitaiops-runner
 
     env:
       IMAGE_NAME: son-blog
       DEPLOY_FILE: k8s/resource/deploy.yaml
-      AWS_REGION: ap-northeast-2
-      ECR_REPOSITORY: son/blog
+      HARBOR_REGISTRY: harbor.onprem.local
+      HARBOR_PROJECT: son
+      HARBOR_REPOSITORY: blog
+      HARBOR_SCHEME: https
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Access Key 기반 AWS 인증
-      - name: Configure AWS credentials (Access Key)
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-2
-
-      - name: Login to Amazon ECR
-        id: ecr_login
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Set ECR registry env
+      - name: Set image env
         run: |
-          echo "ECR_REGISTRY=${{ steps.ecr_login.outputs.registry }}" >> $GITHUB_ENV
+          echo "IMAGE_REPOSITORY=${HARBOR_REGISTRY}/${HARBOR_PROJECT}/${HARBOR_REPOSITORY}" >> $GITHUB_ENV
+
+      - name: Login to Harbor
+        env:
+          HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
+          HARBOR_PASSWORD: ${{ secrets.HARBOR_PASSWORD }}
+        run: |
+          echo "${HARBOR_PASSWORD}" | docker login "${HARBOR_REGISTRY}" \
+            --username "${HARBOR_USERNAME}" \
+            --password-stdin
 
       # 최신 태그 조회 + 0.1 증가 (외부 파이썬 스크립트 사용)
       - name: Calculate next image tag
         id: next_tag
+        env:
+          HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
+          HARBOR_PASSWORD: ${{ secrets.HARBOR_PASSWORD }}
         run: |
-          JSON="$(aws ecr describe-images \
-            --repository-name "${ECR_REPOSITORY}" \
-            --query 'imageDetails' \
-            --output json || echo '[]')"
-          
+          JSON="$(curl -fsSL \
+            -u "${HARBOR_USERNAME}:${HARBOR_PASSWORD}" \
+            "${HARBOR_SCHEME}://${HARBOR_REGISTRY}/api/v2.0/projects/${HARBOR_PROJECT}/repositories/${HARBOR_REPOSITORY}/artifacts?page_size=100" \
+            || echo '[]')"
+
           NEXT_TAG="$(echo "$JSON" | python3 .github/scripts/calc_next_tag.py)"
           echo "NEXT_TAG=${NEXT_TAG}" >> $GITHUB_ENV
 
       - name: Build & Push Docker image
         run: |
           docker build -t ${IMAGE_NAME}:${NEXT_TAG} .
-          docker tag ${IMAGE_NAME}:${NEXT_TAG} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${NEXT_TAG}
-          docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${NEXT_TAG}
+          docker tag ${IMAGE_NAME}:${NEXT_TAG} ${IMAGE_REPOSITORY}:${NEXT_TAG}
+          docker push ${IMAGE_REPOSITORY}:${NEXT_TAG}
 
       - name: Update deploy.yaml image tag
         run: |
           sed -i -E \
-            "s|(image:\s*.*${ECR_REPOSITORY}:)[^[:space:]]+|\1${NEXT_TAG}|" \
+            "s|(image:\s*.*${IMAGE_REPOSITORY}:)[^[:space:]]+|\1${NEXT_TAG}|" \
             "${DEPLOY_FILE}"
     
       - name: Commit and push  
