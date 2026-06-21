@@ -1,4 +1,4 @@
-name: Build & Push to Harbor and Update k8s deploy tag
+name: Build & Push to Harbor and Update GitOps deploy tag
 
 on:
   workflow_dispatch:
@@ -6,7 +6,6 @@ on:
     branches:
       - main
     paths-ignore:
-      - "k8s/**"          # k8s 폴더 아래만 변경된 경우 워크플로우 실행 안 함
       - ".github/**"      # (선택) 워크플로우/스크립트만 바뀐 경우도 제외하고 싶으면
 
 permissions:
@@ -20,7 +19,7 @@ jobs:
 
     env:
       IMAGE_NAME: son-blog
-      DEPLOY_FILE: k8s/resource/deploy.yaml
+      DEPLOY_FILE: resource/deploy.yaml
       HARBOR_REGISTRY: harbor.onprem.local
       HARBOR_PROJECT: son
       HARBOR_REPOSITORY: blog
@@ -63,16 +62,24 @@ jobs:
           docker tag ${IMAGE_NAME}:${NEXT_TAG} ${IMAGE_REPOSITORY}:${NEXT_TAG}
           docker push ${IMAGE_REPOSITORY}:${NEXT_TAG}
 
+      - name: Checkout GitOps repository
+        uses: actions/checkout@v4
+        with:
+          repository: Son-Hunseo/blog-gitops
+          token: ${{ secrets.BLOG_GITOPS_TOKEN }}
+          path: blog-gitops
+
       - name: Update deploy.yaml image tag
         run: |
           sed -i -E \
             "s|(image:\s*.*${IMAGE_REPOSITORY}:)[^[:space:]]+|\1${NEXT_TAG}|" \
-            "${DEPLOY_FILE}"
+            "blog-gitops/${DEPLOY_FILE}"
     
-      - name: Commit and push  
-        run: |  
+      - name: Commit and push GitOps manifest
+        run: |
+          cd blog-gitops
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           git add "${DEPLOY_FILE}"
-          git commit -m "chore(k8s): bump image tag to ${NEXT_TAG} [skip ci]" || exit 0
+          git commit -m "chore(gitops): bump image tag to ${NEXT_TAG}" || exit 0
           git push
