@@ -16,7 +16,7 @@ jobs:
   build-push-update:
     # k8s 리소스 푸시로 다시 재귀적으로 트리거되어 무한으로 호출되는 것을 막음
     if: github.actor != 'github-actions[bot]'
-    runs-on: my-gitaiops-runner
+    runs-on: my-blog-runner
 
     env:
       IMAGE_NAME: son-blog
