@@ -19,7 +19,7 @@ jobs:
 
     env:
       IMAGE_NAME: son-blog
-      KUSTOMIZATION_FILE: overlays/prod/kustomization.yaml
+      KUSTOMIZATION_FILE: overlays/onprem/prod/kustomization.yaml
       HARBOR_REGISTRY: harbor.onprem.local
       HARBOR_PROJECT: son
       HARBOR_REPOSITORY: blog
