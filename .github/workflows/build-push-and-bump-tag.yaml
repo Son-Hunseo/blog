@@ -19,7 +19,7 @@ jobs:
 
     env:
       IMAGE_NAME: son-blog
-      DEPLOY_FILE: resource/deploy.yaml
+      KUSTOMIZATION_FILE: overlays/prod/kustomization.yaml
       HARBOR_REGISTRY: harbor.onprem.local
       HARBOR_PROJECT: son
       HARBOR_REPOSITORY: blog
@@ -69,17 +69,17 @@ jobs:
           token: ${{ secrets.BLOG_GITOPS_TOKEN }}
           path: blog-gitops
 
-      - name: Update deploy.yaml image tag
+      - name: Update kustomization.yaml image tag
         run: |
           sed -i -E \
-            "s|(image:\s*.*${IMAGE_REPOSITORY}:)[^[:space:]]+|\1${NEXT_TAG}|" \
-            "blog-gitops/${DEPLOY_FILE}"
+            "s|(^[[:space:]]*newTag:[[:space:]]*).*$|\1\"${NEXT_TAG}\"|" \
+            "blog-gitops/${KUSTOMIZATION_FILE}"
     
       - name: Commit and push GitOps manifest
         run: |
           cd blog-gitops
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
-          git add "${DEPLOY_FILE}"
+          git add "${KUSTOMIZATION_FILE}"
           git commit -m "chore(gitops): bump image tag to ${NEXT_TAG}" || exit 0
           git push
