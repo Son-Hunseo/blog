@@ -1,4 +1,4 @@
-name: Build & Push to Harbor and Update GitOps deploy tag
+name: Build & Push and Update GitOps deploy tag
 
 on:
   workflow_dispatch:
@@ -6,15 +6,15 @@ on:
     branches:
       - main
     paths-ignore:
-      - ".github/**"      # (선택) 워크플로우/스크립트만 바뀐 경우도 제외하고 싶으면
+      - ".github/**"
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
-  build-push-update:
-    # k8s 리소스 푸시로 다시 재귀적으로 트리거되어 무한으로 호출되는 것을 막음
-    if: github.actor != 'github-actions[bot]'
+  deploy-onprem:
+    if: ${{ (vars.ENABLE_ONPREM || 'false') == 'true' && github.actor != 'github-actions[bot]' }}
     runs-on: my-blog-runner
 
     env:
@@ -42,7 +42,6 @@ jobs:
             --username "${HARBOR_USERNAME}" \
             --password-stdin
 
-      # 최신 태그 조회 + 0.1 증가 (외부 파이썬 스크립트 사용)
       - name: Calculate next image tag
         id: next_tag
         env:
@@ -56,11 +55,11 @@ jobs:
           NEXT_TAG="$(echo "$JSON" | python3 .github/scripts/calc_next_tag.py)"
           echo "NEXT_TAG=${NEXT_TAG}" >> $GITHUB_ENV
 
-      - name: Build & Push Docker image
+      - name: Build and push Docker image
         run: |
-          docker build -t ${IMAGE_NAME}:${NEXT_TAG} .
-          docker tag ${IMAGE_NAME}:${NEXT_TAG} ${IMAGE_REPOSITORY}:${NEXT_TAG}
-          docker push ${IMAGE_REPOSITORY}:${NEXT_TAG}
+          docker build -t "${IMAGE_NAME}:${NEXT_TAG}" .
+          docker tag "${IMAGE_NAME}:${NEXT_TAG}" "${IMAGE_REPOSITORY}:${NEXT_TAG}"
+          docker push "${IMAGE_REPOSITORY}:${NEXT_TAG}"
 
       - name: Checkout GitOps repository
         uses: actions/checkout@v4
@@ -69,17 +68,88 @@ jobs:
           token: ${{ secrets.BLOG_GITOPS_TOKEN }}
           path: blog-gitops
 
-      - name: Update kustomization.yaml image tag
+      - name: Update on-prem kustomization image tag
         run: |
           sed -i -E \
             "s|(^[[:space:]]*newTag:[[:space:]]*).*$|\1\"${NEXT_TAG}\"|" \
             "blog-gitops/${KUSTOMIZATION_FILE}"
-    
+
       - name: Commit and push GitOps manifest
         run: |
           cd blog-gitops
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           git add "${KUSTOMIZATION_FILE}"
-          git commit -m "chore(gitops): bump image tag to ${NEXT_TAG}" || exit 0
+          git commit -m "chore(gitops): bump on-prem image tag to ${NEXT_TAG}" || exit 0
+          git push
+
+  deploy-aws:
+    if: ${{ (vars.ENABLE_AWS || 'true') == 'true' && github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: ap-northeast-2
+      IMAGE_NAME: son-blog
+      KUSTOMIZATION_FILE: overlays/aws/prod/kustomization.yaml
+      ECR_REPOSITORY: blog
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ECR_PUSH_ROLE_ARN }}
+
+      - name: Login to Amazon ECR
+        id: ecr_login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set image env
+        run: |
+          echo "ECR_REGISTRY=${{ steps.ecr_login.outputs.registry }}" >> $GITHUB_ENV
+          echo "IMAGE_REPOSITORY=${{ steps.ecr_login.outputs.registry }}/${ECR_REPOSITORY}" >> $GITHUB_ENV
+
+      - name: Calculate next image tag
+        run: |
+          JSON="$(aws ecr describe-images \
+            --region "${AWS_REGION}" \
+            --repository-name "${ECR_REPOSITORY}" \
+            --query 'imageDetails[].imageTags[]' \
+            --output json 2>/dev/null || echo '[]')"
+
+          NEXT_TAG="$(echo "$JSON" | python3 .github/scripts/calc_next_tag.py)"
+          echo "NEXT_TAG=${NEXT_TAG}" >> $GITHUB_ENV
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t "${IMAGE_NAME}:${NEXT_TAG}" .
+          docker tag "${IMAGE_NAME}:${NEXT_TAG}" "${IMAGE_REPOSITORY}:${NEXT_TAG}"
+          docker push "${IMAGE_REPOSITORY}:${NEXT_TAG}"
+
+      - name: Checkout GitOps repository
+        uses: actions/checkout@v4
+        with:
+          repository: Son-Hunseo/blog-gitops
+          token: ${{ secrets.BLOG_GITOPS_TOKEN }}
+          path: blog-gitops
+
+      - name: Update AWS kustomization image
+        run: |
+          sed -i -E \
+            "s|(^[[:space:]]*newName:[[:space:]]*).*$|\1${IMAGE_REPOSITORY}|" \
+            "blog-gitops/${KUSTOMIZATION_FILE}"
+          sed -i -E \
+            "s|(^[[:space:]]*newTag:[[:space:]]*).*$|\1\"${NEXT_TAG}\"|" \
+            "blog-gitops/${KUSTOMIZATION_FILE}"
+
+      - name: Commit and push GitOps manifest
+        run: |
+          cd blog-gitops
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git add "${KUSTOMIZATION_FILE}"
+          git commit -m "chore(gitops): bump AWS image tag to ${NEXT_TAG}" || exit 0
           git push
