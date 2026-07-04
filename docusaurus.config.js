@@ -117,6 +117,10 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 4,
+      },
 
       // docusaurus 사이트 소유주 인증 과정
       // metadata: [
