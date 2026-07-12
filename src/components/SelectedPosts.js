@@ -53,6 +53,8 @@ function formatDate(dateString) {
  * - 순서 변경: 배열 순서 조정 (배열 순서대로 표시됨)
  */
 const SELECTED_POST_IDS = [
+    '/AI/GitAIOps-01',
+    '/AI/GitAIOps-02',
     'AI/Claude-Code-Tips',
     'Cloud-Infra/Kubernetes/CKA/Exam/Exam-Recap-2',
     'Cloud-Infra/Openstack/Install-OpenStack',
