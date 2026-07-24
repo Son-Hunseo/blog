@@ -77,3 +77,7 @@ npm run clear      # Docusaurus 캐시 삭제
 - KaTeX 스타일 (LaTeX 렌더링용)
 - Algolia 검색 하이라이트 커스터마이징
 - 히어로 섹션 타이포그래피 및 타이핑 애니메이션
+
+## 문서 동기화 규칙
+
+`CUSTOM.md`는 순정 Docusaurus 대비 이 프로젝트의 차이점을 상세히 정리한 문서입니다. **CLAUDE.md에 새로운 기능(컴포넌트, 테마 오버라이드, 플러그인 설정 등)이나 CSS가 추가/변경되면, 반드시 `CUSTOM.md`의 해당 섹션도 함께 업데이트해야 합니다.** (필요 시 `../basic-docu`에 순정 Docusaurus 프로젝트를 `npx create-docusaurus@latest basic-docu classic --javascript`로 받아 비교 기준으로 사용)
