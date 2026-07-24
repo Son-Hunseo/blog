@@ -58,7 +58,7 @@ son-blog/
 
 | 항목 | basic-docu | son-blog |
 |------|------------|----------|
-| Docusaurus | 3.10.0 | 3.8.1 |
+| Docusaurus | 3.10.2 | 3.8.1 |
 | Node.js (engines) | >=20.0 | >=18.0 |
 
 ### basic-docu 추가 패키지
@@ -115,6 +115,26 @@ docs: {
 
 - 기본 Docusaurus는 `/docs`에서 문서가 시작되지만, 현재 프로젝트는 `/`에서 바로 문서가 표시됨
 - `rehype-callouts` 플러그인으로 Obsidian 스타일 콜아웃 지원
+
+### 3.3.1 기타 최상위 설정 변경
+
+| 항목 | 기본값 | 현재 값 |
+|------|--------|---------|
+| `onBrokenMarkdownLinks` | (없음) | `'warn'` (신규 추가) |
+| `organizationName` / `projectName` | `'facebook'` / `'docusaurus'` | 미사용 (주석 처리, GitHub Pages 배포 안 함) |
+| `themeConfig.image` (소셜 카드) | `img/docusaurus-social-card.jpg` | `img/default-image.png` |
+| `navbar.logo.src` | `img/logo.svg` | `img/logo.png` (실제로는 빈 이미지, 로고 숨김 용도) |
+
+### 3.3.2 우측 목차(Table of Contents) 헤딩 범위 확장 (신규)
+
+```js
+themeConfig: {
+  tableOfContents: {
+    minHeadingLevel: 2,
+    maxHeadingLevel: 4,   // 기본값(3)보다 깊은 #### 까지 목차에 표시
+  },
+}
+```
 
 ### 3.4 Google Analytics 추가 (신규)
 
@@ -235,11 +255,15 @@ plugins: [
 
 ```js
 const SELECTED_POST_IDS = [
+  '/AI/GitAIOps-01',
   'AI/Claude-Code-Tips',
-  'Kubernetes/CKA/Exam/Exam-Recap-2',
+  'Cloud-Infra/Kubernetes/CKA/Exam/Exam-Recap-2',
+  'Cloud-Infra/Openstack/Install-OpenStack',
   // ...
 ];
 ```
+
+- 자주 바뀌는 값이므로 최신 목록은 `src/components/SelectedPosts.js` 코드에서 직접 확인
 
 - `Posts.module.css` 공통 스타일 사용
 
@@ -502,6 +526,24 @@ Obsidian과 Docusaurus에서 동일한 색상 클래스를 사용하기 위한 �
 **테마 구분:**
 - Obsidian 라이트 모드: `.theme-light` 클래스
 - Docusaurus 라이트 모드: `html[data-theme='light']` 속성
+
+### 7.8 문서 본문 이미지 테두리 및 그림자 (신규)
+
+터미널/코드 스크린샷처럼 어두운 이미지가 다크 모드 배경에 묻히는 문제를 방지하기 위해, 글 본문(`.markdown`) 내 이미지에만 밝은 테두리와 은은한 그림자를 적용합니다. 로고/아이콘 등 본문 외 이미지는 영향받지 않습니다.
+
+```css
+[data-theme='dark'] .markdown img {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='light'] .markdown img {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+```
 
 ---
 
