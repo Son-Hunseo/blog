@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Cloud-Infra/12-Kubernetes/02-hands-on/02-Namespace-force-delete/namespace-force-delete1.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-06-15

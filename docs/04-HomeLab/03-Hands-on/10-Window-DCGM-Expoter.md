@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Cloud-Infra/12-Kubernetes/02-hands-on/04-Window-DCGM-Expoter/windows-dcgm-exporter1.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-15

@@ -343,7 +343,7 @@ Agent Teams는 여러 Claude Code 인스턴스가 **팀으로 협업**하는 �
 
 **Hooks**는 Claude Code의 라이프사이클 이벤트에서 자동 실행되는 셸 명령입니다. CLAUDE.md 규칙은 확률적(LLM이 따를 수도, 안 따를 수도)이지만, **Hooks는 결정론적으로 강제**합니다. 린트, 포맷, 보안 스캔, 알림 등을 자동화하세요.
 
-즉, CLAUDE.md는 LLM이 판단하여 특정 조건을 따를수도 따르지 않을 수도 있지만 `Hooks`는 강제한다. (쿠버네티스 스케줄링에서의 [Extension Points](../01-Cloud-Infra/12-Kubernetes/01-CKA/02-scheduling/11-Scheduler-Profile.md#extension-points)를 떠올려보면 이해가 쉽다)
+즉, CLAUDE.md는 LLM이 판단하여 특정 조건을 따를수도 따르지 않을 수도 있지만 `Hooks`는 강제한다. (쿠버네티스 스케줄링에서의 [Extension Points](../01-Cloud-Infra/12-Kubernetes/01-Learning/02-scheduling/11-Scheduler-Profile.md#extension-points)를 떠올려보면 이해가 쉽다)
 
 ### 이벤트 발생 시점
 
