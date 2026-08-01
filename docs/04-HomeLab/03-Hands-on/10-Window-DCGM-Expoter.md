@@ -258,25 +258,25 @@ kubectl rollout restart deployment prometheus-server -n 프로메테우스가설
 ### Grafana 연동
 
 
-![prometheus-grafana-install7](assets/prometheus-grafana-install7.jpg)
+![prometheus-grafana-install7](../../01-Container/02-Kubernetes/02-hands-on/assets/prometheus-grafana-install7.jpg)
 
 - Grafana 접속
 - 좌측 패널 > Connections > Data sources > Add data source
 - Prometheus 선택
 
 
-![prometheus-grafana-install8](assets/prometheus-grafana-install8.jpg)
+![prometheus-grafana-install8](../../01-Container/02-Kubernetes/02-hands-on/assets/prometheus-grafana-install8.jpg)
 
 - Connection에 Prometheus URL 입력 후 Save & Test 선택해서 data source 생성
 
 
-![prometheus-grafana-install9](assets/prometheus-grafana-install9.jpg)
+![prometheus-grafana-install9](../../01-Container/02-Kubernetes/02-hands-on/assets/prometheus-grafana-install9.jpg)
 
 - 좌측 패널 > Dashboards > Create Dashboard
 - Import a dashboard 선택
 
 
-![prometheus-grafana-install10](assets/prometheus-grafana-install10.jpg)
+![prometheus-grafana-install10](../../01-Container/02-Kubernetes/02-hands-on/assets/prometheus-grafana-install10.jpg)
 
 - 원하는 대시보드의 ID 입력(DCGM Exporter의 경우 12239 추천)하고 Load
 	- https://grafana.com/grafana/dashboards/12239-nvidia-dcgm-exporter-dashboard/

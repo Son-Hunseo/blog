@@ -8,7 +8,7 @@ description: 쿠버네티스(Kubernetes) Pod에서 데이터의 영속성을 확
 
 ---
 > [!info] 도커 스토리지, 도커 볼륨에 대한 사전 지식이 필요하다.
-> [도커 스토리지](../../../11-Docker/02-Docker-Storage.md)))[도커 볼륨](../../../11-Docker/03-Docker-Volume.md))))) 글 참조
+>[도커 스토리지](../../../01-Docker/02-Docker-Storage.md)))[도커 볼륨](../../../01-Docker/03-Docker-Volume.md)))))) 글 참조
 
 ## Volume
 ### 개념

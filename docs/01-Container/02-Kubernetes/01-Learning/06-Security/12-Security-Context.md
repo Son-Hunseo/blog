@@ -7,7 +7,7 @@ description: 쿠버네티스(Kubernetes)에서 Pod와 컨테이너의 보안 권
 ---
 
 ---
-> [!info] Docker Security에 대한 사전 지식이 [Docker Security](../../../11-Docker/01-Docker-Security.md))))) 글 참조
+> [!info] Docker Security에 대한 사전 지식이[Docker Security](../../../01-Docker/01-Docker-Security.md)))))) 글 참조
 
 ## Security Context
 ### 개념
