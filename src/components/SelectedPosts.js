@@ -53,15 +53,13 @@ function formatDate(dateString) {
  * - 순서 변경: 배열 순서 조정 (배열 순서대로 표시됨)
  */
 const SELECTED_POST_IDS = [
-    '/AI/GitAIOps-04',
-    'Cloud-Infra/Kubernetes/CKA/Exam/Exam-Recap-2',
-    'AI/Claude-Code-Tips',
-    'Cloud-Infra/Openstack/Install-OpenStack',
-    'Cloud-Infra/Openstack/Install-Ceph',
-    'Cloud-Infra/Openstack/Connect-OpenStack-Ceph',
-    'Dev/Project/Chocoletter-Advance-01',
-    'Dev/Project/Chocoletter-Advance-02',
-    'Dev/Project/Chocoletter-Advance-06',
+    'Peer-Learning/gitaiops-04',
+    'Container/Kubernetes/CKA/exam-recap-2',
+    'AI/claude-code-tips',
+    'IaaS/Openstack/connect-openStack-ceph',
+    'Dev/Project/chocoletter-advance-01',
+    'Dev/Project/chocoletter-advance-02',
+    'Dev/Project/chocoletter-advance-06',
 ];
 
 /**
