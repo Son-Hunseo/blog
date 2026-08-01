@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Cloud-Infra/11-Docker/02-Docker-Storage/dockerstorage1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-28
@@ -22,8 +22,6 @@ description: Docker의 데이터 저장 구조( /var/lib/docker)와 레이어드
 - `image/` - Image 레이어 정보 저장
 - `volumes/` - 볼륨 데이터 저장
 - `aufs/overlay2/devicemapper 등` - 스토리지 드라이버별 데이터 저장
-
-> [!info] 위의 디렉토리에 저장되는 정보들이 왜 구분되어있고 어떠한 것들이 저장되는지 아래에서 다룸
 
 ---
 ## Docker의 Layered Architecture

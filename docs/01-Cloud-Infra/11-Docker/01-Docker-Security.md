@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/docker.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-26
@@ -17,7 +17,7 @@ description: Docker 컨테이너의 핵심 보안 원리인 Linux Namespace를 �
 ### 개념
 
 - 컨테이너는 VM과 달리 호스트의 커널을 공유한다.
-- 같은 커널이지만 호스트와 컨테이너는 Linux `Namespace` 기술을 통해 서로 격리된다.
+- 같은 커널이지만 호스트와 컨테이너는 Linux Namespace 기술을 통해 서로 격리된다.
 
 ### 예시
 
@@ -32,7 +32,7 @@ description: Docker 컨테이너의 핵심 보안 원리인 Linux Namespace를 �
 ### 의미
 
 - 즉, 컨테이너 내부에서는 호스트 시스템 및 다른 컨테이너에서 실행중인 모든 프로세스의 존재를 볼 수 없으며 이 때문에 조작도 불가능하다.
-- 이는 컨테이너 간, 컨테이너와 호스트 간의 프로세스 충돌 및 간섭을 방지하여 보안성과 안정석을 높인다.
+- 이는 컨테이너 간, 컨테이너와 호스트 간의 프로세스 충돌 및 간섭을 방지하여 보안성과 안정성을 높인다.
 
 ---
 ## 사용자 - User Security

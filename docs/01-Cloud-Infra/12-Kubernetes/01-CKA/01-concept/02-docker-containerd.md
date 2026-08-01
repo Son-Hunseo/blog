@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-01
@@ -10,63 +10,69 @@ description: Kubernetes에서 Docker 지원이 중단된 이유와 containerd, n
 ## Docker와 Containerd의 관계
 
 - 초창기에는 Docker가 컨테이너 생태계를 주도했고 Kubernetes도 Docker만 지원.
-- 이후 <span class="t-red">다양한 컨테이너 런타임을 지원하기 위해 CRI(Container Runtime Interface) 도입.</span>
-- OCI(Open Container Initiative) 표준(이미지 스펙, 런타임 스펙)을 따르는 런타임들은 Kubernetes와 호환 가능.
-- Docker는 CRI 표준을 따르지 않았기에 Kubernetes가 dockershim이라는 별도 호환 계층을 제공.
+- Kubernetes는 점차 <span class="t-red">다양한 컨테이너 런타임을 지원하기 위해 CRI(Container Runtime Interface) 도입.</span>
+- 이후 Docker는 CRI 표준을 따르지 않았기에 Kubernetes가 dockershim이라는 별도 호환 계층을 제공.
 	- <span class="t-red">Docker는 Kubernetes를 위해 만들어진 것이 아니라 그 자체의 기능들도 많았기 때문에 CRI 표준을 따르기 힘들었음.</span>
-- Kubernetes v1.24에서 dockershim 제거 → Docker 직접 지원 종료.
-	- 그런데 Kubernetes에서 업데이트를 하며, dockershim을 지원하기 위한 리소스가 너무 많이 들어 Docker 지원 종료
+- Kubernetes v1.24에서 dockershim 제거 -> Docker 직접 지원 종료.
+	- dockershim을 지원하기 위한 리소스가 너무 많이 들었기 때문.
 - 그러나 Docker가 생성한 이미지는 OCI 스펙을 따르므로 containerd 등 다른 런타임에서 그대로 사용 가능.
 	- 그래서 Docker 이미지도 kubernetes에서 사용가능한 것
+
+> [!tip] CRI vs OCI
+> - CRI는 Kubernetes가 컨테이너 런타임을 제어하는 인터페이스이고, OCI는 실제 컨테이너 이미지와 실행 방식에 대한 표준이다.
 
 ---
 ## Containerd
 
 - 원래 Docker 내부 구성요소였으나 현재는 독립 프로젝트(CNCF).
-	- Containerd는 원래 docker의 컨테이너 런타임이었으나 docker가 이를 CNCF에 기부함.
+	- Containerd는 원래 Docker의 컨테이너 런타임이었으나 Docker가 이를 CNCF에 기부함.
 - Kubernetes가 직접 사용할 수 있는 CRI 호환 런타임.
 - 단독 설치 가능하며 Docker 없이도 컨테이너 실행 가능.
-	- cf) 원래 나는 kubernetes를 설치할 때, Docker 설치 -> Kubernetes 설치 이렇게 했었는데, 불필요한 Docker의 다른 요소까지 설치하기 보다는 containerd 설치 -> Kubernetes 설치 이게 맞다.
 
 ### 설치
+
+**필수 패키지 설치**
 
 ```bash
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
 ```
 
-- 필수 패키지 설치
+
+**Docker 공식 저장소 등록**
 
 ```bash
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 ```
 
-- Docker 공식 저장소 등록
+
+**containerd 설치**
 
 ```bash
 sudo apt-get update
 sudo apt-get install -y containerd.io
 ```
 
-- containerd 설치
+
+**서비스 시작 및 부팅시 자동 실행 설정**
 
 ```bash
 sudo systemctl start containerd
 sudo systemctl enable containerd
 ```
 
-- 서비스 시작 및 부팅시 자동 실행 설정
-
 ---
 ## Containerd의 주요 CLI 도구 비교
 
+---
 ### ctr
     
 - containerd 기본 제공 CLI        
 - 디버깅용, 기능 제한적, 사용자 친화적이지 않음
 - 예: `ctr images pull`, `ctr run`
-        
+
+---
 ### nerdctl (추천)
     
 - containerd 커뮤니티에서 개발
@@ -75,40 +81,45 @@ sudo systemctl enable containerd
 - 실사용 시 Docker CLI를 대체 가능
 	- Docker의 많은 명령어를 그냥 nerdctl로 대체해서 사용 가능 (`docker ps` -> `nerdctl ps`)
 
-**설치**
+#### 설치
+
+**원하는 버전의 `nerdctl` 바이너리 다운로드 (예시는 1.7.7 기준)**
 
 ```bash
 wget https://github.com/containerd/nerdctl/releases/download/v1.7.7/nerdctl-1.7.7-linux-amd64.tar.gz
 ```
 
-- 원하는 버전의 `nerdctl` 바이너리 다운로드 (예시는 1.7.7 기준)
+
+**다운로드한 압축 파일을 적절한 위치(예: ~/.local/bin 또는 /usr/local/bin)에 해제**
 
 ```bash
 mkdir -p ~/.local/bin
 tar -zxvf nerdctl-1.7.7-linux-amd64.tar.gz -C ~/.local/bin
 ```
 
-- 다운로드한 압축 파일을 적절한 위치(예: ~/.local/bin 또는 /usr/local/bin)에 해제
+
+**설치 위치를 PATH에 추가**
 
 ```bash
 export PATH=$PATH:~/.local/bin
 ```
 
-- 설치 위치를 PATH에 추가
+
+**`nerdctl` 실행 권한 설정**
 
 ```bash
 sudo chown root ~/.local/bin/nerdctl
 sudo chmod +s ~/.local/bin/nerdctl
 ```
 
-- `nerdctl` 실행 권한 설정
+
+**설치 확인**
 
 ```bash
 nerdctl --version
 ```
 
-- 설치 확인
-
+---
 ### crictl
     
 - Kubernetes 커뮤니티에서 개발
@@ -117,29 +128,34 @@ nerdctl --version
 - kubelet과 협력하여 동작
 - `kubectl`은 클러스터 운영과 관리용, `crictl`은 개별 노드 내 컨테이너 런타임 상태 조사 및 디버깅용
 
-**설치**
+#### 설치
+
+**`circtl` 다운로드**
 
 ```bash
 VERSION="v1.26.0"
 curl -LO https://github.com/kubernetes-sigs/cri-tools/releases/download/${VERSION}/crictl-${VERSION}-linux-amd64.tar.gz
 ```
 
-- `circtl` 다운로드
+
+**다운로드한 tar 압축 해제**
 
 ```bash
 sudo tar -C /usr/local/bin -xzf crictl-${VERSION}-linux-amd64.tar.gz
 ```
 
-- 다운로드한 tar 압축 해제
+
+**설치 확인**
 
 ```bash
 crictl --version
 ```
 
-- 설치 확인
+
+**`kubelet`과 같은 CRI 런타임과 통신을 위한 설정 파일 생성**
 
 ```bash
-nano /etc/crictl.yaml
+vi /etc/crictl.yaml
 ```
 
 ```yaml
@@ -147,11 +163,10 @@ nano /etc/crictl.yaml
 runtime-endpoint: unix:///run/containerd/containerd.sock
 ```
 
-- `kubelet`과 같은 CRI 런타임과 통신을 위한 설정 파일 생성
-
+---
 ### 요약 정리
 
-- `ctr`: containerd 기본 디버깅용 → 거의 사용 X    
+- `ctr`: containerd 기본 디버깅용 -> 거의 사용 X    
 - `nerdctl`: Docker CLI와 유사, containerd 기반 운영 시 주 사용
 - `crictl`: Kubernetes 전용 디버깅용, 모든 CRI 런타임과 호환
 	- `kubectl`은 클러스터 운영과 관리용, `crictl`은 개별 노드 내 컨테이너 런타임 상태 조사 및 디버깅용

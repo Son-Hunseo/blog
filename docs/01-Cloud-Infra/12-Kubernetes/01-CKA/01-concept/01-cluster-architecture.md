@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/01-concept/01-cluster-architecture/cluster-arch1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-01
@@ -20,13 +20,13 @@ description: Kubernetes 클러스터의 핵심 아키텍처를 이해하기 쉽�
 - 클러스터 상태 저장소 (분산 키-값 DB)
 - 예: 어떤 파드가 어느 노드에서 실행 중인지, 서비스 IP 목록, ConfigMap 데이터 등이 etcd에 기록됨
 
-### kube-apiserver
+### API Server
 
 - 클러스터와의 모든 요청을 처리하는 게이트웨이
-- 사용자의 명령어에 따라 Controller-Manager, ETCD Cluster, kube-scheduler 를 사용하여 상호작용함
+- 사용자의 명령어에 따라 Controller-Manager, etcd Cluster, kube-scheduler 를 사용하여 상호작용함
 - 예: 사용자가 `kubectl get pods` 명령을 실행하면 API 서버가 etcd에서 파드 정보를 조회해 결과 반환
 
-### kube-scheduler
+### Scheduler
 
 - 새로운 파드를 어느 노드에 배치할지 결정
 - 예: CPU가 충분한 노드를 찾아 “Pod A → Node2”로 스케줄링
@@ -42,7 +42,7 @@ description: Kubernetes 클러스터의 핵심 아키텍처를 이해하기 쉽�
 
 ---
 
-## 워커 노드 (Worker Node)
+## 모든 노드 공통
 
 ### kubelet
 
@@ -53,10 +53,6 @@ description: Kubernetes 클러스터의 핵심 아키텍처를 이해하기 쉽�
 
 - 네트워크 규칙 관리, 서비스 트래픽 분산
 - 예: 외부 요청이 `Service (ClusterIP)`로 들어오면 kube-proxy가 iptables 규칙을 이용해 파드 A, 파드 B, 파드 C 중 하나로 분산
-
----
-
-## 모든 노드 공통
 
 ### Container Runtime Engine
 

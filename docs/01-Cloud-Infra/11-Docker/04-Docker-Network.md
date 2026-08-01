@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/docker.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-30
@@ -42,7 +42,8 @@ docker run nginx
 ---
 ## Bridge 네트워크 Deep Dive
 
-> [!info] 네트워크 네임스페이스에 대한 사전 지식이 없[네트워크 네임스페이스](../../02-CS/03-Network/03-Namespace.md)))) 글 참조
+> [!info] 네트워크 네임스페이스에 대한 사전 지식이 없다면
+> - [네트워크 네임스페이스](../../02-CS/03-Network/03-Namespace.md) 글 참조
 
 ### Docker0 네트워크 인터페이스
 
