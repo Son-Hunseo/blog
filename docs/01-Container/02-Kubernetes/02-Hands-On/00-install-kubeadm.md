@@ -29,7 +29,7 @@ description: Ubuntu 환경에서 kubeadm을 이용한 쿠버네티스 클러스�
 ### IPv4 포워딩
 
 - 아래 과정은 IPv4를 포워딩하여 iptables가 연결된 트래픽을 볼 수 있게 하는 과정이다.
-	- 이유는 다음 글 참조 [IP Forwarding](../../../02-CS/03-Network/01-Switching-Routing-Gateway.md#linux를-router로-사용하기-ip-forwarding))))
+	- 이유는 다음 글 참조 [IP Forwarding](../../../02-CS/03-Network/01-switching-routing-gateway.md#linux를-router로-사용하기-ip-forwarding))))
 
 ```bash
 sudo -i

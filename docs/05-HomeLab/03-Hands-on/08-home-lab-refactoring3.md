@@ -7,7 +7,7 @@ description: Nginx 리버스 프록시에서 Kubernetes Gateway API로 전환하
 ---
 
 ---
-> [!tip] 리팩토링 아키텍처는 [이전 글](06-Home-Lab-Refactoring1.md) 참조
+> [!tip] 리팩토링 아키텍처는[이전 글](06-home-lab-refactoring1.md)) 참조
 
 ---
 ## Gateway API를 도입하는 이유

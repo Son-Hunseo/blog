@@ -7,7 +7,7 @@ description: Jenkins에서 Github Action으로 CI/CD 파이프라인을 마이�
 ---
 
 ---
-> [!tip] 리팩토링 아키텍처는 [이전 글](06-Home-Lab-Refactoring1.md) 참조
+> [!tip] 리팩토링 아키텍처는 [이전 글](06-home-lab-refactoring1.md) 참조
 
 ---
 ## Github Action으로 옮기는 이유

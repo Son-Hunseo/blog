@@ -7,7 +7,7 @@ description: 쿠버네티스(Kubernetes) 서비스와 포드의 DNS 네이밍 �
 ---
 
 ---
-> [!info] 참고 글 [DNS](../../../../02-CS/03-Network/02-DNS.md))))
+> [!info] 참고 글 [DNS](../../../../02-CS/03-Network/02-dns.md))))
 
 ---
 ## 쿠버네티스 DNS 네이밍 규칙
@@ -46,7 +46,7 @@ description: 쿠버네티스(Kubernetes) 서비스와 포드의 DNS 네이밍 �
 ### 원리
 
 - `kubelet`
-	- `kubelet`이 새로운 `Pod`가 생성될 때 `Pod`의 `/etc/resolv.conf` 파일의 `nameserver`로 `CoreDNS` 서비스의 IP를 기입한다. (참[네임서버 설정](../../../../02-CS/03-Network/02-DNS.md#dns-서버-설정)))))
+	- `kubelet`이 새로운 `Pod`가 생성될 때 `Pod`의 `/etc/resolv.conf` 파일의 `nameserver`로 `CoreDNS` 서비스의 IP를 기입한다. (참[네임서버 설정](../../../../02-CS/03-Network/02-dns.md#dns-서버-설정)))))
 - `kube-apiserver`
 	- `CoreDNS`의 `kubernetes`라는 이름의 플러그인이 주기적으로 `kube-apiserver`와 통신하며 새로운 `Service`/`Pod` 혹은 삭제된 `Service`/`Pod`를 Watch하고 있다가 이를 `CoreDNS`에 반영한다.
 
