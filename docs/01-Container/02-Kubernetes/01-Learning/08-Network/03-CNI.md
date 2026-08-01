@@ -1,38 +1,57 @@
-﻿---
-image: /img/default/cloud/k8s.png
+---
+image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-31
-title: 쿠버네티스에서의 CNI
-description: 쿠버네티스에서 CNI 플러그인은 누가, 어떻게 호출할까요? 컨테이너 런타임(Containerd, CRI-O)의 역할부터 CNI 바이너리 경로(/opt/cni/bin) 및 설정 파일(/etc/cni/net.d)의 위치까지, K8s 네트워크 네임스페이스 생성 과정을 쉽고 정확하게 정리해 드립니다.
+title: CNI (Container Network Interface)
+description: 컨테이너 네트워크 표준인 CNI(Container Network Interface)의 개념, 탄생 배경 및 스펙을 정리합니다. Docker, Kubernetes 환경에서 네트워크 플러그인이 작동하는 원리와 주요 종류(Calico, Cilium 등)를 확인하세요.
 ---
 
 ---
-> [!info] CNI에 대한 사전 지식 필요 -> 참[CNI](../../../../02-CS/03-Network/04-CNI.md))))
+## CNI
+### 개념
+
+- 컨테이너 런타임 환경에서 네트워킹 문제를 해결하기 위해 개발된 '플러그인 표준 규격'
+
+### 배경
+
+- `Docker`, `rkt(Rocket)`, `containerd`, `CRI-O` 등 다양한 컨테이너 런타임들이 존재한다. (사실 여기서 `Docker`는 CNI를 지원하지 않으므로 제외해아한다)
+	- `Docker`의 독자적 노선 이유는 다음 글을 참고한다. [Docker vs Containerd](../01-concept/02-docker-containerd.md)
+- 이들은 모두 네트워크 네임스페이스 생성, 브리지 연결, IP 할당, NAT 설정 등 유사한 네트워킹 문제를 해결해야한다. [도커 브리지 네트워크 모드 구현 원리](../../../01-Docker/04-Docker-Network.md#bridge-네트워크-deep-dive) 글 참고 
+	- `Docker`는 CNI를 지원하지 않지만, 이 글을 참조하면 컨테이너 런타임에서 어떤 부분을 구현해야하는지 이해할 수 있다.
+- 하지만 각자 독자적인 방식으로 이를 구현하다 보니 호환성이 떨어지는 문제가 발생했다.
+- 이에 이러한 컨테이너 솔루션의 네트워킹 부분을 별도의 플러그인으로 분리하고, 이를 호출하는 방식을 표준화(인터페이스화)하여 어떤 컨테이너 런타임이든 동일한 방식으로 네트워킹을 처리할 수 있게 만든 것이 CNI의 배경이다.
 
 ---
-## 쿠버네티스의 역할
+## CNI 스펙
 
-- `Pod`를 생성할 때 쿠버네티스에서는 `Pod`의 네트워크 네임스페이스를 생성해야한다. (네트워크 네임스페이스 생성)
-- 그리고 CNI 플러그인을 호출하여 해당 네임스페이스를 네트워크에 연결해야한다. (CNI 플러그인 호출)
-- 그러면 쿠버네티스 컴포넌트 중에서 CNI 플러그인을 호출하는 주체는 누구일까?
-- CNI 플러그인을 호출하는 주체는 컨테이너 런타임(예: `Containerd`, `CRI-O`)이다.
-	- 컨테이너가 생성된 직후 네트워크 설정이 필요하기 때문이다.
-	- 정확하게는 `kubelet`->CRI -> 컨테이너 런타임 -> CNI 플러그인
-- 그럼 컨테이너 런타임은 CNI 플러그인을 어떻게 호출할까?
+> [!info] 명확한 정보는 공식 문서(https://www.cni.dev/docs/spec/) 참조
+
+### 컨테이너 런타임의 역할
+
+- 각 컨테이너를 위한 네트워크 네임스페이스를 생성할 수 있어야 한다.
+- 컨테이너가 연결될 네트워크를 식별할 수 있어야 한다.
+- 컨테이너 생성 시 `ADD` 명령으로, 삭제시 `DEL` 명령으로 CNI 플러그인을 호출할 수 있어야 한다.
+- JSON 형식의 설정 파일을 통해 플러그인에 필요한 정보를 제공할 수 있어야 한다.
+
+### CNI 플러그인의 역할
+
+- `ADD`, `DEL`, `CHECK`, `VERSION` 명령어를 지원해야한다.
+- 컨테이너 ID, 네트워크 네임스페이스 등의 파리미터를 받을 수 있어야 한다.
+- `Pod`에 IP 주소를 할당하고 통신에 필요한 라우팅을 설정할 수 있어야 한다.
+- 작업 결과를 정해진 포맷에 맞게 반환해야한다.
 
 ---
-## CNI 플러그인 위치 및 설정
+## 종류
 
-- 컨테이너 런타임은 아래 경로들을 통해 플러그인을 찾고 설정한다.
-- 플러그인 실행 파일(바이너리) 경로: `/opt/cni/bin`
-	- 해당 경로에 모든 CNI 플러그인(`bridge`, `dhcp`, `calico` 등)의 실행 파일(바이너리)이 모여있다.
-- 설정 파일 경로: `/etc/cni/net.d`
-	- 컨테이너 런타임은 이 경로에서 어떤 플러그인을 사용할지 결정한다.
-	- 만약 여러 개의 설정 파일이 존재할 경우, 알파벳 순서로 결정한다.
-		- 그래서 보통 `10-calico.conflist` 이렇게 이름 앞에 숫자를 붙여 우선순위를 관리한다.
+- 기본 제공 플러그인:
+	- `Bridge`, `VLAN`, `IPVLAN`, `MACVLAN`, Windows용 플러그인 등
+- IPAM (IP Address Management) 플러그인
+	- `host-local`, `DHCP`
+- 서드파티 플러그인
+	- `Flannel`, `Calico`, `Cilium` 등
 
 ---
 ## 레퍼런스
 
-- https://kubernetes.io/ko/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/
+- https://www.cni.dev/docs/spec/
 - Udemy - Certified Kubernetes Administrator (CKA) with Practice Tests (Mumshad)
