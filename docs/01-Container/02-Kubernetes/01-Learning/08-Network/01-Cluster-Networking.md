@@ -13,7 +13,7 @@ description: 쿠버네티스(Kubernetes) 클러스터 구성을 위한 필수 �
 - 네트워크 인터페이스: 최소 1개 이상의 네트워크 인터페이스를 가져야한다.
 - IP 주소: 노드가 가진 네트워크 인터페이스에 IP가 할당되어 있어야 한다.
 - 고유한 식별자
-	- Hostname: 클러스터 내에서 유일해야한다. (cf: 이건 proxmox에서도 그랬음 [Proxmox 호스트네임 주의점](../../../../04-HomeLab/02-Proxmox/04-proxmox-cluster.md#주의점)))))
+	- Hostname: 클러스터 내에서 유일해야한다. (cf: 이건 proxmox에서도 그랬음[Proxmox 호스트네임 주의점](../../../../05-HomeLab/02-Proxmox/04-proxmox-cluster.md#주의점))))))
 	- Mac 주소: 클러스터 내에서 유일해야한다.
 
 > [!info] - 위의 요구사항들을 보고 엥? 너무 당연한 얘기들 아닌가? 자동으로 되는거 아닌가? 라고 생각할 수 있다.
