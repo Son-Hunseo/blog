@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/01-concept/10-ReplicationController-ReplicaSet/replicaset1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-05
@@ -23,9 +23,9 @@ description: Replication Controller와 ReplicaSet의 차이점과 역할을 이�
 - 트래픽이 더 증가하고 첫번째 `Node`의 자원이 부족해지면 새로운 `Node`에 추가 `Pod`를 배포한다.
 - 위의 예시처럼 `Replication controller`는 여러 `Node`에 걸쳐서 존재하며, 서로 다른 `Node`에서 여러 `Pod`에 걸쳐 Load Balancing을 하고 애플리케이션을 확장하는데 도움을 준다.
 
-> [!warning] `ReplicaSet`은 직접적으로 Load Balancing을 하는 주체가 아니다. 단지 지정된 갯수의 `Pod`가 실행되고 있도록 보장하며, `Service`가 Load Balancing의 주체이다.
->
-> 위의 설명은 `Service`가 실행하는 Load Balancing을 `ReplicaSet`이 `Pod`의 갯수를 유지하며 돕는다는 뜻이다.
+> [!warning] 로드 밸런싱의 주체 
+> - `ReplicaSet`은 직접적으로 Load Balancing을 하는 주체가 아니다. 단지 지정된 갯수의 `Pod`가 실행되고 있도록 보장하며, `Service`가 Load Balancing의 주체이다.
+> - 위의 설명은 `Service`가 실행하는 Load Balancing을 `ReplicaSet`이 `Pod`의 갯수를 유지하며 돕는다는 뜻이다.
 
 ---
 ## ReplicaSet vs Replication Controller
@@ -36,7 +36,6 @@ description: Replication Controller와 ReplicaSet의 차이점과 역할을 이�
 	- 새로운 버전 배포 -> `Deployment`가 새로운 `ReplicaSet`을 생성하고 Rolling 업데이트로 `Pod` 순차적 교체
 	- 이전 버전 롤백 -> 이전 `ReplicaSet`의 `Pod` 수를 0으로 하고 오브젝트 자체를 유지하면서, 롤백을 해야할 경우 이전 `ReplicaSet`의 `Pod` 수를 늘리면서 복구한다.
 - 즉, `Deployment`는 `ReplicaSet`을 관리하느 컨트롤러이고, `ReplicaSet`은 `Pod`를 관리하는 컨트롤러이다.
-
 
 ---
 ## YAML
@@ -73,18 +72,21 @@ spec:
 		- `Pod`의 Yaml 작성에서 `apiVersion`과 `kind`를 제외한 다른 모든 것을 그대로 작성하면 된다.
 	- `replicas`: 유지할 `Pod`의 갯수
 
+
+**`Replication Controller` 생성**
+
 ```bash
 kubectl create -f rc-defination.yaml
 ```
 
-- `Replication Controller` 생성
+
+**`Replication Controller` 조회**
 
 ```bash
 kubectl get replicationcontroller
 ```
 
-- default 네임스페이스에 있는 모든 `Replication Controller` 조회
-
+---
 ### ReplicaSet
 
 > [!tip] 사실 `Deployment` yaml 을 작성하고 적용하면 이에 맞는 `ReplicaSet`이 자동으로 생성되기 때문에, `ReplicaSet` yaml을 작성할 일은 거의 없다.
@@ -129,7 +131,7 @@ spec:
 
 
 > [!info] `template`에서 `Pod`를 정의했는데 `selector`가 왜 필요할까?
-> -> `ReplicaSet`은 해당 `ReplicaSet`이 생성되기 이전의 `Pod`도 관리하는 경우가 있기 때문이다.
+> -> `ReplicaSet`은 해당 `ReplicaSet`이 생성되기 이전에 생성된 `Pod`도 관리하는 경우가 있기 때문이다.
 >
 > - Use Case) `ReplicaSet`이 생성되기 이전에 `type`이 `front-end`인 단일 `Pod`가 존재했다고 가정해보자. 이때, `replicas`가 3인 `ReplicaSet`을 생성하면서 `type`을 `front-end`로 설정했다면, 기존의 `Pod`를 고려하면서 새로운 `Pod`는 2개만 생성한다.
 
@@ -137,17 +139,27 @@ spec:
 >
 > -> 아니다 작성해야한다. 왜냐하면, 어떠한 `Pod`가 종료되었을 때, 새로운 `Pod`를 생성하는데 필요하기 때문이다.
 
+
+**`ReplicaSet` 생성**
+
 ```bash
 kubectl apply -f replicaset-definition.yaml
 ```
 
-- `ReplicaSet` 생성
+
+**`ReplicaSet` 조회**
 
 ```bash
 kubectl get replicaset
 ```
 
-- default 네임스페이스의 모든 `ReplicaSet` 조회
+
+**`RelicaSet` 삭제**
+- pod들도 함께 종료된다.
+
+```bash
+kubectl delete replicaset myapp-replicaset
+```
 
 ---
 ## ReplicaSet 확장
@@ -162,6 +174,7 @@ replicas: 6
 kubectl apply -f replicaset-definition.yaml
 ```
 
+
 ### 방법2: scale 명령어 사용 (yaml 대상)
 
 ```bash
@@ -170,26 +183,12 @@ kubectl scale --replicas=6 -f replicaset-definition.yaml
 
 - 현재 실행되고 있는 `ReplicaSet`의 `Pod` 수는 6개로 바뀌지만, yaml 파일의 `replica` 필드의 값이 바뀌는 것은 아니다.
 
+
 ### 방법3: sclae 명령어 사용 (type, name 대상)
 
 ```bash
 kubectl scale --replicas=6 replicaset myapp-replicaset
 ```
-
----
-## 추가 명령어
-
-```bash
-kubectl delete replicaset myapp-replicaset
-```
-
-- pod들도 함께 종료된다.
-
-```bash
-kubectl replace -f replicaset-definition.yaml
-```
-
-- 수정한 yaml 파일을 적용한다.
 
 ---
 ## 레퍼런스

@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-05
@@ -21,30 +21,28 @@ description: 쿠버네티스에서 가장 작은 배포 단위인 Pod의 개념�
 	- 예시: 주 컨테이너는 애플리케이션 실행, 보조 컨테이너가 로그 수집. 이 2가지 컨테이너가 하나의 `Pod`를 구성하는 경우
 - 하지만, 대부분의 경우 `Pod`와 컨테이너는 1대1 관계로 사용하며, 위와같은 경우에도 따로 분리하는 경우가 대부분이다. 이에 1대1 관계라고 보아도 무방하다.
 
-> [!info] 애플리케이션의 트래픽이 증가할 경우, 우선 `Pod`를 추가하여 여러 `Pod`에 로드밸런싱한다. 이후 트래픽이 더 증가하여 해당 노드에서 감당하기 힘든 상황이 되었을 경우 노드를 추가하며 `Pod`들이 여러 노드에 분산되어 배치된다.
->
-> cf) 이 때, `Service`가 `Deployment`가 관리하는 여러개의 `Pod`로 트래픽을 분산하는 것은 L4 로드밸런싱이다.
-
 ---
 ## 명령어 예시
+
+**Pod 생성**
 
 ```bash
 kubectl run nginx --image nginx
 ```
 
-- `Nginx` `Pod`를 생성하고 배포하는 명령어
+
+**Pod 목록 조회**
 
 ```bash
 kubectl get pods
 ```
 
-- `Pod` 목록을 얻는 명령어
+
+**특정 Pod 정보 조회**
 
 ```bash
 kubectl describe pod <pod-name>
 ```
-
-- `Pod`에 대한 자세한 정보를 보는 명령어
 
 ---
 ## YAML
@@ -83,18 +81,18 @@ spec:
 			- `image`(String): 이미지의 이름 (위의 경우 Docker Hub에 있는 이미지의 이름을 뜻함)
 				- Docker Hub에 있는 이미지가 아닐 경우 전체 경로를 모두 작성해야함
 
+
+**yaml 파일로 Pod 생성**
+- `kubectl apply -f pod-definition.yml` 도 정확히 똑같이 동작한다.
+
 ```bash
 kubectl create -f pod-definition.yml
 ```
-
-- 위 명령어로 작성한 yaml에 맞는 `Pod`를 생성한다.
-- `kubectl apply -f pod-definition.yml` 도 정확히 똑같이 동작한다.
 
 
 > [!tip] Yaml에서 Indentation 의 경우 2칸을 띄우던, 4칸을 띄우던 더 많은 칸을 띄우던 상관없지만, 같은 계층의 요소들이 띄워쓰기 갯수가 다르면 안된다.
 >
 > 일반적로는 공백 2칸을 사용하며 이를 추천한다.
-
 
 ---
 ## 레퍼런스

@@ -53,7 +53,7 @@ description: kube-apiserver는 Kubernetes 클러스터의 모든 요청을 처�
 **설정 조회**
 
 ```bash
-sudo nano /etc/kubernetes/manifests/kube-apiserver.yaml
+sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
 
 - 위 경로에 yaml 형태로 설정이 저장되어있다.
@@ -64,6 +64,10 @@ sudo nano /etc/kubernetes/manifests/kube-apiserver.yaml
 ### Manual Setup (Kubernetes The Hard Way)
 
 **설치**
+- `kube-apiserver`를 바이너리로 직접 설치
+	- https://www.downloadkubernetes.com/ 참조
+- `/usr/local/bin/` 으로 이동시켜 PATH에 등록한다. (systemd 등록, pod 형태 아님)
+- 이에 시스템 전역 실행 파일로 사용가능한 것이다. (인증서가 필요한데 이건 추후 진행한다고 가정하자)
 
 ```bash
 wget -q --https-only \ "https://dl.k8s.io/v1.31.14/bin/linux/amd64/kube-apiserver"
@@ -71,7 +75,7 @@ wget -q --https-only \ "https://dl.k8s.io/v1.31.14/bin/linux/amd64/kube-apiserve
 sudo mv kube-apiserver /usr/local/bin/ 
 sudo chmod +x /usr/local/bin/kube-apiserver
 
-sudo nano /etc/systemd/system/kube-apiserver.service
+sudo vi /etc/systemd/system/kube-apiserver.service
 ```
 
 ```ini
@@ -117,23 +121,6 @@ sudo systemctl daemon-reload
 sudo systemctl start kube-apiserver
 sudo systemctl enable kube-apiserver
 ```
-
-- 위 명령어는 `kube-apiserver`를 바이너리를 직접 다운로드하여 설치하는 명령어이다.
-	- https://www.downloadkubernetes.com/ 참조
-- `/usr/local/bin/` 으로 이동시켜 PATH에 등록한다.
-- 이에 시스템 전역 실행 파일로 사용가능한 것이다. (인증서가 필요한데 이건 추후 진행한다고 가정하자)
-
-
-**설정 조회
-
-```bash
-cat /etc/systemd/system/kube-apiserver.service
-```
-
-- `systemd`에 설치했기 때문에 위 경로에서 설정을 조회하고 수정할 수 있다.
-- 해당 파일을 수정한 뒤 아래 명령어 수행해야 적용된다.
-	- `sudo systemctl daemon-reload`
-	- `sudo systemctl restart kube-apiserver`
 
 ---
 ## 레퍼런스

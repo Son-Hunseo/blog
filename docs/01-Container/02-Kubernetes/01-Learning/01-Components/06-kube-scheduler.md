@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-03
@@ -53,7 +53,7 @@ description: kube-scheduler는 Kubernetes에서 Pod를 어떤 노드에 배치�
 **설정 조회**
 
  ```bash
-sudo nano /etc/kubernetes/manifests/kube-scheduler.yaml
+sudo vi /etc/kubernetes/manifests/kube-scheduler.yaml
  ```
 
 - 위 경로에 yaml 형태로 설정이 저장되어있다.
@@ -63,6 +63,10 @@ sudo nano /etc/kubernetes/manifests/kube-scheduler.yaml
 ### Manual Setup (Kubernetes The Hard Way)
 
 **설치**
+- `kube-scheduler`를 바이너리로 직접 설치
+	- https://www.downloadkubernetes.com/ 참조
+- `/usr/local/bin/` 으로 이동시켜 PATH에 등록한다. (systemd 등록, pod 형태 아님)
+- 이에 시스템 전역 실행 파일로 사용가능한 것이다.
 
 ```bash
 wget https://dl.k8s.io/v1.31.14/bin/linux/amd64/kube-scheduler
@@ -70,7 +74,7 @@ wget https://dl.k8s.io/v1.31.14/bin/linux/amd64/kube-scheduler
 sudo mv kube-scheduler /usr/local/bin/ 
 sudo chmod +x /usr/local/bin/kube-scheduler
 
-sudo nano /etc/systemd/system/kube-scheduler.service
+sudo vi /etc/systemd/system/kube-scheduler.service
 ```
 
 ```ini
@@ -97,23 +101,6 @@ sudo systemctl daemon-reload
 sudo systemctl start kube-scheduler
 sudo systemctl enable kube-scheduler
 ```
-
-- 위 명령어는 `kube-scheduler`를 바이너리를 직접 다운로드하여 설치하는 명령어이다.
-	- https://www.downloadkubernetes.com/ 참조
-- `/usr/local/bin/` 으로 이동시켜 PATH에 등록한다.
-- 이에 시스템 전역 실행 파일로 사용가능한 것이다.
-
-
-**설정 조회**
-
-```bash
-cat /etc/systemd/system/kube-scheduler.service
-```
-
-- `systemd`에 설치했기 때문에 위 경로에서 설정을 조회하고 수정할 수 있다.
-- 해당 파일을 수정한 뒤 아래 명령어 수행해야 적용된다.
-	- `sudo systemctl daemon-reload`
-	- `sudo systemctl restart kube-scheduler`
 
 ---
 ## 레퍼런스

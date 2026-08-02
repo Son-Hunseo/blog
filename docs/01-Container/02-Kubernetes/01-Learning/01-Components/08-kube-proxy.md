@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-04
@@ -31,7 +31,7 @@ description: kube-proxy는 Kubernetes에서 Service 트래픽을 실제 Pod로 �
 - 새로운 `Service`가 생성되면 이를 감지하고, 각 노드에 해당 `Service`로 <span class="t-red">트래픽을 전달할 규칙을 자동으로 생성한다.</span>
 - 규칙 생성 방식 중 하나가 iptables 규칙이다.
 	- 예: `Service` IP가 `10.96.0.12`, `Pod` IP가 `10.32.0.15`일 때  
-		→ “목적지가 `10.96.0.12`라면 `10.32.0.15`로 포워딩” 규칙을 iptables에 추가.
+		-> “목적지가 `10.96.0.12`라면 `10.32.0.15`로 포워딩” 규칙을 iptables에 추가.
 - 따라서 `kube-proxy`는 `Pod`가 아닌 `Service`에 대한 실제 네트워크 트래픽 처리자 역할을 한다.
 
 ---
@@ -56,6 +56,10 @@ kubectl get configmap kube-proxy -n kube-system -o yaml
 ### Manual Setup (Kubernetes The Hard Way)
 
 **설치**
+- 위`kube-proxy`를 바이너리로 직접 설치
+	- https://www.downloadkubernetes.com/ 참조
+- `/usr/local/bin/` 으로 이동시켜 PATH에 등록한다. (systemd 등록, pod 형태 아님)
+- 이에 시스템 전역 실행 파일로 사용가능한 것이다.
 
 ```bash
 wget https://dl.k8s.io/v1.31.14/bin/linux/amd64/kube-proxy
@@ -89,23 +93,6 @@ sudo systemctl daemon-reload
 sudo systemctl start kube-proxy
 sudo systemctl enable kube-proxy
 ```
-
-- 위 명령어는 `kube-proxy`를 바이너리를 직접 다운로드하여 설치하는 명령어이다.
-	- https://www.downloadkubernetes.com/ 참조
-- `/usr/local/bin/` 으로 이동시켜 PATH에 등록한다.
-- 이에 시스템 전역 실행 파일로 사용가능한 것이다.
-
-**설정 조회**
-
-```bash
-cat /etc/systemd/system/kube-proxy.service
-```
-
-- `systemd`에 설치했기 때문에 위 경로에서 설정을 조회하고 수정할 수 있다.
-- 해당 파일을 수정한 뒤 아래 명령어 수행해야 적용된다.
-	- `sudo systemctl daemon-reload`
-	- `sudo systemctl restart kube-proxy`
-
 
 ---
 ## 레퍼런스

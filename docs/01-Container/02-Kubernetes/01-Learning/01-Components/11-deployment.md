@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-06
@@ -14,6 +14,7 @@ description: 쿠버네티스 Deployment의 개념과 동작 원리를 이해하�
 - 이 경우 운영되고 있는 애플리케이션을 모두 종료했다가 다시 배포하는 과정은 서비스가 중단될 수 있으므로 좋지 않으며, 수동으로 하기에 번거롭다.
 - 이러한 `Rolling Updates`, `Undo Changes`, `Pause`, `Resume Changes` 등을 기능을 갖추고 있으며, 이를 위해 `ReplicaSet`을 컨트롤하는 컨트롤러가 `Deployment`이다.
 
+---
 ### 예시: 업데이트
 
 `replicas: 3` 가정
@@ -24,6 +25,7 @@ description: 쿠버네티스 Deployment의 개념과 동작 원리를 이해하�
 4. 위 과정 추가로 2회 반복
 5. 기존 `ReplicaSet`은 `replicas: 0` 인 상태로 유지된다. (롤백을 위해)
 
+---
 ### 예시: 롤백
 
 `replicas: 3` 가정
@@ -72,23 +74,19 @@ spec:
 
 > [!info] 어떤 `Deployment`가 어떤 `ReplicaSet`을 관리할지에 대한 정보는 내부적으로 `ReplicaSet`의 메타데이터인 `ownerReferences` 데이터로 구별된다. (쿠버네티스의 모든 "상위 컨트롤러 -> 하위 리소스" 관계는 `ownerReferences` 데이터로 구별된다 즉,`Pod`가 어떤 `ReplicaSet`에 관리되는지도 마찬가지)
 
+
+**`Deployment` 생성**
+
 ```bash
 kubectl create -f deployment-definition.yaml
 ```
 
-- `Deployment` 생성
+
+**`Deployment` 조회**
 
 ```bash
 kubectl get deployment
 ```
-
-- 생성된 `Deployment` 확인
-
-```bash
-kubectl get replicaset
-```
-
-- `Deployment` 생성으로 인해 생성된 `ReplicaSet` 확인
 
 ---
 ## Deployment로 Pod 수정하기
@@ -102,6 +100,7 @@ kubectl get replicaset
 - 즉, 거의 불변에 가깝다.
 - `kubectl edit pod <pod-name>` 으로 변경 불가한 스펙을 수정할 시, 저장했을 때 에러가 발생한다. 
 - 수정하기 위해서는, `Pod`의 yaml를 추출하고, 수정한 뒤, 기존 `Pod`를 `delete`하고, 다시 수정한 yaml 파일로 `create` 해야한다. (`apply` 로 수정 불가)
+
 
 ### Deployment는 수정 가능
 

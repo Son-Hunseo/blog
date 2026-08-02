@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-03
@@ -51,16 +51,20 @@ description: kube-controller-manager는 Kubernetes의 다양한 컨트롤러들�
 **설정 조회**
 
 ```bash
-sudo nano /etc/kubernetes/manifests/kube-controller-manager.yaml
+sudo vi /etc/kubernetes/manifests/kube-controller-manager.yaml
 ```
 
 - 위 경로에 yaml 형태로 설정이 저장되어있다.
-- 설정 변경도 위 yaml 파일을 변경하면 자동으로 된다.
+- 설정 변경도 위 yaml 파일을 변경하면 자동으로 적용된다.
 	- Static Pod 이기 때문인데, 이는 나중에 자세히 다루도록 한다.
 
 ### Manual Setup (Kubernetes The Hard Way)
 
 **설치**
+- `kube-controller-manager`를 바이너리로 직접 설치
+	- https://www.downloadkubernetes.com/ 참조
+- `/usr/local/bin/` 으로 이동시켜 PATH에 등록한다. (systemd 등록, pod 형태 아님)
+- 이에 시스템 전역 실행 파일로 사용가능한 것이다. (인증서가 필요한데 이건 추후 진행한다고 가정하자)
 
 ```bash
 wget https://dl.k8s.io/v1.31.14/bin/linux/amd64/kube-controller-manager
@@ -68,7 +72,7 @@ wget https://dl.k8s.io/v1.31.14/bin/linux/amd64/kube-controller-manager
 sudo mv kube-controller-manager /usr/local/bin/ 
 sudo chmod +x /usr/local/bin/kube-controller-manager
 
-sudo nano /etc/systemd/system/kube-controller-manager.service
+sudo vi /etc/systemd/system/kube-controller-manager.service
 ```
 
 ```ini
@@ -103,23 +107,6 @@ sudo systemctl daemon-reload
 sudo systemctl start kube-controller-manager
 sudo systemctl enable kube-controller-manager
 ```
-
-- 위 명령어는 `kube-controller-manager`를 바이너리를 직접 다운로드하여 설치하는 명령어이다.
-	- https://www.downloadkubernetes.com/ 참조
-- `/usr/local/bin/` 으로 이동시켜 PATH에 등록한다.
-- 이에 시스템 전역 실행 파일로 사용가능한 것이다. (인증서가 필요한데 이건 추후 진행한다고 가정하자)
-
-
-**설정 조회**
-
-```bash
-cat /etc/systemd/system/kube-controller-manager.service
-```
-
-- `systemd`에 설치했기 때문에 위 경로에서 설정을 조회하고 수정할 수 있다.
-- 해당 파일을 수정한 뒤 아래 명령어 수행해야 적용된다.
-	- `sudo systemctl daemon-reload`
-	- `sudo systemctl restart kube-controller-manager`
 
 ---
 ## 레퍼런스

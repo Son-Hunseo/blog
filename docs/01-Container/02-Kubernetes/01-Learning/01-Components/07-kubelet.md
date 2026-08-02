@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-04
@@ -29,17 +29,18 @@ description: kubelet은 Kubernetes 노드에서 실행되는 핵심 에이전트
 **설치**
 
 ```bash
-sudo apt-get install -y kubeadm=<version>
+sudo apt-get install -y kubelet=<version> kubeadm=<version> kubectl=<version>
 ```
 
-- 러프하게 말하면 위처럼 설치하지만, 보통 `kubeadm`을 설치할 때 한번에 설치한다.
-- https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#kubeadm-kubelet-%EB%B0%8F-kubectl-%EC%84%A4%EC%B9%98 참고
+- https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#kubeadm-kubelet-%eb%b0%8f-kubectl-%ec%84%a4%ec%b9%98
+- 위의 kubeadm 으로 클러스터를 구축하는 공식문서를 보면, `kubeadm` 설치할 때, `kubelet`도 함께 패키지 매니저로 설치한다. (위는 데비안 계열 기준)
+- kubelet은 모든 노드에 존재해야한다. 따라서 각 노드에 직접 설치해야 한다.
 
 
 **설정 조회**
 
 ```bash
-sudo nano /var/lib/kubelet/config.yaml
+sudo vi /var/lib/kubelet/config.yaml
 ```
 
 - 위 경로에 yaml 형태로 설정이 저장되어있다.
@@ -50,6 +51,10 @@ sudo nano /var/lib/kubelet/config.yaml
 ### Manual Setup (Kubernetes The Hard Way)
 
 **설치**
+- `kubelet`를 바이너리로 직접 설치
+	- https://www.downloadkubernetes.com/ 참조
+- `/usr/local/bin/` 으로 이동시켜 PATH에 등록한다. (systemd 등록, pod 형태 아님)
+- 이에 시스템 전역 실행 파일로 사용가능한 것이다.
 
 ```bash
 wget https://dl.k8s.io/v1.31.14/bin/linux/amd64/kubelet
@@ -57,11 +62,8 @@ wget https://dl.k8s.io/v1.31.14/bin/linux/amd64/kubelet
 sudo mv kubelet /usr/local/bin/ 
 sudo chmod +x /usr/local/bin/kubelet
 
-sudo nano /etc/systemd/system/kubelet.service
+sudo vi /etc/systemd/system/kubelet.service
 ```
-
-- kubeadm을 사용하더라도 kubelet은 자동으로 배포되지 않는다.
-- 따라서 각 노드에 직접 설치해야 한다.
 
 ```ini
 [Unit]
@@ -91,22 +93,6 @@ sudo systemctl daemon-reload
 sudo systemctl start kubelet
 sudo systemctl enable kubelet
 ```
-
-- 위 명령어는 `kubelet`를 바이너리를 직접 다운로드하여 설치하는 명령어이다.
-	- https://www.downloadkubernetes.com/ 참조
-- `/usr/local/bin/` 으로 이동시켜 PATH에 등록한다.
-- 이에 시스템 전역 실행 파일로 사용가능한 것이다.
-
-**설정 조회**
-
-```bash
-cat /etc/systemd/system/kubelet.service
-```
-
-- `systemd`에 설치했기 때문에 위 경로에서 설정을 조회하고 수정할 수 있다.
-- 해당 파일을 수정한 뒤 아래 명령어 수행해야 적용된다.
-	- `sudo systemctl daemon-reload`
-	- `sudo systemctl restart kubelet`
 
 ---
 ## 레퍼런스
