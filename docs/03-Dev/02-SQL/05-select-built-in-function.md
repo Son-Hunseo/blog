@@ -9,7 +9,7 @@ description: SQL에서 자주 쓰이는 내장함수를 한눈에 정리합니�
 ---
 ## 숫자
 
-![select8](assets/select8.png)
+![select8](assets/05-select-built-in-function/select8.png)
 
 - `CEIL()` 과 `CEILING()`은 같다고 생각하면 된다.
 - `ROUND(1526.159)` 는 `ROUND(1526.159, 0)` 과 같다. (정수자리까지 반올림)
@@ -33,8 +33,8 @@ description: SQL에서 자주 쓰이는 내장함수를 한눈에 정리합니�
 
 ## 문자
 
-![select9](assets/select9.png)
-![select10](assets/select10.png)
+![select9](assets/05-select-built-in-function/select9.png)
+![select10](assets/05-select-built-in-function/select10.png)
 
 - `ASCII('0')` -> 48 / `ASCII('A')` -> 65 / `ASCII('a')` -> 97
 	- `CAST(CHAR(48) AS CHAR)` -> '0'
@@ -48,19 +48,19 @@ description: SQL에서 자주 쓰이는 내장함수를 한눈에 정리합니�
 
 ## 날짜
 
-![select11](assets/select11.png)
-![select12](assets/select12.png)
-![select13](assets/select13.png)
+![select11](assets/05-select-built-in-function/select11.png)
+![select12](assets/05-select-built-in-function/select12.png)
+![select13](assets/05-select-built-in-function/select13.png)
 
 - `SELECT NOW(), SLEEP(5), SYSDATE();` -> 5초 차이나게 조회된다.
 - `SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s)` -> 2024-09-10 10:41:06
 
 ## 논리
 
-![select14](assets/select14.png)
+![select14](assets/05-select-built-in-function/select14.png)
 
 ## 집계
 
-![select15](assets/select15.png)
+![select15](assets/05-select-built-in-function/select15.png)
 
 - `null`은 자동으로 제외된다.

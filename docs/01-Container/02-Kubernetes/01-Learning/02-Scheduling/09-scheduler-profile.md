@@ -26,7 +26,7 @@ description: Kubernetes 1.18+에서 도입된 Scheduler Profile을 통해 Multi 
 ---
 ## Kubernetes Scheduling 과정
 
-![scheduler-profile1](assets/scheduler-profile1.jpg)
+![scheduler-profile1](assets/09-scheduler-profile/scheduler-profile1.jpg)
 
 ### Stages
 

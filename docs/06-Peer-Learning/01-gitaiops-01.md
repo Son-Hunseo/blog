@@ -9,7 +9,7 @@ image: /img/posts/06-Peer-Learning/01-gitaiops-01/ai-book.png
 ---
 ## 개요
 
-![aibooks](assets/ai-book.png)
+![aibooks](assets/01-gitaiops-01/ai-book.png)
 
 회사에서는 적용하지 못하지만, 홈랩 쿠버네티스 클러스터에서는 쿠버네티스 명령어를 입력하는 과정도 AI(Claude-Code, or Codex)에 맡기는데 어느정도 익숙해졌다.
 
@@ -91,7 +91,7 @@ GitOps가 무엇인지, 쿠버네티스를 왜 사용해야하는지 등의 내�
 
 #### 성장 타임라인
 
-![notiflex-timeline](assets/notiflex-timeline.png)
+![notiflex-timeline](assets/01-gitaiops-01/notiflex-timeline.png)
 
 #### 실습자의 역할 페르소나
 
@@ -168,7 +168,7 @@ flowchart TD
 
 > Prompt : 안녕! 나는 Notiflex라는 B2B 알림 SaaS 플랫폼의 DevOps 엔지니어야. 이 책을 따라가면서 쿠버네티스 운영 환경을 처음부터 구축하려고 해.
 
-![hello-claude](assets/hello-claude.png)
+![hello-claude](assets/01-gitaiops-01/hello-claude.png)
 
 #### statusline 설정하기
 
@@ -192,7 +192,7 @@ flowchart TD
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch2/2.4-github-repo.md` -> 행동 수행 -> `result-templates/ch2/2.4-github-repo.md`를 보고 마지막 결과 출력
 
-![set-github](assets/set-github.png)
+![set-github](assets/01-gitaiops-01/set-github.png)
 
 책의 지침사항을 따라 프롬프트를 입력하여 진행하였습니다.
 
@@ -212,7 +212,7 @@ flowchart TD
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch2/2.5-gke-cluster.md` -> 행동 수행 -> `result-templates/ch2/2.5-gke-cluster.md`를 보고 마지막 결과 출력
 
-![gke-cluster](assets/gke-cluster.png)
+![gke-cluster](assets/01-gitaiops-01/gke-cluster.png)
 
 나머지 `kubeconfig`나 `GatewayClass`에 대한 내용은 이미 잘 알고있어서 넘어가겠습니다.
 
@@ -223,7 +223,7 @@ flowchart TD
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch2/2.6-build-deploy.md` -> 행동 수행 -> `result-templates/ch2/2.6-build-deploy.md`를 보고 마지막 결과 출력
 
-![build-deploy](assets/build-deploy.png)
+![build-deploy](assets/01-gitaiops-01/build-deploy.png)
 
 ---
 ### 2.7. 깃허브에 첫 커밋
@@ -232,9 +232,9 @@ flowchart TD
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch2/2.7-first-commit.md` -> 행동 수행 -> `result-templates/ch2/2.7-first-commit.md`를 보고 마지막 결과 출력
 
-![first-commit](assets/first-commit.png)
+![first-commit](assets/01-gitaiops-01/first-commit.png)
 
-![first-journey](assets/first-journey.png)
+![first-journey](assets/01-gitaiops-01/first-journey.png)
 
 ---
 ### 2.8. /update-docs 스킬 만들기
@@ -243,7 +243,7 @@ flowchart TD
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch2/update-docs-skill.md` -> 행동 수행 -> `result-templates/ch2/update-docs-skill.md`를 보고 마지막 결과 출력
 
-![create-update-docs-skill](assets/create-update-docs-skill.png)
+![create-update-docs-skill](assets/01-gitaiops-01/create-update-docs-skill.png)
 
 ---
 ## 리소스 정리 및 다시 실행
@@ -256,19 +256,19 @@ flowchart TD
 
 > Prompt : 현재 내 GCP 계정의 my-gitaiops 프로젝트에서 내가 현재 프로젝트 실습을 하며 생성했던 리소스들을 모두 정리해줘. 존재 가능한 리소스 목록은 gcp cli 명령어, `../notiflex-platform/JOURNEY.md`, `./prompt-guardrails/shared/resource-budget.md`를 참고하면 돼. 그리고 마지막으로 이걸 `../notiflex-platform/JOURNEY.md`에 기록해줘.
 
-![clear-resource](assets/clear-resource.png)
+![clear-resource](assets/01-gitaiops-01/clear-resource.png)
 
 위 명령어를 입력하면 `JOURNEY.md`에 아래와 같은 항목이 추가됩니다.
 
-![journey-resource](assets/journey-resource.png)
+![journey-resource](assets/01-gitaiops-01/journey-resource.png)
 
 ---
 ### 리소스 재생성
 
 > Prompt : 현재 나의 gcp에는 현재 프로젝트 관련 리소스가 없는 상태야. `../notiflex-platform/JOURNEY.md`를 보고 프로젝트를 재개할 수 있게 리소스를 다시 만들어주고. 이 기록을 다시 `../notiflex-platform/JOURNEY.md`에 남겨줘
 
-![resume](assets/resume.png)
+![resume](assets/01-gitaiops-01/resume.png)
 
-![journey-resource2](assets/journey-resource2.png)
+![journey-resource2](assets/01-gitaiops-01/journey-resource2.png)
 
 ---

@@ -20,7 +20,7 @@ description: Kubernetes 클러스터 인가(Authorization)의 핵심 개념과 �
 ## 쿠버네티스 Authorization(인가) 종류
 ### Node
 
-![authorization1](assets/authorization1.png)
+![authorization1](assets/08-authorization/authorization1.png)
 
 - 대상: `kubelet`
 - 목적: 
@@ -31,7 +31,7 @@ description: Kubernetes 클러스터 인가(Authorization)의 핵심 개념과 �
 
 ### ABAC (레거시)
 
-![authorization2](assets/authorization2.png)
+![authorization2](assets/08-authorization/authorization2.png)
 
 ```json
 {
@@ -58,7 +58,7 @@ description: Kubernetes 클러스터 인가(Authorization)의 핵심 개념과 �
 
 ### RBAC (표준)
 
-![authorization3](assets/authorization3.png)
+![authorization3](assets/08-authorization/authorization3.png)
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -99,7 +99,7 @@ roleRef:
 
 ### Webhook
 
-![authorization4](assets/authorization4.png)
+![authorization4](assets/08-authorization/authorization4.png)
 
 ```yaml
 apiVersion: v1

@@ -9,7 +9,7 @@ sidebar_class_name: hidden-sidebar-item
 ---
 ## 개요
 
-![connectivity1](assets/connectivity1.png)
+![connectivity1](assets/11-storage-connectivity-method/connectivity1.png)
 
 스토리지는 단순히 데이터를 저장하는 장치라고 볼 수도 있지만, 실제 인프라 환경에서는 <span class="t-red">서버와 스토리지가 어떤 방식으로 연결되는지</span>에 따라 구조와 용도가 달라진다.
 

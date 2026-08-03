@@ -12,7 +12,7 @@ description: 데드락(DeadLock)이란 무엇인지, 발생 조건 4가지(상�
 
 두 개 이상의 프로세스나 스레드가 서로 자원을 얻지 못해서 다음 처리를 하지 못하는 상태, 이에 무한히 다음 자원을 기다리게 되는 상태를 말한다.
 
-![deadlock](assets/deadlock.png)
+![deadlock](assets/06-deadlock/deadlock.png)
 
 위 사진처럼 서로 원하는 자원이 상대방에 할당되어 있어서 두 프로세스는 무한정 wait에 빠짐
 

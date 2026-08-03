@@ -12,7 +12,7 @@ description: Nginx 리버스 프록시에서 Kubernetes Gateway API로 전환하
 ---
 ## Gateway API를 도입하는 이유
 
-![home-refac3](assets/home-refac3.png)
+![home-refac3](assets/08-home-lab-refactoring3/home-refac3.png)
 
 기존에는 위 그림처럼 Nginx를 리버스 프록시 서버로 두고 크게 3가지 목적으로 사용했다.
 1. 블로그 정적 웹 호스팅

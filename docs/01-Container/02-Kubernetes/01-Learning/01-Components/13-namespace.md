@@ -7,7 +7,7 @@ description: Kubernetes의 Namespace 개념부터 필요성, 기본 네임스페
 ---
 
 ---
-![namespace1](assets/namespace1.png)
+![namespace1](assets/13-namespace/namespace1.png)
 ## Namespace란?
 
 - `Namespace`는 리소스를 '논리적'으로 구분하는 단위이다.
@@ -42,7 +42,7 @@ description: Kubernetes의 Namespace 개념부터 필요성, 기본 네임스페
 
 ### 다른 Namespace에 접근
 
-![namespace2](assets/namespace2.png)
+![namespace2](assets/13-namespace/namespace2.png)
 
 - 다른 `Namespace`의 자원에 접근하려면 전체 도메인을 사용
 - 예: `web-pod.dev.pod.cluster.local`, `web-service.dev.svc.cluster.local`

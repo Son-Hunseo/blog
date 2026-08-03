@@ -48,7 +48,7 @@ public class GiftLetterService {
 
 ### Spring Event
 
-![springevent1](assets/springevent1.png)
+![springevent1](assets/06-chocoletter-advance-06/springevent1.png)
 
 이때 `Spring Event`를 도입하여 중간에 `ApplicationEventPublisher`라는 이벤트 처리 계층을 두어서 문제를 해결할 수 있다.
 

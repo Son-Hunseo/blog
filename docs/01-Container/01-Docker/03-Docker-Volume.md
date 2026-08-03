@@ -16,7 +16,7 @@ description: Docker 컨테이너의 데이터 영속성을 확보하는 핵심 �
 ---
 ## 생성 & 마운트
 
-![dockerstorage4](assets/dockerstorage4.png)
+![dockerstorage4](assets/03-Docker-Volume/dockerstorage4.png)
 
 ### Volume Mount
 

@@ -11,7 +11,7 @@ sidebar_class_name: hidden-sidebar-item
 
 ## Region
 
-![region](assets/region.webp)
+![region](assets/01-aws-network-basic/region.webp)
 
 AWS 인프라의 가장 큰 단위인 <span class="t-red">Region은 최소 2개 이상의 가용영역(AZ, Availability Zone)으로 구성</span>되어 있다.
 
@@ -27,7 +27,7 @@ AWS 인프라의 가장 큰 단위인 <span class="t-red">Region은 최소 2개 
 ---
 ## AZ(Availability Zone)
 
-![az](assets/az.webp)
+![az](assets/01-aws-network-basic/az.webp)
 
 <span class="t-red">하나 이상의 데이터센터가 모이면 AZ(Availability Zone, 가용영역)</span>이라고 한다. 각 가용영역은 내결함성을 갖도록 설계되어 있으며, 재해에 대비하기 위해 다른 AZ와 지리적으로 떨어진 곳에 위치한다. 각 AZ는 프라이빗 링크를 통해 다른 AZ와 연결되어 있다.
 
@@ -41,7 +41,7 @@ AWS 인프라의 가장 큰 단위인 <span class="t-red">Region은 최소 2개 
 ---
 ## VPC (Virtual Private Cloud)
 
-![vpc](assets/vpc.webp)
+![vpc](assets/01-aws-network-basic/vpc.webp)
 
 <span class="t-red">사용자가 구성하는 가상 네트워크 사설망</span>이다. 전용 사설 IP 대역을 구성할 수 있으며, 기본적으로 하나의 Region에 최대 5개의 VPC를 구성할 수 있다.
 
@@ -56,14 +56,14 @@ AWS 인프라의 가장 큰 단위인 <span class="t-red">Region은 최소 2개 
 ---
 ## Subnet
 
-![subnet](assets/subnet.webp)
+![subnet](assets/01-aws-network-basic/subnet.webp)
 
 <span class="t-red">VPC가 사용하는 사설 IP 대역의 일부분을 논리적으로 분할한 영역</span>이다. 하나의 Subnet은 <span class="t-red">반드시 하나의 AZ에 위치</span>하게 된다.
 
 ---
 ## Route Table
 
-![route-table](assets/route-table.webp)
+![route-table](assets/01-aws-network-basic/route-table.webp)
 
 <span class="t-red">Route Table은 VPC 내에서 네트워크 트래픽을 어디로 보낼지 결정하는 표</span>이다.
 
@@ -72,7 +72,7 @@ AWS 인프라의 가장 큰 단위인 <span class="t-red">Region은 최소 2개 
 ---
 ## 인터넷 연결
 
-![internet](assets/internet.webp)
+![internet](assets/01-aws-network-basic/internet.webp)
 
 VPC는 기본적으로 격리된 네트워크이다. 이에 <span class="t-red">기본적으로 인터넷과 연결되어 있지 않다.</span>
 

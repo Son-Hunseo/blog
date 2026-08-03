@@ -7,7 +7,7 @@ image: /img/posts/04-AI/00-claude-code-tips/claude-code.png
 ---
 
 ---
-![claude-code](assets/claude-code.png)
+![claude-code](assets/00-claude-code-tips/claude-code.png)
 
 ## Mode와 권장 워크 플로우
 ### Mode

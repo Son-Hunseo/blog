@@ -9,7 +9,7 @@ description: 홈랩 인프라를 클라우드 네이티브 아키텍처로 리�
 ---
 ## 리팩토링 아키텍처
 
-![home-refac3](assets/home-refac3.png)
+![home-refac3](assets/06-home-lab-refactoring1/home-refac3.png)
 
 ---
 ## 리팩토링 계기

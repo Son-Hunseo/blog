@@ -9,4 +9,4 @@ description: SQL 엔진이 SELECT 문을 실제로 실행하는 순서를 시각
 ---
 ## 쿼리의 실행순서 (중요)
 
-![select16](assets/select16.png)
+![select16](assets/07-select-execution-order/select16.png)

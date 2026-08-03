@@ -35,7 +35,7 @@ description: 문제를 작은 단위로 나누어 해결하는 분할정복 알�
 
 **Top-down approach**
 
-![divide1|500](assets/divide1.png)
+![divide1|500](assets/02-divide-and-conquer-binarysearch/divide1.png)
 
 ### 예제: 거듭 제곱
 
@@ -69,7 +69,7 @@ Recursive_Power(C, n)
 
 ### 예제: 같은 색 공간 만들기
 
-![divide2|300](assets/divide2.png)
+![divide2|300](assets/02-divide-and-conquer-binarysearch/divide2.png)
 
 > [!info] **같은 색 공간 만들기**
 >
@@ -79,7 +79,7 @@ Recursive_Power(C, n)
 > - 전체 공간의 크기는 N x N (N = 2, 4, 8, 16, 32, 64, 128 중 하나)
 >   :::
 >
-> ![divide3|700](assets/divide3.png)info
+> ![divide3|700](assets/02-divide-and-conquer-binarysearch/divide3.png)info
 솔루션
 
 - 공간이 모두 같은 색으로 칠해져있지 않으면 가로와 세로로 중간 부분을 잘라서 똑같은 크기의 4개의 N/2 x N/2 공간으로 나눈다.

@@ -7,7 +7,7 @@ description: 채팅 기능의 메시지 큐를 Kafka에서 Redis Streams로 마�
 ---
 
 ---
-![focus-chat](assets/focus-chat.png)
+![focus-chat](assets/02-chocoletter-advance-02/focus-chat.png)
 
 ## 마이그레이션 이유
 ### 당시 Kafka 선택 이유

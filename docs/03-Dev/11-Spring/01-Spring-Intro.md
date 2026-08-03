@@ -15,13 +15,13 @@ description: Spring Framework는 복잡한 EJB의 한계를 극복하고, POJO �
 - EJB를 사용하면 어플리케이션 작성을 쉽게 할 수 있었다.
 - Low Level의 트랜잭션이나 상태관리, 멀티 쓰레딩, 리소스 풀링과 같은 복잡한 Low Level의 API 등을 이해하지 못하더라도 아무 문제 없이 애플리케이션을 개발할 수 있었다.
 
-### EJB의 문제점![spring-intro1](assets/spring-intro1.png)))
+### EJB의 문제점![spring-intro1](assets/01-Spring-Intro/spring-intro1.png)))
 
 - 복잡한 스펙으로 인한 개발 효율성이 떨어진다.
 - 애플리케이션을 테스트하기 위해서는 반드시 EJB 서버(매우 비싸고 무거움)가 필요하다.
 - EJB스펙에 정의된 인터페이스에 따라 코드를 작성하므로 기존에 작성된 POJO(특정 프레임워크나 기술에 의존적이지 않은 자바 객체)를 변경해야한다.
 
-### Rod Johnson![spring-intro2](assets/spring-intro2.png)))
+### Rod Johnson![spring-intro2](assets/01-Spring-Intro/spring-intro2.png)))
 
 - Rod Johnson이 'Expert One-on-One J2EE Development without EJB'라는 저서에서 EJB를 사용하지 않고 엔터프라이즈 어플리케이션을 개발하는 방법을 소개했다. (스프링의 모태)
 - AOP나 DI같은 새로운 프로그래밍 방법론이 제시되었다. 
@@ -40,7 +40,7 @@ description: Spring Framework는 복잡한 EJB의 한계를 극복하고, POJO �
 > [!info] 결론적으로 Spring이 만들어진 이유는 POJO 즉, Java 어플리케이션을 개발할 때, Java답게, 객체지향적으로 개발하기 위해서이다. 이를 Spring이 기존 EJB가 제공하는 엔터프라이즈급 기능을 제공하며(Low Level보다 비즈니스 로직에 집중), 더 가볍고, 객체지향적으로 개발할 수 있게해주는 것이다.
 
 ---
-## Spring 설계 철학 (Spring 삼각형)![spring-intro3](assets/spring-intro3.png)))
+## Spring 설계 철학 (Spring 삼각형)![spring-intro3](assets/01-Spring-Intro/spring-intro3.png)))
 
 ### POJO
 

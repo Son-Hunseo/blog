@@ -197,7 +197,7 @@ docker ps
 - DCGM Exporter 컨테이너가 실행되었는지 확인한다.
 
 
-![windows-dcgm-exporter1](assets/windows-dcgm-exporter1.jpg)
+![windows-dcgm-exporter1](assets/10-window-dcgm-expoter/windows-dcgm-exporter1.jpg)
 
 - localhost에서 실행되는 이유는 WSL 내부의 컨테이너는 9400:9400으로 WSL Ubuntu와 연결되었고, WSL은 윈도우와 네트워크를 NAT으로 공유하기 때문이다.
 
@@ -250,7 +250,7 @@ kubectl rollout restart deployment prometheus-server -n 프로메테우스가설
 - 위 명령어 입력해서 Pod 재시작
 
 
-![windows-dcgm-exporter2](assets/windows-dcgm-exporter2.jpg)
+![windows-dcgm-exporter2](assets/10-window-dcgm-expoter/windows-dcgm-exporter2.jpg)
 
 - 프로메테우스URL/targets 에서 추가된 것을 확인할 수 있다.
 
@@ -258,30 +258,30 @@ kubectl rollout restart deployment prometheus-server -n 프로메테우스가설
 ### Grafana 연동
 
 
-![prometheus-grafana-install7](../../01-Container/02-Kubernetes/02-Hands-On/assets/prometheus-grafana-install7.jpg)
+![prometheus-grafana-install7](assets/10-window-dcgm-expoter/prometheus-grafana-install7.jpg)
 
 - Grafana 접속
 - 좌측 패널 > Connections > Data sources > Add data source
 - Prometheus 선택
 
 
-![prometheus-grafana-install8](../../01-Container/02-Kubernetes/02-Hands-On/assets/prometheus-grafana-install8.jpg)
+![prometheus-grafana-install8](assets/10-window-dcgm-expoter/prometheus-grafana-install8.jpg)
 
 - Connection에 Prometheus URL 입력 후 Save & Test 선택해서 data source 생성
 
 
-![prometheus-grafana-install9](../../01-Container/02-Kubernetes/02-Hands-On/assets/prometheus-grafana-install9.jpg)
+![prometheus-grafana-install9](assets/10-window-dcgm-expoter/prometheus-grafana-install9.jpg)
 
 - 좌측 패널 > Dashboards > Create Dashboard
 - Import a dashboard 선택
 
 
-![prometheus-grafana-install10](../../01-Container/02-Kubernetes/02-Hands-On/assets/prometheus-grafana-install10.jpg)
+![prometheus-grafana-install10](assets/10-window-dcgm-expoter/prometheus-grafana-install10.jpg)
 
 - 원하는 대시보드의 ID 입력(DCGM Exporter의 경우 12239 추천)하고 Load
 	- https://grafana.com/grafana/dashboards/12239-nvidia-dcgm-exporter-dashboard/
 
 
-![windows-dcgm-exporter3](assets/windows-dcgm-exporter3.jpg)
+![windows-dcgm-exporter3](assets/10-window-dcgm-expoter/windows-dcgm-exporter3.jpg)
 
 - 연동 완료

@@ -27,7 +27,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > 그러나 지금 7.1 챕터까지의 흐름으로는 ArgoCD 애플리케이션은 `notiflex` 단 하나이다.
 > 
-> ![num-of-argocd-app](assets/num-of-argocd-app.png)
+> ![num-of-argocd-app](assets/04-gitaiops-04/num-of-argocd-app.png)
 > 
 > 저자가 책을 작성하면서 현재 모니터링 스택(Prometheus, Grafana, Loki, Fluent Bit, Valkey)등을 이미 ArgoCD로 관리하고 있다고 착각한 모양이다.
 > 
@@ -47,7 +47,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch7/7.2-node-scheduling.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![how-to-seperate](assets/how-to-seperate.png)
+![how-to-seperate](assets/04-gitaiops-04/how-to-seperate.png)
 
 > [!info] 노드풀이란?
 > - 동일한 구성을 가진 워커 노드들의 논리적 그룹이다. 
@@ -61,7 +61,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch7/7.2-node-scheduling.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![other-option3](assets/other-option3.png)
+![other-option3](assets/04-gitaiops-04/other-option3.png)
 
 ---
 #### 멀티 노드풀 생성하기
@@ -70,9 +70,9 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch7/7.2-multi-nodepool.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch7/7.2-multi-nodepool.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![multi-nodepool](assets/multi-nodepool.png)
+![multi-nodepool](assets/04-gitaiops-04/multi-nodepool.png)
 
-![multi-nodepool-result](assets/multi-nodepool-result.png)
+![multi-nodepool-result](assets/04-gitaiops-04/multi-nodepool-result.png)
 
 | 노드풀                  | 머신 타입           | 현재 배치된 워크로드                                                                                                                      | 배치 방식                              |
 | -------------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
@@ -91,7 +91,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch7/7.3-multi-app-management.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![how-about-app-of-apps](assets/how-about-app-of-apps.png)
+![how-about-app-of-apps](assets/04-gitaiops-04/how-about-app-of-apps.png)
 
 ---
 #### 다른 도구는 없는지 비교해보기
@@ -100,7 +100,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch7/7.3-multi-app-management.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![other-option4](assets/other-option4.png)
+![other-option4](assets/04-gitaiops-04/other-option4.png)
 
 ---
 #### App of Apps 패턴 적용하기
@@ -109,20 +109,20 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch7/7.3-app-of-apps.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch7/7.3-app-of-apps.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![app-of-apps-apply](assets/app-of-apps-apply.png)
+![app-of-apps-apply](assets/04-gitaiops-04/app-of-apps-apply.png)
 
 ---
 #### 내가 추가적으로 진행한 것
 
 이때까지 설치한 Prometheus, Grafana, Valkey, Loki, Fluent Bit, Google Secret Manager 등도 App of Apps로 관리해야하는 것 아닌가? 왜 ch8에서부터 추가된 것들만 App of Apps로 관리하지? 라는 의문이 들었다.
 
-![my-addtional](assets/my-addtional.png)
+![my-addtional](assets/04-gitaiops-04/my-addtional.png)
 
 > 진행해줘
 
-![my-additional2](assets/my-additional2.png)
+![my-additional2](assets/04-gitaiops-04/my-additional2.png)
 
-![my-additional-result](assets/my-additional-result.png)
+![my-additional-result](assets/04-gitaiops-04/my-additional-result.png)
 
 ---
 #### Sync Wave로 설치 순서 정하기
@@ -131,7 +131,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch7/7.3-app-of-apps.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch7/7.3-app-of-apps.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![sync-wave](assets/sync-wave.png)
+![sync-wave](assets/04-gitaiops-04/sync-wave.png)
 
 ---
 ### 7.4. 멀티 테넌시: 네임스페이스 격리
@@ -145,7 +145,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch7/7.4-multi-tenancy.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![how-to-multi-tenancy](assets/how-to-multi-tenancy.png)
+![how-to-multi-tenancy](assets/04-gitaiops-04/how-to-multi-tenancy.png)
 
 ---
 #### 다른 도구는 없는지 비교해보기
@@ -154,7 +154,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch7/7.4-multi-tenancy.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![other-option5](assets/other-option5.png)
+![other-option5](assets/04-gitaiops-04/other-option5.png)
 
 ---
 #### 멀티 테넌시 구성하기
@@ -163,7 +163,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch7/7.4-multi-tenancy.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch7/7.4-multi-tenancy.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![multi-tenancy](assets/multi-tenancy.png)
+![multi-tenancy](assets/04-gitaiops-04/multi-tenancy.png)
 
 > [!info] 현재 enterprise 테넌트는 외부 접근 경로가 없다.
 > 여러가지 방법을 고려할 수 있을 것 같다.
@@ -191,14 +191,14 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch7/settings-local-example.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch7/settings-local-example.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![setting-local-json](assets/setting-local-json.png)
+![setting-local-json](assets/04-gitaiops-04/setting-local-json.png)
 
 ---
 #### 차단(deny) 체험
 
 > Prompt : 엔터프라이즈 네임스페이스의 notiflex-api를 kubectl로 지워줘.
 
-![deny-result](assets/deny-result.png)
+![deny-result](assets/04-gitaiops-04/deny-result.png)
 
 >[!warning] `--dangerously-skip-permissions`
 >- 현재 책에서는 모든 실습을 위 모드 기준으로 하라고 가이드 되어있다.
@@ -207,14 +207,14 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 
 일반 모드 실행 결과
 
-![deny-result2](assets/deny-result2.png)
+![deny-result2](assets/04-gitaiops-04/deny-result2.png)
 
 ---
 #### 승인(ask) 체험
 
 > Prompt : worker-pool 이거 누가 만든 거지? 모르는 노드풀이고 비용도 들고 안 쓰는 것 같은데 그냥 삭제해줘
 
-![ask-result](assets/ask-result.png)
+![ask-result](assets/04-gitaiops-04/ask-result.png)
 
 ---
 #### CLAUDE.md 에서 settings.local.json 으로
@@ -231,7 +231,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch7/settings-local-example.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch7/settings-local-example.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![reset-setting](assets/reset-setting.png)
+![reset-setting](assets/04-gitaiops-04/reset-setting.png)
 
 ---
 ## 8. 고도화
@@ -250,7 +250,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch8/8.1-messaging.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![mq-recommand](assets/mq-recommand.png)
+![mq-recommand](assets/04-gitaiops-04/mq-recommand.png)
 
 ---
 #### 다른 도구는 없는지 비교해보기
@@ -259,7 +259,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch8/8.1-messaging.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![other-option6](assets/other-option6.png)
+![other-option6](assets/04-gitaiops-04/other-option6.png)
 
 ---
 #### 카프카를 설치하고 이벤트 드리븐 구성하기
@@ -284,7 +284,7 @@ image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 >   
 > -> 그러니까 나중에 트래픽이 증가해 notiflex앱의 replica수가 늘었을 때 메시지를 병렬적으로 여러 pod에 분배하기 위함이다.
 
-![kafka-result](assets/kafka-result.png)
+![kafka-result](assets/04-gitaiops-04/kafka-result.png)
 
 ---
 ### 8.2. 분산 트레이싱: 템포
@@ -310,7 +310,7 @@ API가 카프카에 발행을 실패했는지, 카프카에는 들어갔는데 C
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch8/8.2-tracing.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![trace-recommand](assets/trace-recommand.png)
+![trace-recommand](assets/04-gitaiops-04/trace-recommand.png)
 
 ---
 #### 다른 도구는 없는지 비교해보기
@@ -319,7 +319,7 @@ API가 카프카에 발행을 실패했는지, 카프카에는 들어갔는데 C
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch8/8.2-tracing.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![other-option7](assets/other-option7.png)
+![other-option7](assets/04-gitaiops-04/other-option7.png)
 
 ---
 #### 템포 설치하고 트레이싱 설정하기
@@ -334,13 +334,13 @@ API가 카프카에 발행을 실패했는지, 카프카에는 들어갔는데 C
 > - OpenTelemetry는 트레이싱, 메트릭 그리고 로그 수집의 벤더 중립 표준이다.
 > - 앱은 OTel SDK로 트레이스를 생성하고, OTLP 프로토콜로 내보낸다.
 
-![trace-result](assets/trace-result.png)
+![trace-result](assets/04-gitaiops-04/trace-result.png)
 
 Loki 때와 똑같이, Grafana에 접속해서 Explorer에서 데이터 소스를 Tempo로 선택하고, Service Name에 notiflex-api를 입력한 뒤 Run Query 클릭 (/id API로 여러번 요청 해보고 보자)
 
 > 현재 애플리케이션 계층에만 trace 지점을 등록한거고, 카프카에는 따로 설정은 안해놓은 상태.
 
-![tempo-result](assets/tempo-result.png)
+![tempo-result](assets/04-gitaiops-04/tempo-result.png)
 
 ---
 ### 8.3. 배치 자동화: 크론잡
@@ -354,7 +354,7 @@ API가 정상 응답하는지 주기적으로 확인하고 싶다.
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch8/8.3-cronjob.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![how-about-cronjob](assets/how-about-cronjob.png)
+![how-about-cronjob](assets/04-gitaiops-04/how-about-cronjob.png)
 
 ---
 #### 크론잡 생성하기
@@ -363,7 +363,7 @@ API가 정상 응답하는지 주기적으로 확인하고 싶다.
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch8/8.3-cronjob.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch8/8.3-cronjob.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![cronjob-result](assets/cronjob-result.png)
+![cronjob-result](assets/04-gitaiops-04/cronjob-result.png)
 
 ---
 ### 8.4. 마무리: command-guardrails/로 위험 작업 절차 정리
@@ -387,7 +387,7 @@ API가 정상 응답하는지 주기적으로 확인하고 싶다.
 > - `settings.local.json` : ~ 는 차단 , ~는 승인 받아
 > - `command-guardrails` : ~가 필요하면 이 절차를 따라라
 
-![](assets/command-guardrails.png)
+![](assets/04-gitaiops-04/command-guardrails.png)
 
 ---
 ## 9. GitAIOps, 살아있는 운영 표준의 탄생
@@ -401,7 +401,7 @@ API가 정상 응답하는지 주기적으로 확인하고 싶다.
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch9/9.1-repo-analysis.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch9/9.1-repo-analysis.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![analysis-repo](assets/analysis-repo.png)
+![analysis-repo](assets/04-gitaiops-04/analysis-repo.png)
 
 > 이번에도 저장소 구조 분석만 시켰는데 커밋 히스토리까지 분석해버렸다 ㅋㅋ
 > 
@@ -414,7 +414,7 @@ API가 정상 응답하는지 주기적으로 확인하고 싶다.
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch9/9.1-repo-analysis.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch9/9.1-repo-analysis.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![cluster-status](assets/cluster-status.png)
+![cluster-status](assets/04-gitaiops-04/cluster-status.png)
 
 ---
 ### 9.2. 쌓인 것들을 돌아보기
@@ -424,11 +424,11 @@ API가 정상 응답하는지 주기적으로 확인하고 싶다.
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch9/9.2-retrospective.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch9/9.2-retrospective.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![retrospective1](assets/retrospective1.png)
+![retrospective1](assets/04-gitaiops-04/retrospective1.png)
 
-![retrospective2](assets/retrospective2.png)
+![retrospective2](assets/04-gitaiops-04/retrospective2.png)
 
-![retrospective3](assets/retrospective3.png)
+![retrospective3](assets/04-gitaiops-04/retrospective3.png)
 
 ---
 ### 9.3. 기대하지 않았던 효과
@@ -494,7 +494,7 @@ notiflex-platform의 문서는 코드와 같은 저장소에 있다.
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch9/9.4-gitaiops.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch9/9.4-gitaiops.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![gitaiops](assets/gitaiops.png)
+![gitaiops](assets/04-gitaiops-04/gitaiops.png)
 
 ---
 #### GitOps와의 차이
@@ -539,7 +539,7 @@ GitAIOps에서는 AI가 실행자이면서 동시에 기록자이다. 이것이 
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch9/9.5-wrap-up.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch9/9.5-wrap-up.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![next-step](assets/next-step.png)
+![next-step](assets/04-gitaiops-04/next-step.png)
 
 ---
 #### AI와 대화하는 습관

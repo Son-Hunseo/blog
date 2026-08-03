@@ -9,7 +9,7 @@ description: CKA 자격증 시험에 1차에서 1점 차이로 떨어진 후 재
 ---
 ## 자격증 취득 후기
 
-![cka](assets/cka.png)
+![cka](assets/08-exam-recap-2/cka.png)
 
 1차 시험에서 1점차이로 떨어진 이후에 바로 다음날 시험 접수를 했다.
 
@@ -27,4 +27,4 @@ description: CKA 자격증 시험에 1차에서 1점 차이로 떨어진 후 재
 CKA 자격증을 획득했다고 쿠버네티스를 잘하냐? 그건 아닌 것 같다. 이 자격증은 저는 쿠버네티스의 기본적인 개념들은 알고있어요 ~ 정도이지 잘한다는 의미는 아닌 것 같다. 그래도 자격증을 준비하면서 겉핥기식으로 알고있던 지식들을 많이 채워서 보람있었다.
 
 
-![recap2](assets/recap2.png)
+![recap2](assets/08-exam-recap-2/recap2.png)

@@ -27,7 +27,7 @@ kubectl get pods \
 
 ### YAML
 
-![kubeconfig1](assets/kubeconfig1.png)
+![kubeconfig1](assets/06-kubeconfig/kubeconfig1.png)
 
 ```yaml
 apiVersion: v1

@@ -26,7 +26,7 @@ Proxmox 기반에서 단순히 VM을 여러 개 띄우는 것을 넘어, VLAN �
 ## 설계
 ### 가용 자원
 
-![kolla1](assets/kolla1.png)
+![kolla1](assets/02-install-openstack/kolla1.png)
 
 현재 가용자원은 위처럼 서버 2대이고, Proxmox 클러스터로 묶여있다.
 
@@ -40,7 +40,7 @@ Proxmox 기반에서 단순히 VM을 여러 개 띄우는 것을 넘어, VLAN �
 
 ### 네트워크 설계
 
-![kolla2](assets/kolla2.png)
+![kolla2](assets/02-install-openstack/kolla2.png)
 
 자원 제약 환경에서 트래픽 특성과 성능 요구사항을 고려하여, 네트워크를 두 개의 물리 경로로 분리하여 구성하였다.
 
@@ -68,7 +68,7 @@ Proxmox 기반에서 단순히 VM을 여러 개 띄우는 것을 넘어, VLAN �
 ---
 ## 스위치 VLAN 설정
 
-![kolla3](assets/kolla3.png)
+![kolla3](assets/02-install-openstack/kolla3.png)
 
 현재 스위치의 Port 2, 3에 각각 서버 A, B가 연결되어 있다. 두 서버 사이에 VLAN 1과 VLAN10의 2가지트래픽이 흘러야 하므로 위와 같이 설정한다.
 
@@ -97,9 +97,9 @@ Proxmox 기반에서 단순히 VM을 여러 개 띄우는 것을 넘어, VLAN �
 ## Proxmox 네트워크 기본 개념
 ### 물리 NIC (Network Interface Card)
 
-![kolla4](assets/kolla4.png)
+![kolla4](assets/02-install-openstack/kolla4.png)
 
-![kolla5](assets/kolla5.png)
+![kolla5](assets/02-install-openstack/kolla5.png)
 
 - 물리 NIC는 말 그대로 물리 서버에 실제로 꽂혀있는 랜카드다.
 - 현재 서버 A의 물리 NIC는 `enp1s0`, `enp3s0` 이렇게 2개이고, 서버 B의 물리 NIC는 `eno1`, `enp4s0`이다.
@@ -107,7 +107,7 @@ Proxmox 기반에서 단순히 VM을 여러 개 띄우는 것을 넘어, VLAN �
 
 ### 가상 브릿지 (Linux Bridge)
 
-![kolla6](assets/kolla6.png)
+![kolla6](assets/02-install-openstack/kolla6.png)
 
 - Proxmox 에서는 VM이 물리 NIC에 직접 붙지 않는다. 대신 가상 브릿지를 통해 네트워크에 연결된다.
 - 가상 브릿지는 쉽게 말해서 "가상 스위치"라고 보면 된다.
@@ -122,7 +122,7 @@ Proxmox 기반에서 단순히 VM을 여러 개 띄우는 것을 넘어, VLAN �
 ## 호스트 네트워크 설정 (모든 호스트 공통)
 ### 가상 브릿지(기본 외부 네트워크)
 
-![kolla7](assets/kolla7.png)
+![kolla7](assets/02-install-openstack/kolla7.png)
 
 - Proxmox 노드는 설치 시, 첫 번째 물리 NIC를 기반으로 가상 브릿지 `vmbr0`가 기본적으로 생성된다.
 - 현재 구성에서는 각 서버의 첫 번째 NIC가 스위치에 연결되어 있고, 스위치가 공유기에 연결되어 있으므로 `vmbr0`를 통해 외부 네트워크 및 인터넷과 통신할 수 있다.
@@ -136,7 +136,7 @@ Proxmox 기반에서 단순히 VM을 여러 개 띄우는 것을 넘어, VLAN �
 
 ### 가상 브릿지(노드 간 내부 네트워크)
 
-![kolla8](assets/kolla8.png)
+![kolla8](assets/02-install-openstack/kolla8.png)
 
 - 두 번째 물리 NIC를 기반으로 노드 간 통신을 위한 가상 브릿지 `vmbr1`를 추가로 구성한다.
 - 이 브릿지는 서버 간 내부 통신 전용 네트워크이므로 외부와 연결되지 않으며 단순히 NIC ↔ NIC 간 통신만 수행한다.
@@ -151,7 +151,7 @@ Proxmox 기반에서 단순히 VM을 여러 개 띄우는 것을 넘어, VLAN �
 
 이제 VM에 네트워크 인터페이스를 추가하여, 앞서 설계한 네트워크 구조를 VM 내부에서 사용할 수 있도록 구성한다.
 
-![kolla9](assets/kolla9.png)
+![kolla9](assets/02-install-openstack/kolla9.png)
 
 - Proxmox의 Hardware 탭 → Network Device 추가를 통해 VM에 아래와 같이 네트워크 인터페이스를 구성한다.
 	- `vmbr0`, VLAN tag 없음 (VLAN 1) → External 네트워크 (인터넷, Floating IP)
@@ -160,7 +160,7 @@ Proxmox 기반에서 단순히 VM을 여러 개 띄우는 것을 넘어, VLAN �
 
 ### External 망
 
-![kolla10](assets/kolla10.png)
+![kolla10](assets/02-install-openstack/kolla10.png)
 
 ```bash
 ip addr
@@ -611,7 +611,7 @@ openstack network agent list
 
 ### Proxmox에 VLAN 인터페이스 생성
 
-![kolla11](assets/kolla11.png)
+![kolla11](assets/02-install-openstack/kolla11.png)
 
 - `vmbr0` 브릿지에서 VLAN 10 트래픽을 처리하기 위해 Linux VLAN 인터페이스 `vmbr0.10`을 생성한다.
 - 해당 인터페이스는 `192.168.10.0/24` 네트워크로의 진입 지점 역할을 한다.
@@ -649,7 +649,7 @@ sudo ip route add default via 192.168.10.254
 
 ### Horizon 접속
 
-![kolla12](assets/kolla12.png)
+![kolla12](assets/02-install-openstack/kolla12.png)
 
 - 이러면 `http://<VIP IP>` Horizon 접속이 가능하다.
 

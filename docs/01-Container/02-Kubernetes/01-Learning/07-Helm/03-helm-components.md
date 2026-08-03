@@ -25,7 +25,7 @@ description: 쿠버네티스 패키지 매니저 Helm의 기본 개념인 Chart,
 
 ### Release
 
-![helm-components1](assets/helm-components1.png)
+![helm-components1](assets/03-helm-components/helm-components1.png)
 
 - Chart가 쿠버네티스 클러스터에 적용되어 생성된 '인스턴스'이다.
 - 하나의 차트를 사용하여 여러 개의 Release를 생성할 수 있다.
@@ -34,7 +34,7 @@ description: 쿠버네티스 패키지 매니저 Helm의 기본 개념인 Chart,
 
 ### Revision
 
-![helm-components2](assets/helm-components2.png)
+![helm-components2](assets/03-helm-components/helm-components2.png)
 
 - Release의 '스냅샷'이다.
 - 애플리케이션에 변경 사항(이미지 업데이트, 설정 변경 등)이 발생할 때마다 새로운 리비전 번호가 생성되어 이력을 관리한다.

@@ -9,7 +9,7 @@ image: /img/posts/00-IaaS/01-AWS/03-iam/iam.png
 ---
 ## 개요
 
-![iam1](assets/iam1.png)
+![iam1](assets/03-iam/iam1.png)
 
 AWS IAM은 Identity and Access Management의 약자로, <span class="t-red">AWS 리소스에 대한 접근 권한을 관리하는 서비스</span>이다. 
 쉽게 말하면, <span class="t-red">누가</span> AWS에 접근할 수 있는지, <span class="t-red">어떤 리소스</span>에 <span class="t-red">어떤 작업</span>을 할 수 있는지를 제어하는 서비스이다.

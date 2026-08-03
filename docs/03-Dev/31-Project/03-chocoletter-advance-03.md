@@ -68,18 +68,18 @@ description: 프론트엔드에 하드코딩된 대칭키로 인한 보안 취�
 
 ### 2. DB 컬럼 삭제, API 삭제
 
-![encrypt1](assets/encrypt1.png)
+![encrypt1](assets/03-chocoletter-advance-03/encrypt1.png)
 
 
 - Member 테이블에 더이상 공개키를 저장할 필요가 없으므로 Member테이블에 공개키 컬럼을 삭제한다.
 - 당연히 이에 따른 엔티티의 필드도 삭제한다.
 
 
-![encrypt2](assets/encrypt2.png)
+![encrypt2](assets/03-chocoletter-advance-03/encrypt2.png)
 
-![encrypt3](assets/encrypt3.png)
+![encrypt3](assets/03-chocoletter-advance-03/encrypt3.png)
 
-![encrypt4](assets/encrypt4.png)
+![encrypt4](assets/03-chocoletter-advance-03/encrypt4.png)
 
 - 이에 공개키를 저장, 조회하는 API를 삭제한다.
 - 당연히 이에 따른 Dto도 삭제한다.
@@ -167,7 +167,7 @@ public class LetterEncryptionUtil {
 - 암복호화를 이제 서버에서 수행하기 때문에 사용해야하는 Util을 만들었다.
 
 
-![encrypt5](assets/encrypt5.png)
+![encrypt5](assets/03-chocoletter-advance-03/encrypt5.png)
 
 - 기존에는 프론트에서 암호화된 편지 내용을 전송받기 때문에 그대로 조회, 저장, 수정했지만 이제 프론트에서는 평문으로 보내고 서버에서 암호화 복호화를 수행한다.
 - 이에 API의 경우 편지 조회, 생성, 수정에서 컨트롤러단에서는 수정할 부분이 없고 서비스단에서 만든 Util을 사용하는 로직을 추가하면 된다.

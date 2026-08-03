@@ -22,7 +22,7 @@ AWS를 사용하는 방법은 크게 세 가지로 나눌 수 있다.
 ## AWS 사용 방법
 ### AWS Management Console
 
-![access1](assets/access1.png)
+![access1](assets/02-aws-access-method/access1.png)
 
 AWS Management Console은 웹 브라우저에서 AWS를 사용할 수 있는 <span class="t-red">GUI 환경</span>이다.
 
@@ -68,7 +68,7 @@ CLI가 사람이 터미널에서 직접 사용하는 방식이라면, SDK는 애
 ---
 ## CloudShell
 
-![access2](assets/access2.png)
+![access2](assets/02-aws-access-method/access2.png)
 
 CloudShell은 AWS <span class="t-red">콘솔에서 바로 사용할 수 있는 가상 리눅스 환경</span>이다.
 

@@ -33,7 +33,7 @@ description: 쿠버네티스(Kubernetes) Deployment Rollout의 핵심 개념과 
 ---
 ## Deployment Rollout 전략
 
-![rolling1](assets/rolling1.png)
+![rolling1](assets/07-rolling-update-and-rollback/rolling1.png)
 
 ### Recreate
 
@@ -65,7 +65,7 @@ description: 쿠버네티스(Kubernetes) Deployment Rollout의 핵심 개념과 
 
 ### Recreate vs Rolling Update
 
-![rolling2](assets/rolling2.png)
+![rolling2](assets/07-rolling-update-and-rollback/rolling2.png)
 
 ---
 ## 업데이트 방법

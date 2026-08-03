@@ -18,7 +18,7 @@ description: 네트워크의 기본 원리인 스위칭(Switching)과 라우팅(
 
 ### 예시
 
-![switching1](assets/switching1.png)
+![switching1](assets/01-switching-routing-gateway/switching1.png)
 
 - 위 그림을 예시로 들어보자.
 - 주소가 192.168.1.0이라는 네트워크라고 가정하자.
@@ -45,7 +45,7 @@ description: 네트워크의 기본 원리인 스위칭(Switching)과 라우팅(
 
 ### 예시
 
-![switching2](assets/switching2.png)
+![switching2](assets/01-switching-routing-gateway/switching2.png)
 
 - 위 그림을 예시로 들어보자.
 - 네트워크A(192.168.1.0/24)에서의 라우터 주소는 192.168.1.1로 가정하자.
@@ -75,7 +75,7 @@ description: 네트워크의 기본 원리인 스위칭(Switching)과 라우팅(
 
 ### Default Gateway
 
-![switching3](assets/switching3.png)
+![switching3](assets/01-switching-routing-gateway/switching3.png)
 
 - 그런데, 인터넷에는 수많은 네트워크가 존재한다.
 - 모든 네트워크에 대한 라우트를 추가하는 것은 비현실적이다.
@@ -94,7 +94,7 @@ ip route add 0.0.0.0/0 via 192.168.1.1
 ## Linux를 Router로 사용하기 (IP Forwarding)
 ### 예시
 
-![switching4](assets/switching4.png)
+![switching4](assets/01-switching-routing-gateway/switching4.png)
 
 - 위 그림 예시를 보자.
 - 장치 B는 Linux 시스템이다.

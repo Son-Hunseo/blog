@@ -8,7 +8,7 @@ sidebar_class_name: hidden-sidebar-item
 
 ---
 
-![component](assets/component.webp)
+![component](assets/01-openstack-component/component.webp)
 
 ---
 ## Nova
@@ -94,7 +94,7 @@ Horizon은 오픈 스택의 <span class="t-red">웹 기반 대시보드</span>�
 ---
 ## 서비스간 관계
 
-![component2](assets/component2.png)
+![component2](assets/01-openstack-component/component2.png)
 
 ---
 ## 레퍼런스

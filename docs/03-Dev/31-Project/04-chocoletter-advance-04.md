@@ -46,7 +46,7 @@ description: 사용률이 낮은 영상통화 기능을 삭제한 리팩토링 �
 
 ### 프론트엔드
 
-![calender](assets/calender.jpeg)
+![calender](assets/04-chocoletter-advance-04/calender.jpeg)
 
 1. **캘린더 기능 삭제**
 	- 캘린더 아이콘 삭제
@@ -55,7 +55,7 @@ description: 사용률이 낮은 영상통화 기능을 삭제한 리팩토링 �
 	- 일정 조회 api 호출 로직 삭제
 	- 커밋 링크: https://github.com/Son-Hunseo/chocoletter-refac/commit/29ab7902d1bf103891adc4edb32f202d8c9c365e
 
-![alarm1](assets/alarm1.jpeg) ![alarm2](assets/alarm2.jpeg) 
+![alarm1](assets/04-chocoletter-advance-04/alarm1.jpeg) ![alarm2](assets/04-chocoletter-advance-04/alarm2.jpeg) 
 
 2. **알림 기능 삭제**
 	- 알림 아이콘 삭제
@@ -63,7 +63,7 @@ description: 사용률이 낮은 영상통화 기능을 삭제한 리팩토링 �
 	- 알림 관련 api 호출 로직 삭제
 	- 커밋 링크: https://github.com/Son-Hunseo/chocoletter-refac/commit/ee10f2580f540646d5c99b8fe6225ba8eb43a15e
 
-![type](assets/type.jpeg)
+![type](assets/04-chocoletter-advance-04/type.jpeg)
 
 3. **선물 타입 선택 기능 삭제**
 	- 일반 선물 버튼 삭제
@@ -71,13 +71,13 @@ description: 사용률이 낮은 영상통화 기능을 삭제한 리팩토링 �
 	- 선물 선택 모달 삭제
 	- 커밋 링크: https://github.com/Son-Hunseo/chocoletter-refac/commit/0f3cae75ab4aaa40d1204ff4a50aca263b83d442
 
-![clock](assets/clock.jpeg)
+![clock](assets/04-chocoletter-advance-04/clock.jpeg)
 
 4. **시간 설정 기능 삭제**
 	- 시간 설정 뷰, 버튼 모두 삭제
 	- 커밋 링크: https://github.com/Son-Hunseo/chocoletter-refac/commit/ed9c9695273192526125b383545d64fc20a4b294
 
-![video](assets/video.png)
+![video](assets/04-chocoletter-advance-04/video.png)
 
 5. **영상 통화 기능 삭제**
 	- 영상통화 대기방 뷰 삭제
@@ -100,10 +100,10 @@ description: 사용률이 낮은 영상통화 기능을 삭제한 리팩토링 �
 
 **전**
 
-![main_before](assets/main_before.jpeg)
+![main_before](assets/04-chocoletter-advance-04/main_before.jpeg)
 
 
 
 **후**
 
-![main_after](assets/main_after.png)
+![main_after](assets/04-chocoletter-advance-04/main_after.png)

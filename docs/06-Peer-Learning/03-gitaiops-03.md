@@ -47,7 +47,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch5/5.2-traffic-management.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![how-about-gateway|](assets/how-about-gateway.png)
+![how-about-gateway|](assets/03-gitaiops-03/how-about-gateway.png)
 
 > [!tip] `--gateway-api=standard` 옵션이란? (2.5 챕터에 클러스터 생성시 들어가있었음)
 > - GKE가 자동으로 Gateway API CRD와 GKE 전용 GatewayClass들을 설치해주는 옵션이다.
@@ -61,7 +61,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch5/5.2-traffic-management.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![other-option](assets/other-option.png)
+![other-option](assets/03-gitaiops-03/other-option.png)
 
 ####  Gateway API 설정하기
 
@@ -69,7 +69,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch5/5.2-gateway-api.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch5/5.2-gateway-api.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![make-gateway-api](assets/make-gateway-api.png)
+![make-gateway-api](assets/03-gitaiops-03/make-gateway-api.png)
 
 >[!tip] `readinessProbe` 와 `HealthCheckPolicy`의 차이
 >- `readinessProbe` : `Pod` 수준에서의 헬스체크, `kubelet`에서 `Pod`가 살아있는지 확인하는 것, yaml 정의는 `Deployment`에서 한다.
@@ -85,7 +85,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch5/5.3-deployment-strategy.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![introduce-argo-rollout](assets/introduce-argo-rollout.png)
+![introduce-argo-rollout](assets/03-gitaiops-03/introduce-argo-rollout.png)
 
 
 #### 다른 도구는 없는지 비교해보기
@@ -94,7 +94,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch5/5.3-deployment-strategy.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![other-option2](assets/other-option2.png)
+![other-option2](assets/03-gitaiops-03/other-option2.png)
 
 >이러한 이유들로 실습에서 Argo Rollouts와 Blue/Green 전략으로 결정한다. 이후 Blue/Grean이 리소스가 2배로 필요한 단점을 6장에서 Canary로 발전할 예정이다.
 
@@ -105,7 +105,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch5/5.3-bluegreen.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch5/5.3-bluegreen.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![bluegreenresult](assets/bluegreenresult.png)
+![bluegreenresult](assets/03-gitaiops-03/bluegreenresult.png)
 
 > [!warning] 지속적으로 책에 나온 단계를 1단계씩이 아니라 2, 3단계씩 진행한다. 
 > - 5.3.3. 절차를 진행했는데, 5.3.4 단계까지 수행하고 심지어, 5.4.까지 해버릴까? 라고 나에게 물어봄
@@ -153,7 +153,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch5/5.4-adr.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch5/5.4-adr.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![adr](assets/adr.png)
+![adr](assets/03-gitaiops-03/adr.png)
 
 
 #### 남아있는 문제점
@@ -175,7 +175,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch6/6.1-cache.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![cache-recommend](assets/cache-recommend.png)
+![cache-recommend](assets/03-gitaiops-03/cache-recommend.png)
 
 > Prompt : 레디스를 많이 쓰는데 Valkey는 처음 들어봐. 다른 방법도 있다고 했는데, 비교하면 어때?
 > 
@@ -183,7 +183,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 
 #### 다른 도구는 없는지 비교해보기
 
-![cache-other-option](assets/cache-other-option.png)
+![cache-other-option](assets/03-gitaiops-03/cache-other-option.png)
 
 
 #### Valkey 설치하고 앱 연동하기
@@ -192,7 +192,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch6/6.1-valkey.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch6/6.1-valkey.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![install-valkey](assets/install-valkey.png)
+![install-valkey](assets/03-gitaiops-03/install-valkey.png)
 
 이후 `/id` 엔드포인트로 여러번 새로고침 해보면, 이전처럼 Pod 끼리 값이 공유가 되지 않는 것이 아니라 일정하게 계속 값이 올라가는 것을 볼 수 있다.
 
@@ -215,7 +215,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch6/6.2-secret-management.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![secret-management-recommend](assets/secret-management-recommend.png)
+![secret-management-recommend](assets/03-gitaiops-03/secret-management-recommend.png)
 
 > [!tip] Google Secret Manager + CSI Driver 조합 동작 방식
 > Google Secret Manager -> CSI Driver -> Pod Volume Mount
@@ -229,7 +229,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > 무슨 차이가 있을까? 실습 중 클로드 코드에게 그대로 물어봤다.
 > 
-> ![question](assets/question.png)
+> ![question](assets/03-gitaiops-03/question.png)
 > 
 > 뭐가 더 안전하다라는 느낌보다는 어떤 RBAC를 가진 User가 접근할 수 있느냐에 차이가 있다.
 > 
@@ -241,7 +241,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch6/6.2-secret-management.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![secret-other-option](assets/secret-other-option.png)
+![secret-other-option](assets/03-gitaiops-03/secret-other-option.png)
 
 ---
 #### Secret Manager 설정하기
@@ -250,7 +250,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch6/6.2-secret.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch6/6.6-secret.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![install-secret-manager](assets/install-secret-manager.png)
+![install-secret-manager](assets/03-gitaiops-03/install-secret-manager.png)
 
 > [!info] CSI Driver가 노드에 끼치는 영향
 > CSI addon 활성화 시 노드당 2개의 DaemonSet이 자동 배포된다.
@@ -269,13 +269,13 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > 다음 다른 도구 추천까지 여기서 출력이 나와버림
 
-![canary-recommend](assets/canary-recommend.png)
+![canary-recommend](assets/03-gitaiops-03/canary-recommend.png)
 
 
 #### 의문점
 
 
-![question2](assets/question2.png)
+![question2](assets/03-gitaiops-03/question2.png)
 
 #### Canary 배포 설정하기
 
@@ -283,7 +283,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch6/6.3-canary.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch6/6.3-canary.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![canary-apply](assets/canary-apply.png)
+![canary-apply](assets/03-gitaiops-03/canary-apply.png)
 
 
 ---
@@ -293,7 +293,7 @@ image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch6/6.3-canary.md` -> 해당 문서를 참고해서 진행한다 -> `result-templates/ch6/6.3-canary.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
-![claude-context](assets/claude-context.png)
+![claude-context](assets/03-gitaiops-03/claude-context.png)
 
 #### 정리된 지식 계층
 

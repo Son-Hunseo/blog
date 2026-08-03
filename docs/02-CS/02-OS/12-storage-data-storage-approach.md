@@ -9,7 +9,7 @@ sidebar_class_name: hidden-sidebar-item
 ---
 ## 개요
 
-![approach1](assets/approach1.png)
+![approach1](assets/12-storage-data-storage-approach/approach1.png)
 
 스토리지는 데이터를 저장하는 공간이지만, 모든 스토리지가 같은 방식으로 데이터를 저장하고 제공하는 것은 아니다.
 
@@ -31,7 +31,7 @@ sidebar_class_name: hidden-sidebar-item
 
 ### 정의
 
-![approach2](assets/approach2.png)
+![approach2](assets/12-storage-data-storage-approach/approach2.png)
 
 ```
 사용자 ── 파일 시스템 ── 파일 스토리지
@@ -75,7 +75,7 @@ NAS가 대표적인 파일 스토리지 사용 방식이다. NAS는 네트워크
 
 ### 정의
 
-![approach3](assets/approach3.png)
+![approach3](assets/12-storage-data-storage-approach/approach3.png)
 
 ```
 서버 ── 블록 스토리지
@@ -117,7 +117,7 @@ NAS가 대표적인 파일 스토리지 사용 방식이다. NAS는 네트워크
 
 ### 정의
 
-![approach4](assets/approach4.png)
+![approach4](assets/12-storage-data-storage-approach/approach4.png)
 
 ```
 애플리케이션 ── API ── 오브젝트 스토리지

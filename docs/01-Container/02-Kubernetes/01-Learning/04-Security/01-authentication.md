@@ -10,7 +10,7 @@ description: Kubernetes 인증(Authentication)의 기본 개념과 작동 원리
 ## Authentication in Kubernetes
 ### 개념
 
-![authentication1](assets/authentication1.png)
+![authentication1](assets/01-authentication/authentication1.png)
 
 - Kubernetes 클러스터에 접근/조작 하기 위해서는
 	1. 클러스터에 접근 가능한 자격이 있는지(인증 - Authentication) 확인하고
@@ -23,7 +23,7 @@ description: Kubernetes 인증(Authentication)의 기본 개념과 작동 원리
 
 ### Authentication 대상
 
-![authentication2.png](assets/authentication2.png)
+![authentication2.png](assets/01-authentication/authentication2.png)
 
 **User Account**
 

@@ -20,7 +20,7 @@ description: 언더레이 네트워크와 오버레이 네트워크의 차이, V
 ## VLAN
 ### 개념
 
-![vlan](assets/vlan.jpg)
+![vlan](assets/04-vlan-vxlan/vlan.jpg)
 
 - 일반적으로 하나의 스위치에 연결된 장비들은 하나의 LAN(Local Area Network)으로 묶인다. (L2 계층)
 - 그러나, VLAN(Virtual Local Area Network)은 하나의 물리적 네트워크(LAN)을 여러개의 논리적 네트워크(VLAN)으로 나누는 기술이다. 다른 말로는 '여러 개의 브로드캐스트 도메인을 만드는 것'이다.
@@ -46,7 +46,7 @@ description: 언더레이 네트워크와 오버레이 네트워크의 차이, V
 ## VXLAN
 ### 개념
 
-![vxlan](assets/vxlan.webp)
+![vxlan](assets/04-vlan-vxlan/vxlan.webp)
 
 - VLAN의 한계를 극복하기 위한 오버레이 네트워크 기술이다.
 - L2 프레임(진짜 이더넷 프레임이 아닌, VXLAN에서 사용하는 가상 L2 프레임)을 UDP 패킷에 감싸서(캡슐화) L3 네트워크에서 전달한다.

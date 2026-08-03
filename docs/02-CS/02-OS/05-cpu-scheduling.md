@@ -14,7 +14,7 @@ CPU 코어 1개에서는 특정 시점에 1개의 프로세스만 처리할 수 
 
 ### 프로세스 상태(Process State)
 
-![cpu-scheduling1](assets/cpu-scheduling1.jpeg)
+![cpu-scheduling1](assets/05-cpu-scheduling/cpu-scheduling1.jpeg)
 
 **프로세스의 상태**
 

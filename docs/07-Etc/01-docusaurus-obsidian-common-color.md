@@ -87,7 +87,7 @@ html[data-theme='light'] .hl-teal   { background: rgba(29,  158, 117, 0.12) !imp
 
 ### Obsidian에 적용하기
 
-![css](assets/css.png)
+![css](assets/01-docusaurus-obsidian-common-color/css.png)
 
 - `.obsidian/snippets/` 안에 위 내용이 담긴 `colors.css`를 넣는다.
 - 그리고 설정 - 외형 - CSS 스니펫 에서 토글해서 적용시킨다.
@@ -107,9 +107,9 @@ html[data-theme='light'] .hl-teal   { background: rgba(29,  158, 117, 0.12) !imp
 
 이후에 옵시디언에서 글을 작성할 때마다 `span` 태그를 작성하기는 너무 귀찮다. 이에 옵시디언 커뮤니티 플러그인인 `Templater`를 사용해서 이를 단축키로 등록하면 된다.
 
-![template_md](assets/template_md.png)
+![template_md](assets/01-docusaurus-obsidian-common-color/template_md.png)
 
 위처럼 md 파일을 만들고, 아래와 같이 `templater` 플러그인에 적용시킨다.
 
-![hotkey](assets/hotkey.png)
+![hotkey](assets/01-docusaurus-obsidian-common-color/hotkey.png)
 

@@ -9,7 +9,7 @@ description: 컨테이너 이미지 이름 구조(레지스트리/사용자/이�
 ---
 ## 컨테이너 이미지 이름의 구조
 
-![image-security1](assets/image-security1.png)
+![image-security1](assets/11-image-security/image-security1.png)
 
 ```yaml
 apiVersion: v1

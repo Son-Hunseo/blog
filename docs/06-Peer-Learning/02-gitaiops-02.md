@@ -25,7 +25,7 @@ GitOps에 관한 개념과 장단점의 경우 잘 숙지하고 있으므로 넘
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch3/3.2-gitops-tool.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![argo-recommend](assets/argo-recommend.png)
+![argo-recommend](assets/02-gitaiops-02/argo-recommend.png)
 
 #### ArgoCD 설치 및 애플리케이션 배포
 
@@ -34,7 +34,7 @@ GitOps에 관한 개념과 장단점의 경우 잘 숙지하고 있으므로 넘
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch3/3.2-argocd.md` -> 해당 문서에 ArgoCD 설치 Notiflex Application 생성 과정을 참고해서 진행한다 -> `result-templates/ch3/3.2-argocd.md` -> 실제 결과와 결과 템플릿 비교하여 결과 출력
 
 
-![install-argocd](assets/install-argocd.png)
+![install-argocd](assets/02-gitaiops-02/install-argocd.png)
 
 >[!tip] 몰랐는데 알게된 사항 : `--server-side=true` 옵션이란?
 >일반 `kubectl apply`(client-side)는 클라이언트가 last-applied-configuration 애노테이션으로 변경 사항을 추적한다. 이 방식은 ArgoCD, Helm 과 같은 다른 도구들이 같은 리소스를 수정하면 충돌이 발생할 수 있다.
@@ -90,7 +90,7 @@ GitOps에 관한 개념과 장단점의 경우 잘 숙지하고 있으므로 넘
 > 
 > 왜 이런상황이 발생할까를 생각해보았다.
 > 
-> ![why-over-proceed](assets/why-over-proceed.png)
+> ![why-over-proceed](assets/02-gitaiops-02/why-over-proceed.png)
 > 
 > `CLAUDE.md`에 적혀있는 참조 표를 보면, 이전 명령어와 입력해야하는 명령어가 같은 프롬프트 가드레일의 `3.2-argocd.md`를 참조하고있다.
 > 
@@ -106,7 +106,7 @@ GitOps에 관한 개념과 장단점의 경우 잘 숙지하고 있으므로 넘
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch3/3.3-rolling-update.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch3/3.3-rolling-update.md` -> 결과 템플릿과 맞게 결과 출력
 
-![new-version](assets/new-version.png)
+![new-version](assets/02-gitaiops-02/new-version.png)
 
 >[!tip] Rolling Update의 한계
 >
@@ -122,7 +122,7 @@ GitOps에 관한 개념과 장단점의 경우 잘 숙지하고 있으므로 넘
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch3/3.3-rolling-update.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch3/3.3-rolling-update.md` -> 결과 템플릿과 맞게 결과 출력
 
-![rollback-test](assets/rollback-test.png)
+![rollback-test](assets/02-gitaiops-02/rollback-test.png)
 
 > [!tip] 엥? `git revert` 대신 그냥 해당 커밋 없애고 다시 푸시하면 안되나?
 > "되돌렸다는 기록"을 남겨야한다. 
@@ -154,7 +154,7 @@ Github Action은 그러한 설정 필요없이 yaml 스크립트 하나면 추�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch3/3.4-github-actions.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch3/3.4-github-actions.md` -> 결과 템플릿과 맞게 결과 출력
 
-![github-action-ci](assets/github-action-ci.png)
+![github-action-ci](assets/02-gitaiops-02/github-action-ci.png)
 
 >[!info] 왜 이미지 태그에 버전 숫자 대신 깃 SHA(해시)를 쓰는걸까?
 >깃 SHA는 커밋마다 자동으로 새애기는 고유 ID이다.
@@ -178,13 +178,13 @@ Github Action은 그러한 설정 필요없이 yaml 스크립트 하나면 추�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch3/3.5-ci-cd-integration.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![how-to-ci-cd-integration](assets/how-to-ci-cd-integration.png)
+![how-to-ci-cd-integration](assets/02-gitaiops-02/how-to-ci-cd-integration.png)
 
 > Prompt : 깃허브 액션 CI 만들어줘.
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch3/3.5-ci-argocd.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch3/3.5-ci-argocd.md` -> 결과 템플릿과 맞게 결과 출력
 
-![cicd-integration](assets/cicd-integration.png)
+![cicd-integration](assets/02-gitaiops-02/cicd-integration.png)
 
 #### 전체 파이프라인 테스트
 
@@ -192,7 +192,7 @@ Github Action은 그러한 설정 필요없이 yaml 스크립트 하나면 추�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch3/3.5-ci-argocd.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch3/3.5-ci-argocd.md` -> 결과 템플릿과 맞게 결과 출력
 
-![pipeline-test](assets/pipeline-test.png)
+![pipeline-test](assets/02-gitaiops-02/pipeline-test.png)
 
 >[!tip] 새롭게 알게된 사실 : image tag 변경은 브랜치 새로파서!
 >- 그동안 아무생각 없이, 같은 브랜치에서(물론 내 개인 프로젝트나 클러스터 구성이었기에) 이미지 태그를 수정하고 푸시하는 ci 스크립트를 적용하였다.
@@ -210,25 +210,25 @@ Github Action은 그러한 설정 필요없이 yaml 스크립트 하나면 추�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch3/claudemd-example.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch3/claudemd-example.md` -> 결과 템플릿과 맞게 결과 출력
 
-![rule](assets/rule.png)
+![rule](assets/02-gitaiops-02/rule.png)
 
 > Prompt : notiflex 네임스페이스의 notiflex-api deloyment를 지워줘.
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch3/claudemd-example.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch3/claudemd-example.md` -> 결과 템플릿과 맞게 결과 출력
 
-![deny-delete](assets/deny-delete.png)
+![deny-delete](assets/02-gitaiops-02/deny-delete.png)
 
 > Prompt : notiflex-api 상태 확인해줘
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch3/claudemd-example.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch3/claudemd-example.md` -> 결과 템플릿과 맞게 결과 출력
 
-![notiflex-api-status](assets/notiflex-api-status.png)
+![notiflex-api-status](assets/02-gitaiops-02/notiflex-api-status.png)
 
 > Prompt : 방금 추가한 규칙 되돌려줘
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch3/claudemd-example.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch3/claudemd-example.md` -> 결과 템플릿과 맞게 결과 출력
 
-![revert-rule](assets/revert-rule.png)
+![revert-rule](assets/02-gitaiops-02/revert-rule.png)
 
 ---
 ## 4. 관측 가능성 한 번에 구축하기
@@ -250,7 +250,7 @@ cf) 프로파일(profiles) - 관측 가능성의 4번째 요소로 프로파일�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch4/4.2-metrics-monitoring.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![metric-solutions](assets/metric-solutions.png)
+![metric-solutions](assets/02-gitaiops-02/metric-solutions.png)
 
 > [!info] Pull 기반 수집의 장점
 > Pull 기반 수집은 수집하는 모니터링 솔루션에서 각 Pod에게 상태를 질의한다. 장점은 다음과 같다.
@@ -274,7 +274,7 @@ cf) 프로파일(profiles) - 관측 가능성의 4번째 요소로 프로파일�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch4/4.2-prometheus-grafana.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch4/4.2-prometheus-grafana.md` -> 결과 템플릿과 맞게 결과 출력
 
-![install-pro-gra](assets/install-pro-gra.png)
+![install-pro-gra](assets/02-gitaiops-02/install-pro-gra.png)
 
 #### 그라파나에 접속하기
 
@@ -282,7 +282,7 @@ cf) 프로파일(profiles) - 관측 가능성의 4번째 요소로 프로파일�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch4/4.2-prometheus-grafana.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch4/4.2-prometheus-grafana.md` -> 결과 템플릿과 맞게 결과 출력
 
-![show-grafana](assets/show-grafana.png)
+![show-grafana](assets/02-gitaiops-02/show-grafana.png)
 
 #### 프로메테우스 메트릭 확인하기
 
@@ -290,7 +290,7 @@ cf) 프로파일(profiles) - 관측 가능성의 4번째 요소로 프로파일�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch4/4.2-prometheus-grafana.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch4/4.2-prometheus-grafana.md` -> 결과 템플릿과 맞게 결과 출력
 
-![show-prometheus](assets/show-prometheus.png)
+![show-prometheus](assets/02-gitaiops-02/show-prometheus.png)
 
 ---
 ### 4.3. 로그 수집: Loki + Fluent Bit
@@ -300,7 +300,7 @@ cf) 프로파일(profiles) - 관측 가능성의 4번째 요소로 프로파일�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch4/4.3-logging.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![log-tool-recommand](assets/log-tool-recommand.png)
+![log-tool-recommand](assets/02-gitaiops-02/log-tool-recommand.png)
 
 >[!info] 라벨 기반 인덱싱이란?
 >- 익숙한 방법의 인덱싱은 풀텍스트 인덱싱이다.
@@ -318,7 +318,7 @@ cf) 프로파일(profiles) - 관측 가능성의 4번째 요소로 프로파일�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch4/4.3-loki-fluentbit.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch4/4.3-loki-fluentbit.md` -> 결과 템플릿과 맞게 결과 출력
 
-![install-loki-fluentbit](assets/install-loki-fluentbit.png)
+![install-loki-fluentbit](assets/02-gitaiops-02/install-loki-fluentbit.png)
 
 >[!info] SingleBinary 모드란?
 >- Loki는 여러 컴포넌트(read, write, backend)로 나눠서 배포할 수 있다.
@@ -338,7 +338,7 @@ cf) 프로파일(profiles) - 관측 가능성의 4번째 요소로 프로파일�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch4/4.3-loki-fluentbit.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch4/4.3-loki-fluentbit.md` -> 결과 템플릿과 맞게 결과 출력
 
-![check-log](assets/check-log.png)
+![check-log](assets/02-gitaiops-02/check-log.png)
 
 ---
 ### 4.4. 알림 설정: PrometheusRule
@@ -348,7 +348,7 @@ cf) 프로파일(profiles) - 관측 가능성의 4번째 요소로 프로파일�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `decision-guides/ch4/4.4-alerting.md` -> 해당 문서에 제시된 지식 참고 후 답변
 
-![alert-recommend](assets/alert-recommend.png)
+![alert-recommend](assets/02-gitaiops-02/alert-recommend.png)
 
 > [!info] 그라파나에서 알림 설정하면 안되나?
 > - 그라파나에서 알림 설정은 yaml로 관리하는 GitOps 로 적용할 수 없습니다. UI에서 클릭, 클릭으로 설정해야한다.
@@ -362,7 +362,7 @@ cf) 프로파일(profiles) - 관측 가능성의 4번째 요소로 프로파일�
 > 
 > AI 사고 흐름 : `CLAUDE.md` -> `CLAUDE.md`의 참조 표 스캔 -> `prompt-guardrails/ch4/4.4-alerting.md` -> 해당 문서에 제시된 작업 사항 진행 -> `result-templates/ch4/4.4-alerting.md` -> 결과 템플릿과 맞게 결과 출력
 
-![make-alert-rule](assets/make-alert-rule.png)
+![make-alert-rule](assets/02-gitaiops-02/make-alert-rule.png)
 
 위 프롬프트만 입력했는데, 책에서 나오는 다음 과정 프롬프트인 '알림 규칙이 제대로 동작하는지 어떻게 확인해?' 프롬프트를 입력하지도 않았는데 그 과정까지 진행되었다.
 
@@ -383,11 +383,11 @@ cf) 프로파일(profiles) - 관측 가능성의 4번째 요소로 프로파일�
 
 > Prompt : PrometheusRule 임계값은 일단 5분/3회로 뒀는데, 운영 데이터를 보고 조정해야 해. 메모리에 TODO로 적어둬.
 
-![memory-save](assets/memory-save.png)
+![memory-save](assets/02-gitaiops-02/memory-save.png)
 
 > Prompt : PrometheusRule 임계값 조정 TODO가 있었지?
 
-![memory-test](assets/memory-test.png)
+![memory-test](assets/02-gitaiops-02/memory-test.png)
 
 ---
 ## 찜찜했던 이유

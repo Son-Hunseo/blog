@@ -10,7 +10,7 @@ description: Gift와 Letter 테이블을 GiftLetter로 통합하며 발생한 DB
 ## 문제점
 ### 기존 DB 테이블
 
-![erd](assets/erd.png)
+![erd](assets/05-chocoletter-advance-05/erd.png)
 
 기존 테이블 구조는 다음과 같다. 유저가 본인이 받은 편지를 모두 보관하는 단위인 `gift_box` 테이블이 있다. 이와 1:N 관계를 가지는 `gift` 테이블이 있고, 이 `gift`와 1:1관계를 가지는 `letter` 테이블이 있다.
 
@@ -22,7 +22,7 @@ description: Gift와 Letter 테이블을 GiftLetter로 통합하며 발생한 DB
 
 ### 문제점
 
-![chatroom1](assets/chatroom1.png)
+![chatroom1](assets/05-chocoletter-advance-05/chatroom1.png)
 
 ```java
 @Service  
@@ -118,7 +118,7 @@ public class ChatRoomService {
 
 ### `gift_letter` 테이블 만들기
 
-![erd2](assets/erd2.png)
+![erd2](assets/05-chocoletter-advance-05/erd2.png)
 
 `gift` 테이블과 `letter` 테이블을 합친 `gift_letter` 테이블을 만들었다.
 

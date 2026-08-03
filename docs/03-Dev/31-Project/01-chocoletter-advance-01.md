@@ -9,7 +9,7 @@ description: 단일 컨테이너 기반 아키텍처에서 쿠버네티스 환�
 ---
 ## AS-IS
 
-![choco-legacy](assets/choco-legacy.png)
+![choco-legacy](assets/01-chocoletter-advance-01/choco-legacy.png)
 
 기존의 아키텍처는 각 요소(백엔드 서버, 채팅 서버, 메시지 큐 등)가 단일 컨테이너로 기동되며, 외부에서의 접근은 Nginx가 리버스 프록시 역할을 해주었다.
 
@@ -28,7 +28,7 @@ description: 단일 컨테이너 기반 아키텍처에서 쿠버네티스 환�
 ---
 ## TO-BE
 
-![choco-tobe](assets/choco-tobe.png)
+![choco-tobe](assets/01-chocoletter-advance-01/choco-tobe.png)
 
 위와같이 쿠버네티스 기반 아키텍처로 이관하려고한다. 또한 모든 리소스는 yaml 형태의 선언적인 방식으로 git에 기록하고자 한다.
 

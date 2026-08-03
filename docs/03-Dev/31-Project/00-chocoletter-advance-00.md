@@ -21,7 +21,7 @@ description: 발렌타인데이 시즈널 서비스 초코레터 프로젝트를
 ---
 ## 초코레터 프로젝트
 
-![chocoletter1](assets/chocoletter1.gif)
+![chocoletter1](assets/00-chocoletter-advance-00/chocoletter1.gif)
 
 ### 서비스 개요
 
@@ -38,7 +38,7 @@ description: 발렌타인데이 시즈널 서비스 초코레터 프로젝트를
 
 ### 아키텍처
 
-![chocoletter2](assets/chocoletter2.png)
+![chocoletter2](assets/00-chocoletter-advance-00/chocoletter2.png)
 
 기존 아키텍처는 위 그림과 같다.
 

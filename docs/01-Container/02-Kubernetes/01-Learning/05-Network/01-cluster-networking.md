@@ -23,7 +23,7 @@ description: 쿠버네티스(Kubernetes) 클러스터 구성을 위한 필수 �
 ---
 ## 포트 구성
 
-![cluster-networking1](assets/cluster-networking.jpg)
+![cluster-networking1](assets/01-cluster-networking/cluster-networking.jpg)
 ### 마스터 노드
 
 | **프로토콜** | **포트 범위**     | **프로세스/컴포넌트**           | **설명**                                                      |
