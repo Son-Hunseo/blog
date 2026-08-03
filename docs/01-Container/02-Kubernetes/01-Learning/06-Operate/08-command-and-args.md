@@ -1,5 +1,5 @@
 ---
-image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/04-Application-Lifecycle-Management/02-Command-And-Args/command1.png
+image: /img/posts/01-Container/02-Kubernetes/01-Learning/06-Operate/08-command-and-args/command1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-15
 title: Command & Args (Docker, k8s)

@@ -1,5 +1,5 @@
 ﻿---
-image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/05-Cluster-Maintenance/02-Kubernetes-Versions/version1.png
+image: /img/posts/01-Container/02-Kubernetes/01-Learning/06-Operate/02-kubernetes-versions/version1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-19
 title: 쿠버네티스 버전 관리

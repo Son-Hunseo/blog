@@ -3,7 +3,7 @@ title: AI 시대에 개발자가 알아야 할 인프라 구성 배포 스터디
 description: GitAIOps 스터디를 시작하며 Claude Code 기반 가드레일 구조, GKE 실습 환경 구성, GitHub 저장소 생성, 앱 배포, 문서화 자동화, GCP 리소스 정리와 재생성까지 실습한 과정을 정리합니다.
 date: 2026-07-03
 sidebar_class_name: hidden-sidebar-item
-image: /img/posts/05-AI/01-GitAIOps-01/ai-book.png
+image: /img/posts/06-Peer-Learning/01-gitaiops-01/ai-book.png
 ---
 
 ---

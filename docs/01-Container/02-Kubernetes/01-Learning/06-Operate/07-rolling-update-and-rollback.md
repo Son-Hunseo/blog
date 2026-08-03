@@ -1,5 +1,5 @@
 ---
-image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/04-Application-Lifecycle-Management/01-Rolling-Update-And-Rollback/rolling1.png
+image: /img/posts/01-Container/02-Kubernetes/01-Learning/06-Operate/07-rolling-update-and-rollback/rolling1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-15
 title: Rolling Update & Rollback

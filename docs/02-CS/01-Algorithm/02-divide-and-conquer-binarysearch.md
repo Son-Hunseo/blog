@@ -1,5 +1,5 @@
 ﻿---
-image: /img/posts/02-CS/01-Algorithm/02-Divide-and-Conquer-BinarySearch/divide1.png
+image: /img/posts/02-CS/01-Algorithm/02-divide-and-conquer-binarysearch/divide1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-01-08
 title: 분할정복 & 이진탐색

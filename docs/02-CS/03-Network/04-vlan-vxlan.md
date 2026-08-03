@@ -1,5 +1,5 @@
 ---
-image: /img/posts/02-CS/03-Network/11-VLAN-VXLAN/vlan.jpg
+image: /img/posts/02-CS/03-Network/04-vlan-vxlan/vlan.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2026-04-11
 title: VLAN과 VXLAN

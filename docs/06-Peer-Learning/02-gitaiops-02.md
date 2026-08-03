@@ -5,7 +5,7 @@ description: "ArgoCD와 GitHub Actions를 활용한 GitOps 배포 파이프라�
   실습 과정에서 새롭게 알게 된 기술적 내용과 AI 기반 인프라 운영에 대한 고민, 그리고 앞으로의 학습 방향을 함께 기록합니다."
 date: 2026-07-11
 sidebar_class_name: hidden-sidebar-item
-image: /img/posts/05-AI/01-GitAIOps-01/ai-book.png
+image: /img/posts/06-Peer-Learning/02-gitaiops-02/ai-book.png
 ---
 
 ---

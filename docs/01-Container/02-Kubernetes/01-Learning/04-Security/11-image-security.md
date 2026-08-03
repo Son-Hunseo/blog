@@ -1,5 +1,5 @@
 ---
-image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/06-Security/11-Image-Security/image-security1.png
+image: /img/posts/01-Container/02-Kubernetes/01-Learning/04-Security/11-image-security/image-security1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-26
 title: Image Security

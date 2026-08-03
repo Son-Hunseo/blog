@@ -3,7 +3,7 @@ title: IAM
 description: AWS IAM의 핵심 개념을 정리한 글. Root 계정과 최소 권한 원칙, User·Group·Policy·Role 구성 요소, Managed/Inline Policy의 차이, MFA와 Password Policy 등 보안 설정, Credentials Report와 Access Advisor 활용법, 그리고 IAM Best Practice까지 한 번에 정리한다.
 date: 2026-04-29
 sidebar_class_name: hidden-sidebar-item
-image: /img/posts/01-Cloud-Infra/01-AWS/03-IAM/iam.png
+image: /img/posts/00-IaaS/01-AWS/03-iam/iam.png
 ---
 
 ---

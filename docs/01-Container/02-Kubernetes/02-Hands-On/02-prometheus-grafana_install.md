@@ -1,5 +1,5 @@
 ---
-image: /img/posts/01-Cloud-Infra/12-Kubernetes/02-hands-on/03-Prometheus-Grafana_Install/prometheus-grafana-install1.jpg
+image: /img/posts/01-Container/02-Kubernetes/02-Hands-On/02-prometheus-grafana_install/prometheus-grafana-install1.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-01
 title: 프로메테우스와 그라파나 설치 및 통합

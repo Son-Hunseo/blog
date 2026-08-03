@@ -1,5 +1,5 @@
 ﻿---
-image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/06-Security/02-TLS/TLS1.png
+image: /img/posts/01-Container/02-Kubernetes/01-Learning/04-Security/02-tls/TLS1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-21
 title: TLS in Kubernetes

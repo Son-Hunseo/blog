@@ -1,5 +1,5 @@
 ﻿---
-image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/13-Exam/08-Exam-Recap-2/cka.png
+image: /img/posts/01-Container/02-Kubernetes/04-CKA/08-exam-recap-2/cka.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-17
 title: CKA 자격증 취득 후기

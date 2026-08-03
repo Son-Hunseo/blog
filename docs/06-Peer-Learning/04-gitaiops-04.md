@@ -3,7 +3,7 @@ title: AI 시대에 개발자가 알아야 할 인프라 구성 배포 스터디
 description: 멀티 노드풀과 네임스페이스 격리로 워크로드를 분리하고, App of Apps 패턴과 Sync Wave로 다수의 ArgoCD 애플리케이션을 관리한다. 카프카·템포·크론잡으로 시스템을 고도화하고 settings.local.json과 command-guardrails로 AI의 위험 작업을 통제하면서, 운영 자산이 자연스럽게 쌓이는 GitAIOps 구조를 정리했다.
 date: 2026-07-25
 sidebar_class_name: hidden-sidebar-item
-image: /img/posts/05-AI/01-GitAIOps-01/ai-book.png
+image: /img/posts/06-Peer-Learning/04-gitaiops-04/ai-book.png
 ---
 
 ---

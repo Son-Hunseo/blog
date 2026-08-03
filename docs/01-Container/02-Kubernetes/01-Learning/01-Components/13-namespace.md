@@ -1,5 +1,5 @@
 ---
-image: /img/posts/01-Cloud-Infra/12-Kubernetes/01-CKA/01-concept/13-Namespace/namespace1.png
+image: /img/posts/01-Container/02-Kubernetes/01-Learning/01-Components/13-namespace/namespace1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-07
 title: Namespace

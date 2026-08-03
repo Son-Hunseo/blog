@@ -1,5 +1,5 @@
 ﻿---
-image: /img/posts/02-CS/01-Algorithm/05-Trie/trie1.png
+image: /img/posts/02-CS/01-Algorithm/05-trie/trie1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-01-29
 title: 문자열 2 - Trie

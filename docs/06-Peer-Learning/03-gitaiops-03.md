@@ -3,7 +3,7 @@ title: AI 시대에 개발자가 알아야 할 인프라 구성 배포 스터디
 description: Claude Code와 함께 Gateway API, Argo Rollouts, Valkey, Secret Manager를 적용하며 Kubernetes 무중단 배포와 엔터프라이즈 운영 기반을 구축한 과정을 정리합니다.
 date: 2026-07-19
 sidebar_class_name: hidden-sidebar-item
-image: /img/posts/05-AI/01-GitAIOps-01/ai-book.png
+image: /img/posts/06-Peer-Learning/03-gitaiops-03/ai-book.png
 ---
 
 ---

@@ -1,5 +1,5 @@
 ﻿---
-image: /img/posts/01-Cloud-Infra/11-Docker/03-Docker-Volume/dockerstorage4.png
+image: /img/posts/01-Container/01-Docker/03-Docker-Volume/dockerstorage4.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-28
 title: Docker Volume

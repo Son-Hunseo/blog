@@ -1,5 +1,5 @@
 ﻿---
-image: /img/posts/02-CS/03-Network/01-Switching-Routing-Gateway/switching1.png
+image: /img/posts/02-CS/03-Network/01-switching-routing-gateway/switching1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-30
 title: 스위칭, 라우팅, 게이트웨이, IP 포워딩

@@ -1,5 +1,5 @@
 ﻿---
-image: /img/posts/02-CS/02-OS/01-Process-And-Thread/process1.jpg
+image: /img/posts/02-CS/02-OS/01-process-and-thread/process1.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-10-15
 title: 프로세스와 쓰레드

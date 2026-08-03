@@ -1,5 +1,5 @@
 ﻿---
-image: /img/posts/02-CS/03-Network/03-Namespace/namespace1.png
+image: /img/posts/02-CS/03-Network/03-namespace/namespace1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-30
 title: 네트워크 네임스페이스

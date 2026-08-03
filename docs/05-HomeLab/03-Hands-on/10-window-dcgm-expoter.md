@@ -1,5 +1,5 @@
 ---
-image: /img/posts/01-Cloud-Infra/12-Kubernetes/02-hands-on/04-Window-DCGM-Expoter/windows-dcgm-exporter1.jpg
+image: /img/posts/05-HomeLab/03-Hands-on/10-window-dcgm-expoter/windows-dcgm-exporter1.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-15
 title: 윈도우에 장착된 GPU를 Prometheus & Grafana로 모니터링 해보자
