@@ -10,8 +10,10 @@ description: Kubernetes의 Namespace 개념부터 필요성, 기본 네임스페
 ![namespace1](assets/namespace1.png)
 ## Namespace란?
 
-- `Namespace`는 리소스를 논리적으로 구분하는 단위이다.
-- 예를들어, `Database`라는 `Namespace`에는 데이터베이스에 관련된 `Pod`, `Service`, `Deployment` 등의 리소스를 모아두고, `Monitoring`이라는 `Namespace`에는 모니터링에 관련된 `Pod`, `Service`, `Deployment` 등의 리소스를 모아두고 분리해서 관리할 수 있다. (cf: 논리적으로 구분되는 것이기 때문에 다른 `Namespace`에 있는 리소스라도 서로 통신은 할 수 있다)
+- `Namespace`는 리소스를 '논리적'으로 구분하는 단위이다.
+- 예를들어, `Database`라는 `Namespace`에는 데이터베이스에 관련된 `Pod`, `Service`, `Deployment` 등의 리소스를 모아두고, `Monitoring`이라는 `Namespace`에는 모니터링에 관련된 `Pod`, `Service`, `Deployment` 등의 리소스를 모아두고 분리해서 관리할 수 있다.
+
+> 네임스페이스는 논리적으로 구분되는 것이기 때문에 다른 `Namespace`에 있는 리소스라도 서로 통신은 할 수 있다
 
 ---
 ## Namespace의 필요성
@@ -48,42 +50,41 @@ description: Kubernetes의 Namespace 개념부터 필요성, 기본 네임스페
 ---
 ## 명령어
 
+**생성**
+
 ```bash
 kubectl create namespace dev
 ```
 
-- `dev`라는 이름의 `Namespace`를 생성한다.
+
+**조회**
 
 ```bash
 kubectl get pods -n dev
 ```
 
-- `dev`라는 이름의 `Namespace`에 존재하는 `Pod`를 조회한다.
-
 ```bash
 kubectl get deployment -n dev
 ```
-
-- `dev`라는 이름의 `Namespace`에 존재하는 `Deployment`를 조회한다.
 
 ```bash
 kubectl get service -n dev
 ```
 
-- `dev`라는 이름의 `Namespace`에 존재하는 `Service`를 조회한다.
+
+**모든 네임스페이스 조회**
+- `-A`를 더 많이 사용한다
 
 ```bash
 kubectl get pods --all-namespaces
 ```
 
-- 모든 `Namespace`에 존재하는 `Pod`를 조회한다.
+
+**특정 kubeconfig context의 디폴트 네임스페이스 지정**
 
 ```bash
 kubectl config set-context --current --namespace=dev
 ```
-
-- 기본 `Namespace`는 `default`이다.
-- 위 명령어를 통해서 기본 `Namespace`를 `dev`로 바꿀 수 있다. 
 
 ---
 ## Yaml
@@ -125,6 +126,7 @@ kubectl create -f pod-definition.yaml --namespace=dev
 ```
 
 - `Pod`를 `dev` 라는 이름의 `Namespace`에 생성한다.
+- 보통 `--namespace=dev` 이렇게 보다는 줄여서 `-n dev` 이렇게 줄여서 사용한다.
 
 ```yaml
 # pod-definition.yaml
@@ -148,6 +150,10 @@ kubectl create -f pod-definition.yaml
 
 - `metadata`
 	- `namespace`: 여기에 `Namespace` 이름을 지정하여 해당 `Pod`가 항상 `dev`라는 이름의 `Namespace`에 생성되도록 할 수 있다.
+
+> [!tip] 위처럼 yaml에 네임스페이스가 지정되어있는 리소스를 `kubectl apply pod-definition.yaml -n other-ns` 이렇게 다른 네임스페이스에 적용하면 어떻게 될까?
+> - 네임스페이스 불일치 오류가 난다.
+> - 추가적으로 클러스터 범위에 속하는 리소스(ex: `PersistentVolume`)를 네임스페이스를 지정해서 적용하면 네임스페이스가 무시된다.
 
 ### 리소스 제한 (Resource Quota)
 

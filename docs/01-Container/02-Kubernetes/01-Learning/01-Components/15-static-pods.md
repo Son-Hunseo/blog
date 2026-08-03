@@ -10,7 +10,7 @@ description: Static Pod는 Kubernetes Control Plane 없이 Kubelet이 독립적�
 ## Static Pod
 ### 개념
 
-- <span class="t-red">kube-apiserver, kube-scheduler, etcd 없이도 kubelet이 독립적으로 생성/관리 하는 Pod</span>
+- <span class="t-red">kube-apiserver, kube-scheduler, etcd 없이도 'kubelet이 독립적으로' 생성/관리 하는 Pod</span>
 - 즉, Kubernetes Control Plane의 지시 없이도 동작한다.
 - 오직 `Pod`만 가능하다.
 	- `Deployment`, `ReplicaSet`, `Service` 등은 Controller가 필요하므로 Static으로 생성이 불가능하다.
@@ -21,14 +21,11 @@ description: Static Pod는 Kubernetes Control Plane 없이 Kubelet이 독립적�
 ### Use-case: Control Plane
 
 - `kube-apiserver`, `etcd`, `controller-manater` 등은 `Static Pod`로 실행되어 Control Plane을 구축한다.
-	- 확인 방법
-		- `kubectl get pod -n kube-system`
-- 실제로 Control Plane(Master Node)의 `/etc/kubernetes/manifests`를 들어가보면, `etcd.yaml`, `kube-apiserver.yaml`, `kube-controller-manager.yaml`, `kube-scheduler.yaml`이 존재하는 것을 볼 수 있다.
+- 실제로 Control Plane의 `/etc/kubernetes/manifests`를 들어가보면, `etcd.yaml`, `kube-apiserver.yaml`, `kube-controller-manager.yaml`, `kube-scheduler.yaml`이 존재하는 것을 볼 수 있다.
 
 ### 동작 방식
 
 **`Kubelet`**
-
 - `Pod` yaml을 실행하고자하는 `Node`의 특정 디렉토리(`/etc/kubernetes/manifests`)에 두면 `kubelet`이 자동으로 감지하여 실행한다.
 - 이 디렉토리를 `Static Pod Manifest Directory`라고 한다.
 
@@ -49,7 +46,7 @@ description: Static Pod는 Kubernetes Control Plane 없이 Kubelet이 독립적�
 **방법 1**: `Kubelet` 실행 옵션에서 지정
 
 ```bash
-sudo nano /etc/systemd/system/kubelet.service
+sudo vi /etc/systemd/system/kubelet.service
 ```
 
 ```bash
@@ -61,7 +58,7 @@ sudo nano /etc/systemd/system/kubelet.service
 **방법 2**: `Kubelet` 설정 파일에서 지정
 
 ```bash
-sudo nano /var/lib/kubelet/config.yaml
+sudo vi /var/lib/kubelet/config.yaml
 ```
 
 ```yaml
@@ -77,17 +74,17 @@ nerdctl ps
 ```
 
 - `Kubelet`이 직접 `containerd`로 `Pod`를 실행하므로 실행되고 있는 `Node`에서 바로 확인 가능하다. (`docker ps` or `nerdctl ps` 둘 중 하나 설치된 것으로 사용)
-- `Control Plane`이 없는 환경에서는 `kubectl`로 조회 불가능하다.
+- 물론, `kubectl get pod -n kube-system`으로도 조회가 가능하지만, 컨트롤 플레인과 독립적으로 관리되는 `Pod`가 `Static Pod`이므로 위와같은 명령어를 언급하였다. (컨트롤 플레인이 없는 환경에서도 조회가 가능해야하므로)
 
 ---
 ## Kubernetes 클러스터 입장
 
-- `Static Pod`도 `kubectl get pods`에서 보인다.
-	- `Kubelet`이 `Mirror Pod`라는 오브젝트를 `kube-apiserver`로 전송하고, 이를 `etcd`에 기록한다. 이 때문에 조회되는 것이다.
-	- 그렇게 때문에 읽기 전용이며,`kubectl`로 수정/삭제가 불가능하다.
-	- 수정/삭제하려면 `Static Pod Manifest Directory`에서 조작해야한다.
-	- cf) `Mirror Pod`는 `Pod` 이름 뒤에 자동으로 노드 이름이 붙는다.
-		- ex: `etcd-node01`
+**`Static Pod`도 `kubectl get pods`에서 보인다.**
+- `Kubelet`이 `Mirror Pod`라는 오브젝트를 `kube-apiserver`로 전송하고, 이를 `etcd`에 기록한다. 이 때문에 조회되는 것이다.
+- 그렇게 때문에 읽기 전용이며,`kubectl`로 수정/삭제가 불가능하다.
+- 수정/삭제하려면 `Static Pod Manifest Directory`에서 조작해야한다.
+- cf) `Mirror Pod`는 `Pod` 이름 뒤에 자동으로 노드 이름이 붙는다.
+	- ex: `etcd-node01`
 
 ---
 ## Static Pod vs DaemonSet

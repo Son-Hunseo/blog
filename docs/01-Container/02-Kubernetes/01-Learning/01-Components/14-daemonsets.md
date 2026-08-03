@@ -10,7 +10,7 @@ description: Kubernetes 클러스터 내의 모든 노드에 단 하나의 Pod�
 ## DaemonSet
 ### 개념
 
-- `ReplicaSet`과 비슷하게 여러 `Pod`를 배포하지만, 차이점은 클러스터의 모든 `Node`에 `Pod`를 1개씩 배치하는 것을 보장한다는 점이다.
+- `ReplicaSet`과 비슷하게 여러 `Pod`를 배포하지만, 차이점은 클러스터의 모든 `Node`에 `Pod`를 1개씩 배치하는 것을 '보장'한다는 점이다.
 - 새로운 `Node`가 클러스터에 추가되면 자동으로 `Pod`도 추가된다.
 - `Node`가 클러스터에서 제거되면 해당 `Node`에서 실행 중이던 `Pod`도 자동 삭제됨.
 
@@ -18,18 +18,20 @@ description: Kubernetes 클러스터 내의 모든 노드에 단 하나의 Pod�
 
 아래 사례들 처럼 모든 `Node`에 하나씩 존재해야하는 `Pod`들을 관리할 때 사용한다.
 
-- `Node` 단위 모니터링 에이전트
-	- `Node Exporter`
-	- `Datadog agent`
-	- `Prometheus Node-level exporter` 등
-- 로그 수집기
-	- `Fluentd`
-	- `Filebeat`
-	- `Logstash`
-- `Kube-proxy`
+**`Node` 단위 모니터링 에이전트**
+- `Node Exporter`
+- `Datadog agent`
+- `Prometheus Node-level exporter` 등
+
+**로그 수집기**
+- `Fluentd`
+- `Filebeat`
+- `Logstash`
+
+**`Kube-proxy`**
 - `CNI Plugin`
-	- `Calico`
-	- `Flannel`
+- `Calico`
+- `Flannel`
 
 ---
 ## Yaml
