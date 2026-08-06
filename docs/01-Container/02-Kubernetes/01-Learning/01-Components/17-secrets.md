@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-17
@@ -24,6 +24,8 @@ description: Kubernetes에서 민감한 정보(DB 접속 정보 등)를 안전�
 
 ---
 ## Secrets 생성
+
+---
 ### Imperative(명령형) 방법
 
 **from-literal**
@@ -41,6 +43,7 @@ kubectl create secret generic app-secret \
 kubectl create secret generic app-secret --from-file=app_secret.properties
 ```
 
+---
 ### Declarative(선언적) 방법 - yaml
 
 **Base64 인코딩 된 값을 확인**
@@ -92,6 +95,8 @@ echo -n "cGFzd3Jk" | base64 --decode
 
 ---
 ## Pod에 삽입
+
+---
 ### Secret 전체
 
 ```yaml
@@ -110,12 +115,10 @@ spec:
 
 - `Secret`에 있는 key-value 전체를 `Pod` 안에 환경변수로 등록한다.
 
-- `spec`
-    - `containers`
-        - `envFrom`
-            - `secretRef`
-                - `name`: `Secret` 객체의 이름
+- `spec.containers.envFrom.secretRef`
+	- `name`: `Secret` 객체의 이름
 
+---
 ### 특정 변수만 삽입
 
 ```yaml
@@ -141,16 +144,13 @@ spec:
 ```
 
 - `Secret`에 있는 특정 key-value만 `Pod`의 환경변수로 등록한다. (여러 개 가능)
+- `spec.containers.env`
+	- `name`: 환경변수 이름 (컨테이너 내부에서 사용할 이름)
+	- `valueFrom.secretKeyRef`
+		- `name`: `Secret` 객체의 이름
+		- `key`: `Secret` 에서 가져올 value의 key
 
-- `spec`
-	- `containers`
-	    - `env`
-	        - `name`: 환경변수 이름 (컨테이너 내부에서 사용할 이름)
-	        - `valueFrom`
-	            - `secretKeyRef`
-	                - `name`: `Secret` 객체의 이름
-	                - `key`: `Secret` 에서 가져올 value의 key
-
+---
 ### Secret을 Pod 내부 특정 경로에 마운트
 
 ```yaml
@@ -189,9 +189,8 @@ spec:
 ```
 
 - `Secret`을 `Pod` 안의 특정 경로에 파일 형태로 주입하고 싶을 경우 사용한다. (환경변수 X). 
-- Secret의 내용은 자동으로 디코딩되어 파일로 저장된다.
+- `Secret`의 내용은 자동으로 디코딩되어 파일로 저장된다.
 	- `Pod` 내부의 `/etc/secrets/db` 경로에 `username.txt`와 `password.txt` 파일이 생성된다.
-
 - `spec`
 	- `containers`
 	    - `volumeMounts`

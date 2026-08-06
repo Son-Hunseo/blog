@@ -9,12 +9,16 @@ description: "Kubernetes ConfigMap을 활용하여 Pod의 환경 설정과 환�
 ---
 ## 개념
 
-- `Pod` yaml 파일 안에 환경 변수를 `env`로 직접 넣으면 파일이 복잡해지고 관리가 어려워진다.
-- `ConfigMap`을 사용하면, 환경 변수로 사용할 key-value 들을 따로 관리할 수 있다.
-- `Pod`가 생성될 때 `ConfigMap` 객체를 주입하거나, key-value(`.conf`, `.yaml`, `.properties` 등)의 파일로 `ConfigMap`을 마운트해서 사용한다.
+- `Pod` yaml 파일 안에 환경 변수를 `env`로 직접 하나하나 넣으면 파일이 복잡해지고 다른 `Pod`를 정의할 때 해당 환경 변수를 다시 정의해주어야한다.
+- `ConfigMap`을 사용하면, 환경 변수로 사용할 key-value 들을 따로 관리할 수 있며, 다른 리소스에서 재사용할 수 있다.
+- `ConfigMap`은 두 가지 방식으로 사용된다.
+	1. **환경변수 주입**: 개별 key-value 쌍을 컨테이너의 환경변수로 주입
+	2. **볼륨 마운트**: ConfigMap을 볼륨으로 마운트하면 각 key가 파일명, value가 파일 내용이 되어 컨테이너 내부에 파일 형태(`.conf`, `.yaml`, `.properties` 등 임의의 텍스트 포맷)로 나타남
 
 ---
 ## ConfigMap 생성
+
+---
 ### Imperative(명령형) 방법
 
 **from-literal**
@@ -31,6 +35,7 @@ kubectl create configmap <name> \
 kubectl create configmap <name> --from-file=app.properties
 ```
 
+---
 ### Declarative(선언적) 방법 - yaml
 
 ```yaml
@@ -53,7 +58,9 @@ kubectl apply -f my-configmap.yaml
 
 ---
 ## Pod에 삽입
-### ConfigMap 전체
+
+---
+### ConfigMap 전체 (`envFrom.configMapRef`)
 
 ```yaml
 apiVersion: v1
@@ -69,15 +76,12 @@ spec:
             name: nginx-config
 ```
 
-- `ConfigMap`에 있는 key-value 전체를 `Pod`안에 환경변수로 등록한다.
+- `ConfigMap`에 있는 key-value <span class="t-red">전체</span>를 `Pod`안에 환경변수로 등록한다.
+- `spec.containers.envFrom.configMapRef`
+	- `name`: `ConfigMap` 객체의 이름
 
-- `spec`
-	- `containers`
-		- `envFrom`
-			- `configMapRef`
-				- `name`: `ConfigMap` 객체의 이름
-
-### 특정 변수만 삽입
+---
+### 특정 변수만 삽입 (`env.valueFrom.configMapKeyRef`)
 
 ```yaml
 apiVersion: v1
@@ -101,18 +105,15 @@ spec:
               key: APP_MODE
 ```
 
-- `ConfigMap`에 있는 특정 key-value만 `Pod`의 환경변수로 등록한다. (여러 개 가능)
+- `ConfigMap`에 있는 <span class="t-red">특정 key-value</span>만 `Pod`의 환경변수로 등록한다. (여러 개 가능)
+- `spec.containers.env`
+	- `name`: Pod에서 사용할 환경변수 이름
+	- `valueFrom.configMapKeyRef`
+		- `name`: `ConfigMap` 객체의 이름
+		- `key`: `ConfigMap` 에서 가져올 value의 <span class="t-red">key</span>
 
-- `spec`
-	- `containers`
-		- `env`
-			- `name`: 환경변수 이름
-			- `valueFrom`
-				- `configMapKeyRef`
-					- `name`: `ConfigMap` 객체의 이름
-					- `key`: `ConfigMap` 에서 가져올 value의 key
-
-### ConfigMap을 Pod 내부 특정 경로에 마운트
+---
+### ConfigMap을 Pod 내부 특정 경로에 볼륨 마운트
 
 ```yaml
 apiVersion: v1
@@ -163,15 +164,15 @@ spec:
 - `spec`
 	- `containers`
 		- `volumeMounts`
-			- `name`: 아래에 설정할 `volumes`의 `name`
+			- `name`: 아래에 설정할 `volumes`의 이름
 			- `mountPath`: 마운트할 `Pod` 내부의 경로
 	- `volumes`
 		- `name`: `volume`의 이름
 		- `configMap`:
 			- `name`: 주입할 `ConfigMap` 객체의 이름
 			- `items`:
-				- `key`: 주입할 value의 key
-				- `path`: `Pod` 내부에 만들어질 파일 명
+				- `key`: 주입할 value의 <span class="t-red">key</span>
+				- `path`: `Pod` 내부에 만들어질 경로 (`mountPath`를 `/etc/nginx`, `path`를 `conf.d/nginx.conf` 이렇게 해도 상관없다)
 
 ---
 ## 레퍼런스

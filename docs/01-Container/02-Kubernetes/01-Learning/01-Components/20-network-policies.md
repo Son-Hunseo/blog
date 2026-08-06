@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-27
@@ -7,21 +7,26 @@ description: 쿠버네티스(Kubernetes) Network Policy의 개념, Ingress/Egres
 ---
 
 ---
-> [!info] - Ingress: 들어오는 트래픽
+> [!info] 트래픽의 종류
+> - Ingress: 들어오는 트래픽
 > - Egress: 나가는 트래픽
 > - 참고: 아래에서 설정하는 규칙들은 모두 요청 트래픽이다.
 > 	- Ingress 규칙: 들어오는 요청 트래픽에 대한 규칙
 > 	- Egress 규칙: 나가는 요청 트래픽에 대한 규칙
-> 	- 응답 트래픽은 규칙을 만들 필요가 없다. (요청이 있어야 응답이 있기 때문)
+> 	- 응답 트래픽은 별도의 규칙이 필요 없다. (NetworkPolicy는 stateful connection tracking을 기반으로 동작하므로, 허용된 요청으로 맺어진 연결의 응답은 자동으로 통과된다)
 
+---
 ## Network Policy
+
+---
 ### 개념
 
-- 쿠버네티스의 네트워크는 기본적으로 모든 `Pod` 서로 통신이 가능하다.
+- 쿠버네티스의 네트워크는 기본적으로 모든 `Pod` 끼리 서로 통신이 가능하다.
 - 이런 상황을 가정해보자. 보안상의 이유로 DB `Pod`가 허가된 특정 `Pod`를 제외하고는 접근하지 못하도록 해야한다고 하자.
 - 이 때 사용하는 것이 `Network Policy` 이다.
 - 특정 `Pod`에 `Network Policy`를 설정하면 해당 `Pod`는 `Network Policy`에서 허용한 트래픽 외에는 모두 차단한다.
 
+---
 ### Selector의 종류
 
 | **종류**                | **설명**                              | **사용 예시**                             |

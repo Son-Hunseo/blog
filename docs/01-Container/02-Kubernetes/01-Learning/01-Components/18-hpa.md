@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-18
@@ -8,12 +8,15 @@ description: Kubernetes 클러스터에서 수동 스케일링의 비효율성�
 
 ---
 ## 개념
+
+---
 ### 수동 스케일링의 문제점 (Horizontal)
 
 - 클러스터 운영자가 직접 `kubectl top pod`로 자원 사용량을 모니터링 해야한다.
 - 모니터링 하다가 특정 수치에 도달하면 직접 `kubectl scale` 명령으로 `replica` 수를 조절해야한다.
 - 항상 모니터링해야 하며, 트래픽 급증 시 빠르게 대응하기 어렵다.
 
+---
 ### HPA
 
 - CPU, 메모리, 혹은 커스텀 메트릭(예: 작업 큐 길이)을 지속적으로 모니터링 한다.
@@ -21,6 +24,7 @@ description: Kubernetes 클러스터에서 수동 스케일링의 비효율성�
 - 사용량이 낮아지면 자동으로 `Pod` 개수를 감소시킨다. (Scale-in)
 - 가능한 대상: `Deployment` / `StatefulSet` / `ReplicaSet`
 
+---
 ### 동작 방식
 
 - 메트릭 수집
@@ -31,6 +35,8 @@ description: Kubernetes 클러스터에서 수동 스케일링의 비효율성�
 
 ---
 ## 생성 방법
+
+---
 ### Imperative(명령형) 방법
 
 ```bash
@@ -39,6 +45,7 @@ kubectl autoscale deployment myapp --cpu-percent=50 --min=1 --max=10
 
 - cpu 메트릭 임계치가 50% 이며, 최소 `Pod` 수는 1개 최대 `Pod` 수는 10개인 `HPA` 설정 생성
 
+---
 ### Declarative(선언적) 방법 - yaml
 
 ```yaml
@@ -69,13 +76,6 @@ spec:
 	- `minReplicas`: 최소 `Pod` 수
 	- `maxReplicas`: 최대 `Pod` 수
 	- `metrics`: 메트릭 설정
-
-### 조회/삭제
-
-```bash
-kubectl get hpa
-kubectl delete hpa myapp-hpa
-```
 
 ---
 ## 레퍼런스

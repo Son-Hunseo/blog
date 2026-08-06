@@ -37,15 +37,18 @@ spec:
 
 ---
 ## Operator 패턴
+
+---
 ### 개념
 
 - 이렇게 커스텀 리소스를 만들고 싶을 경우 어떻게 해야할까?
 - `Deployment` 리소스가 '상태를 정의'하고 `Deployment Controller`가 '상태를 실현'하는 것 처럼 커스텀 리소스도 이러한 형태로 만들 수 있다.
 - 첫 번째로 커스텀 리소스를 정의해서 리소스 상태를 '정의'할 수 있게 한다.
 - 두 번째로 해당 리소스를 '실현'할 수 있게하는 컨트롤러를 제작한다.
-- 이렇게 `CRD`를 구성하고 커스텀 컨트롤러로 이를 지속적으로 관리하는 방식을 Operator 패턴이라고 한다.
+- 이렇게<span class="t-red"> CRD를 구성하고 커스텀 컨트롤러로 이를 지속적으로 관리</span>하는 방식을 <span class="t-red">Operator 패턴</span>이라고 한다.
 	- Operator Hub에서 OLM(Operator Lifecycle Manager)를 설치하고 원하는 오퍼레이터를 설치할 수 있다.
 
+---
 ### CRD (Custom Resource Definition)
 
 ```yaml
@@ -87,6 +90,7 @@ spec:
 - 위 사항을 `apply`하면, 이제 `FlightTicket` 리소스를 생성할 수 있다.
 - 하지만, 실제 리소스가 어떤 동작을 하지는 않는다. 단지 `etcd`에 이 리소스에 대한 정보가 저장될 뿐이다.
 
+---
 ### 커스텀 컨트롤러
 
 - 이렇게 리소스가 생성되었을 때, 실제로 동작을 할 컨트롤러가 필요하다.
@@ -96,26 +100,28 @@ spec:
 - 이러한 커스텀 컨트롤러는 `etcd` 등에 접근하여 커스텀 리소스를 관리한다.
 - 자세한 방법은 이 글에서는 다루지 않는다.
 
-> [!info] 즉, 이러한 커스텀 리소스와 커스텀 컨트롤러 사용함으로써 쿠버네티스 자체 코드를 수정하지 않으면서 쿠버네티스 API를 확장할 수 있다.
-
-> [!info] 우리가 가장 많이 사용하는 `Prometheus`, `ArgoCD`, `cert-manager` 등도 이러한 오퍼레이터 패턴을 사용하여 구현된 예시이다.
+> 즉, 이러한 커스텀 리소스와 커스텀 컨트롤러 사용함으로써 쿠버네티스 자체 코드를 수정하지 않으면서 쿠버네티스 API를 확장할 수 있다.
+> 
+> 우리가 가장 많이 사용하는 `Prometheus`, `ArgoCD`, `cert-manager` 등도 이러한 오퍼레이터 패턴을 사용하여 구현된 예시이다.
 
 ---
 ## 참고
 
-- 내가 헷갈렸던 부분 정리
+> 내가 헷갈렸던 부분 정리
 
+---
 ### Helm 과 Operator
 
 - Helm과 Operator를 둘 다 어떠한 애플리케이션을 패키징하는 동일 선상인 개념이라고 오해했다.
-- Helm은 여러 리소스의 정의 템플릿(yaml)을 YAML Chart로 묶어 애플리케이션을 패키징 및 배포하는 역할이다.
-- 반면에, Operator는 Kubernetes에 어떠한 기능을 추가하여 확장하고 싶을 때, CRD + Custom Controller 패턴으로 확장하는 패턴이다.
+- <span class="t-red">Helm은</span> 여러 리소스의 정의 템플릿(yaml)을 YAML <span class="t-red">Chart로 묶어 애플리케이션을 패키징 및 배포</span>하는 역할이다.
+- 반면에, <span class="t-red">Operator는</span> Kubernetes에 <span class="t-red">어떠한 기능을 추가하여 확장</span>하고 싶을 때, CRD + Custom Controller 패턴으로 확장하는 패턴이다.
 - 이해하기 쉬운 예를 들어보면 아래와 같다.
 	- `ArgoCD`는 보통 Helm으로 설치한다.
 	- `ArgoCD`의 Helm Chart를 보면 `ArgoCD`가 사용하는 `CRD`와 해당 `CRD`를 관리하는 컨트롤러 `Pod`가 정의되어 있다.
 		- 참고: https://artifacthub.io/packages/helm/argo/argo-cd
 	- `ArgoCD`는 일반적으로 Helm으로 설치되고,내부적으로는 `CRD`와 먼트롤러를 통해 Operator 패턴으로 동작한다.
 
+---
 ### 어떤 경우에 Operator를 사용하는가?
 
 - 어떠한 경우에 오퍼레이터가 필요한지 잘 와닿지 않을 수 있다.
@@ -123,7 +129,7 @@ spec:
 	- 어떠한 상태를 정의
 	- 해당 상태를 컨트롤러가 지속적으로 비교
 	- 해당 상태를 유지
-- 이러한 쿠버네티스의 기능을 확장하여 새로운 리소스를 선언하고 해당 리소스를 정의한 방식에 따라 선언한 상태로 유지하기 위해서 오퍼레이터를 사용한다.
+- 이러한 <span class="t-red">쿠버네티스의 기능을 확장하여 새로운 리소스를 선언하고 해당 리소스를 정의한 방식에 따라 선언한 상태로 유지하기 위해서</span> 오퍼레이터를 사용한다.
 - 예시:
 	- `cert-manager`는 오퍼레이터 패턴으로 구현되었는데, `Issuer`/`ClusterIssuer`/`Certificate`/`Order`/`Challenge` 등의 CRD를 정의하고 컨트롤러가 이 `CRD` 들을 watch(`etcd`에 기록된 리소스들을 `kube-apiserver`를 통해 watch)하며 인증서들을 갱신하는 기능을 자동화한다.
 	- 추가적으로 내가 예전에 프로젝트를 진행할 때, `external-secrets-operator`를 사용하여 AWS Secret Manager에서 관리하는 비밀 값들을 가져와서 적용했었다.
