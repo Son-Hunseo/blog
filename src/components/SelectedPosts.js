@@ -53,13 +53,13 @@ function formatDate(dateString) {
  * - 순서 변경: 배열 순서 조정 (배열 순서대로 표시됨)
  */
 const SELECTED_POST_IDS = [
+    'Peer-Learning/llm-serving-study-week1',
     'Peer-Learning/gitaiops-04',
     'Container/Kubernetes/CKA/exam-recap-2',
+    'Dev/Golang/java-vs-go-thread',
     'AI/claude-code-tips',
     'IaaS/Openstack/connect-openStack-ceph',
     'Dev/Project/chocoletter-advance-01',
-    'Dev/Project/chocoletter-advance-02',
-    'Dev/Project/chocoletter-advance-06',
 ];
 
 /**
