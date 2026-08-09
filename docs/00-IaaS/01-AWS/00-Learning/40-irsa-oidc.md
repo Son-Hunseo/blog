@@ -3,7 +3,7 @@ title: IRSA와 OIDC
 description: EKS에서 IRSA를 사용하여 Kubernetes ServiceAccount와 AWS IAM Role을 연결하는 이유와 OIDC Issuer/Provider의 역할, JWT 검증 및 STS 임시 자격증명 발급까지의 전체 동작 과정을 정리한다.
 date: 2026-08-09
 sidebar_class_name: hidden-sidebar-item
-image: /img/posts/00-IAas/01-AWS/00-Learning/40-irsa-oidc/flow.png
+image: /img/posts/00-IaaS/01-AWS/00-Learning/40-irsa-oidc/flow.png
 ---
 ---
 ## IRSA
