@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-10
@@ -8,6 +8,8 @@ description: "Kubernetes Node Affinity 완전 정복: nodeSelector와의 차이,
 
 ---
 ## Node Affinity
+
+---
 ### 개념
 
 - `nodeAffinity`는 `Pod`가 특정 `Node`에 배치되도록 강제하거나 유도하는 기능이다.
@@ -17,7 +19,8 @@ description: "Kubernetes Node Affinity 완전 정복: nodeSelector와의 차이,
 - 이 경우 `nodeSelector`로는 불가능하다. 왜냐하면 `nodeSelector`는 AND 연산만 가능하기 때문이다.
 - 이렇게 조금 더 복잡한 조건을 매칭시켜야하는 경우 사용할 수 있는 기능이 `nodeAffinity`이다.
 
-### 대표적인 operator
+---
+### 대표적인 연산자
 
 | Operator       | 설명                      |
 | -------------- | ----------------------- |
@@ -26,33 +29,43 @@ description: "Kubernetes Node Affinity 완전 정복: nodeSelector와의 차이,
 | `Exists`       | key만 존재하면 매칭            |
 | `DoesNotExist` | key 자체가 없으면 매칭          |
 
-### Node Affinity의 Type
+---
+### Node Affinity의 Type (2025년 12월 기준)
 
 **현재 사용할 수 있는 Type**
 
 - `requiredDuringSchedulingIgnoredDuringExecution`
-	- 스케줄링 시: 반드시 조건을 만족하는 `Node`에만 배치
+	- 스케줄링 시
+		- 반드시 조건을 만족하는 `Node`에만 배치
 		- 만족하는 `Node`가 없으면 `Pod`는 `Pending`상태가 된다.
-	- 실행 중: `label`이 변경되어도 `Pod`는 그대로 유지
+	- 실행 중
+		- `label`이 변경되어도 `Pod`는 그대로 유지
 		- `Node`의 `label`이 변경되어도 `Pod`는 그대로 유지된다.
 - `preferredDuringSchedulingIgnoredDuringExecution`
-	- 스케줄링 시: 조건을 만족하는 `Node`에 우선 배치
+	- 스케줄링 시
+		- 조건을 만족하는 `Node`에 우선 배치
 		- 만족하는 `Node`가 없으면 아무 `Node`에나 배치
-	- 실행 중: `label`이 변경되어도 `Pod`는 그대로 유지
+	- 실행 중
+		- `label`이 변경되어도 `Pod`는 그대로 유지
 		- `Node`의 `label`이 변경되어도 `Pod`는 그대로 유지된다.
 
 **앞으로 추가될 예정 (아직 지원 X)**
 
 - `requiredDuringSchedulingRequiredDuringExecution`
-	- 스케줄링 시: 반드시 조건을 만족하는 `Node`에만 배치
+	- 스케줄링 시
+		- 반드시 조건을 만족하는 `Node`에만 배치
 		- 만족하는 `Node`가 없으면 `Pod`는 `Pending`상태가 된다.
-	- 실행 중: `label`이 변경되면 `Pod`가 재배치된다.
+	- 실행 중
+		- `label`이 변경되면 `Pod`가 재배치된다.
 - `preferredDuringSchedulingRequiredDuringExecution`
-	- 스케줄링 시: 조건을 만족하는 `Node`에 우선 배치
+	- 스케줄링 시
+		- 조건을 만족하는 `Node`에 우선 배치
 		- 만족하는 `Node`가 없으면 아무 `Node`에나 배치
-	- 실행 중: `label`이 변경되면 `Pod`가 재배치된다.
+	- 실행 중
+		- `label`이 변경되면 `Pod`가 재배치된다.
 
-### YAML
+---
+### YAML 예시
 
 ```yaml
 apiVersion: v1

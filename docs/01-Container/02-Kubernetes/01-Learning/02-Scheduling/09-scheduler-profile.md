@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Container/02-Kubernetes/01-Learning/02-Scheduling/09-scheduler-profile/scheduler-profile1.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-13
@@ -8,26 +8,32 @@ description: Kubernetes 1.18+에서 도입된 Scheduler Profile을 통해 Multi 
 
 ---
 ## Scheduler Profile
-### Multi Scheduler 방식의 문제점
+
+---
+### Multi Scheduler (Custom Scheduler) 방식의 문제점
 
 1. 각각 독립된 프로세스(`Pod`이든, 프로세스이든)와 config 파일이 필요하다. -> 운영의 복잡도가 증가한다.
 2. Race Condition 위험 -> 하나의 `Pod` 배치에 여러 스케줄러가 관여하는 경쟁적 상태가 되는 문제가 발생할 수 있다. (일반적으로는 `Pod`가 스케줄러를 지정하기 때문에 잘 발생하지 않지만, 커스텀 스케줄러의 구현 중 여러 변수로 인한 리스크를 말하는 것)
 
+---
 ### Scheduler Profile
 
 - 이러한 문제점을 해결하기 위해서 `Scheduler Profile` 방식이 도입되었다. (kubernetes 1.18 ~)
-- `Scheduler Profile` 방식은 하나의 스케줄러 안에서 여러 `Profile`을 지정하여, `Pod`들이 필요에따라, `Profile`을 선택하여, 마치 여러 스케줄러를 선택적으로 사용하는 것과 같은 효과를 낸다.
+- `Scheduler Profile` 방식은 <span class="t-red">하나의 스케줄러 안에서 여러</span> `Profile`<span class="t-red">을 지정</span>하여, `Pod`들이 필요에따라, <span class="t-red">필요한</span> `Profile`<span class="t-red">을 선택</span>하여, 마치 여러 스케줄러를 선택적으로 사용하는 것과 같은 효과를 낸다.
 - `Scheduler Profile` 방식은 각 `Profile`에서 어떠한 `Plugin`을 채택/제외할지 선택하는 방법으로 적용된다.
 - `Plugin`은 Kubernetes Scheduling 과정의 각 단계에서 적용되며, 사용자 커스텀으로 개발하여 적용할 수 도 있다.
 - `Plugin`을 이해하기 위해서는 Kubernetes Scheduling 과정을 이해해야한다.
 
-> [!info] 결정적으로, Custom Scheduler를 하나 만들기 위해서는 A ~ Z 까지의 로직을 직접 개발하고 빌드하고 실행시켜야한다. 하지만, Scheduler Profile의 경우에는 따로 로직을 작성하지 않고, 이미 개발되어있는 여러 플러그인들을 조합하여 사용(혹은 조금 수정하여 사용)하여 훨씬 편리하게 사용할 수 있다. (그러나, 커스텀 자유도는 낮음)
+> [!info] Multi Scheduler의 결정적인 단점
+> - Custom Scheduler를 하나 만들기 위해서는 A ~ Z 까지의 로직을 직접 개발하고 빌드하고 실행시켜야한다. 
+> - 하지만, Scheduler Profile의 경우에는 따로 로직을 작성하지 않고, 이미 개발되어있는 여러 플러그인들을 조합하여 사용(혹은 조금 수정하여 사용)하여 훨씬 편리하게 사용할 수 있다. (그러나, 커스텀 자유도는 낮음)
 
 ---
 ## Kubernetes Scheduling 과정
 
 ![scheduler-profile1](assets/09-scheduler-profile/scheduler-profile1.jpg)
 
+---
 ### Stages
 
 1. `Scheduling Queue` 
@@ -53,6 +59,7 @@ description: Kubernetes 1.18+에서 도입된 Scheduler Profile을 통해 Multi 
 	- 대표적인 플러그인
 		- `DefaultBinder`: `Pod`를 앞선 과정에서 정해진 기준들에 따라 노드에 바인딩하는 플러그인
 
+---
 ### Extension Points
 
 Extension Points는 스케줄링의 각 `Stage`마다 플러그인이 어떤 시점에 실행될지를 명확히 지정해둔 인터페이스이다.
@@ -74,7 +81,9 @@ Extension Points는 스케줄링의 각 `Stage`마다 플러그인이 어떤 시
     - `postbind`: 바인딩 성공 후 사후 정리 또는 알림 로직을 실행하는 단계
 
 ---
-## Yaml
+## Yaml 예시
+
+---
 ### Profile
 
 ```yaml
@@ -108,6 +117,7 @@ profiles:
 	- `schedulerName`: 정의할 Profile의 이름
 	- `plugins`: 활성/비활성 할 플로그인들을 나열하는 위치
 
+---
 ### Pod
 
 ```yaml

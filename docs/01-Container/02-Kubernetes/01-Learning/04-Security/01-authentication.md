@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Container/02-Kubernetes/01-Learning/04-Security/01-authentication/authentication1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-21
@@ -8,37 +8,39 @@ description: Kubernetes 인증(Authentication)의 기본 개념과 작동 원리
 
 ---
 ## Authentication in Kubernetes
+
+---
 ### 개념
 
 ![authentication1](assets/01-authentication/authentication1.png)
 
-- Kubernetes 클러스터에 접근/조작 하기 위해서는
-	1. 클러스터에 접근 가능한 자격이 있는지(인증 - Authentication) 확인하고
-	2. 클러스터 내에서 어떠한 리소스들에 권한이 있는지(인가 - Authorization)에 대한 확인
-- 을 거쳐야한다.
+Kubernetes 클러스터에 접근/조작 하기 위해서는
+1. 클러스터에 접근 가능한 자격이 있는지(인증 - Authentication) 확인하고
+2. 클러스터 내에서 어떠한 리소스들에 권한이 있는지(인가 - Authorization)에 대한 확인
+을 거쳐야한다.
 
-- 이 글에서는 인증(Authentication)을 다룰 것이다. 
+이 글에서는 <span class="t-red">인증(Authentication)</span>을 다룰 것이다. 
 - 그럼 이 인증은 어디서 검증해주는걸까?
-- 유저가 클러스터에 `kubectl`로 요청을 했을 때, Authentication을 하는 주체는 `kube-apiserver`이다.
+- 유저가 클러스터에 `kubectl`로 요청을 했을 때, <span class="t-red">Authentication을 하는 주체</span>는 <span class="t-red">kube-apiserver</span>이다.
 
+---
 ### Authentication 대상
 
 ![authentication2.png](assets/01-authentication/authentication2.png)
 
 **User Account**
-
 - 대상 - 쿠버네티스 클러스터 내의 리소스를 조작하는 사람
 	- 클러스터 관리자
 	- 개발자
 - <span class="t-red">Kubernetes는 User Account 라는 객체가 존재하지 않는다. - 다른 방법으로 관리</span>
 	- cf) 미리 말하자면, 유저가 개인키로 <span class="t-red">CSR을 만들 때 넣는 CN(Common Name)</span>이 유저의 이름이 된다.
 
-**Service Account**
-
+**Service Account** (`ServiceAccount`)
 - 클러스터 내 다른 객체 
 	- ex: `Deployment`, `Ingress Controller` 등)
-- Kubernetes에는 클러스터 내 객체가 Authentication을 하기위한 객체인 `Service Account`가 존재한다.
+- Kubernetes에는 클러스터 내 객체가 Authentication을 하기위한 객체인 `ServiceAccount`가 존재한다.
 
+---
 ### Authentication 종류
 
 - User
@@ -52,8 +54,11 @@ description: Kubernetes 인증(Authentication)의 기본 개념과 작동 원리
 ---
 ## 예시 - Static Token File (For 이해, 권장 X)
 
-> [!info] 이 글에서는 Authentication 이해를 위한 가장 쉬운 예시인 `Static Token File` 방법을 소개한다. (토큰이 plain text 그대로 저장되기 때문에 보안상 권장 x) 권장되는 User 인증 방법인 `Certificate`와 객체 끼리의 인증 방법인 `Service Account`는 다른 글에서 자세히 다룬다.
+> 이 글에서는 Authentication 이해를 위한 가장 쉬운 예시인 `Static Token File` 방법을 소개한다.(토큰이 plain text 그대로 저장되기 때문에 보안상 권장 x)
+> 
+> 권장되는 User 인증 방법인 `Certificate`와 객체 끼리의 인증 방법인 `Service Account`는 다른 글에서 자세히 다룬다.
 
+---
 ### In Kubernetes Cluster
 
 **토큰 파일 생성**
@@ -118,6 +123,7 @@ cat /etc/kubernetes/pki/ca.crt | base64 -w 0
 - 이를 기록해둔다.
 - 왜냐하면, 토큰이 Authentication 부분은 해결하지만, TLS 연결을 해결해주는 것이 아니기 때문에 CA 인증서가 필요하다.
 
+---
 ### User Local
 
 - 클러스터에 접근하려는 유저가 로컬에서 클러스터에 요청을 보내고 싶을 경우를 가정한다.

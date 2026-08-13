@@ -8,14 +8,17 @@ description: Kubernetes 환경에서 기본 스케줄러로 해결할 수 없는
 
 ---
 ## Multiple Schedulers
+
+---
 ### 개념
 
 - 기본적으로 Kubernetes는 `kube-scheduler`(디폴트 스케줄러)하나로 모든 `Pod`를 Scheduling한다.
 - 하지만 특정 애플리케이션에 대해 기본 Scheduler로는 부족한 특별한 규칙이 필요할 수 있다.
-- 이때 개발자가 직접 Scheduling 로직을 만든 후 Kubernetes에 추가 Scheduler로 배포할 수 있다.
+- 이때 <span class="t-red">개발자가 직접 Scheduling 로직을 만든 후 Kubernetes에 추가 Scheduler로 배포할 수 있다.</span>
 	- `Go` 언어로 스케줄링 로직을 개발하고 빌드(바이너리든, 컨테이너든)하면 된다.
-- 하나의 클러스터에 여러 개의 스케줄러가 동시에 존재할 수 있다. 즉, `Multiple Schedulers`가 가능하다.
+- <span class="t-red">하나의 클러스터에 여러 개의 스케줄러가 동시에 존재할 수 있다.</span> 즉, `Multiple Schedulers`가 가능하다.
 
+---
 ### 사용 예시
 
 **GPU 노드의 실시간 상태 기반 스케줄링**
@@ -36,11 +39,14 @@ description: Kubernetes 환경에서 기본 스케줄러로 해결할 수 없는
 
 ---
 ## 배포 방식
+
+---
 ### 바이너리 실행 (예전 방식, 추천 X)
 
--[Kube-Scheduler Manual Setup](../01-Components/06-kube-scheduler.md#manual-setup-kubernetes-the-hard-way)) - 이 방법처럼 나 혹은 다른 사람이 만든 Cusom Scheduler를 `systemd`의 서비스로 사용할 수 있게 설정하면 된다.
+- [Kube-Scheduler Manual Setup](../01-Components/06-kube-scheduler.md#manual-setup-kubernetes-the-hard-way) - 이 방법처럼 나 혹은 다른 사람이 만든 Cusom Scheduler를 `systemd`의 서비스로 사용할 수 있게 설정하면 된다.
 - 하지만, 이 방법은 추천되지 않는다.
 
+---
 ### Deployment로 배포 (추천)
 
 - https://kubernetes.io/docs/tasks/extend-kubernetes/configure-multiple-schedulers/ 참조

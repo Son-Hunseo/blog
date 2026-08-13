@@ -8,6 +8,8 @@ description: 쿠버네티스(Kubernetes) Ingress의 개념과 필요성을 NodeP
 
 ---
 ## Ingress 배경
+
+---
 ### 시나리오
 
 - `www.my-online-store.com` 이라는 서비스를 운영하고 있다고 하자.
@@ -15,8 +17,9 @@ description: 쿠버네티스(Kubernetes) Ingress의 개념과 필요성을 NodeP
 	- `replica` 3개
 - `video-service`라는 동영상 서비스가 `www.my-online-store.com/video` 에서 운영되어야한다.
 	- `replica` 3개
-- GCP 환경이다.
+- GCP 환경이라고 하자. (LoadBalancer 프로비저닝 때문에 가정)
 
+---
 ### 구성 (NodePort)
 
 ```mermaid
@@ -51,9 +54,14 @@ graph TD
 - 외부에 리버스 프록시 서버를 배치해서 경로별로 맞는 포트로 포워딩한다.
 	- `/wear` -> 30080포트, `/vidoe` -> 30081포트
 - DNS서버에 `www.my-online-store.com`으로 오는 요청을 리버스프록시 서버로 보내게 설정한다.
-- 단점
-	- '특정 노드'의 노드포트로 접근해야하므로, 리버스 프록시 서버에 설정해둔 노드가 장애가 날 경우 이를 복구하기위해 수동으로 서버 설정을 변경해야한다.
 
+**단점**
+
+> 외부 리버스 프록시가 Kubernetes 노드의 상태를 직접 관리해야 한다.
+
+만약 리버스 프록시 서버가 Nginx 라면, `upstream`에 여러 노드를 등록하여 특정 노드 장애에 대응할 수는 있지만, 노드가 추가·삭제되거나 IP가 변경될 경우 외부 리버스 프록시의 upstream 설정도 관리해야 한다.
+
+---
 ### 구성 (Load Balancer)
 
 ```mermaid
@@ -88,9 +96,12 @@ graph TD
 	- `another-load-balancer`
 	- `/wear` -> `gcp-load-balancer`, `/video` -> `gcp-load-balancer2`
 - DNS서버에 `www.my-online-store.com`으로 오는 요청을 `another-load-balancer`로 보내게 설정한다.
-- 단점
-	- 서비스가 늘어날 때마다 로드밸런서를 계속 새로 만들어야 하므로 비용이나 관리의 복잡성이 늘어난다.
 
+**단점**
+
+> 서비스가 늘어날 때마다 로드밸런서를 계속 새로 만들어야 하므로 비용이나 관리의 복잡성이 늘어난다.
+
+---
 ### 구성 (Ingress)
 
 ```mermaid
@@ -130,24 +141,30 @@ graph TD
 	- `/wear` -> `wear-service.default.svc.cluster.local`
 	- `/video` -> `video-service.default.svc.cluster.local`
 - DNS서버에 `www.my-online-store.com`으로 오는 요청을 `gcp-ingress-load-balancer`로 보내게 설정한다.
-- `NodePort`와 `LoadBalancer`에서 존재했던 단점들이 `Ingress`로 해결되었다.
+
+> `NodePort`와 `LoadBalancer`에서 존재했던 단점들이 `Ingress`로 해결되었다.
 
 ---
 ## Ingress 구성 요소
+
+---
 ### Ingress Controller
 
 - 쿠버네티스에는 기본적으로 `Ingress Controller`가 내장되어 있지 않다. 이에 반드시 별도로 설치해야 한다. (`Nginx`, `HAProxy`, `Traefik`, `Istio` 등)
 - `Deployment(Pod)`, `Service`, `ConfigMap`(`Nginx` 설정 등이 여기 들어감), `ServiceAccount`(권한)로 구성된다. -> `Helm`으로 설치
 - 즉, L7 로드밸런서 역할을 해주는 것이다.
-### Ingress Resource
 
-- 어떤 트래픽을 어디로 보낼지 정의한 YAML 파일이다.
+---
+### Ingress
+
+- 어떤 트래픽을 어디로 보낼지 정의한 리소스이다.
 - 추가적으로 TLS/SSL 설정도 여기서 할 수 있다.
 - `Ingress Controller`가 `Ingress` 리소스를 읽고 요청을 분배한다.
-- 아래 예시에서 자세히 다룸
 
 ---
 ## Ingress 설정 예시
+
+---
 ### 경로 기반
 
 ```yaml
@@ -193,6 +210,7 @@ spec:
 			- `path: /something(/|$)(.*)
 - 해당하는 경로가 없다면 `ingress-controller`의 `deploy` 설정에 있는 `default-backend-service`로 보낸다.
 
+---
 ### 도메인 기반
 
 ```yaml
@@ -229,6 +247,23 @@ spec:
 ```
 
 - 도메인 기반은 `rewrite-target`이 필요 없는 경우가 많다.
+
+---
+## 추가) Ingress -> Gateway API로의 전환 트렌드
+
+> 아래와 같은 이유들로 Ingress는 점점 지원이 줄어드며, Gateway API가 새로운 Kubernetes 표준이 되어가고 있다.
+
+**Ingress의 기능적 한계**
+- Ingress는 기본적으로 Host/Path 기반 HTTP 라우팅 중심이라 Canary, 가중치 기반 라우팅, Header 라우팅, TCP/UDP 등 복잡한 트래픽 제어를 표현하기 어렵다.
+
+**Annotation 의존 문제**
+- 부족한 기능을 NGINX, Traefik, AWS 등 각 Ingress Controller가 자체 Annotation/CRD로 확장하면서 구현체마다 설정 방식이 달라지고 벤더 종속성이 발생한다.
+
+**표준화된 고급 라우팅**
+- Gateway API는 `HTTPRoute`, `GRPCRoute`, `TCPRoute` 등의 리소스를 통해 가중치 분배, Header 기반 라우팅 등 다양한 트래픽 정책을 Kubernetes 표준 API로 표현할 수 있다.
+
+**역할 분리** 
+- `GatewayClass → Gateway → HTTPRoute` 구조를 통해 플랫폼 관리자는 Gateway 인프라를, 개발자는 애플리케이션 Route를 관리하도록 책임을 명확하게 분리할 수 있다.
 
 ---
 ## 레퍼런스

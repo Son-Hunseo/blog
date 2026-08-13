@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-09
@@ -8,28 +8,30 @@ description: nodeSelector는 Kubernetes에서 특정 레이블을 가진 노드�
 
 ---
 ## Node Selector
+
+---
 ### 개념
 
 - `nodeSelector`는 `Pod`입장에서 어떤 `Label`이 달린 `Node`에 배치될 것인지 결정하는 개념이다.
-- 예를들어 사양이 높은 `Node1` 사양이 낮은 `Node2`, `Node3`가 있다. 그리고, 워크로드가 높은 `Pod1`, 워크로드가 낮은 `Pod2`, `Pod3`가 있다고 가정하자.
-- 이 때, 워크로드가 높은 `Pod1`이 `Node2` 혹은 `Node3`에 배치될 수도 있다. 이러한 상황은 개선될 필요가 있다.
+- 예를들어 사양이 높은 `Node1` , 사양이 낮은 `Node2`, `Node3`가 있다. 그리고, 워크로드가 높은 `Pod1` , 워크로드가 낮은 `Pod2`, `Pod3`가 있다고 가정하자.
+- 이때, 워크로드가 높은 `Pod1`이 `Node2` 혹은 `Node3`에 배치될 수도 있다. 이러한 상황은 개선될 필요가 있다.
 - 이 때, `Pod1`을 `nodeSelector`를 이용해서 `Node1`에 강제로 배치할 수 있다.
 
+---
 ### Node에 Label 붙이기
 
 ```bash
 kubectl label nodes <node-name> <label-key>=<label-value>
 ```
 
-- 문법
+예시
+- `node-1`에 `size=Large`라는 `label`을 붙인다.
 
 ```bash
 kubectl label nodes node-1 size=Large
 ```
 
-- 예시
-- `node-1`에 `size=Large`라는 `label`을 붙인다.
-
+---
 ### Pod에 nodeSelector 필드 추가
 
 ```yaml

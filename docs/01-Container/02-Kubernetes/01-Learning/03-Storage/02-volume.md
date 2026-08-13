@@ -8,14 +8,21 @@ description: 쿠버네티스(Kubernetes) Pod에서 데이터의 영속성을 확
 
 ---
 > [!info] 도커 스토리지, 도커 볼륨에 대한 사전 지식이 필요하다.
->[도커 스토리지](../../../01-Docker/02-Docker-Storage.md)))[도커 볼륨](../../../01-Docker/03-Docker-Volume.md)))))) 글 참조
+>[도커 스토리지](../../../01-Docker/02-Docker-Storage.md), [도커 볼륨](../../../01-Docker/03-Docker-Volume.md) 글 참조
 
+---
 ## Volume
+
+---
 ### 개념
 
 - 쿠버네티스에서의 `Pod` 또한 도커에서의 컨테이너와 마찬가지로 Container Layer에서 수정, 생성된 데이터는 `Pod`가 삭제될 경우 같이 삭제된다.
 - 이를 해결해기 위해서 `Pod`에 `Volume`을 연결한다.
 
+---
+## Volume 종류
+
+---
 ### hostPath
 
 ```yaml
@@ -33,6 +40,7 @@ spec:
       mountPath: /opt
   volumes:
   - name: data-volume
+    # hostPath
     hostPath:
       path: /data
       type: DirectoryOrCreate
@@ -49,6 +57,7 @@ spec:
 	- `mountPath`: 연결할 컨테이너 내부의 디렉토리 위치
 - `hostPath`는 권장되지 않는다. 왜냐하면, `Pod`가 어떤 노드에서 실행될지 보장되지 않으며, 각 노드의 해당 디렉토리는 실제로 서로 다른 디렉토리이기 때문이다.
 
+---
 ### 외부 Volume Storage
 
 ```yaml
@@ -66,6 +75,7 @@ spec:
       mountPath: /opt
   volumes:
   - name: data-volume
+    # 외부 스토리지
     awsElasticBlockStore:
       volumeID: <volume-id>
       fsType: ext4

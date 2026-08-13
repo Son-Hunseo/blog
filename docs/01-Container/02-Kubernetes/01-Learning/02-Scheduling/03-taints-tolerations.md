@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-09
@@ -8,6 +8,8 @@ description: Kubernetes의 Taints와 Tolerations 개념, 적용 방법, Taint �
 
 ---
 ## Taints, Tolerations
+
+---
 ### 개념
 
 `Taint`
@@ -18,6 +20,7 @@ description: Kubernetes의 Taints와 Tolerations 개념, 적용 방법, Taint �
 - 특정 `Taint`(오염)을 견딜 수 있는 `Toleration`(면역)을 가지고 있다는 표시이다.
 - `Pod`에 설정된다.
 
+---
 ### Taint effect 종류
 
 | 효과                 | 의미                                            |
@@ -28,15 +31,17 @@ description: Kubernetes의 Taints와 Tolerations 개념, 적용 방법, Taint �
 - `NoSchedule`의 경우 기존에 해당 `Node`에 실행되고 있던 `Pod`들이 `Toleration`이 없어도 영향을 받지 않는다. (쫓아내지 않는다 = `evict` 하지 않는다)
 - 하지만, `NoExecute`의 경우 `Toleration`이 없는 기존 `Pod`들도 쫓아낸다.
 
+---
 ### 헷갈리기 쉬운 부분
 
 - `Taints`/`Toleration`은 `Node` 입장에서 누가 들어오면 안되는지 결정하는 기술이다.
 - `Toleration`이 있다고 해서, 해당 `Taint`가 있는 `Node`에 강제로 올리는 기능이 아니다. (배치 될 '수' 있는 것이다)
 	- 강제로 배치하려면 추가적으로 `Node Affinity`로 해결해야한다.
 
-> [!tip] 예를 들어, GPU를 사용하는 `Pod`만 GPU가 장착된 특정 `Node`에 배치하고 싶다면, 해당 GPU `Node`에 `Taint`로 `NoSchedule`을 적용하고, 해당 `Node`에 배치하고 싶은 `Pod`들에 `Toleration`을 적용한 뒤 추가적으로 `Node Affinity`를 적용해서 강제로 배치한다.
+> 예를 들어, GPU를 사용하는 `Pod`만 GPU가 장착된 특정 `Node`에 배치하고 싶다면, 해당 GPU `Node`에 `Taint`로 `NoSchedule`을 적용하고, 해당 `Node`에 배치하고 싶은 `Pod`들에 `Toleration`을 적용한 뒤 추가적으로 `Node Affinity`를 적용해서 강제로 배치해야한다.
 
-### Mater Node
+---
+### 예시: Mater Node
 
 - `Master Node`에는 기본적으로 일반 워크로드 `Pod`가 스케줄링되지 않는다.
 - 왜냐하면 기본적으로 `Taint`가 `NoSchedule`로 설정되어있기 때문이다.
@@ -48,20 +53,21 @@ kubectl describe node <master-node> | grep Taint
 
 ---
 ## 적용 방법
+
+---
 ### Taints
 
 ```bash
 kubectl taint nodes <node-name> key=value:effect
 ```
 
-- 문법
+예시
 
 ```bash
 kubectl taint nodes node1 app=blue:NoSchedule
 ```
 
-- 예시
-
+---
 ### Tolerations (Yaml)
 
 ```yaml

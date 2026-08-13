@@ -3,22 +3,25 @@ image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-29
 title: PV(Persistent Volume) & PVC(Persistent Volume Claim)
-description: Kubernetes의 영구 스토리지 관리 핵심 개념인 **PV (Persistent Volume)**와 **PVC (Persistent Volume Claim)**의 개념, 구조, 바인딩 규칙, 그리고 Pod에 적용하는 방법을 상세히 설명합니다. PV/PVC의 YAML 예시와 Deprecated된 Recycle 정책에 대한 최신 정보도 포함되어 있습니다.
+description: Kubernetes의 영구 스토리지 관리 핵심 개념인 PV (Persistent Volume)와 PVC (Persistent Volume Claim)의 개념, 구조, 바인딩 규칙, 그리고 Pod에 적용하는 방법을 상세히 설명합니다. PV/PVC의 YAML 예시와 Deprecated된 Recycle 정책에 대한 최신 정보도 포함되어 있습니다.
 ---
 
 ---
 ## PV (Persistent Volume)
+
+---
 ### 개념
 
-- 클러스터 전체에서 사용 가능한 스토리지 풀이다.
+- 클러스터에서 사용 가능한 스토리지 리소스이다.
 - Cluster-scoped 리소스이다.
-- 주된 사용 패턴은 다음과 같다.
+- 주된 사용 패턴은 다음과 같다. (정적 프로비저닝)
 	- 클러스터 관리자가 `PV`를 생성한다.
 	- 사용자는 `PVC`(Persistent Volume Claim)을 통해 필요한 만큼 요청한다.
 	- `PVC` 조건에 맞는 `PV`가 할당된다.
 	- `Pod`의 볼륨으로 `PVC`를 적용한다.
-- cf) `PV`의 스토리지 구현으로 `hostPath`를 사용이 가능하긴 하지만(할당되는 `Pod`가 실행되는 노드의 디스크 사용), 이는 `PV`의 설계의도와 맞지 않는 사용 사례이며, 권장되지 않는다.
+- cf) `PV`의 구현체로 `hostPath`를 사용이 가능하긴 하지만(할당되는 `Pod`가 실행되는 노드의 디스크 사용), 이는 `PV`의 설계 의도와 맞지 않는 사용 사례이며, 권장되지 않는다.
 
+---
 ### 예시
 
 ```yaml
@@ -57,18 +60,21 @@ spec:
 > - 스냅샷, 암호화, 클라우드 메타데이터 미처리
 > - CSI 및 클라우드 스토리지와 부적합
 >
-> -> 이에 현재 `StorageClass` + 동적 프로비저닝 사용
+> -> 이에 현재의 표준은 `StorageClass` + 동적 프로비저닝 사용이다.
 
 ---
 ## PVC (Persistent Volume Claim)
+
+---
 ### 개념
 
 - 사용자가 스토리를 요청하는 객체 (PV - 자원, PVC - 요청서)
 - Namespace-scoped 리소스이다.
 - <span class="t-red">PV와 PVC는 1 : 1 관계로 바인딩 된다.</span>
-- PV에서 PVC와 바인딩 된 이후 남는 용량이 있다고 하더라도 다른 PVC가 사용할 수 없다.
+- PV에서 PVC와 바인딩 된 이후 <span class="t-red">남는 용량이 있다고 하더라도 다른 PVC가 사용할 수 없다.</span>
 	- ex: PVC에서 1기가 요청하더라도 할당된 PV가 2기가라면 PVC에는 2기가가 할당된다.
 
+---
 ### 바인딩 규칙 (중요)
 
 > [!tip] CKA 시험에서 자주 나오는 유형이다.
@@ -81,8 +87,9 @@ spec:
 3. `PV`의 용량이 `PVC` 요청을 만족할만큼 큰지?
 4. `AccessMode`가 일치하는지?
 
-- 조건이 맞는 `PV`가 없으면 `PVC`는 Pending 상태가 된다.
+> 조건이 맞는 `PV`가 없으면 `PVC`는 Pending 상태가 된다.
 
+---
 ### 예시
 
 ```yaml

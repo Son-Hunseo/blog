@@ -2,12 +2,12 @@
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-10
-title: 자원 할당(Requst & Limits)
+title: 자원 할당 - Requests, Limits, LimitRange, ResourceQuota
 description: Kubernetes 리소스 관리의 핵심 개념을 정리한 가이드입니다. CPU·메모리 단위, Resource Requests·Limits의 동작 원리, LimitRange 및 ResourceQuota 설정 방법, 그리고 실무에서 활용할 수 있는 최적의 리소스 사용 전략까지 상세히 설명합니다. CKA 준비 및 Kubernetes 운영 환경에서 Pod 스케줄링과 자원 관리의 이해도를 높이고 싶은 개발자에게 도움이 됩니다.
 ---
 
 ---
-## Resource
+## Resource 개요
 
 - `Pod`는 `Node`의 리소스를 소비한다. (CPU/Memory/Disk)
 - `kube-scheduler`는 `Pod`의 리소스 요청과 `Node`의 가용 자원을 비교해 배치함.
@@ -24,12 +24,15 @@ description: Kubernetes 리소스 관리의 핵심 개념을 정리한 가이드
 
 ---
 ## Resource Request
+
+---
 ### 개념
 
-- `Container`/`Pod`가 최소한으로 필요하다고 요구하는 자원량
-- `kube-scheduler`는 `requests`를 기준으로만 `Node`에 `Pod`를 배치함 (즉, 스케줄링의 기준이자, 보장되는 최소 자원)
+- `Container`/`Pod`가 <span class="t-red">최소한으로 필요하다고 요구</span>하는 자원량
+- `kube-scheduler`는 `requests`를 기준으로만 `Node`에 `Pod`를 배치함 (즉, <span class="t-red">스케줄링의 기준</span>이자, 보장되는 최소 자원)
 
-### Yaml
+---
+### Yaml 예시
 
 ```yaml
 apiVersion: v1
@@ -57,9 +60,11 @@ spec:
 
 ---
 ## Resource Limits
+
+---
 ### 개념
 
-- `Container`/`Pod`가 최대로 사용할 수 있는 자원량
+- `Container`/`Pod`가 <span class="t-red">최대로 사용할 수 있는</span> 자원량
 - CPU가 지정된 `limits`의 `cpu` 사용량을 넘길 경우
 	- 스로틀링 발생. 즉, `limits` 이상 사용할 수 없음
 	- 하드웨어 스로틀링처럼 전압이 낮춰지는 것은 아니고, 할당된 CPU time quota를 소진하면, 그 기간이 끝날 때까지 CPU를 받지 못하고 대기 -> 느려지고 성능저하 발생
@@ -70,7 +75,8 @@ spec:
 > [!tip] `memory`의 `limits` 때문에 OOM이 발생한다면, `memory`의 `limits`를 걸지 않으면 되는거 아닌가?
 > -> 꼭 그런 것은 아니다. `memory`의 `limits`는 일종의 안전장치 역할을 한다. 이러한 `limits`를 걸면서 `Pod` 하나를 재시작함으로써 전체 `Node`의 메모리가 부족해 `Node` 전체가 다운되는 상황을 막는 것이다.
 
-### Yaml
+---
+### Yaml 예시
 
 ```yaml
 apiVersion: v1
@@ -98,13 +104,16 @@ spec:
 
 ---
 ## LimitRange
+
+---
 ### 개념
 
-- `Namespace` 내의 `Pod`들의 `requests`/`limits`를 지정하지 않아도 설정한 `LimitRange` 값을 자동으로 적용하게하는 기능
+- `Namespace` 내의 `Pod`들의 `requests`/`limits`를 <span class="t-red">지정하지 않아도</span> `LimitRange`에서 정한 값을 <span class="t-red">자동으로 적용</span>하게하는 기능
 - `Namespace` 단위로 적용하는 기능이다.
 - `Namespace`에 실행되고 있던 기존 `Pod`에는 영향이 없고, 새로 생성되는 `Pod`부터 적용된다.
 
-### Yaml
+---
+### Yaml 예시
 
 ```yaml
 apiVersion: v1
@@ -140,12 +149,15 @@ spec:
 
 ---
 ## ResourceQuota
+
+---
 ### 개념
 
 - `Namespace`에서 배포되는 모든 자원 합계의 상한을 두는 기능
 - `Namespace` 단위로 적용하는 기능이다.
 
-### Yaml
+---
+### Yaml 예시
 
 ```yaml
 apiVersion: v1

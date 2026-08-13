@@ -9,12 +9,29 @@ description: Kubernetes Admission Controller는 API Server로 들어오는 요�
 ---
 ## Admission Controller
 
-> [!warning] - 스케줄링 섹션에 있어서 헷갈릴 수 있는데, Custom Scheduler나 Scheduler Profile은 어디까지나 "`Pod` 스케줄링"을 컨트롤하는 역할이고, 
-> - 이 글에서 다루는 Admission Controller는 스케줄링과정 이전에 "`kube-apiserver`로 들어오는 요청" 자체를 검증, 수정, 차단하는 역할이다.
+> [!warning] Admission Controller vs Scheduler 
+> - 같은 스케줄링 섹션에 있어서 헷갈릴 수 있는데, Custom Scheduler나 Scheduler Profile은 어디까지나 "`Pod` 스케줄링"을 컨트롤하는 역할이고, 
+> - 이 글에서 다루는 Admission Controller는 스케줄링 과정 이전에 <span class="t-red">kube-apiserver로 들어오는 요청 자체를 검증, 수정, 차단하는 역할</span>이다.
 
-### 왜 Admission Controller?
+> [!info] Admission Controller를 Scheduler 주제에서 다루는 이유
+> - `Admission Controller`는 스케줄링 과정의 핵심인 `Pod`에 직접 접근 및 수정을 하고, 결과적으로 스케줄러가 어떤 `Node`를 선택하게 만드는 구조를 결정하는 전처리 역할을 하기 때문
 
-- 우리가 `kubectl`로 `Pod` 생성과 같은 요청을 보내면 요청은 Kubernetes API Server로 전달되고 다음과 같은 단계를 거친다.
+---
+### 개념
+
+<span class="t-red">API Server로 들어오는 요청을 가로채 검증하거나 수정하거나 별도 작업을 수행하는 플러그인</span>이다.
+
+즉, `RBAC` 이후 단계에서 클러스터 보안과 정책 준수 강화를 위해 작동하는 필터라고 볼 수 있다.
+
+예시
+- `latest` 태그 금지
+- root 사용자 실행 금지
+- `PVC`에 기본 `StorageClass` 자동 추가
+
+---
+### Admission Controller 원리
+
+우리가 `kubectl`로 `Pod` 생성과 같은 요청을 보내면 요청은 Kubernetes API Server로 전달되고 다음과 같은 단계를 거친다.
 
 1. Authentication (인증)
 	- 요청을 보낸 사용자가 쿠버네티스 클러스터에 접근할 수 있는 유저인지 확인 (`kubeconfig` 내부 인증서 사용)
@@ -22,19 +39,12 @@ description: Kubernetes Admission Controller는 API Server로 들어오는 요�
 	- 해당 사용자가 그 작업을 수행할 권한이 있는지 `RBAC`(Rule Based Access Control) 규칙으로 판단한다.
 3. `Etcd` 에 반영
 
-- 위 과정으로는 '`latest`이미지 태그 금지', 'root 권한 금지'같은 세부 정책을 구현할 수 없다.
-- 이러한 API 요청 자체를 검증, 수정, 거부하는 기능이 `Admission Controller`이다.
+위 과정으로는 '`latest`이미지 태그 금지', 'root 권한 금지'같은 세부 정책을 구현할 수 없다.
 
-### 개념
+이러한 <span class="t-red">API 요청 자체를 검증, 수정, 거부하는 기능</span>이 `Admission Controller`이다.
 
-- API Server로 들어오는 요청을 가로채 검증하거나 수정하거나 별도 작업을 수행하는 플러그인이다.
-- 즉, `RBAC` 이후 단계에서 클러스터 보안과 정책 준수 강화를 위해 작동하는 필터라고 볼 수 있다.
-- 예시
-	- `latest` 태그 금지
-	- root 사용자 실행 금지
-	- `PVC`에 기본 `StorageClass` 자동 추가
-
-### 종류
+---
+### Admission Controller의 종류
 
 **Validating Admission Controller**
 - 요청을 Validate하여 허용/거부만 한다.
@@ -46,12 +56,12 @@ description: Kubernetes Admission Controller는 API Server로 들어오는 요�
 - 예: `DefaultStorageClass` - `PVC` 생성 시 `StorageClass` 없으면 `StorageClass` 자동 추가
 - cf) Validate, Mutate 둘 다 하는 컨트롤러도 존재한다.
 
-
 > [!tip] **실행 순서**
 > - Mutate Admission Controllerr -> Validate Admission Controller 순서로 실행된다.
 > - 왜? -> Mutate에서 바뀐 내용이 Validate 시점에 반영되어야하기 때문이다.
 
-### 대표 예시 (기본 제공)
+---
+### 대표 예시
 
 - `AlwaysPullImages`
 	- `Pod` 생성 시 항상 이미지를 다시 pull 하도록 강제
@@ -64,6 +74,8 @@ description: Kubernetes Admission Controller는 API Server로 들어오는 요�
 
 ---
 ## Admission Controller 활성화 방법
+
+---
 ### Manual Setup으로 설치했을 경우
 
 ```bash
@@ -95,6 +107,7 @@ sudo systemctl enable kube-apiserver
 
 - 위 명령어로 `kube-apiserver` 바이너리 실행 (예시이므로 명령어 본인 환경에 맞게 변경해서 사용)
 
+---
 ### kubeadm 환경
 
 ```yaml
@@ -119,12 +132,15 @@ spec:
 
 ---
 ## Admission Webhook
+
+---
 ### 개념
 
-- 기존에 정의되어있는 플러그인들이 아니라 커스텀 `Admission Webhook`을 사용하고 싶을 경우 사용하는 방법이다.
+- 기존에 정의되어있는 플러그인들이 아니라 커스텀 `Admission Controller`을 사용하고 싶을 경우 사용하는 방법이다.
 - `Webhook Server`로 요청(`AdmissionReview`)을 보내서 `Webhook Server`에서 요청을 처리하고 결과(Validate의 경우 true/false, Mutate의 경우 바뀐 `patch`)를 받는 방식이다.
 	- `Webhook Server`의 경우 클러스터 밖에 놓든, 안에(`Deployment`+`Service`) 놓든 상관없다. 또한, 요청을 받고 가공해서 응답할 수 있는 API 서버라면, `Spring`으로 개발하든 `FastAPI`로 개발하든 `Go`로 개발하든 상관없다.
 
+---
 ### 동작 흐름
 
 1. 사용자가 요청(`Pod`, `PVC` 등) 생성
@@ -134,6 +150,7 @@ spec:
 5. `Webhook Server`가 JSON 요청(`AdmissionReview`)을 받고 판단 후 응답
 6. 허용되면 etcd로 저장되고 객체 생성, 거부되면 에러 메시지 출력
 
+---
 ### 구성 방법
 
 1. `Webhook Server` 배포
@@ -201,12 +218,6 @@ webhooks:
 		- `caBundle`: API 서버가 웹훅 서버의 TLS 인증서를 신뢰하도록 하는 CA 인증서의 Base64 인코딩 값 (필수 - https 만 가능학고, http 불가능)
 	- `rules`: 여기에 규칙 설정
 		- 자세한 옵션 https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#what-are-admission-webhooks 참조
-
----
-## Admission Controller를 Scheduler 주제에서 다루는 이유
-
-- `Admission Controller`는 스케줄링 과정의 핵심인 `Pod`에 직접 접근 및 수정을 하고, 결과적으로 스케줄러가 어떤 `Node`를 선택하게 만드는 구조를 결정하는 전처리 역할을 하기 때문
-
 
 ---
 ## 레퍼런스

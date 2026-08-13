@@ -1,24 +1,29 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-08
-title: Labels, Selectors
+title: Labels, Selectors, Annotation
 description: Kubernetes의 Labels와 Selectors 개념을 쉽게 설명한 가이드입니다. Label로 객체에 속성을 부여하고 Selector로 Pod, Service, ReplicaSet 등을 필터링하는 방법과 올바른 matchLabels 설정 기준을 명확히 정리했습니다. Annotation과의 차이까지 포함한 Kubernetes 메타데이터 이해에 도움이 되는 문서입니다.
 ---
 
 ---
 ## Labels, Selectors
+
+---
 ### 개념
 
 - `labels`: 객체(`Pod`, `Service` 등)에 붙이는 속성(Key-Value)
 - `selectors`: `labels`를 기준으로 객체를 필터링하는 방법
-	- AND 연산 - 여러 `Selectors` 조건이 있으면 모두 만족하는 객체 찾음
+	- AND 연산이다.
+		- 여러 `Selectors` 조건이 있으면 모두 만족하는 객체 찾음
 
+---
 ### 왜 필요?
 
 - Kubernetes에서는 수많은 `Pod`, `Service`, `ReplicaSet`, `Deployment` 객체들이 생긴다. 이 객체들을 역할별로 묶고, 특정 조건에 맞는 객체만 조회하거나, 이 객체들 사이의 연결을 만드려면 `labels`와 `selectors`가 필요하다.
 
-### 역할
+---
+### 사용 예시시
 
 ```bash
 kubectl get pods --selector app=myapp
