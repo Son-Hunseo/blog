@@ -7,7 +7,7 @@ image: /img/posts/06-Peer-Learning/05-llm-serving-study-week1/llm-serving-book.j
 ---
 
 ---
-# CH1. Inroduction to Model Serving and Optimization
+## CH1. Inroduction to Model Serving and Optimization
 
 ---
 ### Model Serving Optimization
