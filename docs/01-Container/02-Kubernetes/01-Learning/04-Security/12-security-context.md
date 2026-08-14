@@ -7,14 +7,19 @@ description: 쿠버네티스(Kubernetes)에서 Pod와 컨테이너의 보안 권
 ---
 
 ---
-> [!info] Docker Security에 대한 사전 지식이[Docker Security](../../../01-Docker/01-Docker-Security.md)))))) 글 참조
+> [!info] Docker Security에 대한 사전 지식이 필요하다. [Docker Security](../../../01-Docker/01-Docker-Security.md) 글 참조
 
+---
 ## Security Context
+
+---
 ### 개념
 
 - 쿠버네티스의 `securityContext`는 `Pod`나 컨테이너의 권한 및 접근 제어 설정을 정의하는 필드이다.
 - Docker에서 사용자와 권한을 관리하기 위해 `docker run --user`나 `--cap-add` 옵션을 사용하는 것과 유사한 기능이다.
 	- 프로세스를 실행할 사용자 ID 설정, Linux Capabilities 추가/삭제 등
+
+---
 ### 설정 방법
 
 - `securityContext`는 `Pod`레벨, 컨테이너 레벨 모두에서 구성할 수 있다.

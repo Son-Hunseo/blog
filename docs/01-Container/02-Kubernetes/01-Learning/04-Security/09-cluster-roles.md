@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-25
@@ -8,6 +8,8 @@ description: Kubernetes RBAC의 핵심인 ClusterRole과 ClusterRoleBinding의 �
 
 ---
 ## 범위별 리소스의 종류
+
+---
 ### 네임스페이스 범위 리소스 (Namespaced Resource)
 
 ```bash
@@ -19,8 +21,7 @@ kubectl api-resources --namespaced=true
 - 예시
 	- `Pod`, `Deployment`, `Service`, `Job`, `ConfigMap`, `Secret`, `Role`, `RoleBindings`
 
-
-
+---
 ### 클러스터 범위 리소스 (Cluster Scoped Resource)
 
 ```bash
@@ -33,6 +34,8 @@ kubectl api-resources --namespaced=false
 
 ---
 ## Cluster Role
+
+---
 ### 개념
 
 - `ClusterRole`은 `Role`과 유사하지만, 클러스터 범위의 리소스(ex: `Node`)에 대한 권한을 정의할 때 사용한다.
@@ -40,6 +43,7 @@ kubectl api-resources --namespaced=false
 	- 노드 생성, 삭제, 조회
 	- PV 생성, 삭제
 
+---
 ### YAML
 
 ```yaml
@@ -55,11 +59,14 @@ rules:
 
 ---
 ## Cluster Role Binding
+
+---
 ### 개념
 
 - `ClusterRoleBinding`은 권한을 사용하는 User와 `ClusterRole`을 연결해주는 역할을 한다.
 - 이를 통해 특정 User에게 클러스터 범위 리소스에 대한 권한을 부여할 수 있다.
 
+---
 ### YAML
 
 ```yaml

@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Container/02-Kubernetes/01-Learning/06-Operate/02-kubernetes-versions/version1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-19

@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-22
@@ -7,10 +7,12 @@ description: 쿠버네티스(Kubernetes) 클러스터 구축을 위한 OpenSSL �
 ---
 
 ---
-> [!warning] - `kubeadm`으로 클러스터를 설치할 경우 모든 과정이 자동으로 이루어진다.
+> [!warning] 엥? 나는 이런 과정으로 클러스터 구축한 적 없는데?
+> - `kubeadm`으로 클러스터를 설치할 경우 모든 과정이 자동으로 이루어진다.
 > - 아래 내용은 수동으로 인증서를 발급하는 방법이다.
 > - 여러 발급 방법이 있지만 아래는 대표적인 `openssl`로 발급받는 방법이다.
 
+---
 ## CA
 
 **1. 개인키(Private Key) 생성**
@@ -45,6 +47,8 @@ openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt
 
 ---
 ## Client
+
+---
 ### User(Admin)
 
 **1. 개인키 생성**
@@ -77,6 +81,7 @@ openssl x509 -req -in admin.csr -CA ca.crt -CAkey ca.key -out admin.crt
 - 보통 사용자의 홈 디렉토리 내의 `.kube` 디렉토리에 위치한다. (따로 설정 가능)
 	- `~/.kube/admin.crt`, `~/.kube/admin.key`
 
+---
 ### Component (`kube-scheduler`, `kube-controller-manager`)
 
 **1. 개인키 생성**
@@ -107,10 +112,12 @@ openssl x509 -req -in scheduler.csr -CA ca.crt -CAkey ca.key -out scheduler.crt
 - 다른 컴포넌트의 경우 `scheduler.crt`를 `controller-manager.crt` 등으로 바꾼다.
 - `kube-scheduler`, `kube-controller-manager`의 경우에는 보통 마스터 노드의 `/etc/kubernetes/pki` 디렉토리에 저장한다. (따로 설정 가능)
 
-> [!warning] 과거에는 `kube-proxy`도 `kube-scheduler`와 `kube-controller-manager`와 같은 방식으로 인증서를 발급받았지만, 현재는 `kube-proxy`만 TLS Bootstrap과정을 통해 인증된다. (이에 대해 자세히 언급하는건 나중에 시간될 때 정리)
+> cf) 과거에는 `kube-proxy`도 `kube-scheduler`와 `kube-controller-manager`와 같은 방식으로 인증서를 발급받았지만, 현재는 `kube-proxy`만 TLS Bootstrap과정을 통해 인증된다. (이에 대해 자세히 언급하는건 나중에 시간될 때 정리)
 
 ---
 ## Server
+
+---
 ### ETCD
 
 **1. 개인키 생성**
@@ -135,7 +142,8 @@ openssl x509 -req -in etcd-server.csr -CA ca.crt -CAkey ca.key -out etcd-server.
 
 > [!info] `ETCD`를 HA로 구성할 경우, `Peer Cert`를 추가로 생성해서 `ETCD` `Static Pod` yaml에 `Server Cert`와 `Peer Cert`의 경로를 각각 지정해주면 된다.
 
-### Kube-Apiserver
+---
+### kube-apiserver
 
 - `kube-apiserver`는 여러 이름(DNS, IP)으로 호출되므로 SAN(Subject Alternative Names) 설정이 필수이다.
 	- CN 하나로 안된다는 말이다.
@@ -179,7 +187,8 @@ openssl x509 -req -in apiserver.csr -CA ca.crt -CAkey ca.key -extensions v3_req 
 
 - 인증서와 키의 위치는 보통 `/etc/kubernetes/pki`에 저장하면된다. (수정 가능)
 
-### Kubelet
+---
+### kubelet
 
 - 비슷한 과정을 많이 반복했으니, 자세한 설명은 생략
 - `CN`은 노드 이름으로 설정

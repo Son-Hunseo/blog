@@ -8,6 +8,8 @@ description: Kubernetes 클러스터와 상호작용하는 핵심 경로인 API 
 
 ---
 ## API Groups
+
+---
 ### Kubernetes API 그룹
 
 ![api-group1](assets/07-api-groups/api-group1.png)
@@ -19,6 +21,7 @@ description: Kubernetes 클러스터와 상호작용하는 핵심 경로인 API 
 	- `/logs`: 서드파티 로깅 애플리케이션 통합 용도
 - 여기서 클러스터의 기능을 담당하는 API는 크게 `Core`그룹(`/api`)과 `Named`그룹(`/apis`)로 나뉜다.
 
+---
 ### Core Group
 
 ![api-group2](assets/07-api-groups/api-group2.png)
@@ -37,7 +40,7 @@ description: Kubernetes 클러스터와 상호작용하는 핵심 경로인 API 
     - `ConfigMaps`, `Secrets`
     - `Services`
 
-
+---
 ### Named Group
 
 ![api-group3](assets/07-api-groups/api-group3.png)
@@ -55,6 +58,7 @@ description: Kubernetes 클러스터와 상호작용하는 핵심 경로인 API 
         - `CertificateSigningRequests` 
     - 그 외 `/storage`, `/authentication`, `/authorization` 등의 다양한 그룹 존재한다.
 
+---
 ### Verbs
 
 - 각 API 그룹 아래에는 리소스가 있고, 각 리소스에 대해 수행할 수 있는 `Verbs`가 정의되어 있다.
@@ -66,12 +70,14 @@ description: Kubernetes 클러스터와 상호작용하는 핵심 경로인 API 
     - `update` (수정)
     - `watch` (변경 감지)
 
-> [!tip] - Kubernetes API 레퍼런스 문서를 보면 각 오브젝트의 그룹 정보를 확인할 수 있다.
-> 	- 예: Deployment를 선택하면 그룹이 `apps/v1`임을 확인 가능
+> [!tip] Kubernetes API 레퍼런스 문서를 보면 각 오브젝트의 그룹 정보를 확인할 수 있다.
+> - 예: Deployment를 선택하면 그룹이 `apps/v1`임을 확인 가능
 
 ---
 ## kubectl proxy
-### 왜?
+
+---
+### 왜 사용?
 
 ```bash
 curl https://kube-apiserver:6443/apis \
@@ -93,6 +99,7 @@ curl http://127.0.0.1:8001/apis
 - 이 때, `kubectl proxy` 라고 명령어를 입력하면, 로컬 포트 8001에서 사용자의 `KubeConfig`로 인증 절차를 대신해주는 프록시 서버가 열린다.
 - 이후 해당 프록시 서버로 요청을 보내면 편하게 API 요청을 보낼 수 있다.
 
+---
 ### `kube-proxy` vs `kubectl proxy`
 
 | **구분**            | **역할**       | **설명**                                                        |

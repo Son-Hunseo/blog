@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Container/02-Kubernetes/01-Learning/04-Security/02-tls/TLS1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-21
@@ -8,14 +8,17 @@ description: 쿠버네티스(Kubernetes) 클러스터 내부의 TLS(Transport La
 
 ---
 ## Kubernetes에서의 TLS 통신
+
+---
 ### 개념
 
 ![TLS1](assets/02-tls/TLS1.png)
 
-- 쿠버네티스는 '`Node` to `Node`', 'User to `kube-apiserver'', '`kube-apiserver` to kube-sceduler`' 등 모든 컴포넌트 간 통신을 TLS로 한다.
+- 쿠버네티스는 'Node to Node', 'User to kube-apiserver', 'kube-apiserver to kube-sceduler' 등 <span class="t-red">모든 컴포넌트 간 통신을 TLS</span>로 한다.
 - 여기서 의문이 들 수 있다. '클러스터 내부인데 굳이 내부안에서 TLS 같은 보안 통신을 할 필요가 있나?'
-- 이러한 보안 통신을 하는 이유는 쿠버네티스는 이미 해커가 클러스터 내부에 들어와있다는 전제로 모든 것을 신뢰하지 않는 'Zero Trust' 보안 모델을 채택하기 때문이다.
+- 이러한 보안 통신을 하는 이유는 쿠버네티스는 이미 해커가 클러스터 내부에 들어와있다는 전제로 모든 것을 신뢰하지 않는 '<span class="t-red">Zero Trust</span>' 보안 모델을 채택하기 때문이다.
 
+---
 ### 흐름도
 
 ![TLS2](assets/02-tls/TLS2.png)
@@ -31,7 +34,8 @@ description: 쿠버네티스(Kubernetes) 클러스터 내부의 TLS(Transport La
 - 클라이언트가 서버에 접근할 때 본인의 자격을 증명하는데 사용한다. (CSR을 서버로 보냈었고 이를 승인받아서 CA로부터 서명받은 인증서가 있기 때문에 클러스터에 접근할 수 있어요!)
 - 예: User, `kube-scheduler`, `kube-controller-manager`, `kube-proxy`
 
-> [!info] - 일반적인 웹 환경을 생각해보면 클라이언트의 자격 증명을 하는 '클라이언트 인증서' 조금 낯설 수 있다.
+> [!info] 클라이언트 인증서??
+> - 일반적인 웹 환경을 생각해보면 클라이언트의 자격 증명을 하는 '클라이언트 인증서' 조금 낯설 수 있다.
 > - 왜냐하면, 일반적인 웹 페이지는 보통 클라이언트의 자격 증명을 Id/pw 로 하기 때문이다.
 > - 우리에게 익숙한 인증서 기반 클라이언트 자격 증명이 존재하는데, 은행이나 공공기관에서 사용되는 '공인인증서'를 떠올려보면 된다. (공인인증서는 과거의 TLS와 같은 RSA를 사용하였다)
 > - 쿠버네티스는 이러한 클라이언트 자격증명을 '클라이언트 인증서'로 하는 것이다.
@@ -40,14 +44,12 @@ description: 쿠버네티스(Kubernetes) 클러스터 내부의 TLS(Transport La
 - CA가 본인이 신뢰할만한 CA임을 증명하는 인증서
 - CA는 모든 서버/클라이언트의 인증서를 서명한다.
 
-> [!info] 여기서 의문이 들 수 있다. 엥? CA가 클러스터 내부에 있다고?
->
+> [!info] 엥? CA가 클러스터 내부에 있다고?
 > - 일반적인 웹 환경에서는 몇몇 공인된 회사들이 CA역할을 하며 인증서를 발급한다.
 > - 하지만, 쿠버네티스 클러스터 내부에서는 클러스터가 설치될 때(by `kubeadm`) `/etc/kubernetes/pki/` 폴더 내부에 `ca.crt`와 `ca.key`를 생성하여 CA를 만든다.
 > - 해당 CA가 모든 서버/클라이언트 인증서에 서명하는 것이다.
 
-> [!info] 그러면 해커가 마스터 노드에 침입해서 `ca.key`를 탈취하면요? (이러면 서명을 위조하여 가짜 인증서를 만들 수 있게 됨)
->
+> [!info] 그러면 `ca.key`를 탈취되면요? (이러면 서명을 위조하여 가짜 인증서를 만들 수 있게 됨)
 > - 일반적으로는 `/etc/kubernetes/pki/ca.key`는 `600`(소유자만 읽기/쓰기 가능)으로 설정되어있고 소유자는 `root`이다.
 > - 즉, 해커가 `root` 권한을 얻지 못한다면 `ca.key`를 얻을 수 없다.
 > - 근데, 마스터 노드에 침입할 정도라면 `root` 권한도  얻을 수 있지 않을까?
@@ -71,9 +73,10 @@ description: 쿠버네티스(Kubernetes) 클러스터 내부의 TLS(Transport La
 - 원한다면, `etcd` 전용 CA를 별도로 둘 수 있다.
 
 ---
-## (중요) 과정 요약
+## 클라이언트 인증 과정 요약
 
-> [!tip] 1. 유저가 유저 개인키를 생성함
+> [!tip]  클라이언트 인증 과정
+> 1. 유저가 유저 개인키를 생성함
 > 2. 유저 개인키로 CSR을 생성함
 > 	- CSR 구성 요소 (아래 요소들이 다같이 base64로 인코딩 되어 있음)
 > 		- CN(Common Name)값: 유저 이름(이게 RBAC의 사용자 name을 구분하는 기준이다)

@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Container/02-Kubernetes/01-Learning/05-Network/01-cluster-networking/cluster-networking.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-30
@@ -8,15 +8,17 @@ description: 쿠버네티스(Kubernetes) 클러스터 구성을 위한 필수 �
 
 ---
 ## Node 네트워크
+
+---
 ### 모든 노드 공통
 
 - 네트워크 인터페이스: 최소 1개 이상의 네트워크 인터페이스를 가져야한다.
 - IP 주소: 노드가 가진 네트워크 인터페이스에 IP가 할당되어 있어야 한다.
 - 고유한 식별자
-	- Hostname: 클러스터 내에서 유일해야한다. (cf: 이건 proxmox에서도 그랬음[Proxmox 호스트네임 주의점](../../../../05-HomeLab/02-Proxmox/04-proxmox-cluster.md#주의점))))))
+	- Hostname: 클러스터 내에서 유일해야한다. (cf : 이건 proxmox에서도 그랬음 - 참고 : [Proxmox 호스트네임 주의점](../../../../05-HomeLab/02-Proxmox/04-proxmox-cluster.md#주의점))
 	- Mac 주소: 클러스터 내에서 유일해야한다.
 
-> [!info] - 위의 요구사항들을 보고 엥? 너무 당연한 얘기들 아닌가? 자동으로 되는거 아닌가? 라고 생각할 수 있다.
+> [!info] 아니, 신경안써도 자동으로 되는 당연한 설정들 아닌가?
 > - 하지만, 가장 많이 겪는 오류 중 하나이다.
 > - 예를들어 VM을 Clone 하여 노드를 생성할 경우, MAC 주소나 Hostname이 중복되어 안되는 경우가 매우 많다. (매우 주의)
 
@@ -24,6 +26,8 @@ description: 쿠버네티스(Kubernetes) 클러스터 구성을 위한 필수 �
 ## 포트 구성
 
 ![cluster-networking1](assets/01-cluster-networking/cluster-networking.jpg)
+
+---
 ### 마스터 노드
 
 | **프로토콜** | **포트 범위**     | **프로세스/컴포넌트**           | **설명**                                                      |
@@ -34,12 +38,13 @@ description: 쿠버네티스(Kubernetes) 클러스터 구성을 위한 필수 �
 | TCP      | **10259**     | kube-scheduler          | 스케줄러 동작 포트                                                  |
 | TCP      | **10257**     | kube-controller-manager | 컨트롤러 매니저 동작 포트                                              |
 
+---
 ### 워커 노드
 
-|**프로토콜**|**포트 범위**|**프로세스/컴포넌트**|**설명**|
-|---|---|---|---|
-|TCP|**10250**|Kubelet API|마스터 노드(API Server)가 워커 노드의 상태를 확인하고 명령을 내릴 때 사용|
-|TCP|**30000-32767**|NodePort Services|외부 사용자가 배포된 서비스(애플리케이션)에 접근하기 위해 예약된 포트 범위
+| **프로토콜** | **포트 범위**       | **프로세스/컴포넌트**     | **설명**                                          |
+| -------- | --------------- | ----------------- | ----------------------------------------------- |
+| TCP      | **10250**       | Kubelet API       | 마스터 노드(API Server)가 워커 노드의 상태를 확인하고 명령을 내릴 때 사용 |
+| TCP      | **30000-32767** | NodePort Services | 외부 사용자가 배포된 서비스(애플리케이션)에 접근하기 위해 예약된 포트 범위      |
 
 > [!tip] 클러스터를 구성할 때 위 포트들이 열려있는지 확인해야하는 요소
 > 1. 노드 자체 방화벽
@@ -114,7 +119,7 @@ cat /proc/sys/net/ipv4/ip_forward
     - `1`: 활성화 (패킷을 다른 인터페이스로 전달 가능)
     - `0`: 비활성화
 - 쿠버네티스 파드(Pod) 간 통신을 위해 반드시 `1`로 설정되어 있어야 합니다.
-	- 이에 대한 내용 정리[IP 포워딩 활성화](../../../../02-CS/03-Network/01-switching-routing-gateway.md#활성%20방법)))))
+	- 이에 대한 내용 정리 - [IP 포워딩 활성화](../../../../02-CS/03-Network/01-switching-routing-gateway.md#활성%20방법)
 
 ---
 ## 레퍼런스

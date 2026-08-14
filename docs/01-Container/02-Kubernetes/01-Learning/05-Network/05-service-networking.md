@@ -7,10 +7,12 @@ description: Kubernetes Service의 네트워크 원리와 kube-proxy의 역할�
 ---
 
 ---
-> [!info] `Service` 개념 참고 글 [Service](../01-Components/12-service.md)))
+> [!info] `Service` 개념 참고 -> [Service](../01-Components/12-service.md)
 
 ---
 ## Service 네트워크
+
+---
 ### 개념
 
 - `Pod` to `Pod` 통신을 하는 경우는 드물다.
@@ -20,6 +22,7 @@ description: Kubernetes Service의 네트워크 원리와 kube-proxy의 역할�
 	- `ClusterIP`: 클러스터 내부에서만 접근 가능하다. (`Service`의 기본 타입)
 	- `NodePort`: 모든 노드의 특정 포트를 열어 애플리케이션에 대한 접근을 `Service`를 통해 가능하게 한다. (`ClusterIP` 기능 포함)
 
+---
 ### Service는 실체하지 않는다
 
 - `Pod`와 달리 `Service`는 특정 노드에 존재하지 않으며, 프로세스, 네임스페이스, 네트워크 인터페이스가 존재하지 않는다.
@@ -27,6 +30,7 @@ description: Kubernetes Service의 네트워크 원리와 kube-proxy의 역할�
 - `Service`는 실체하는 요소가 아니라 클러스터 전체에 걸친 가상 객체이다.
 - 그러면 이렇게 실체하지도 않는데 `Service`로 보낸 패킷을 알맞게 전달하는걸까?
 
+---
 ### Kube-proxy
 
 - 이렇게 실체하지 않는 `Service`라는 개념이 패킷을 알맞게 전달하는 이유는 `kube-proxy` 덕분이다.
@@ -35,6 +39,7 @@ description: Kubernetes Service의 네트워크 원리와 kube-proxy의 역할�
 	- 새로운 `Service`가 생성되면 `kube-proxy`는 해당 `Service`의 IP로 들어오는 트래픽을 해당하는 `Pod` IP로 전달하기 위한 포워딩 규칙을 각 노드에 생성한다.
 	- 이에 대한 내용을[Kube-proxy](../01-Components/08-kube-proxy.md#service와-kube-proxy의-역할)) 에서 다루었었다.
 
+---
 ### Proxy Mode
 
 - `kube-proxy`가 포워딩 규칙을 각 노드에 생성한다고 했었는데 이러한 규칙을 생성하는데에 몇가지 모드가 있으며 이 모드를 Proxy Mode라고한다.

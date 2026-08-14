@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Container/02-Kubernetes/01-Learning/04-Security/08-authorization/authorization1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-24
@@ -18,6 +18,8 @@ description: Kubernetes 클러스터 인가(Authorization)의 핵심 개념과 �
 
 ---
 ## 쿠버네티스 Authorization(인가) 종류
+
+---
 ### Node
 
 ![authorization1](assets/08-authorization/authorization1.png)
@@ -29,6 +31,7 @@ description: Kubernetes 클러스터 인가(Authorization)의 핵심 개념과 �
 	- 요청을 보낸 주체(노드 혹은 `kubelet`)가 '자신이 관리하는 리소스'에 대한 작업을 요청할 때만 접근을 허용한다.
 	- 즉, NodeA에서 PodA만 실행되고있다면, NodeA의 `kubelet`은 PodA에 대한 권한만 가진다. PodB에 대한 요청은 거부된다. (그럴 일도 없긴 하지만, 최소 권한 원칙)
 
+---
 ### ABAC (레거시)
 
 ![authorization2](assets/08-authorization/authorization2.png)
@@ -56,6 +59,7 @@ description: Kubernetes 클러스터 인가(Authorization)의 핵심 개념과 �
 	- 관리가 어렵다. 보안 정책을 변경하거나 사용자를 추가할 때마다 파일을 수동으로 수정하고 API 서버를 재시작해야한다.
 	- 그래서 지금은 `RBAC`가 표준으로 사용된다.
 
+---
 ### RBAC (표준)
 
 ![authorization3](assets/08-authorization/authorization3.png)
@@ -97,6 +101,7 @@ roleRef:
 - 장점:
 	- 권한 변경이 필요할 때 역할(`Role`)만 수정하면, 해당 역할에 연결된 모든 사용자에게 즉시 반영된다.
 
+---
 ### Webhook
 
 ![authorization4](assets/08-authorization/authorization4.png)

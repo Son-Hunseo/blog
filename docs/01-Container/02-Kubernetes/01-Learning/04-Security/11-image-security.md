@@ -35,6 +35,8 @@ spec:
 
 ---
 ## Private Registry
+
+---
 ### 개념
 
 - 사내 애플리케이션 이미지와 같이 외부에 노출되어서는 안되는 이미지들이 있다.
@@ -43,6 +45,7 @@ spec:
 	- 내부: `HARBOR`, `Dragonfly`
 	- CSP사: `AWS ECR` 등
 
+---
 ### 접근 방법 (Docker registry 예시)
 
 **1. `Secret` 생성**
@@ -75,6 +78,9 @@ spec:
   imagePullSecrets:
   - name: regcred
 ```
+
+> [!tip] `ServiceAccount`도 사용 가능
+> - `Secret`을 `ServiceAccount`에 연결하여 해당 네임스페이스의 모든 Pod들이 `imagePullSecret` 설정 없이 인증하게 하는 방법도 있다.
 
 ---
 ## 레퍼런스

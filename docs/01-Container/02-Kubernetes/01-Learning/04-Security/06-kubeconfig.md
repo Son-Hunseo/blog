@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/01-Container/02-Kubernetes/01-Learning/04-Security/06-kubeconfig/kubeconfig1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-23
@@ -8,7 +8,9 @@ description: KubeConfig 파일의 역할, 구조(Cluster, User, Context), YAML �
 
 ---
 ## KubeConfig
-### 왜?
+
+---
+### 왜 사용?
 
 ```bash
 kubectl get pods \
@@ -25,7 +27,8 @@ kubectl get pods \
 	- 바꾸고싶다면, 환경변수 `KUBECONFIG`에 경로를 등록하자.
 - 클러스터 내부에서도 이 `KubeConfig`가 등록되어있기 때문에 옵션없이 명령어를 사용할 수 있는 것이다. (확인해보면 있음)
 
-### YAML
+---
+### YAML 예시
 
 ![kubeconfig1](assets/06-kubeconfig/kubeconfig1.png)
 
@@ -86,6 +89,8 @@ kubectl config use-context prod-user@production
 
 ---
 ## 추가 옵션
+
+---
 ### 네임스페이스
 
 ```yaml
@@ -99,6 +104,7 @@ contexts:
 
 - 특정 컨텍스트를 사용할 때 기본 네임스페이스를 지정하고 싶다면, `context`에  `namespace` 필드를 추가하면 된다.
 
+---
 ### 인증서 데이터 직접 입력
 
 ```yaml
