@@ -1028,6 +1028,10 @@ services:
     environment:  
       # 컨테이너 안에서는 localhost 가 아니라 서비스 이름으로 Triton 을 찾는다.  
       TRITON_URL: "triton:8000"  
+    volumes:  
+      # 이미지 모델 입력은 파일 경로 문자열로 넘어간다. 이미지를 추가할 때마다  
+      # 재빌드하지 않도록 COPY 된 경로 위에 그대로 덮어 마운트한다.  
+      - ./tests/images:/opt/project/tests/images:ro  
     depends_on:  
       triton:  
         condition: service_healthy  
@@ -1048,7 +1052,7 @@ services:
       retries: 20
 ```
 
-> 아래는 Single 모델 처럼 GPU를 쓰기 위한 설정
+> 아래는 싱글모델 실습 때 했던 것 처럼, GPU를 쓰기 위한 설정이다.
 
 ```python
 # app/worker.py
@@ -1193,7 +1197,11 @@ class ModelManager:
             self.model_engine.delete_worker(id)  
               
         # Download model if not already downloaded  
-        # Skip the downlaod implementation for simplicity        # if not self.model_store.model_exists(model_id):        #     self.model_store.download_model(model_id)                # Create and cache new model worker  
+        # Skip the downlaod implementation for simplicity        
+        # if not self.model_store.model_exists(model_id):        
+        #     self.model_store.download_model(model_id)   
+                     
+        # Create and cache new model worker  
         self.model_cache[model_id] = self.model_engine.create_worker(model_metadata)  
         return self.model_cache[model_id]  
       
@@ -1202,4 +1210,356 @@ class ModelManager:
                 for model_id, worker in self.model_cache.items()}
 ```
 
-- 
+- `get_model_worker`
+	- 요청한 모델의 Worker를 가져오는 메서드
+	- 모델이 이미 캐시에 있다면
+		- 방금 사용했으니 LRU 순서의 맨 뒤로 이동 (LRU : 가장 오랫동안 사용하지 않은 것을 먼저 삭제)
+		- 기존 Workeer 반환
+	- 모델이 캐시에 없다면
+		- `ModelStore`에서 해당 모델 정보 조회
+			- 존재하지 않는 모델이면 `None`
+		- 캐시가 꽉 찼다면
+			- LRU에서 가장 높은 순서 모델 제거 (가장 오랫동안 사용하지 않은 모델)
+			- 실제 `ModelEngine`에서도 Worker 삭제
+		- 새로운 Worker 생성 및 캐시에 저장 후 생성한 Worker 리턴
+	- `model_engine.create_worker()` 메서드에 대한 설명은 아래에서 이어서 진행
+- `list_loaded_models`
+	- 현재 캐시에 있는 모델 목록을 반환
+
+> [!tip] ModelManager가 가장 중요한 이유
+> - ModelManager이 '어떤 모델을 RAM/VRAM/HBM에 올려둘 것인가?'를 결정하는 역할이기 때문
+
+```python
+# app/engine.py
+class ModelEngine:
+	...
+	def create_worker(self, model_metadata: ModelMetadata) -> ModelWorker:  
+	    if model_metadata.id not in self.workers:  
+	        if model_metadata.framework == "transformers":  
+	            self.workers[model_metadata.id] = TransformerWorker(model_metadata)  
+	        elif model_metadata.framework == "torchvision":  
+	            self.workers[model_metadata.id] = TorchVisionWorker(model_metadata)  
+	        elif model_metadata.framework == "triton":  
+	            self.workers[model_metadata.id] = TritonWorker(model_metadata)  
+	        else:  
+	            raise ValueError(f"Unsupported framework: {model_metadata.framework}")  
+	    return self.workers[model_metadata.id]
+```
+
+- ModelEngine은 프레임워크별 worker를 생성한다.
+- 여기서 알 수 있는 점은 다양한 모델 유형을 지원하기 위해서 서로 다른 모델 백엔드가 필요하다는 점이다. (`TransformerWorker`, `TorchVisionWorker`, `TritonWorker`)
+
+```python
+# app/worker.py
+class ModelWorker(ABC):  
+    def __init__(self, model_metadata):  
+        self.model_metadata = model_metadata  
+        self.model: Optional[torch.nn.Module] = None  
+        # 단일 모델 서빙과 같은 규칙. GPU 가 보이면 쓰고, 없으면 CPU 로 떨어진다.  
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"  
+        self._load_model()  
+      
+    @abstractmethod  
+    def _load_model(self):  
+        pass  
+    @abstractmethod  
+    def predict(self, input_data: Any) -> Dict[str, Any]:  
+        pass
+        
+class TransformerWorker(ModelWorker):
+	...
+
+class TorchVisionWorker(ModelWorker):
+	...
+	
+class TritonWorker(ModelWorker):
+	...
+```
+
+- 크게 내용 자체를 뜯어볼 필요는 없고, `ModelWorker`라는 인터페이스를 선언하고, 하위 구현체들이 각자의 방법으로 `_load_model`, `predict` 메서드를 구현하고 있다는 점이다.
+
+> [!tip] 서빙 프레임워크
+> - 실제로는 다양한 모델의 로드와 실행을 위한 백엔드 지원을 유지하고, 모델 메타데이터와 구성을 관리하며, 스레드 안전성과 동시성을 조율하는 일이 복잡하고 오류가 발생하기 쉽다. 
+> - 이런 이유로, 이러한 책임을 전용 멀티 모드 서빙 프레임워크에 위임하는 것이 더 효율적인 경우가 많다.
+> - 이를 통해 해당 프레임워크를 비즈니스 애플리케이션에 통합하는 데 본인의 노력을 집중할 수 있다.
+
+---
+#### 모델 리스트 조회하기
+
+> [!info] 모델 리스트 조회하기
+> 
+> - 요청
+>   
+> ```
+> GET /models
+> ```
+> 
+> - 응답
+> 
+> ```
+> {
+>   "available_models": {
+>     "550e8400-e29b-41d4-a716-446655440000": {
+>       "id": "550e8400-e29b-41d4-a716-446655440000",
+>       "name": "distilbert-base-uncased-finetuned-sst-2-english",
+>       "type": "text",
+>       "framework": "transformers",
+>       "version": "1.0.0",
+>       "description": "Sentiment analysis model"
+>     },
+>     "6ba7b810-9dad-11d1-80b4-00c04fd430c8": {
+>       "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+>       "name": "mrm8488/bert-tiny-finetuned-sms-spam-detection",
+>       "type": "text",
+>       "framework": "transformers",
+>       "version": "1.0.0",
+>       "description": "Spam detection model"
+>     },
+>     "7c9e6679-7425-40de-944b-e07fc1f90ae7": {
+>       "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+>       "name": "pytorch/vision:mobilenet_v2",
+>       "type": "image",
+>       "framework": "torchvision",
+>       "version": "1.0.0",
+>       "description": "Image classification model"
+>     },
+>     "8ba7b810-9dad-11d1-80b4-00c04fd430c9": {
+>       "id": "8ba7b810-9dad-11d1-80b4-00c04fd430c9",
+>       "name": "densenet_onnx",
+>       "type": "image",
+>       "framework": "triton",
+>       "version": "1.0.0",
+>       "description": "DenseNet image classification model served via Triton"
+>     }
+>   },
+>   "loaded_models": {}
+> }
+> ```
+
+- `550e8400-e29b-41d4-a716-446655440000`
+	- 감성 분석 - 영어 문장을 넣으면 negative/positive 2클래스 확률을 반환
+- `6ba7b810-9dad-11d1-80b4-00c04fd430c8`
+	- 스팸 탐지 - 문자열이 스팸인지 2클래스 확률로 반환
+- `7c9e6679-7425-40de-944b-e07fc1f90ae7`
+	- 이미지 분류 - ImageNet 사전학습, 1000 클래스 확률 반환
+- `8ba7b810-9dad-11d1-80b4-00c04fd430c9`
+	- 이미지 분류를 Triton 서버 경유로 수행. 역시 ImageNet 1000 클래스 확률 반환
+
+- `loaded_models`
+	- 현재 메모리(RAM, VRAM, HBM 등)에 어떤 모델이 로드되어 있는지
+
+---
+#### 모델 별 추론
+
+> [!info] 감성 분석
+> 
+> - 요청
+>   
+> ```
+> {
+>   "model_id": "550e8400-e29b-41d4-a716-446655440000",
+>   "input_data": "This movie was great! I really enjoyed it."
+> }
+> ```
+> 
+> - 응답 : 99.998퍼센트 긍정
+> 
+> ```
+> {
+>   "predictions": [
+>     [
+>       0.00011904458369826898,
+>       0.9998809099197388
+>     ]
+>   ]
+> }
+> ```
+
+> [!info] 스팸 예측
+> 
+> - 요청
+>   
+> ```
+> {
+>   "model_id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+>   "input_data": "WIN A FREE IPHONE NOW! CLICK HERE!"
+> }
+> ```
+> 
+> - 응답 : 93.228퍼센트 스팸
+> 
+> ```
+> {
+>   "predictions": [
+>     [
+>       0.9322899580001831,
+>       0.0677100419998169
+>     ]
+>   ]
+> }
+> ```
+
+> [!info] 이미지 분류
+> 
+> ![](assets/06-llm-serving-study-week2/test-cat.png)
+> 
+> - 요청
+>   
+> ```
+> {
+>   "model_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+>   "input_data": "tests/images/cat1.jpg"
+> }
+> ```
+> 
+> - 응답 : TABBY라는 고양이 종 확률이 가장 높게 나왔다.
+> 
+> ```
+> {
+>   "predictions": [
+>     [
+>       0.0005564960883930326,
+>       0.0005307781393639743,
+>       ...
+>     ]
+>   ]
+> }
+> ```
+
+---
+#### Using Triton
+
+![](assets/06-llm-serving-study-week2/triton.png)
+
+이전에 서빙 프레임워크를 사용해서, 관심사를 분리하는 것이 더 좋다고 언급했었다.
+
+이에, 우리가 구축하는 서버에서는 Client의 요청만 처리하고, <span class="t-red">모델들을 관리(LRU를 비롯한 여러 알고리즘으로 모델을 관리)하는 책임을 프레임워크에 위임</span>한다.
+
+이러한 프레임워크 중 하나가 Triton이다.
+
+Triton은 웹 형태로 실행되며 2가지 주요 API를 제공한다.
+- **모델 관리 API: 모델 로드/언로드/설정** (/v2/repository/models/$name/load, /unload)
+- **추론 API: 실제 예측 요청** (/v2/models/$name/infer)
+
+실제로, `app/worker.py`의 `TritonWorker` 클래스를 보면, 다른 Worker 클래스들과 달리, 이러한 요청을 Triton 서버에 요청할 뿐이다.
+
+`TritonWorker`
+-  `_load_model` : 초기화 시 Triton의 management API에 POST 요청을 보내 모델을 로드
+-  `predict` : 실제 추론
+-  `__del__` : 워커 소멸 시 unload API를 호출해 Triton에서 모델을 내려 GPU/CPU 메모리를 회수
+
+> [!info] Triton API 호출
+> - Triton의 경우 이전 이미지 분류 모델처럼 경로를 넣는 것이 아니라, 리사이즈 -> 정규화 -> CHW 변환한 배열을 통째로 보내야한다.
+> - 이에 이러한 과정을 클로드 코드에게 맡기고 실행시켜보았다.
+> 
+> ```
+> 200으로 잘 돌아갔습니다. top-5:
+>
+>    11.5500  285  EGYPTIAN CAT
+>     9.5882  282  TIGER CAT
+>     9.5168  287  LYNX
+>     9.1649  281  TABBY
+>     8.9331  284  SIAMESE CAT
+>
+> 보낸 요청은 이런 형태입니다 (data는 3×224×224 중첩 리스트, 약 15만 개 float):
+>
+> img = Image.open('tests/images/cat1.jpg').convert('RGB').resize((224,224))
+> arr = (np.array(img).astype(np.float32)/255.0).transpose(2,0,1)   # (3,224,224) CHW
+>
+> requests.post('http://localhost:8001/predict', json={
+>     'model_id': '8ba7b810-9dad-11d1-80b4-00c04fd430c9',
+>     'input_data': {'data_0': {'shape': list(arr.shape), 'data': arr.tolist()}},
+> })
+> ```
+
+---
+### Trade-offs in Multi-Model Serving Designs
+
+---
+#### 멀티 모델 서빙 과제
+
+- 모델별 dependency와 framework가 다를 수 있다.
+- model load/unload가 latency spike를 만든다.
+- hot model과 cold model의 traffic 차이가 크다. (메모리에 올라가있는 모델과 그렇지 않은 모델)
+- 모델 cache eviction 정책이 성능과 비용에 직접 영향을 준다.
+- 보안, 격리, observability가 single-model보다 복잡하다.
+
+> [!tip] 가장 큰 과제 - 사용자 경험
+> - Cold start latency
+> 	- 현재 로드되어 있지 않은 모델에 대한 요청이 들어오면 몇 초 ~ 수십 초의 지연이 발생할 수 있다.
+> - Hot model scaling
+> 	- 특정 모델에 갑자기 많은 트래픽이 몰리면, 이 모델을 확장해야하는데 이것은 단순하지 않다.
+> 	- 각 인스턴스가 독립적인 모델 캐시를 가지고 있기 때문에 모델을 여러 인스턴스에 복제하고 라우팅 계층을 업데이트하는 일이 복잡해진다.
+
+---
+#### 과제 해결 방법 1 - 비용 최적화 설계
+
+![](assets/06-llm-serving-study-week2/multi-model-problem-solve1.png)
+
+> <span class="t-red">여러 모델을 추론할 수 있는 인스턴스를 여러 개로 확장</span>하는 구조
+
+**장점**
+-  콜드 스타트 최소화
+	- <span class="t-red">이미 해당 모델이 로드된 인스턴스로 요청을 라우팅</span>
+-  핫 모델 수평 확장
+	- 모델별 레플리카 수를 추적해, <span class="t-red">트래픽이 몰리는 모델은 여러 인스턴스의 메모리에 해당 모델 로드</span>
+-  빈 패킹
+	- 모델들을 최소한의 서버 수에 몰아서 배치해 자원 사용을 최적화 (각 인스턴스의 <span class="t-red">남은 메모리를 고려해 모델들을 꽉꽉 채워넣는 방식</span>)
+
+**단점**
+- 비용 효율은 높지만 트래픽에 사후 대응 하기 때문에 급격한 트래픽 증가 시 latency가 발생하고, 라우팅, 캐시, 스케일링 관리가 복잡함
+
+---
+#### 과제 해결 방법 2 - 지연시간 최적화 설계
+
+![](assets/06-llm-serving-study-week2/multi-model-problem-solve2.png)
+
+> <span class="t-red">싱글 모델 인스턴스를 두고, 요청에 따라 해당 모델 인스턴스로 추론</span>하며, 스케일링도 각자 진행
+
+**장점**
+- 콜드 스타트 지연 없음
+	- 이미 각 모델 별 인스턴스가 최소 1개 이상 존재하므로 콜드 스타트 지연 없음
+- 독립적 확장
+	- 모델별로 따로 스케일 아웃 가능
+- 운영 유연성
+	- 자원 정책을 모델별로 분리 가능
+- 유지보수/트러블슈팅이 상대적으로 쉬움
+	- 캐시 상태 구조가 이전 구조에 비해 단순
+
+**단점**
+- 비용 효율 낮음
+	- 트래픽이 적은 모델도 전용 자원을 계속 점유하므로 낭비가 생김
+
+---
+#### LLM에서의 사용 사례
+
+<span class="t-red">일반적으로 LLM은 보통 연산/메모리 요구량이 커서 싱글 모델 서빙</span>으로 다루지만, 아래 케이스들 처럼 특수한 상황에는 멀티모델 서빙 전략이 유효함
+
+- 프리픽스 캐싱 + 라우팅
+	- 프롬프트 프리픽스가 같은 요청들을 이미 해당 KV 캐시가 채워진 특정 레플리카로 라우팅해 중복 연산을 줄임
+	- ex: 
+		- 프리픽스 o -> 모델 A (KV 캐시 채워짐)
+		- 프리픽스 x -> 모델 B (KV 캐시 없음)
+- 다중 LoRA 어댑터 서빙
+	- 하나의 공유 베이스 모델 위에 여러 LoRA 어댑터를 동적으로 로드/관리
+	- 테넌트별/유즈케이스별 개인화를 메모리 효율적으로 확장
+	- LoRA - Base Model 전체를 따로 나누는게 아니라, 목적에 따라 일부 가중치 변화만 작은 어댑터 형태로 저장하는 방법
+	- ex: 
+		- 고객 A -> 금융 상담용 LoRA
+		- 고객 B -> 법률 상담용 LoRA
+
+---
+## CH4. Model Serving Best Practices
+
+2~3챕터에서 모델이 내부적으로 어떻게 동작하는지를 다뤘다면, 4챕터에서는 실제 프로덕션 LLM 애플리케이션 서빙 시스템의 아키텍처를 다룬다.
+
+다루는 범위는 다음과 같다.
+
+1. 에이전트 애플리케이션
+2. 계층형 레퍼런스 아키텍처
+3. 빌드 vs 클라우드 선택
+4. 핵심 성능 지표
+
+---
+### Model Serving in an Agentic World
+
