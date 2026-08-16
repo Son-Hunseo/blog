@@ -1563,3 +1563,426 @@ Triton은 웹 형태로 실행되며 2가지 주요 API를 제공한다.
 ---
 ### Model Serving in an Agentic World
 
+> 앞선 챕터들에서는 모델들이 '요청 하나에 추론 한 번, 응답 반환' 이 구조였다.
+> 
+> 에이전트 시스템에서는 이 구조가 깨진다.
+> 
+> <span class="t-red">모델이 요청당 한 번이 아니라, 제어 루프 안에서 반복 호출</span>된다.
+> 
+> 그 루프 안에서 정보를 검색하고, 중간 결과를 추론하고, 도구를 실행하고, 출력을 다듬는 과정을 거쳐야 최종 답변이 나온다.
+> 
+> 사용자의 요청 한 번이 아래와 같은 작업들을 요한다.
+> - 다중 LLM 호출
+> - 더 긴 컨텍스트 윈도우
+> - 검색 연산 (RAG)
+> - 메모리 재사용 (CAG)
+> 
+> 이 모든게 복잡성을 증가시킵니다. 결과적으로, <span class="t-red">모델을 효율적으로 실행하는 것을 넘어, 오케스트레이션, 메모리 관리, 시스템 레벨 조정까지 지원해야하는 일</span>이 서빙의 업무가 된다.
+
+---
+#### Knowledge Agent
+
+> 실습 코드 : https://github.com/orca3/llm-model-inference/tree/main/ch04/KnowledgeAgent
+> 
+> Agent의 동작 방식에 대해서는 이미 많이 숙지가 된 부분이기 때문에, Agent 동작 방식의 이해를 위한 위 실습 과정 코드 분석은 생략하겠습니다.
+> 
+> 아래에서는 실습을 제외한 개념적인 부분을 정리하고 넘어가겠습니다.
+> 
+> 짧게 요약 : <span class="t-red">Agent는 안에서 여러 모델, 도구가 실시간으로 상호작용</span>하며 동작하기 때문에, <span class="t-red">고성능, 저지연, 비용 효율적인 서빙</span>이 핵심 조건이다.
+
+![](assets/06-llm-serving-study-week2/agent-flow.png)
+
+**[동작 과정]**
+
+1. 유저 쿼리
+2. LLM으로 요청 날림
+	- 이 요청 대상은 LLM API일 수도 있고, 직접 서빙하는 모델일 수도 있다.
+3. Planner가 plan을 만듬 (2번 요청에 대한 결과 텍스트)
+	- 유저가 요청(Query)을 하였으니 이를 수행하기 위해서는 Action 1, 2, 3이 필요하겠군
+4. Action 1 - Context과 함께 요청을 만들기
+5. Query에 대한 Context를 만들어야한다. (RAG)
+	- Query를 embedding model에 요청하여 벡터로 만든다.
+	- 이 벡터를 RAG system에 있는 여러 context 청크 (텍스트 - 벡터)와 코사인 유사도(혹은 다른 알고리즘으로 유사도 측정)를 비교한다.
+	- 이 청크들 중 필요한 n개를 추출하여 query의 context로 담는다.
+6. 이렇게 만들어진 요청 형태 (Query + Context)를 LLM으로 요청을 날린다.
+	- Query : A가 뭐야?
+	- Context : A는 B이다. A는 C가 아니다. A는 D와 연관이 있다.
+7. 이렇게 요청하고 받은 응답을 최종 응답 형태로 만드는 요청을 LLM으로 요청을 날린다.
+	- 분석 결과 : A는 C가 아니며 D와 연관이 있으며 B이다.
+	- '위 분석결과를 통해 최종 응답을 만들어줘!'
+8. 7번으로 만든 최종 응답을 유저에게 반환한다.
+
+---
+#### RAG vs CAG
+
+| |RAG|CAG|
+|---|---|---|
+|지식 활용|Query마다 관련 문서 검색|Knowledge를 미리 Context/KV Cache에 로드|
+|Query 처리|Query → 검색 → Context → LLM|Query → 캐시된 Context → LLM|
+|장점|동적 정보·최신성에 강함|검색 지연 제거, 반복 연산 감소|
+|단점|검색 latency, 검색 오류, 시스템 복잡도|긴 Context로 인한 메모리/KV Cache 부담|
+|적합한 경우|지식이 자주 바뀌거나 매우 큼|**고정된 Knowledge에 반복 Query**|
+
+---
+### LLM Serving in Enterprise Systems: An Overview
+
+![](assets/06-llm-serving-study-week2/enterprise-overview.png)
+
+> 지금까지의 챕터는 모두 "<span class="t-red">모델을 호스팅하고 실행한다</span>"는 좁은 의미의 서빙이었다.
+> 
+> 이 챕터에서는 그 위에 실제 대규모 프로바이더가 추가로 감당해야하는 것들을 나열한다.
+> 
+> - 인증(authentication)
+> - 과금 정책(pricing)
+> - 리소스 관리
+> - 네트워킹
+> - 최적화
+> - 실험(experimentation, 즉 A/B 테스트 등)
+> - 관측성(observability)
+> - 온콜 지원
+> 
+> 위와 같은 아키텍처링이 어려운 이유는 '기술적인 것 보다 조직적인 것'에 가깝기 때문이다.
+> 
+> - 서로 다른 책임을 가진 여러 팀이 병목이나 과도한 상호 의존성 없이 하나의 진화하는 시스템에 동시에 기여할 수 있어야 함
+> - 빠른 반복(iteration)과 안정성 사이의 균형
+> - 이 모든 걸 비용, 신뢰성, 사용자 경험이라는 제약 안에서 해내야 함
+
+---
+#### 레이어 1 - Public API
+
+```
+Internet
+   ↓
+Authentication
+Rate Limit
+Tenant
+Billing
+Routing
+   ↓
+LLM
+```
+
+**역할**
+- 고객/개발자/내부 서비스가 접하는 외부 인터페이스
+- 네트워킹
+- 인증
+- 과금
+- rate limiting
+- 요청 라우팅 관리
+
+**해결해야할 과제**
+- High concurrency - 수백만 동시 연결 처리 (고동시성)
+- Fair usage and monetization - 쿼터/어뷰징 방지/정확한 과금 (공정 사용·수익화)
+- Low-latency global access - 지역 라우팅·캐싱으로 최근접 리전 서빙 (저지연 글로벌 접근)
+- Security - 인증·테넌트 격리·네트워크 공격 방어 (보안)
+
+---
+#### 레이어 2 - Resource Management
+
+```
+GPU Cluster
+H100
+H200
+B200
+L40S
+...
+
+누구에게 GPU를 줄 것인가?
+몇 대가 필요한가?
+GPU가 놀고 있지는 않은가?
+중요 고객 요청을 우선 처리할 것인가?
+```
+
+**역할**
+- CPU/GPU/메모리/디스크/네트워킹 같은 인프라 하드웨어를 리전 전반에서 관리, 예산/비용 배분 통합
+
+**해결해야할 과제**
+- Capacity planning - 수요 예측 및 과다 프로비저닝 방지(용량 계획)
+- GPU utilization - 데이터센터 전반의 이기종 GPU 풀 고가동률 유지(GPU 활용률)
+- Customer prioritization - 중요 워크로드에 쿼터/예약을 강제하면서 저우선순위는 선점 가능하게 스케줄링(고객 우선순위)
+
+---
+#### 레이어 3 - Model Selection & Orchestration
+
+```
+단순 질문
+ ↓
+Small Model
+
+---
+
+복잡한 Reasoning
+ ↓
+Large Model
+```
+
+**역할**
+- 요청마다 어떤 모델(들)을 쓸지 결정
+- 정확도/지연/비용 균형
+- 여러 모델을 함께 오케스트레이션(스펙큘레이티브 디코딩 speculative decoding , 모델 패밀리 model families 간 라우팅 등)
+
+**해결해야할 과제**
+- Cost–quality trade-offs - 모든 작업에 최대 모델이 필요한 건 아님(예: OpenAI가 기본값으로 gpt-4o-mini 사용) → 쿼리를 이해해서 triaging해야 함(비용-품질 트레이드오프)
+- Load balancing - 모델 풀 전반에 트래픽 분산(로드 밸런싱)
+- Latency-sensitive use cases - 지연에 민감한 케이스엔 더 작고 빠른 모델이나 스펙큘레이티브 디코딩 적용
+
+---
+#### 레이어 4 - Distributed Serving
+
+```
+# 모델이 커지면 GPU 하나에 안 들어감
+예:
+Model Weight = 160 GB
+GPU VRAM = 80 GB
+
+# 그러면 최소한 여러 GPU로 나눠야 함
+GPU 0
+GPU 1
+```
+
+**역할**
+- 분산 실행 인프라 구성
+    - (a) 대형 모델을 위한 분산 호스팅
+    - (b) KV 캐시·프롬프트 캐시·시맨틱 캐시 같은 분산 캐싱으로 중복 연산 감소
+
+**해결해야할 과제**
+- Hardware limitations - 모델 크기가 단일 GPU 메모리 초과(하드웨어 한계)
+- Multi-GPU and multi-node coordination - 멀티GPU/멀티노드가 요청 컨텍스트를 효율적으로 공유해 SLA 유지(코디네이션)
+- Caching for efficiency - KV-캐시 인식 라우팅으로 중복 추론 감소(캐싱 효율)
+
+---
+#### 레이어 5 - Core Inference
+
+```
+Framework 예시:
+	vLLM
+	Triton
+	TensorRT-LLM
+	SGLang
+
+최적화:
+	FlashAttention
+	GEMM
+	PagedAttention
+```
+
+**역할**
+- 모델이 실제로 실행되는 곳
+- vLLM/Triton/TensorRT-LLM/SGLang 같은 서빙 프레임워크 + FlashAttention/GEMM/PagedAttention 같은 최적화 커널을 웹 엔드포인트로 노출
+
+**해결해야할 과제** (CH3에서 다룬 부분)
+- 모델별 dependency와 framework가 다를 수 있다.
+- model load/unload가 latency spike를 만든다.
+- hot model과 cold model의 traffic 차이가 크다.
+- 모델 cache eviction 정책이 성능과 비용에 직접 영향을 준다.
+- 보안, 격리, observability가 single-model보다 복잡하다.
+- **Cold start latency**
+- **Hot model scaling**
+
+---
+#### 레이어 6 - Model Optimization
+
+**역할**
+- 재학습 없이 성능/효율을 높이는 다양한 최적화 기법 적용
+
+**해결해야할 과제**
+- CH 5, 6, 7, 9에서 다룸
+
+---
+#### 레이어 7 - Model & 마무리
+
+**역할**
+- 실제 학습된 모델을 서빙 시스템에 공급
+	- 모델을 내부 학습 파이프라인이나 외부 소스에서 운영 환경으로 이동시킴
+	- 모델을 기능(음성, 추론, 비디오)과 목적(샌드박스, 실험, 실제 운영)에 따라 분류
+	- 모델이 발전함에 따라 추적과 버전 관리를 담당
+
+---
+### Building with an Open Source Stack (K8S)
+
+![](assets/06-llm-serving-study-week2/on-k8s.png)
+
+> 이 챕터에서는 우리가 선호하는 오픈 소스 소프트웨어 구성 요소(Kubernetes, Grafana, Prometheus 등)들을 사용해 엔터프라이즈 모델 서비스 시스템을 구현하는 방법을 다룬다.
+> 
+> 이 챕터의 목표는 하나의 해결책을 제시하는 것이 아니라, <span class="t-red">실용적인 설계 선택을 보여주고, 우리가 직접 서빙 플랫폼을 만들 수 있는 출발점을 제공</span>하는데 있다.
+
+> [!tip] 저자가 예시로 Kubernetes를 선택한 근거
+> 1. 핵심 기능 자체: 배포/스케일링/관리 자동화
+> 2. 거대한 생태계: 그 위에 쌓인 메트릭, 로깅, 네트워킹, 인가(authorization), 하드웨어 관리 등 부가 기능들
+
+---
+#### 퍼블릭 API 구현
+
+**1. FastAPI 채팅 엔드포인트 + 인증 의존성 주입**
+
+```python
+@app.post("/v1/chat/completions")
+async def chat(req: ChatReq, idp=Depends(require_auth)):
+    await rate_limit(idp["tenant"])
+    # select model, route traffic based on tenant information
+```
+
+- FastAPI의 `Depends()`로 인증 로직(`require_auth`)을 엔드포인트에 선언적으로 주입
+- 라우트 핸들러 코드 자체는 "인증된 테넌트 정보(`idp`)를 받아 `rate_limit`를 걸고, 그 테넌트 정보로 모델 선택/트래픽 라우팅을 한다"는 <span class="t-red">비즈니스 로직에만 집중</span>
+
+**2. 인증 방식 : JWT 또는 API 키**
+
+```python
+# authorize request either with JWT or api_key
+async def require_auth(api_key=Depends(verify_api_key), claims=Depends(verify_jwt)):
+    if not api_key and not claims:
+        raise HTTPException(401, "Missing API key or JWT")
+    tenant = claims.get("tenant") if claims else await rds.hget(f"keys:{api_key}", "tenant")
+    if not tenant: raise HTTPException(403, "Unknown tenant")
+    return {"tenant": tenant, "claims": claims, "api_key": api_key}
+```
+
+- JWT
+	- `verify_jwt`가 Authorization: Bearer ... 헤더를 파싱해 RSA 공개키(JWK)로 서명 검증 + audience/만료(verify_exp) 확인 → 토큰 클레임에서 바로 tenant 추출
+- API 키
+	- `verify_api_key`로 받은 키를 Redis(`rds.hget`)에서 조회해 tenant를 역참조
+- 두 인증 방식 모두 최종적으로 "<span class="t-red">테넌트 식별</span>"이라는 같은 목적지로 수렴하는 게 핵심
+	- 테넌트 식별 - 이 요청이 어느 고객/조직/계정 소속인지?
+	- 이후 단계(쿼터 강제, 트래픽 라우팅, 모델 선택)가 전부 이 tenant 값 하나에 의존하기 때문
+
+
+**3. Kubernetes HPA (고동시성 대응)**
+
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: enterprise-model-api-hpa }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, 
+      kind: Deployment, name: enterprise-model-api }
+  minReplicas: 3
+  maxReplicas: 15
+  metrics:
+  - type: Resource
+    resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }
+```
+
+- 평균 CPU 사용률이 70%를 넘으면 Kubernetes가 자동으로 인스턴스를 3개→최대 15개까지 수평 확장
+
+
+**4. Ingress 레벨 rate limiting (공정 사용/어뷰징 방지)**
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # rate limit the traffic to 50 request per second max : 초당 50개 요청 제한
+    nginx.ingress.kubernetes.io/limit-rps: "50"
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "5"
+    nginx.ingress.kubernetes.io/proxy-body-size: "8m"
+spec:
+  rules:
+  - host: api.yourorg.example
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend: {service: { name: enterprise-model-api, port: { number: 80 } } }
+```
+
+- Nginx(또는 Envoy) 인그레스가 초당 50건, 버스트는 5배(순간적으로 최대 250건)까지만 허용하도록 트래픽을 제한
+- (참고) rate limiting이 두 레이어에서 이중으로 걸려 있다
+    1. 애플리케이션 코드 안의 rate_limit(idp["tenant"])(테넌트별 세밀한 쿼터)
+    2. 인그레스의 limit-rps(전체 서비스 단위의 거친 방어선)
+
+---
+#### 모델 선택 구현
+
+> 요구사항에 따라 모델 선택 로직을 어디에 둘 것인가?
+> 
+> 1안) Public API
+> 2안) 별도의 서비스 (미들웨어)
+> 3안) 정적 라우팅 설정
+> 
+> 현재 예시에서는 1안 채택
+
+**1. 기존 엔드포인트에 로직 추가**
+
+```python
+@app.post("/v1/chat/completions")
+async def chat(req: ChatReq, idp=Depends(require_auth)):
+    await rate_limit(idp["tenant"])
+    # choose the right model for the given request
+    ep = choose_endpoint(req.model, idp["tenant"])
+	
+    # basic classifier: use speculation for long outputs, else direct
+    if req.model.draft_enabled and req.max_new_tokens > 1024:
+        draft_ep = config.get_draft_endpoint(req.model)
+        # use draft model for generation, target model for validation
+        gen = speculative_decode(req, 
+                 endpoint_draft=draft_ep, 
+                 endpoint_target=ep)
+    else: # simple pass-through stream 
+         gen = passthrough(ep)
+```
+
+- 아주 기초적인 분류기
+	- 토큰이 1024 이상 AND 해당 모델이 speculative decoding을 지원(`draft_enabled`)하면
+		- speculative decoding - 빠르고 저렴한 모델이 여러 미래 토큰을 생성하고, 더 큰 모델이 대량으로 이를 검증 
+		- 자세하게는 이후 챕터에서 설명
+	- else
+		- 요청을 모델 백엔드로 직접 전달
+- `choose_endpoint`에 대해서는 아래에서 설명
+
+**2. `choose_endpoint()`**
+
+```python
+def choose_endpoint(model: str, tenant: str):
+    cfg = load_routes()
+
+    # policy example: tenant allow-list, cost class, region, canary
+    route = cfg["models"].get(model) or cfg["aliases"].get(model)
+    if not route: raise HTTPException(404, f"Unknown model {model}")
+
+    # weighted canary
+    if "canary" in route and random() < float(route["canary"]["weight"]):
+        return route["canary"]["url"]
+
+    # tenant override
+    route_over = (route.get("tenants") or {}).get(tenant)
+    if route_over: return route_over["url"]
+    return route["url"]
+```
+
+1. 모델/별칭 조회 : 없으면 404
+2. 가중치 기반 카나리(canary) 라우팅:
+    - random() < weight 확률로 신규/실험 버전 엔드포인트로 트래픽 일부를 흘려보냄
+    - 이 체크가 테넌트 오버라이드보다 먼저 실행된다는 점에 주목
+    - 즉 카나리 샘플링은 전체 트래픽(전용 라우팅을 가진 테넌트 포함)에서 무작위로 뽑히도록 설계돼 있어서, 카나리 배포가 특정 고객군에 편향되지 않고 대표성 있는 샘플을 확보
+3. 테넌트별 오버라이드 : 특정 고객에게 전용 엔드포인트(예: 전용 파인튜닝 모델, 전용 용량)가 지정돼 있으면 그걸 사용
+4. 기본 라우트로 폴백
+
+---
+#### 모델 서비스 엔드포인트 구현
+
+앞선 챕터들에서 공부했던, <span class="t-red">'단일 모델 서비스', '멀티 모델 서비스' 구현이 여기서</span> 이루어진다.
+
+<span class="t-red">vLLM, Nvidia Triton, FastAPI</span> 같은 도구들을 활용해 만들 수 있다.
+
+cf) 인스턴스 서빙을 위한 확장성과 네트워크 관리가 부담스럽다면, 모델 서빙 라이브러리인 Ray Serve를 사용하는 것도 방법이다. (다음 여러 챕터에서 사용됨)
+
+> 구현의 경우 앞선 CH3 때 했던 것들 (싱글 모델 서비스, 멀티 모델 서비스) 참고
+
+---
+### Building with a Cloud Vendor
+
+> 오픈소스 스택 (Kubernetes + Ray Serve + vLLM)으로 구현을 해본 앞선 챕터와 대비해서, 여기서는 완전 관리형 클라우드로 구현하는 방법을 다룬다.
+> 
+> AWS SageMaker를 사용
+> 
+> **목적**
+> - SageMaker를 단계별로 조작하는 법(하우투 튜토리얼)을 가르치려는 게 아니라, 클라우드 벤더들이 서빙 옵션을 설계하는 근본 논리를 이해시키는 게 목적
+> - SageMaker는 하나의 구체적 예시일 뿐이고, 이 논리를 이해하면 다른 벤더(GCP Vertex AI, Azure ML 등)의 유사한 스펙트럼도 스스로 판단할 수 있게 하려는 의도
+
+---
+#### Amazon Bedrock
+
+
