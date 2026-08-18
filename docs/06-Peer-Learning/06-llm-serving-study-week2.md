@@ -8,6 +8,9 @@ image: /img/posts/06-Peer-Learning/05-llm-serving-study-week1/llm-serving-book.j
 ---
 ## CH3. Model Serving System Design: A Deep Dive
 
+---
+### 개요
+
 > 이 장의 목표는 특정 프레임워크(vLLM, Triton 등)을 바로 다루기보다, from scratch로 서빙 시스템을 직접 만들어보면서 원리를 체득한다.
 > 
 > 이러한 원리 파악을 바탕으로 추후 어떠한 서빙 프레임워크가 출시되더라도 상황에 맞게 합리적인 판단을 하기 위함이다.
@@ -1550,6 +1553,9 @@ Triton은 웹 형태로 실행되며 2가지 주요 API를 제공한다.
 
 ---
 ## CH4. Model Serving Best Practices
+
+---
+### 개요
 
 2~3챕터에서 모델이 내부적으로 어떻게 동작하는지를 다뤘다면, 4챕터에서는 실제 프로덕션 LLM 애플리케이션 서빙 시스템의 아키텍처를 다룬다.
 
