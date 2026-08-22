@@ -38,6 +38,7 @@ npm run clear      # Docusaurus 캐시 삭제
 - **src/theme/** - Docusaurus 테마 오버라이드
   - `DocCard/` - 카테고리 카드 (항목 개수 표시)
   - `DocItem/Layout/` - 문서 레이아웃 (날짜 및 댓글 추가)
+  - `DocItem/Paginator/` - 이전/다음 네비게이션 (카테고리 index.mdx 페이지 건너뜀)
   - `DocSidebar/` - 사이드바 (카테고리별 글 개수 표시)
 - **plugins/gather-meta-plugin.js** - 포스트 메타데이터 수집 커스텀 플러그인
 - **.github/** - 배포 워크플로(`workflows/build-push-and-bump-tag.yaml`)와 이미지 태그 계산 스크립트(`scripts/calc_next_tag.py`)
@@ -56,7 +57,7 @@ npm run clear      # Docusaurus 캐시 삭제
 **메타데이터 플러그인** (`plugins/gather-meta-plugin.js`): 모든 문서를 스캔하여 프론트매터를 추출하고, `recentPosts`와 `postsByPath` 전역 데이터를 컴포넌트에 제공합니다.
 
 **테마 커스터마이징**:
-- DocItem: 각 포스트에 날짜 표시 및 Giscus 댓글 추가
+- DocItem: 각 포스트에 날짜 표시 및 Giscus 댓글 추가, 이전/다음 네비게이션에서 카테고리 index 페이지 제외
 - DocCard: 카테고리 카드에 총 항목 개수 표시
 - DocSidebar: 카테고리 이름 옆에 글 개수 표시 (예: `Kubernetes (13)`)
 

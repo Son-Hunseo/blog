@@ -52,6 +52,7 @@ son-blog/
 │       ├── DocCard/               # 문서 카드 커스터마이징
 │       ├── DocItem/Layout/        # 문서 레이아웃 (댓글 추가)
 │       ├── DocItem/Content/       # 문서 콘텐츠 (제목 아래 날짜 표시)
+│       ├── DocItem/Paginator/     # 이전/다음 네비게이션 (index.mdx 제외)
 │       └── DocSidebar/            # 사이드바 (글 개수 표시)
 ├── plugins/
 │   └── gather-meta-plugin.js      # 커스텀 플러그인
@@ -425,6 +426,36 @@ const addCountToItems = (items) => {
 };
 ```
 
+### 6.5 DocItem/Paginator/index.js
+
+**변경 내용:**
+- 글 하단 이전/다음 네비게이션에서 카테고리 목록 페이지(`index.mdx`)를 건너뛰도록 재계산
+- 기본 페이지네이션은 사이드바 순서를 그대로 따라가서 index 페이지가 이전/다음 대상으로 잡히는 문제가 있음. 프론트매터(`pagination_prev/next: null`)는 해당 페이지 "자신의" 페이지네이터만 없앨 뿐, 다른 글의 대상 목록에서 빼주지는 못하므로 Eject 방식으로 대체
+- `useDocsSidebar()`로 사이드바 트리를 평탄화해 `link` 타입만 수집 (카테고리 링크로 붙은 index.mdx는 category 항목이라 자연히 제외), docId가 `index`로 끝나는 문서도 제외
+- 현재 문서를 목록에서 못 찾으면(= index 페이지) 페이지네이터를 렌더링하지 않음
+
+```jsx
+export default function DocItemPaginator() {
+  const {metadata} = useDoc();
+  const sidebar = useDocsSidebar();
+  if (!sidebar) return null;
+
+  const docLinks = flattenDocLinks(sidebar.items);  // index 페이지 제외한 글 목록
+  const currentIndex = docLinks.findIndex(
+    (item) => item.permalink === metadata.permalink,
+  );
+  if (currentIndex === -1) return null;
+
+  return (
+    <DocPaginator
+      className="docusaurus-mt-lg"
+      previous={docLinks[currentIndex - 1]}
+      next={docLinks[currentIndex + 1]}
+    />
+  );
+}
+```
+
 ---
 
 ## 7. CSS 커스터마이징
@@ -661,7 +692,7 @@ Obsidian과 Docusaurus에서 동일한 색상 클래스를 사용하기 위한 �
 | `src/css/custom.css` | 확장 | KaTeX, 검색 하이라이트, 홈페이지 스타일, Obsidian 콜아웃, 공용 색상 클래스, 본문 이미지 테두리 |
 | `src/pages/` | 삭제 | docs/index.mdx로 대체 |
 | `src/components/` | 신규 | 4개 커스텀 컴포넌트 + 공통 CSS |
-| `src/theme/` | 신규 | 4개 테마 오버라이드 |
+| `src/theme/` | 신규 | 5개 테마 오버라이드 |
 | `plugins/` | 신규 | gather-meta-plugin.js |
 | `Dockerfile` | 신규 | 멀티 스테이지 빌드 (Node 20 -> Nginx) |
 | `.github/` | 신규 | 온프렘/AWS 2중 배포 워크플로 + 태그 계산 스크립트 |
