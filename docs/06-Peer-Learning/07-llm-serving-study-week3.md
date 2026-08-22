@@ -828,3 +828,170 @@ for m in [0, M):
 ---
 #### 확장 가능한 어텐션 메커니즘
 
+> [!info] KV Cache 축소가 중요한 이유
+> - Decode 단계에서는 매 iteration마다 KV 캐시가 HBM에서 온칩 레지스터·공유 메모리로 계속 전송
+> - KV 캐시가 작을수록
+> 	- GPU 메모리 대역폭 부담이 줄어듦 (**VRAM에 캐시를 저장해뒀다가 계속 로드하기 때문**)
+> 	- GPU 메모리 공간을 덜 차지 → 더 큰 배치 크기로 더 많은 요청을 병렬 처리 가능 → 처리량 향상
+> 	- 제한된 GPU 메모리 안에서 더 긴 컨텍스트도 서빙 가능
+
+> 아래에서는 이러한 KV 캐시를 최적화하는 여러 어텐션 방식을 소개한다.
+
+
+**4가지 어텐션 방식 비교**
+
+![](assets/07-llm-serving-study-week3/attentions.png)
+
+1. **MHA** (Multi-Head Attention)
+	- 우리가 기존에 아는 어텐션 방법
+	- 많은 초기 모델의 기반이 되는 원래 버전
+	- 쿼리 하나당 별도의 고유한 key-value 헤드가 필요
+	- 결과적으로 네 방식 중 KV 캐시가 가장 크고 가장 비효율적
+
+2. **MQA** (Multi-Query Attention)
+	- **모든 쿼리가 단 하나의 key-value 헤드를 공유**
+	- 단점: 너무 공격적인 설계 때문에 모델 정확도가 크게 저하되는 것으로 밝혀짐
+
+3. **GQA** (Grouped-Query Attention)
+	- MQA의 정확도 문제를 완화하기 위해 등장, 성능과 정확도의 균형을 목표로 함
+	- 쿼리 헤드를 여러 그룹으로 묶고, **각 그룹이 동일한 key-value 공유**
+	- MHA(연산 효율 낮음)와 MQA(정확도 손실 큼) 사이의 좋은 절충안으로 입증되어, 현재 많은 모델 아키텍처에서 채택 중
+	- 캐시 메모리 뿐 아니라, 추론 시 속도에도 이점
+
+4. **MLA** (Multi-head Latent Attention) - DeepSeek가 도입
+	- 단순히 KV 개수를 줄이는 것이 아니라, 영리한 방식으로 압축(compress)한다는 점이 핵심 차이
+	- **head를 줄이는 대신 latent를 캐싱한다** (<span class="t-red">각 토큰의 K/V 정보를 저차원 latent로 압축하여 latent 표현을 KV cache에 저장</span>)
+	- DeepSeek 원 논문 주장 : "KV 캐시 크기는 그룹 2.25개짜리 GQA와 동등하지만, 성능은 MHA보다 더 강력하다"
+
+
+**모델이 어떤 방식을 쓰는지 config.json으로 확인하기**
+
+```bash
+# MHA는 attention head와 key/value head 수가 같다.
+Llama2 (MHA) — num_attention_heads = num_key_value_heads
+"num_attention_heads": 32,
+"num_hidden_layers": 32,
+"num_key_value_heads": 32,
+
+# GQA/MQA 계열은 key/value head 수를 줄여 KV cache memory를 절감한다
+Llama3 (GQA) — num_key_value_heads가 축소됨
+"num_attention_heads": 32,
+"num_hidden_layers": 32,
+"num_key_value_heads": 8,
+→ KV 헤드 하나를 32 ÷ 8 = 4개의 어텐션 헤드가 공유
+```
+
+
+> [!tip] 이 진화가 시사하는 것
+> - 이 모든 발전은 **모델 아키텍처 레벨**에서 일어난다. 
+> 	- 즉, **어텐션 방식**(MHA/MQA/GQA/MLA)의 선택은 결국 어떤 모델 계열·구체적인 모델이 내 use case에 가장 잘 맞는가라는 총체적인 결정(holistic decision)의 일부이다.
+> - 이러한 아키텍처 발전은 모델 개발 트렌드의 중요한 변화를 보여준다.
+> 	- <span class="t-red">초점이</span> 더 이상 모델 품질 향상에만 있지 않고, 점점 더 <span class="t-red">모델을 제품화(productize)하는 것으로 옮겨가고 있다.</span>
+
+---
+#### 커널 융합과 커스텀 어텐션 커널
+
+**GPU 커널(Kernel)이란?**
+
+![](assets/07-llm-serving-study-week3/kernel.png)
+
+- 커널 : GPU에서 실행되는 작고 특화된 프로그램으로, 행렬 곱셈·소프트맥스 등 LLM과 딥러닝 모델에 필수적인 연산을 수행
+- <span class="t-red">모델</span> 아키텍처·하드웨어·워크로드<span class="t-red">에 맞게 적절히 최적화되고 특화된 GPU 커널</span>을 쓰면 GPU 활용률, 추론 속도, 처리량이 크게 향상됨
+
+
+**커널 퓨전** (Kernel Fusion)
+
+![](assets/07-llm-serving-study-week3/kernel-fusion.png)
+
+- ML 전반 및 LLM에서 널리 쓰이는 핵심 커널 최적화 기법
+- 위 그림은 Kernel fusion 전후 memory/compute interaction 비교
+- 여러 <span class="t-red">개별 연산</span>(예: 곱셈 + 덧셈)<span class="t-red">을 하나로 합쳐서</span>, GPU 메모리(ex. HBM) 와 GPU 연산 유닛 사이의 <span class="t-red">데이터 이동 오버헤드를 최소화</span>
+- <span class="t-red">레지스터·공유 메모리에 이미 있는 데이터를 재사용</span> → GPU 글로벌 메모리에 다시 쓰고 다시 읽는 왕복(round trip)이 불필요해짐
+
+
+**커스텀 어텐션 커널** - **Flash Attention**, **Paged Attention**
+
+> Flash Attention과 Paged Attention은 어텐션을 효율적으로 실행하기 위한 커스텀 GPU 커널, 커널 최적화의 대표적인 사례이다.
+
+개념은 [이전 WEEK1 글에서 해당 개념 설명한 부분](./05-llm-serving-study-week1.md#추가적인-여러-attention-효율화-기법) 참고
+
+
+**실전 예시 : vLLM에서 FlashInfer 커널 사용하기**
+
+```bash
+# vLLM에서 FlashInfer 커널 사용하기
+pip install vllm==0.8.5.post1
+pip install flashinfer-python==0.2.2
+export VLLM_ATTENTION_BACKEND=FLASHINFER
+export VLLM_USE_FLASHINFER_SAMPLER=1
+export VLLM_FLASHINFER_FORCE_TENSOR_CORES=1
+
+# vLLM CLI
+## --attention-backend FLASH_ATTN : 어텐션 백엔드를 FlashAttention으로 명시 지정 # 미지정 시 하드웨어에 맞게 자동 선택(auto-detect)
+## flash_attn_version (config, 2/3/4) : FlashAttention 버전을 강제 지정, 기본값(None:자동 감지)
+## 대부분의 경우 명시적으로 지정할 필요 없음 — vLLM이 GPU 세대(예: Hopper vs Ampere)와 모델 구조에 맞춰 자동으로 최적 백엔드를 고름
+### H100/H200 (Hopper) : FlashAttention 3이 자동 선택되는 경우가 많음
+### A100/A40 (Ampere 이하) : FlashAttention 2 또는 FlashInfer가 선택됨
+vllm serve Qwen/Qwen2.5-7B-Instruct \
+  --attention-backend FLASH_ATTN \
+  --max-model-len 4096 \
+  --max-num-batched-tokens 8192 \
+  --max-num-seqs 128 \
+  --enable-chunked-prefill
+  
+
+# SGLang에서는 플래그 하나로:
+--attention-backend {flashinfer|fa3|triton|torch_native|FlashMLA}
+```
+
+
+> [!tip] 우리가 알아야하는 것의 범위
+> - 커널 최적화는 그것 자체가 하나의 전문성을 필요로하는 큰 연구 영역이다.
+> - 이에 우리는 <span class="t-red">효율적인 커널을 활용하는 것이 실무적으로 중요</span>하다는 점만 기억하면 된다.
+
+> [!info] 어떤 커널을 골라야 하나?
+> - 커널·하드웨어·LLM 입출력의 복잡성과 다양성 때문에 명확한 정답을 제시하기 어려움 → 보통 실험을 통해 찾아야 함
+> - 다행히 vLLM, SGLang 같은 서빙 백엔드는 기본값을 자동으로 선택하는 내장 로직을 갖고 있음
+> 	- 예(집필 시점 기준): SGLang은 Hopper가 아닌 GPU(A100, A40 등)에는 FlashInfer, Hopper 아키텍처(H100, H200, H20)에는 FlashAttention3를 기본값으로 사용
+> - 실전 팁 : 처음에는 권장 기본값으로 시작하고, 다른 최적화 기회들을 먼저 시도한 뒤, 추가 성능 향상이 필요할 때 다른 커널을 실험하는 것이 좋음
+
+---
+### Model Compression
+
+---
+#### 모델 압축 개요
+
+```mermaid
+flowchart TD
+
+    BIG["Large LLM"]
+
+    Q["Quantization<br/>숫자 Precision 감소"]
+
+    D["Distillation<br/>큰 Teacher → 작은 Student"]
+
+    P["Pruning<br/>불필요 Weight 제거"]
+
+    Q --> SMALL1["작은 Memory<br/>적은 Data Movement"]
+
+    D --> SMALL2["더 작은 Model"]
+
+    P --> SMALL3["Parameter 감소"]
+
+    BIG --> Q
+    BIG --> D
+    BIG --> P
+```
+
+1. **양자화 (Quantization)**
+    - 모델 파라미터의 **정밀도를 높은 비트에서 낮은 비트 형식으로 축소**
+    - 더 많은 파라미터를 메모리에 욱여넣고, **행렬 연산 속도를 높이는 것**이 목적
+    - (CH5에서 배운 FP32 → FP16 → INT8/FP8 정밀도 축소 개념과 직결)
+2. **증류 (Distillation)**
+    - 크고 강력한 "교사(teacher)" 모델의 지식을 **더 작고 빠른 "학생(student)" 모델로 전이**
+    - **학생 모델이 교사의 행동을 모방하도록 학습**
+3. 가지치기 (Pruning)
+    - **불필요한(redundant) 가중치나 어텐션 헤드를 외과적으로(surgically) 제거**
+    - 이 과정에서 모델 용량 중 얼마나 많은 부분이 저활용(underused)되고 있었는지가 드러남
+
+> 
