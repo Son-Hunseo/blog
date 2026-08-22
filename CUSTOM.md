@@ -287,14 +287,18 @@ const SELECTED_POST_IDS = [
 ### 6.1 DocItem/Layout/index.js
 
 **변경 내용:**
-- 문서 하단에 Giscus 댓글 추가
+- 개별 글 하단에 Giscus 댓글 추가
+- `index.mdx` 기반 페이지(홈 랜딩, 카테고리 목록)는 doc id가 `index`로 끝나는 것으로 판별하여 댓글 제외
 
 ```jsx
 export default function LayoutWrapper(props) {
+  const {metadata} = useDoc();  // @docusaurus/plugin-content-docs/client
+  const isIndexPage = metadata.id === 'index' || metadata.id.endsWith('/index');
+
   return (
     <>
       <Layout {...props} />
-      <GiscusComponent />   {/* 댓글 */}
+      {!isIndexPage && <GiscusComponent />}   {/* 개별 글에만 댓글 */}
     </>
   );
 }
