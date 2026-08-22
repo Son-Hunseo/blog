@@ -625,6 +625,8 @@ Obsidian과 Docusaurus에서 동일한 색상 클래스를 사용하기 위한 �
 | `.t-purple` / `.hl-purple` | #AFA9EC | #534AB7 |
 | `.t-teal` / `.hl-teal` | #5DCAA5 | #0F6E56 |
 
+모든 `.t-*` / `.hl-*` 클래스에는 `font-weight: bold`가 적용되어 색상 강조와 함께 굵게 표시됩니다.
+
 **테마 구분:**
 - Obsidian 라이트 모드: `.theme-light` 클래스
 - Docusaurus 라이트 모드: `html[data-theme='light']` 속성
