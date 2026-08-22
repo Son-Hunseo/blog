@@ -29,7 +29,15 @@ basic-docu/
 ### 현재 프로젝트 구조 (추가/변경된 부분)
 ```
 son-blog/
-├── docs/                          # 번호 프리픽스로 정렬 (01-Kubernetes/, 03-Docker/ 등)
+├── docs/                          # 번호 프리픽스로 정렬 (대분류 → 소분류 2단계)
+│   ├── 00-IaaS/                   # 01-AWS, 11-Openstack
+│   ├── 01-Container/              # 01-Docker, 02-Kubernetes
+│   ├── 02-CS/                     # 01-Algorithm, 02-OS, 03-Network, 11-Security
+│   ├── 03-Dev/                    # 01-Golang, 02-SQL, 11-Spring, 21-Middleware, 31-Project
+│   ├── 04-AI/
+│   ├── 05-HomeLab/                # 01-SynologyNas, 02-Proxmox, 03-Hands-on
+│   ├── 06-Peer-Learning/          # 스터디 기록
+│   ├── 07-Etc/
 │   └── index.mdx                  # docs가 랜딩 페이지 역할 (src/pages 없음)
 ├── src/
 │   ├── components/                # 커스텀 컴포넌트 추가
@@ -47,7 +55,17 @@ son-blog/
 │       └── DocSidebar/            # 사이드바 (글 개수 표시)
 ├── plugins/
 │   └── gather-meta-plugin.js      # 커스텀 플러그인
+├── .github/
+│   ├── workflows/build-push-and-bump-tag.yaml   # 온프렘/AWS 2중 배포 파이프라인
+│   └── scripts/calc_next_tag.py                 # 이미지 태그 자동 증가 스크립트
+├── Dockerfile                     # 멀티 스테이지 빌드 (Node 20 -> Nginx)
 └── package.json
+```
+
+각 카테고리 폴더에는 `_category_.json`으로 사이드바 라벨을 지정합니다 (번호 프리픽스 제거용).
+
+```json
+{ "label": "IaaS" }
 ```
 
 ---
@@ -183,11 +201,13 @@ algolia: {
 
 ```js
 colorMode: {
-  defaultMode: 'dark',           // 기본 다크모드
+  defaultMode: 'light',          // 기본 라이트모드 (순정 기본값과 동일)
   disableSwitch: false,
-  respectPrefersColorScheme: false,  // 시스템 설정 무시
+  respectPrefersColorScheme: false,  // 시스템 설정 무시 (순정: false)
 }
 ```
+
+- 초기에는 다크모드가 기본값이었으나, 라이트모드로 변경됨
 
 ### 3.9 추가 언어 지원 (Prism)
 
@@ -279,6 +299,34 @@ const SELECTED_POST_IDS = [
 ### 5.4 SimpleDocList.js
 
 **목적:** 단순한 문서 목록 표시
+
+### 5.5 Posts.module.css (공통 포스트 목록 스타일)
+
+`SelectedPosts.js`와 `CategoryPosts.js`가 공유하는 카드형 목록 스타일입니다.
+
+- **레이아웃**: `flex-direction: row-reverse` — 텍스트 좌측, 썸네일 우측 (모바일 768px 이하에서는 세로 스택)
+- **썸네일 배경 레이어**: `.imageWrapper`에 `background: var(--ifm-color-emphasis-100)` 지정
+  - 투명 배경(PNG)이거나 비율이 맞지 않는 썸네일이 카드에서 비어 보이지 않도록 뒤에 깔아주는 배경
+  - 이미지는 `object-fit: cover`로 150×150 영역을 채움
+- **썸네일 없을 때**: `.noImage`가 브랜드 색상 그라디언트(`--ifm-color-primary-lighter` → `--ifm-color-primary-light`)로 대체 표시
+- **설명 2줄 말줄임**: `-webkit-line-clamp: 2`
+- 색상은 모두 Infima 변수(`--ifm-color-emphasis-*`)를 사용하므로 다크/라이트 모드에 자동 대응
+
+```css
+.imageWrapper {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  background: var(--ifm-color-emphasis-100);  /* 썸네일 뒤 배경 레이어 */
+  border-radius: 4px;
+}
+
+.noImage {
+  background: linear-gradient(135deg,
+    var(--ifm-color-primary-lighter) 0%,
+    var(--ifm-color-primary-light) 100%);
+}
+```
 
 ---
 
@@ -380,6 +428,25 @@ const addCountToItems = (items) => {
 ---
 
 ## 7. CSS 커스터마이징
+
+### 7.0 Infima 색상 변수 오버라이드
+
+Docusaurus는 Infima CSS 프레임워크를 사용하며, `--ifm-color-primary` 계열 변수로 사이트 전체 테마 색상이 결정됩니다. 현재는 순정 템플릿과 동일한 값(라이트=녹색, 다크=청록)을 유지 중이며, 브랜드 색상을 바꾸려면 이 블록만 수정하면 됩니다.
+
+```css
+:root {
+  --ifm-color-primary: #2e8555;   /* 라이트 모드 (녹색 계열) */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;   /* 다크 모드 (청록 계열) */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+```
+
+- `Posts.module.css`의 썸네일 없는 카드 그라디언트, 타이핑 커서 색상 등이 이 변수를 참조
 
 ### 7.1 문서 본문 전용 스타일
 
@@ -591,22 +658,75 @@ Obsidian과 Docusaurus에서 동일한 색상 클래스를 사용하기 위한 �
 |------|------|------|
 | `docusaurus.config.js` | 수정 | 한국어, Algolia, Analytics, Mermaid, LaTeX 등 |
 | `sidebars.js` | 동일 | 자동 생성 사용 |
-| `src/css/custom.css` | 확장 | KaTeX, 검색 하이라이트, 홈페이지 스타일, Obsidian 콜아웃, 공용 색상 클래스 |
+| `src/css/custom.css` | 확장 | KaTeX, 검색 하이라이트, 홈페이지 스타일, Obsidian 콜아웃, 공용 색상 클래스, 본문 이미지 테두리 |
 | `src/pages/` | 삭제 | docs/index.mdx로 대체 |
 | `src/components/` | 신규 | 4개 커스텀 컴포넌트 + 공통 CSS |
 | `src/theme/` | 신규 | 4개 테마 오버라이드 |
 | `plugins/` | 신규 | gather-meta-plugin.js |
+| `Dockerfile` | 신규 | 멀티 스테이지 빌드 (Node 20 -> Nginx) |
+| `.github/` | 신규 | 온프렘/AWS 2중 배포 워크플로 + 태그 계산 스크립트 |
 
 ---
 
 ## 10. 글작성 시 참고사항
 
+### 네이밍 규칙
+
+- **카테고리 폴더**: 번호 프리픽스 + **대문자 시작** (예: `01-Container/02-Kubernetes/`)
+- **글 파일**: 번호 프리픽스 + **소문자 케밥 케이스** (예: `05-llm-serving-study-week1.md`)
+- 카테고리 폴더에는 `_category_.json`으로 사이드바 라벨 지정, `index.mdx`로 카테고리 목록 페이지 구성
+
+### 이미지 경로 규칙 (본문 / 썸네일 이원화)
+
+이미지는 **두 곳**에 저장하며 용도에 따라 참조 경로가 다릅니다.
+
+| 용도 | 저장 위치 | 참조 방식 |
+|------|-----------|-----------|
+| 본문 이미지 | `docs/<카테고리>/assets/<글이름>/` | 상대 경로 (`assets/01-gitaiops-01/ai-book.png`) |
+| 프론트매터 썸네일 | `static/img/posts/<카테고리>/<글이름>/` | 절대 경로 (`/img/posts/06-Peer-Learning/01-gitaiops-01/ai-book.png`) |
+
+- 본문은 Docusaurus가 상대 경로 이미지를 번들링하므로 `docs/` 내 `assets/` 사용
+- 프론트매터 `image`는 빌드 시 번들링되지 않으므로 `static/` 아래 실제 경로가 필요 (`SelectedPosts`/`CategoryPosts` 썸네일, 소셜 카드에 사용)
+- **카테고리 폴더명을 바꾸면 두 경로 모두 함께 옮겨야 함**
+
 ### 새 문서 추가 시
 
-1. `docs/` 하위에 `.md` 또는 `.mdx` 파일 생성
-2. 이미지는 `static/img/` 폴더에 직접 저장
-3. 프론트매터에 필요한 메타데이터 직접 작성 (`image`, `sidebar_class_name` 등)
+1. `docs/<카테고리>/` 하위에 `.md` 또는 `.mdx` 파일 생성
+2. 이미지는 위 규칙에 따라 `assets/`와 `static/img/posts/` 양쪽에 배치
+3. 프론트매터 작성 (`title`, `description`, `date`, `image`, `sidebar_class_name: hidden-sidebar-item`)
 
 ### 추천 글 변경 시
 
-`src/components/SelectedPosts.js`의 `SELECTED_POST_IDS` 배열 수정
+`src/components/SelectedPosts.js`의 `SELECTED_POST_IDS` 배열 수정 (카테고리 구조가 바뀌면 이 경로들도 함께 갱신 필요)
+
+---
+
+## 11. 배포 및 CI/CD (순정 대비 신규)
+
+순정 Docusaurus는 GitHub Pages 배포(`deploy` 스크립트)를 전제로 하지만, 이 프로젝트는 **컨테이너 이미지 빌드 + GitOps** 방식으로 배포합니다.
+
+### 11.1 Dockerfile
+
+멀티 스테이지 빌드 — `node:20-alpine`에서 `npm run build` 후 결과물(`/app/build`)을 `nginx:stable-alpine`으로 복사.
+
+### 11.2 GitHub Actions 워크플로
+
+`.github/workflows/build-push-and-bump-tag.yaml` — main 브랜치 push 시 실행되며, **온프렘과 AWS 두 개의 job**으로 구성됩니다.
+
+| Job | 실행 환경 | 레지스트리 | GitOps 대상 |
+|-----|-----------|------------|-------------|
+| `deploy-onprem` | self-hosted runner (`my-blog-runner`) | Harbor (`harbor.onprem.arpa/son/blog`) | `overlays/onprem/prod/kustomization.yaml` |
+| `deploy-aws` | `ubuntu-latest` | AWS ECR (OIDC role assume) | `overlays/aws/prod/kustomization.yaml` |
+
+- 각 job은 리포지토리 변수 `ENABLE_ONPREM` / `ENABLE_AWS`로 개별 on/off (온프렘 기본 `false`, AWS 기본 `true`)
+- 매니페스트는 이 저장소가 아닌 **별도 GitOps 저장소 `Son-Hunseo/blog-gitops`** 에 있으며, 워크플로가 해당 저장소의 kustomization `newTag`를 갱신하고 커밋/푸시 → ArgoCD가 동기화
+- 과거에 있던 `k8s/resource/` 매니페스트 폴더는 GitOps 저장소로 이관되며 삭제됨
+
+### 11.3 이미지 태그 자동 증가
+
+`.github/scripts/calc_next_tag.py`가 레지스트리(Harbor API / `aws ecr describe-images`) 응답을 stdin으로 받아 `major.minor` 형식 태그 중 최댓값 +1을 계산합니다. (`0.9` → `1.0`, 태그가 없으면 `0.1`부터)
+
+### 11.4 무한 루프 방지
+
+- `paths-ignore: .github/**` — 워크플로 자체 수정은 파이프라인을 트리거하지 않음
+- `github.actor != 'github-actions[bot]'` — 봇이 만든 커밋으로 재실행되지 않음
