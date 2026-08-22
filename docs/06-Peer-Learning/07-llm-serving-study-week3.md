@@ -580,7 +580,9 @@ for m in [0, M):
 - 결론은 다음과 같다.
 	- Prefill: 시퀀스 길이가 충분히 길면 산술 강도가 크게 올라가 GPU 연산력을 포화시킬 만큼 높아짐 → compute-bound가 될 수 있음
 	- Decode: 시퀀스 길이와 무관하게 s=1이 고정이므로 산술 강도가 항상 매우 낮음(~1.0) → 시퀀스 길이가 아무리 길어도 항상 memory bandwidth-bound
-		- (이번 챕터에서는 이해를 위해 배치 크기 의도적으로 제외해서 s=1 인것)
+		- (이번 챕터에서는 추후 챕터에서서 배치가 필요한 이유를 설명하기 위해 배치 크기 의도적으로 제외해서 s=1 인것)
+
+> 간략하게 얘기하면, <span class="t-red">입력 프롬프트는 대량의 토큰을 한번에 입력받지만, 출력은 토큰을 한 번에 1개씩 생성</span>하게 때문에 생기는 문제이다.
 
 > [!info] 이 분석의 목적
 > - LLM 서빙의 각 단계별 병목(bottleneck)에 대한 직관을 키우는 것
@@ -639,4 +641,190 @@ for m in [0, M):
 
 ---
 ### Request Batching and Scheduling-level Optimizations
+
+> CH2에서 서빙 중 요청을 묶어서 배치로 처리하면 응답 속도가 늘질 수 있지만, 더 높은 처리량을 달성할 수 있다는 것을 배웠다.
+> 
+> 왜 그런지 더 깊이 이해하기 위해 CH5에서 배운 산술 강도라는 개념을 적용해서 분석해보자.
+> 
+> 배칭은 단순히 '여러 요청을 한꺼번에 처리하는 것'의 의미가 아니라, 개별 요청 하나로는 <span class="t-blue">낭비되던 GPU 연산력을, 여러 요청을 묶어 행렬 크기를 키움으로써 산술 강도를 높여 실제로 활용하게 만드는 것</span>의 의미가 있다.
+
+---
+#### 실시간 서빙에서 Batching이 필요한 이유
+
+> 이전 챕터에서 Prefill 단계에서는 높은 산술 강도를 달성하였지만, Decode 단계에서는 s = 1이기 때문에 항상 낮은 산술 강도를 사용할 수 밖에 없어 비효율적이라는 얘기를 하였다.
+> 
+> 이에 <span class="t-red">Batching을 도입하여 이 문제를 해결</span>한다. (s = n)
+
+**Batching 도입 전 (s = 1)**
+
+![](assets/07-llm-serving-study-week3/before-batch.png)
+
+
+**Batching 도입 후 (s = 3)**
+
+![](assets/07-llm-serving-study-week3/after-batch.png)
+
+- prompt1, prompt2, prompt3 **세 개의 입력 프롬프트를 하나로 배칭**해서 모델에 전달
+- Decode 단계는 여전히 반복(iteration)당 토큰 하나씩 생성하지만, 요청들을 배칭했기 때문에 **한 번의 반복에서 세 개의 새 토큰을 동시에 생성**할 수 있음 - 각 요청당 하나씩
+- 이를 통해 <span class="t-red">산술 강도가 인위적으로 상승</span>합니다: <span class="t-red">모델 가중치는 여전히 한 번만 읽지만</span>, 그 한 번의 읽기로 <span class="t-red">더 많은 계산을 수행하고 더 많은 토큰을 생성</span>하게 된다.
+
+> [!info] Batching은 Decode에서 특히 효율적
+> - Prefill : 효과가 제한적. 이미 입력 토큰 전체를 병렬로 처리하고 있어서, 입력 프롬프트가 아주 작지 않은 이상(대략 1,024 토큰 미만이 아닌 이상) prefill 자체만으로도 GPU 연산 능력을 이미 포화시킴 → 배칭으로 얻는 추가 병렬성의 효과는 미미함
+> - <span class="t-red">Decode : 특히 효과적</span>. 한 번에 토큰 하나씩만 생성하는 구조이므로, 여러 요청을 묶으면 전체 처리량이 상승하고 GPU FLOPS 활용률이 개선됨
+
+---
+#### 온라인 추론에서의 동적 배칭
+
+**Static Batching의 문제**
+
+- 온라인 서비스에서는 요청이 언제 들어올지 알 수 없다.
+- 예시
+	- Max Batch가 10이라고 해서 무조건 10개가 찰 때까지 기다리면
+	- Request 1~9 : 바로 도착
+	- Request 10 : 5분 후 도착
+- 앞의 9명이 5분이나 기다릴 수 있다. ⇒ <span class="t-red">오프라인 사용 사례에는 적합하지만, 온라인 추론에는 부적합</span>
+
+
+**해결 방법 : Max Batch Size + Max Delay Time**
+
+- 대기 중인 요청 수가 최대 배치 크기에 도달 → 최대 지연 시간이 아직 안 지났어도 즉시 전송
+- 최대 지연 시간에 도달 → 배치에 요청이 단 하나뿐이더라도 즉시 전송
+- 가장 이해가 빠른 예시
+	- “10명이 차면 바로 출발하고, 10명이 안 차더라도 5분이 지나면 출발한다.”
+- 파라미터 튜닝 방향 : 지연시간 SLA를 지키는 선에서 배치 크기를 최대한 높게 유지
+    - 배치 크기(max batch size)
+        - 너무 높이면: 처리 지연시간 증가 + GPU/CPU 메모리 사용량 증가 → 결국 OOM(메모리 부족) 위험
+    - 최대 지연 시간(max delay time)
+        - 너무 길게 설정 + 높은 배치 크기 조합 → 이미 도착한 요청들이 오래 대기하게 됨
+        - 너무 짧게 설정 → 배치를 제때 채우지 못해 실제 처리되는 배치 크기가 줄어듦 (배칭 효과 반감)
+
+> [!warning] 이것으로 부족하다
+> - Traditional inference에서는 효과적이지만, LLM은 request마다 output 길이가 달라 batch 내부의 sequence가 서로 다른 시점에 끝난다.
+
+---
+#### 온라인 추론을 위한 Continuous Batching
+
+**동적 Batching의 한계**
+
+![](assets/07-llm-serving-study-week3/continuous-batching-limit.png)
+
+- 동적 배칭은 대부분의 전통적인 ML 서빙에는 잘 작동하지만, LLM은 더 크고 독특한 문제를 안고 있다.
+- 입력·출력 길이가 요청마다 크게 다름 → 배치 안 요청들이 처리 완료까지 걸리는 시간이 제각각
+- 동적 배칭에서는 배치의 전체 완료 시간이 가장 길고 느린 요청에 의해 결정됨 (배치 안 모든 요청이 끝나야 결과 반환)
+
+
+**해결 방법 : Continuous Batching** (= inflight batching, interactive batching)
+
+![](assets/07-llm-serving-study-week3/continuous-batching.png)
+
+![](assets/07-llm-serving-study-week3/continuous-parameter.png)
+
+- 연속 배칭: 정해진 배치 크기·시간을 기다리지 않고, 요청을 백엔드 모델에 즉시 추가하고 그때그때 유동적으로 그룹핑
+- 배치 내 실행 중인 요청 하나가 끝나는 즉시 → 대기열에 있던 요청이 바로 그 자리에 추가됨
+- 예시
+	- 처음에 요청 1, 2, 3이 처리 시작
+	- 요청 1이 끝나면 → 새로 도착한 요청 4가 즉시 추가
+	- 요청 2가 끝나면 → 요청 5 추가
+	- 요청 5가 끝나면 → 요청 6 추가
+- 튜닝해야 할 파라미터
+	- 최대 지연 시간(max delay time)
+		- 더 이상 인위적으로 설정할 필요 없음 (**동적 배칭과의 차이점**)
+	- **최대 배치 크기**(max batch size)
+		- 여전히 관리·튜닝 필요 (단, 이 파라미터는 절대 상한선(upper bound) 역할만 함)
+	- 추가 파라미터: **최대 배칭 토큰 수**
+		- 토큰(token) 레벨의 더 세밀한 제어
+		- LLM 요청은 입력 길이가 천차만별이기 때문
+		- 요청 개수 제한만으로는 토큰 길이 차이를 반영하지 못해 배치가 너무 가볍거나 너무 무거워질 수 있음
+- **단계별 실제 제약 조건**
+    - **Prefill 단계**: 입력이 훨씬 길기 때문에 최대 토큰 수(**max number of tokens**)가 가장 중요한 요소
+    - **Decode 단계**: 병렬성은 보통 최대 배치 크기(**max batch size**)에 의해 정해짐
+
+**vLLM 파라미터**
+- `--max-num-batched-tokens` : 최대 배칭 토큰 수, 한 iteration에서 배치 전체가 소비할 수 있는 총 토큰 수의 상한
+- `--max-num-seqs` : 최대 (동시) 배치 크기, 한 iteration에서 동시에 처리할 수 있는 요청 개수의 상한
+- `--max-model-len` : 스케줄러가 배치 전체에서 허용하는 총 토큰 수의 상한
+
+---
+#### Chunked Prefill을 이용한 Continuous Batching
+
+**문제 제기: Prefill과 Decode는 서로 다른 워크로드**
+
+![](assets/07-llm-serving-study-week3/chunked-prefill1.png)
+
+- 연속 배칭은 요청마다 길이가 다른 문제는 해결했지만, LLM 서빙의 또 다른 독특한 측면을 간과하고 있다 ->  prefill과 decode는 서로 완전히 다른 성격의 워크로드
+	- Prefill: 산술 강도가 높아 배칭의 도움을 크게 필요로 하지 않음
+	- Decode: 산술 강도가 낮아 배칭의 이득을 크게 받음
+- Continuous Batching에서 예시로 든 시나리오는 사실 "체리피킹된 이상적인 경우"였다. 
+	- 모든 요청의 입력 길이·출력 길이가 동일하고 시작 시점도 같은 경우. 
+	- 이 경우 iteration 1에서 세 요청의 prefill이 함께 배칭되고, iteration 2에서 세 요청의 decode가 함께 배칭됩니다. (거의 발생할 수 없는 상황이다)
+
+> 실제 온라인 서빙에서는 요청은 무작위로, 다른 시점에 도착한다.
+> 
+> <span class="t-red">요청 1이 이미 decode 중인데 요청 2가 도착해 prefill을 시작하고 싶다면? decode를 우선할까, prefill을 우선할까?</span> 아니면 같은 iteration에 함께 배칭할 수 있을까?
+
+
+**방안 1 : Prefill과 Decode를 함께 배칭하지 않음**
+
+![](assets/07-llm-serving-study-week3/chunked-prefill2.png)
+
+- Prefill과 Decode를 섞은 하이브리드 워크로드는 더 복잡한 GPU 커널이 필요하므로, 우선 이 방법부터 검토
+- 요청 1이 prefill(iteration 1) → decode(iteration 2) 진행 중, 요청 2·3이 도착
+- **보통 prefill을 우선함** : prefill이 TTFT(첫 토큰까지의 시간)를 결정하는 중요한 지연시간 지표이기 때문(특히 챗봇 같은 대화형 서비스에서 중요)
+- 하지만 iteration 3에서 요청 2·3의 prefill을 처리하는 동안 → **요청 1은 완전히 유휴(idle) 상태로 대기**
+- 요청 2·3의 프롬프트가 길면 → 요청 1의 종단 지연시간(end-to-end latency)과 토큰 간 지연시간(inter-token latency)에 큰 타격
+
+
+**방안 2 : Prefill과 Decode를 함께 배칭**
+
+![](assets/07-llm-serving-study-week3/chunked-prefill3.png)
+
+- 요청 1의 두 번째 decode 스텝을 iteration 3에 넣어, 요청 2·3의 prefill과 같은 배치 iteration에서 함께 실행
+- 그래도 큰 도움은 안 됨 -> 토큰 하나를 디코딩하는 것은 prefill을 끝내는 것보다 훨씬 빠르기 때문, 특히 입력 프롬프트가 길 경우 지연이 여전히 두드러짐
+
+
+**해결 방법 : Chunked Prefill**
+
+![](assets/07-llm-serving-study-week3/chunked-prefill4.png)
+
+- 긴 입력 프롬프트를 더 작은 청크(chunk)로 나누는 기법
+- <span class="t-red">긴 prefill 막대가 decode 박스와 비슷한 크기</span>(이상적으로는 처리 시간도 비슷)<span class="t-red">의 여러 작은 prefill 조각으로 분할됨</span>
+- Chunked prefill은 긴 prefill을 여러 chunk로 쪼개 decode와 함께 처리할 수 있게 한다.
+- 요청 2·3이 배치에 합류하면(iteration 5): 요청 1은 계속 decode 진행, 나머지 두 요청은 자신만의 작은 청크 단위 prefill을 시작
+- iteration 10: 요청 2는(prefill이 요청 3보다 짧아서) 자연스럽게 decode로 전환
+- Chunked prefill은 긴 prompt가 많은 workload에서 TTFT와 fairness를 개선할 수 있지만, scheduler 복잡도와 memory 관리 부담이 증가한다.
+- **튜닝 파라미터 : 청크 크기 (얼마나 잘게 쪼갤 것인가)**
+	- 극단적으로 크게 (예: max model leghth까지)
+		- 사실상 청킹을 전혀 안 하는 것과 가음
+	- 극단적으로 작게
+		- 오버헤드 증가 -> 한 iteration에서 충분한 토큰을 배칭하지 못해 GPU 연산력을 포화시키지 못함
+	- 이상적
+		- 오버헤드도 크지 않고, 청크 프리필의 목적(빈틈 채우기)도 훼손하지 않는 중간값
+
+**vLLM 문서에서 chunked prefill 관련 파라미터**
+- `--enable-chunked-prefill` : 청크 프리필 기능 자체를 켜고 끄는 스위치 , 기본값(True)
+- `--max-num-batched-tokens` : 청크 하나(=한 iteration)가 처리할 최대 토큰 수(실질적인 ‘청크 크기’ 역할) , 기본값(컨텍스트에 따라 자동 설정)
+- 어떻게 동작하는가
+    - `enable-chunked-prefill`이 True면, prefill 요청은 남은 `max-num-batched-tokens`를 기준으로 더 작은 청크로 나뉜다." (**빈 공간 기준으로 prefill chunk 크기가 동적으로 결정**)
+    - 즉, 별도의 "청크 크기" 전용 파라미터는 따로 없고, 이전에에 다룬 `--max-num-batched-tokens` 값 자체가 청크 크기를 결정합니다.
+    - 긴 prefill을 이 값 이하 단위로 잘라서 여러 iteration에 걸쳐 처리하는 방식입니다.
+
+
+> [!info] 결국 use case와 SLA 요구사항에 따라 선택해야 하는 트레이드오프
+> - ITL(토큰 간 지연시간) : 개선됨 - decode 박스가 더 이상 긴 prefill에 막혀 대기하지 않음
+> - TTFT(첫 토큰까지 시간) : 악화됨 - prefill 단계에 더 많은 작업(오버헤드)이 추가됨
+> - 종단 지연시간(end-to-end latency) : 개선 안 됨, 오히려 여러 작은 prefill 스텝을 계산하는 오버헤드로 약간 악화되는 경우가 많음
+> - 처리량(throughput) : 보통 개선됨 — 유휴 시간의 빈틈을 채워 배치 효율성이 좋아지고 GPU를 더 잘 활용
+
+---
+#### 업계 현황
+
+- 연속 배칭(continuous batching) : 이 책이 쓰이는 시점 기준, 몇 년간 프로덕션 LLM 서빙의 업계 표준
+- 청크 프리필과 그 변형들 : 긴 컨텍스트 워크로드 처리 등에서 매우 인기 있는 기법
+- 더 고급 기법 **Prefill-Decode 분리(disaggregation)**: prefill과 decode 작업을 완전히 다른 GPU, 심지어 다른 노드로 분리하는 방식 → 7장에서 기초를 다진 후 다룰 예정
+
+---
+### Scaling Attention and GPU Kernel Optimization
+
+---
+#### 확장 가능한 어텐션 메커니즘
 
