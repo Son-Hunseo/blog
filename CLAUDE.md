@@ -22,9 +22,12 @@ npm run clear      # Docusaurus 캐시 삭제
 - **docs/** - 메인 콘텐츠 (MDX 파일, 번호 프리픽스 폴더로 대분류 → 소분류 2단계 구성)
   - `00-IaaS/` (01-AWS, 11-Openstack)
   - `01-Container/` (01-Docker, 02-Kubernetes)
-  - `02-CS/` (01-Algorithm, 02-OS, 03-Network, 11-Security)
-  - `03-Dev/` (01-Golang, 02-SQL, 11-Spring, 21-Middleware, 31-Project)
-  - `04-AI/`, `05-HomeLab/` (01-SynologyNas, 02-Proxmox, 03-Hands-on), `06-Peer-Learning/`, `07-Etc/`
+  - `02-Platform/` (01-Registry, 02-Secret, 03-CI-CD)
+  - `03-Observability/` (01-Monitoring, 02-Logging)
+  - `04-Middleware/` (01-Web, 02-Messaging, 03-Cache)
+  - `05-CS/` (01-Algorithm, 02-OS, 03-Network, 11-Security)
+  - `06-Dev/` (01-Golang, 02-SQL, 11-Spring, 31-Project)
+  - `07-AI/`, `08-HomeLab/` (01-SynologyNas, 02-Proxmox, 03-Hands-on), `09-Peer-Learning/`, `10-Etc/`
   - 각 카테고리 폴더에 `_category_.json`(사이드바 라벨)과 `index.mdx`(카테고리 목록 페이지)
   - `docs/index.mdx` - 랜딩 페이지 (`src/pages/` 대체)
   - 네이밍: 카테고리 폴더는 대문자 시작, 글 파일명은 소문자 케밥 케이스

@@ -32,12 +32,15 @@ son-blog/
 ├── docs/                          # 번호 프리픽스로 정렬 (대분류 → 소분류 2단계)
 │   ├── 00-IaaS/                   # 01-AWS, 11-Openstack
 │   ├── 01-Container/              # 01-Docker, 02-Kubernetes
-│   ├── 02-CS/                     # 01-Algorithm, 02-OS, 03-Network, 11-Security
-│   ├── 03-Dev/                    # 01-Golang, 02-SQL, 11-Spring, 21-Middleware, 31-Project
-│   ├── 04-AI/
-│   ├── 05-HomeLab/                # 01-SynologyNas, 02-Proxmox, 03-Hands-on
-│   ├── 06-Peer-Learning/          # 스터디 기록
-│   ├── 07-Etc/
+│   ├── 02-Platform/               # 01-Registry, 02-Secret, 03-CI-CD
+│   ├── 03-Observability/          # 01-Monitoring, 02-Logging
+│   ├── 04-Middleware/             # 01-Web, 02-Messaging, 03-Cache
+│   ├── 05-CS/                     # 01-Algorithm, 02-OS, 03-Network, 11-Security
+│   ├── 06-Dev/                    # 01-Golang, 02-SQL, 11-Spring, 31-Project
+│   ├── 07-AI/
+│   ├── 08-HomeLab/                # 01-SynologyNas, 02-Proxmox, 03-Hands-on
+│   ├── 09-Peer-Learning/          # 스터디 기록
+│   ├── 10-Etc/
 │   └── index.mdx                  # docs가 랜딩 페이지 역할 (src/pages 없음)
 ├── src/
 │   ├── components/                # 커스텀 컴포넌트 추가
@@ -716,7 +719,7 @@ Obsidian과 Docusaurus에서 동일한 색상 클래스를 사용하기 위한 �
 | 용도 | 저장 위치 | 참조 방식 |
 |------|-----------|-----------|
 | 본문 이미지 | `docs/<카테고리>/assets/<글이름>/` | 상대 경로 (`assets/01-gitaiops-01/ai-book.png`) |
-| 프론트매터 썸네일 | `static/img/posts/<카테고리>/<글이름>/` | 절대 경로 (`/img/posts/06-Peer-Learning/01-gitaiops-01/ai-book.png`) |
+| 프론트매터 썸네일 | `static/img/posts/<카테고리>/<글이름>/` | 절대 경로 (`/img/posts/09-Peer-Learning/01-gitaiops-01/ai-book.png`) |
 
 - 본문은 Docusaurus가 상대 경로 이미지를 번들링하므로 `docs/` 내 `assets/` 사용
 - 프론트매터 `image`는 빌드 시 번들링되지 않으므로 `static/` 아래 실제 경로가 필요 (`SelectedPosts`/`CategoryPosts` 썸네일, 소셜 카드에 사용)

@@ -15,7 +15,7 @@ description: 쿠버네티스(Kubernetes) 클러스터 구성을 위한 필수 �
 - 네트워크 인터페이스: 최소 1개 이상의 네트워크 인터페이스를 가져야한다.
 - IP 주소: 노드가 가진 네트워크 인터페이스에 IP가 할당되어 있어야 한다.
 - 고유한 식별자
-	- Hostname: 클러스터 내에서 유일해야한다. (cf : 이건 proxmox에서도 그랬음 - 참고 : [Proxmox 호스트네임 주의점](../../../../05-HomeLab/02-Proxmox/04-proxmox-cluster.md#주의점))
+	- Hostname: 클러스터 내에서 유일해야한다. (cf : 이건 proxmox에서도 그랬음 - 참고 : [Proxmox 호스트네임 주의점](../../../../08-HomeLab/02-Proxmox/04-proxmox-cluster.md#주의점))
 	- Mac 주소: 클러스터 내에서 유일해야한다.
 
 > [!info] 아니, 신경안써도 자동으로 되는 당연한 설정들 아닌가?
@@ -119,7 +119,7 @@ cat /proc/sys/net/ipv4/ip_forward
     - `1`: 활성화 (패킷을 다른 인터페이스로 전달 가능)
     - `0`: 비활성화
 - 쿠버네티스 파드(Pod) 간 통신을 위해 반드시 `1`로 설정되어 있어야 합니다.
-	- 이에 대한 내용 정리 - [IP 포워딩 활성화](../../../../02-CS/03-Network/01-switching-routing-gateway.md#활성%20방법)
+	- 이에 대한 내용 정리 - [IP 포워딩 활성화](../../../../05-CS/03-Network/01-switching-routing-gateway.md#활성%20방법)
 
 ---
 ## 레퍼런스
