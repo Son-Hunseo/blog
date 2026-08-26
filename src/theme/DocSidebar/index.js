@@ -29,9 +29,23 @@ import React from 'react';
 import DocSidebar from '@theme-original/DocSidebar';  // 원본 Docusaurus 사이드바
 
 /**
+ * 카테고리 목록 페이지(index.mdx) 링크인지 판별
+ *
+ * 글이 있는 카테고리는 index.mdx가 카테고리 자체의 링크로 흡수되어 items에 나타나지 않지만,
+ * 글이 없는 카테고리는 Docusaurus가 카테고리를 통째로 link 타입으로 접어버린다.
+ * 이 경우 index.mdx가 글 1개로 집계되어 "Platform (3)"처럼 글이 없는데 개수가 잡히므로 제외한다.
+ *
+ * @param {Object} item - 사이드바 아이템
+ * @returns {boolean} 카테고리 목록 페이지면 true
+ */
+const isCategoryIndexLink = (item) =>
+  item.docId === 'index' || item.docId?.endsWith('/index');
+
+/**
  * 사이드바 아이템들의 문서 개수를 재귀적으로 카운트
  *
  * 카테고리의 모든 하위 항목을 순회하며 link 타입(실제 문서)의 개수를 합산
+ * 단, 카테고리 목록 페이지(index.mdx)는 글이 아니므로 집계에서 제외
  *
  * @param {Array} items - 사이드바 아이템 배열
  * @returns {number} 모든 하위 문서(link 타입)의 총 개수
@@ -52,8 +66,8 @@ const countItems = (items) => {
     if (item.type === 'category') {
       // 카테고리면 하위 아이템을 재귀적으로 탐색
       count += countItems(item.items);
-    } else if (item.type === 'link') {
-      // 링크(실제 문서)면 1개 추가
+    } else if (item.type === 'link' && !isCategoryIndexLink(item)) {
+      // 링크(실제 문서)면 1개 추가 (카테고리 목록 페이지는 제외)
       count += 1;
     }
   });

@@ -35,9 +35,23 @@ import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
 /**
+ * 카테고리 목록 페이지(index.mdx) 링크인지 판별
+ *
+ * 글이 있는 카테고리는 index.mdx가 카테고리 자체의 링크로 흡수되어 items에 나타나지 않지만,
+ * 글이 없는 카테고리는 Docusaurus가 카테고리를 통째로 link 타입으로 접어버린다.
+ * 이 경우 index.mdx가 글 1개로 집계되어 글이 없는데 "3 items"처럼 개수가 잡히므로 제외한다.
+ *
+ * @param {Object} item - 사이드바 아이템
+ * @returns {boolean} 카테고리 목록 페이지면 true
+ */
+const isCategoryIndexLink = (item) =>
+  item.docId === 'index' || item.docId?.endsWith('/index');
+
+/**
  * 카테고리 내 모든 문서를 재귀적으로 카운트
  *
  * 하위 카테고리가 있으면 그 안의 문서도 모두 포함하여 총 개수 계산
+ * 단, 카테고리 목록 페이지(index.mdx)는 글이 아니므로 집계에서 제외
  *
  * @param {Array} items - 사이드바 아이템 배열
  * @returns {number} 모든 하위 문서(link 타입)의 총 개수
@@ -56,8 +70,8 @@ const countItemsRecursive = (items) => {
     if (item.type === 'category') {
       // 카테고리면 하위 아이템을 재귀적으로 탐색
       count += countItemsRecursive(item.items);
-    } else if (item.type === 'link') {
-      // 링크(실제 문서)면 1개 추가
+    } else if (item.type === 'link' && !isCategoryIndexLink(item)) {
+      // 링크(실제 문서)면 1개 추가 (카테고리 목록 페이지는 제외)
       count += 1;
     }
   });
@@ -189,14 +203,23 @@ function CardLink({item}) {
   const icon = "";  // 아이콘 제거
   // docId가 있으면 해당 문서의 메타데이터 가져오기
   const doc = useDocById(item.docId ?? undefined);
+  const categoryItemsPlural = useCategoryItemsPlural();
+
+  // 글이 없어 link로 접힌 카테고리는 실제로는 '글 0개인 카테고리'다.
+  // 이때 index.mdx 본문 첫 줄(`---`)이 description으로 자동 추출되어 카드에 "---"가 찍히므로,
+  // 문서 description 대신 다른 카테고리 카드와 동일한 "0 항목" 표기를 사용한다.
+  const description = isCategoryIndexLink(item)
+    ? categoryItemsPlural(0)
+    : doc?.description;
+
   return (
     <CardLayout
       className={item.className}
       href={item.href}
       icon={icon}
       title={item.label}
-      // description이 있으면 사용, 없으면 문서의 description 사용
-      description={item.description ?? doc?.description}
+      // description이 있으면 사용, 없으면 위에서 정한 기본 설명 사용
+      description={item.description ?? description}
     />
   );
 }

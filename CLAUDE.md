@@ -63,6 +63,7 @@ npm run clear      # Docusaurus 캐시 삭제
 - DocItem: 각 포스트에 날짜 표시 및 Giscus 댓글 추가, 이전/다음 네비게이션에서 카테고리 index 페이지 제외
 - DocCard: 카테고리 카드에 총 항목 개수 표시
 - DocSidebar: 카테고리 이름 옆에 글 개수 표시 (예: `Kubernetes (13)`)
+- 개수 집계 시 카테고리 목록 페이지(`index.mdx`)는 제외 — 글이 없는 카테고리는 `(0)`으로 표시
 
 **랜딩 페이지**: `src/pages/` 대신 `docs/index.mdx` 사용. 타이핑 애니메이션이 있는 히어로 섹션과 `<SelectedPosts />` 컴포넌트 포함.
 

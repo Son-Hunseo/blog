@@ -392,19 +392,31 @@ export default function DocItemContent({children}) {
 **변경 내용:**
 - 카테고리 카드에 하위 항목 총 개수 표시
 - 재귀적으로 모든 하위 문서 카운트
+- 카테고리 목록 페이지(`index.mdx`)는 글이 아니므로 집계에서 제외
 
 ```js
+// 글이 없는 카테고리는 Docusaurus가 카테고리를 link로 접어버려 index.mdx가 글 1개로 잡힌다.
+// (예: 글 0개인 Platform이 "3 items"로 표시) 이를 막기 위해 index 문서를 걸러낸다.
+const isCategoryIndexLink = (item) =>
+  item.docId === 'index' || item.docId?.endsWith('/index');
+
 const countItemsRecursive = (items) => {
   let count = 0;
   items?.forEach((item) => {
     if (item.type === 'category') {
       count += countItemsRecursive(item.items);
-    } else if (item.type === 'link') {
+    } else if (item.type === 'link' && !isCategoryIndexLink(item)) {
       count += 1;
     }
   });
   return count;
 };
+
+// 글 0개라 link로 접힌 카테고리 카드는 본문 첫 줄(`---`)이 description으로 잡히므로
+// 대신 "0 항목"을 표시한다. (CardLink)
+const description = isCategoryIndexLink(item)
+  ? categoryItemsPlural(0)
+  : doc?.description;
 ```
 
 ### 6.4 DocSidebar/index.js
@@ -412,6 +424,7 @@ const countItemsRecursive = (items) => {
 **변경 내용:**
 - 사이드바 카테고리에 글 개수 표시
 - 예: `Kubernetes (13)`, `CKA (12)`
+- 글이 없는 카테고리는 `(0)`으로 표시 (카테고리 목록 페이지 `index.mdx`는 집계 제외)
 
 ```js
 const addCountToItems = (items) => {
