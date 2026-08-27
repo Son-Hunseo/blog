@@ -80,12 +80,13 @@ npm run clear      # Docusaurus 캐시 삭제
 - Mermaid 다이어그램 활성화
 - LaTeX 수식 지원 (`remark-math`, `rehype-katex`)
 - 한국어(`ko`)가 기본 로케일
+- `trailingSlash: true` - 모든 URL을 끝 슬래시 형태로 통일 (nginx 301 리다이렉트 제거, Algolia 크롤링 정상화)
 - 라이트 모드 기본값 (`colorMode.defaultMode: 'light'`, 시스템 설정 무시)
 - 우측 목차 `maxHeadingLevel: 4` (`####`까지 표시)
 
 ## 배포
 
-- **Docker**: 멀티 스테이지 빌드 (Node 20 -> Nginx)
+- **Docker**: 멀티 스테이지 빌드 (Node 20 -> Nginx). 루트의 `nginx.conf`를 `/etc/nginx/conf.d/default.conf`로 복사하며, TLS를 앞단 Nginx Gateway Fabric에서 끊는 구조라 `absolute_redirect off`로 리다이렉트 `Location`을 상대 경로로 발급해 https -> http 스킴 다운그레이드를 막습니다
 - **CI/CD**: `.github/workflows/build-push-and-bump-tag.yaml`가 main 브랜치 push 시 실행되며 두 개의 job으로 구성
   - `deploy-onprem`: self-hosted runner에서 Harbor(`harbor.onprem.arpa/son/blog`)로 푸시 (`vars.ENABLE_ONPREM`로 토글)
   - `deploy-aws`: OIDC로 AWS 인증 후 ECR로 푸시 (`vars.ENABLE_AWS`로 토글)

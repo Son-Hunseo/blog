@@ -36,6 +36,9 @@ const config = {
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
+  // 모든 URL을 끝 슬래시 형태로 통일 (사이트맵/canonical/내부 링크)
+  // nginx 디렉토리 리다이렉트(301)를 없애 Algolia 크롤러가 페이지를 건너뛰지 않게 함
+  trailingSlash: true,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.

@@ -63,6 +63,7 @@ son-blog/
 │   ├── workflows/build-push-and-bump-tag.yaml   # 온프렘/AWS 2중 배포 파이프라인
 │   └── scripts/calc_next_tag.py                 # 이미지 태그 자동 증가 스크립트
 ├── Dockerfile                     # 멀티 스테이지 빌드 (Node 20 -> Nginx)
+├── nginx.conf                     # 프로덕션 nginx 설정 (absolute_redirect off)
 └── package.json
 ```
 
@@ -143,6 +144,7 @@ docs: {
 | 항목 | 기본값 | 현재 값 |
 |------|--------|---------|
 | `onBrokenMarkdownLinks` | (없음) | `'warn'` (신규 추가) |
+| `trailingSlash` | (없음 = `undefined`) | `true` (신규 추가, 3.3.3 참고) |
 | `organizationName` / `projectName` | `'facebook'` / `'docusaurus'` | 미사용 (주석 처리, GitHub Pages 배포 안 함) |
 | `themeConfig.image` (소셜 카드) | `img/docusaurus-social-card.jpg` | `img/default-image.png` |
 | `navbar.logo.src` | `img/logo.svg` | `img/logo.png` (실제로는 빈 이미지, 로고 숨김 용도) |
@@ -157,6 +159,16 @@ themeConfig: {
   },
 }
 ```
+
+### 3.3.3 URL 끝 슬래시 통일 (신규)
+
+```js
+trailingSlash: true,
+```
+
+기본값(`undefined`)에서는 빌드 산출물이 `path/index.html`로 떨어지는데 사이트맵·`canonical`·`og:url`은 슬래시 없는 `/path`로 생성됩니다. 그러면 nginx가 `/path` 요청마다 `/path/`로 301을 발급하고, TLS를 앞단 Nginx Gateway Fabric에서 끊는 구조라 `Location` 헤더에 `http://`가 박혀 스킴 다운그레이드까지 발생했습니다. Algolia Crawler는 이 리다이렉트를 크롤 범위 밖으로 판단해 따라가지 않아, 사이트맵의 슬래시 없는 186건이 전부 Ignored 처리됐습니다.
+
+`trailingSlash: true`로 모든 URL을 슬래시 형태로 통일해 리다이렉트 자체를 없앴습니다. 서버 쪽 보완은 루트의 `nginx.conf` (`absolute_redirect off`) 참고.
 
 ### 3.4 Google Analytics 추가 (신규)
 
@@ -713,6 +725,7 @@ Obsidian과 Docusaurus에서 동일한 색상 클래스를 사용하기 위한 �
 | `src/theme/` | 신규 | 5개 테마 오버라이드 |
 | `plugins/` | 신규 | gather-meta-plugin.js |
 | `Dockerfile` | 신규 | 멀티 스테이지 빌드 (Node 20 -> Nginx) |
+| `nginx.conf` | 신규 | 프로덕션 nginx 설정 (`absolute_redirect off`) |
 | `.github/` | 신규 | 온프렘/AWS 2중 배포 워크플로 + 태그 계산 스크립트 |
 
 ---
