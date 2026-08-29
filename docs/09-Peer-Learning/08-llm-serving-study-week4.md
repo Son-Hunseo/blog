@@ -406,3 +406,268 @@ KV 캐시 크기는 입력 길이에 선형적으로 비례한다.
 ---
 ### 왜 LLM 특화 프레임워크를 사용해야하는가?
 
+범용 서빙 프레임워크(TensorFlow Serving, TorchServe, Triton)는 이미지/정형 데이터용으로 설계되어 LLM에는 부적합하며, 이 때문에 전문 LLM 서빙 프레임워크가 필요하다.
+
+**LLM Serving의 5가지 과제**
+
+1. 자기회귀적 생성
+	- LLMs은 토큰 단위로 출력을 생성합니다. 이미지 모델과 달리 추론 세션은 몇 초에서 몇 분 동안 열려 있을 수 있다.
+2. 컨텍스트 길이 폭증
+	- 모델은 몇 개의 토큰에서 수십만 개, 심지어 백만 개에 이르는 다양한 크기의 입력 prompts를 처리해야 한다.
+3. 지속적인 Batch
+	- 요청마다 입력 및 출력 길이가 크게 다르다. 정적 배칭 전략은 GPU를 충분히 활용하지 못한다.
+4. 스트리밍 요구 사항
+	- 사용자는 수백 밀리초 이내의 첫 토큰 출력 시간(TTFT)와 지속적인 토큰 스트리밍을 기대한다.
+5. 리소스 활용도
+	- GPU는 고가이다. 파편화나 유휴 토큰으로 인해 GPU FLOPS를 낭비하는 것은 대규모 환경에서는 용납될 수 없다.
+
+> vLLM, TensorRT-LLM, SGLang 등은 페이지 단위 KV 캐싱, 연속 배칭, LLM 전용 양자화, 추측 디코딩 등의 혁신으로 이 문제들을 해결한다.
+
+---
+### vLLM
+
+----
+#### 개요
+
+**vLLM의 핵심 가치**
+- 긴 프롬프트·높은 메모리 요구·다중 사용자 동시 서빙이라는 **LLM 서빙의 근본적 어려움을 해결**하며 오픈소스/엔터프라이즈 양쪽에서 빠르게 확산
+
+**핵심 기술**
+- 페이지 단위 KV 캐싱 + 연속 배칭 → 처리량 향상, 지연 시간 감소 (프레임워크의 근본 혁신)
+- **부가 기능**: 양자화, 추측 디코딩, 스트리밍, 멀티 GPU/분산 실행
+
+**적합한 사용 사례**
+- 챗봇/RAG, 배치 텍스트 생성, 멀티 테넌트 서빙, 실시간 애플리케이션
+
+**인기 요인** 
+1. 실전 검증됨
+2. 오픈소스/자체 파인튜닝 모델과 쉬운 통합
+3. 깊은 튜닝 없이도 GPU 효율 극대화
+4. 기본 설정만으로 예측 가능한 성능
+
+**아키텍처적 강점**
+- 깔끔하고 확장 가능한 설계 → **최신 연구 성과를 빠르게 흡수** + 활발한 커뮤니티 → 미래 지속 가능성
+
+---
+#### 아키텍처
+
+**vLLM의 두 가지 사용 방식**
+
+![](assets/08-llm-serving-study-week4/vllm-archi1.png)
+
+```python
+from vllm import LLM, SamplingParams
+
+llm = LLM(model="Qwen/Qwen3-8B")
+
+outputs = llm.generate(
+    ["Kafka와 RabbitMQ 차이를 설명해줘"],
+    SamplingParams(max_tokens=200)
+)
+```
+
+- **LLM Class**
+	- **오프라인 추론을 위한** 순수 Python 로컬 인터페이스
+	- 별도의 서버나 웹 API가 필요하지 않는다. 
+	- 이 "**라이브러리 모드**"는 vLLM을 기존 서비스나 배치 워크플로에 직접 연결하고자 할 때 이상적
+
+```bash
+vllm serve Qwen/Qwen3-8B \
+  --host 0.0.0.0 \
+  --port 8000
+```
+
+```
+POST http://vllm-service:8000/v1/chat/completions
+```
+
+- **API Server**
+	- GPU가 붙은 서버/Pod 안에서 vLLM 프로세스를 계속 띄워두고, HTTP API로 추론 요청을 받는 방식
+	- OpenAI 호환 HTTP 엔드포인트, 프로덕션/멀티클라이언트/스트리밍용
+
+
+![](assets/08-llm-serving-study-week4/vllm-archi2.png)
+
+- **LLMEngine**
+	- `LLMEngine`은 vLLM 추론 시스템의 상위 수준 인터페이스이자 주 진입점이다.
+	- 사용자가 상호작용하는 공개 API 역할을 하는 동시에, 내부적으로는 하위의 모든 컴포넌트를 조율한다. (Kubernetes에서의 kube-apiserver와 비슷)
+	- `LLMEngine`은 모든 컴포넌트를 명확한 데이터 흐름을 가진 하나의 응집력 있는 시스템으로 통합한다. 
+	- 동기 및 비동기 서빙 시나리오를 모두 처리하며, 요청 처리 파이프라인의 오케스트레이션, 요청 큐 및 설정 관리 등 전체 요청 생명주기를 관리한다.
+		- 요청을 큐에 넣고
+		- 어떤 요청부터 처리할지 정하고
+		- 필요한 모델/GPU/KV Cache 자원을 배정하고
+		- 실제 모델 추론을 실행시키고
+		- 생성된 토큰을 다시 사용자에게 전달하는
+
+- **EngineCore**
+	- `EngineCore` 는 vLLM 추론 엔진의 중앙 오케스트레이터이다.
+	- 모델 익스큐터, 출력 프로세서, 스케줄러를 통합하며, 모든 주요 컴포넌트를 조율하고 전체 요청 처리 파이프라인을 관리하는 "**내부 루프**(inner loop)" 역할을 한다.
+
+- **Scheduler**
+	- `Scheduler`는 vLLM 내부에서 **현재 대기 중인 여러 요청 중 어떤 요청을 이번 iteration에 얼마나 처리할지 결정하는 컴포넌트**이다.
+	- 쉽게 말하면 **GPU 추론 작업의 교통 관제사** 역할을 한다.
+	- 제한된 GPU 연산량과 KV Cache 메모리를 여러 요청에 효율적으로 배분하면서 **처리량(throughput)을 높이고 요청 간 공정성을 유지**하는 것이 핵심 역할이다.
+	- 주요 역할은 다음과 같다.
+	    - 현재 대기 중인 요청들의 상태 확인
+	    - 이번 iteration에서 실행할 요청 선택
+	    - 각 요청별로 처리할 토큰 수 결정
+	    - KV Cache 블록 할당 및 관리
+	    - 여러 요청을 하나의 실행 단위로 묶어 배치 구성
+	    - Prefix Caching, Chunked Prefill, Token-level Scheduling 같은 모델 비종속 최적화 적용
+	- 스케줄링 결과는 `SchedulerOutput`이라는 형태로 만들어 `ModelExecutor`에 전달한다.
+	- `SchedulerOutput`은 쉽게 말하면 다음과 같은 **GPU 실행 작업 지시서**이다.
+		- "이번 iteration에서는 A 요청 3토큰, B 요청 1토큰, C 요청 4토큰을 처리해라. 각 요청은 이 KV Cache 블록을 사용하며, 필요한 입력과 메타데이터는 이것이다."
+
+- **ModelExecutor, (GPU) Worker, ModelRunner**
+	- vLLM은 **각 모델을 별도의 프로세스 또는 프로세스 그룹에서 호스팅하고 실행**하기 때문에, 프로세스 간 통신을 처리하고, 분산 워커 그룹을 조율하며, 다양한 모델 순전파 실행 세부사항을 처리하기 위해 계층화된 아키텍처를 사용한다. 
+	- 이 아키텍처는 세 가지 컴포넌트로 구성된다.
+		- **ModelExecutor** : 여러 워커 프로세스를 조율하고 관리
+		- **GPUWorker** : 각 워커 프로세스에서 실행되며 디바이스/모델 생명주기를 관리하는 워커 인터페이스 역할
+		- **GPUModelRunner** : 실제로 신경망을 실행
+
+![](assets/08-llm-serving-study-week4/vllm-archi3.png)
+
+> 위처럼 메인프로세스와 워커프로세스를 나누는 관심사의 분리(separation of concerns)를 통해 각 컴포넌트는 컴포넌트 간의 깔끔한 인터페이스를 유지하면서 자신의 특정 모델 실행 책임에 집중할 수 있다.
+
+---
+#### 모델 초기화 워크플로우 (멀티 프로세스 워커 포함)
+
+![](assets/08-llm-serving-study-week4/model-init-workflow.png)
+
+
+```python
+lm = LLM(
+  model="Qwen/Qwen2.5-7B-Instruct",
+  # specify 4 workers
+  tensor_parallel_size=4,
+  # use multi-process model executor
+  distributed_executor_backend="mp"
+)
+```
+
+1. 메인 프로세스 초기화
+	- `LLM()` 생성 → `LLMEngine`, `Scheduler`, `KVCacheManager`, `MultiProcessExecutor` 등 주요 컴포넌트를 메인 프로세스에서 기동
+
+2. 워커 프로세스 그룹 생성
+	- `MultiProcessExecutor` → N개 워커 프로세스 spawn + `rpc_broadcast_mq` (메인 → 워커 명령/신호 전달용 큐 - 프로세스간 통신 위함) 설정
+
+3. 워커 프로세스 초기화
+	- 각 워커 → `GPUWorker` 실행 → CUDA 디바이스 설정, 프로세스 간 통신 수립, 모델 로드 + `worker_response_mq` (워커 → `ModelExecutor` 결과 반환용 큐) 유지
+
+4. 모델 준비 및 로드
+	- `GPUModelRunner` → 모델 레지스트리에서 구현체 조회 (예: Qwen → `Qwen3NextForCausalLM`) →`__init__` 호출 → 가중치를 GPU에 로드
+
+---
+#### 생성 요청 실행 워크플로우
+
+> 이전 모델 초기화 워크플로우가 완료되면 서빙할 준비가 된 것이다.
+> 
+> 이제, 생성 요청 실행 워크플로우를 알아보자.
+
+![](assets/08-llm-serving-study-week4/request-exec-workflow.png)
+
+|단계|담당 컴포넌트|역할|
+|---|---|---|
+|1|Processor|입력 검증·토큰화 → Request 객체 생성|
+|2|LLMEngine → EngineCore → Scheduler|다음 배치 결정, PagedAttention·Continuous Batching 등 최적화 적용|
+|3|MultiProcessExecutor → GPU Worker|실제 모델 forward pass 실행|
+|4|Output Processor|모델 출력 → 최종 응답 변환|
+
+1. **입력 요청 전처리**
+    - `Processor` → 사용자 프롬프트 검증 및 토큰화 → 추론 옵션과 함께 내부 `Request` 객체로 변환
+
+2. **요청 스케줄링**
+    - `LLMEngine` → `EngineCore` 반복 호출
+    - `EngineCore` → `Scheduler` 호출 → 이번 iteration에서 처리할 요청과 토큰 수 결정
+    - Continuous Batching, KV Cache 관리, Prefix Caching, Chunked Prefill 등의 최적화 적용 → `SchedulerOutput` 생성
+
+3. **GPU 모델 실행**
+    - `EngineCore` → `SchedulerOutput`을 `MultiProcessExecutor`에 전달
+    - `MultiProcessExecutor` → 워커 프로세스에 작업 전달
+    - `GPUWorker` → `GPUModelRunner`를 통해 실제 모델 Forward Pass 수행 → 다음 토큰 계산
+
+4. **결과 처리 및 반복**
+    - 모델 결과 → `EngineCore`로 반환 → `Output Processor`가 디코딩 및 완료 여부 처리
+    - 미완료 요청은 다시 `Scheduler`로 보내 다음 iteration 수행
+    - 완료된 요청은 `LLMEngine`을 통해 최종 응답으로 반환
+
+---
+#### Scheduler Deep Dive
+
+**vLLM Scheduler**는 "교통 관제탑" 역할을 하며, **5가지 핵심 책임**을 가진다.
+
+1. **자원 오케스트레이션**
+	- WAITING/RUNNING 큐 관리, GPU 메모리·KV 캐시·토큰 예산 기반 동적 결정
+2. **토큰 단위 스케줄링**
+	- prefill/decode를 분리하지 않고 요청이 아닌 토큰 단위로 스케줄링 → 더 세밀한 제어
+	- <span class="t-red">Scheduler는 이 토큰이 prefill인지 decode인지보다, 각 요청에서 “아직 계산되지 않은 토큰이 몇 개인가”를 본다.</span>
+3. **최적화 통합 허브**
+	- 프리픽스 캐싱, 추측 디코딩, 청크드 프리필, 분산 KV 캐시 전송을 상황에 맞게 적용
+4. **동적 부하 분산**
+	- 도착/완료/선점 등 이벤트에 실시간 대응, 지연시간-처리량 균형
+5. **생명주기 관리**
+	- FCFS/우선순위 정책, 자원 부족 시 선점(preemption)
+
+![](assets/08-llm-serving-study-week4/scheduler-deep-dive.png)
+
+1. **초기화**
+	- 신규/재개/실행중/선점된 요청 수집, 가용 토큰·인코더 예산 갱신
+2. **RUNNING 요청 우선 처리**
+	- 이미 KV 캐시를 점유 중이므로 먼저 처리 → 이 과정에서 청크드 프리필, 프리픽스 캐싱, 추측 디코딩 적용, 필요 시 선점
+3. **WAITING 요청 처**리
+	- 남은 예산 내에서 활성화, 동일한 최적화 혜택
+4. **후처리**
+	- LoRA 어댑터 추적, 멀티모달 인코더 입력 준비, 추측 토큰 확정
+5. **SchedulerOutput 생성**
+	- 스케줄링된 요청·토큰 수·KV 캐시 할당 정보를 묶어 모델 실행기(Executor)에 전달
+
+> [!tip] 핵심은 "우선순위 결정"과 "토큰 스케줄링"을 분리했다는 것
+> - 우선 순위 결정
+> 	- 큐(WAITING/RUNNING) → 요청의 처리 순서를 결정 (FCFS, 우선순위 등)
+> - 토큰 스케줄링
+> 	- `num_computed_tokens`(이 요청에서 계산 한 토큰 수) 와 `num_tokens_with_spec`(이 요청에서 계산해야하는 전체 토큰 수)의 차이를 계산 → 각 요청이 이번 스텝에 몇 개 토큰을 처리할지 결정
+> - <span class="t-red">이 둘을 분리했기 때문에, 다양한 요청 우선순위 정책과 실행 최적화 기법을 서로 독립적으로 조합할 수 있는 유연한 구조가 만들어진다.</span>
+
+---
+#### vLLM의 계층적 최적화 전략
+
+> vLLM의 핵심 설계 철학은 "**최적화는 그것이 속한 올바른 계층에서 이루어져야 한다**"는 것이다.
+
+LLM 아키텍처와 하드웨어가 매우 빠르게 변화하기 때문에, 특정 모델·하드웨어에 최적화를 하드코딩하면 시스템이 금방 낡아버린다.
+
+이를 해결하기 위해 **vLLM은 최적화 책임을 4개 계층으로 분리**한다.
+
+1. `Scheduler`
+	- 범위(시스템 전반의, 모델 무관 최적화) → 배칭, 캐싱, 공정성·처리량 관리
+    - `Scheduler`는 **시스템 레벨에서의 공정성, 효율성, 확장성을 책임**진다.
+
+2. `ModelExecutor`
+	- 범위(**모델 아키텍처별** 최적화) → Transformer용 융합 어텐션 커널, 멀티모달 인코더 특수 연산자
+    - `Scheduler`는 모델에 무관하게 유지되는 반면, `ModelExecutor`는 각 모델 아키텍처의 세부사항을 이해한다.
+    - 예를 들어, Transformer 기반 모델에는 융합된(fused) 어텐션 커널을, 멀티모달 인코더에는 특수 연산자를 적용한다.
+    - 이 레벨은 **아키텍처를 인지하는 최적화를 분리**하여, 시스템 레벨 스케줄링과 독립적으로 진화할 수 있게 합니다.
+
+3. **모델 레이어**
+	- 범위(**컴포넌트별** 최적화) → KV 캐시 재사용, 플래시 어텐션, 레이어 단위 연산자 융합
+    - 모델 아키텍처의 레이어 수준(예: 어텐션 레이어, 피드포워드 블록)에서는 최적화가 연산 병목에 맞춰 조정된다.
+    - KV 캐시 재사용, 플래시 어텐션, 레이어 단위 연산자 융합 같은 기법들이 여기서 일어난다.
+    - 이 설계는 특정 하위 컴포넌트를 대상으로 하는 최적화가 시스템 전반의 스케줄링 로직으로 새어 나가지 않도록 보장한다.
+
+4. `CustomOp`
+	- 범위(**하드웨어별** 최적화) → CUDA 커널, 텐서 코어 가속, 양자화 연산자
+    - 마지막으로, `CustomOp`는 CUDA 커널, 텐서 코어 가속, 양자화된 연산자 같은 기저 하드웨어에 대한 최적화를 담당한다.
+    - 이를 별도로 분리함으로써, vLLM은 상위 레벨의 스케줄링이나 모델 로직을 바꾸지 않고도 새로운 GPU 기능과 가속기를 활용할 수 있다.
+
+> [!tip] 설계 의도
+> - **위로 갈수록(Scheduler) 범용적이고 모델에 무관하며, 아래로 갈수록(CustomOp) 특정 하드웨어에 특화됨**
+> - 각 계층이 자신의 관심사만 처리하므로, **한 계층의 변경이 다른 계층에 영향을 주지 않음** (예: 새 GPU가 나와도 Scheduler·모델 로직은 그대로 두고 CustomOp만 확장)
+> - 결과적으로 **vLLM은 새로운 모델 아키텍처나 하드웨어가 등장해도 전체 시스템을 재설계할 필요 없이**, 해당 최적화를 알맞은 계층에 "끼워 넣기"만 하면 되는 **미래 대비적(futureproof) 구조**를 갖게 됨
+
+---
+### TensorRT-LLM
+
+---
+#### 개요
+
+
+
