@@ -193,6 +193,11 @@ $$ X_{input} = X_{embedding} + P_{position}$$
 이렇게 하면 같은 단어라도 문장 안에서 위치가 다르면 서로 다른 입력 벡터가 된다.
 
 ---
+## 참고) KV Cache 시각화
+
+![](assets/01-attention/kv-cache.png)
+
+---
 ## 레퍼런스
 
 - https://www.youtube.com/watch?v=6s69XY025MU
