@@ -370,6 +370,7 @@ Auto Ack은 Consumer의 응답과 상관없이 **Consumer가 메시지를 받는
 |ON|OFF|Publisher → RabbitMQ 전달은 확인 가능, Consumer 처리 중 유실 가능|
 |OFF|ON|Consumer 처리 실패 시 재처리 가능, Publisher가 메시지를 제대로 보냈는지는 확인 불가|
 |ON|ON|Publisher 전달 확인 + Consumer 처리 완료 확인 가능|
+
 중요한 메시지는 Manual Ack + Publisher Confirm ON이 일반적으로 더 안전하지만, 아무래도 처리하는데 더 많은 비용을 요구한다.
 
 트레이드 오프를 잘 생각하고 결정
