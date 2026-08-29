@@ -1,6 +1,6 @@
 ---
 title: Hands-On LLM Serving Optimization Study - Week4
-description: --
+description: Speculative Decoding, 분산 추론, Prefill-Decode 분리, 고급 KV Cache 최적화와 vLLM·TensorRT-LLM·SGLang·llama.cpp 등 주요 LLM Serving Framework의 구조와 선택 기준을 정리합니다.
 date: 2026-08-29
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/05-llm-serving-study-week1/llm-serving-book.jpg
@@ -669,5 +669,255 @@ LLM 아키텍처와 하드웨어가 매우 빠르게 변화하기 때문에, 특
 ---
 #### 개요
 
+> `TensorRT-LLM`은 NVIDIA가 만든 **자사 GPU 전용 고성능 LLM 추론 라이브러리**
 
+- **핵심 방식**
+	- 모델 체크포인트 → 고도로 튜닝된 TensorRT 엔진으로 컴파일
+- **런타임**
+	- Python/C++ 런타임 제공
+- **주요 기능**
+	- in-flight batching(연속 배칭)
+	- 페이지드 KV 캐시
+	- 추측 디코딩
+	- 다중 정밀도 양자화(FP8/FP4/INT4/INT8)
+	- 텐서/파이프라인 병렬화
+- **생태계 통합**
+	- `NVIDIA Dynamo`, `Triton`과 긴밀히 연동
+- **API 사용성**
+	- vLLM과 거의 동일한 고수준 LLM(`model=...`) / `generate()` 인터페이스 제공 → 사용 편의성 확보
 
+---
+#### 간단한 예시
+
+```bash
+llm = LLM(model="Qwen/Qwen3-7B")
+
+# 샘플 프롬프트.
+prompts = [
+   "Hello, my name is",
+   "The capital of France is",
+   "The future of AI is",
+]
+
+# 샘플링 파라미터 생성.
+sampling_params = SamplingParams(temperature=0.8, top_p=0.95)
+
+# 모델 생성 요청 실행
+for output in llm.generate(prompts, sampling_params):
+   print(
+       f"Prompt: {output.prompt!r}, Generated text: {output.outputs[0].text!r}"
+   )
+```
+
+---
+#### 포지셔닝 및 적합한 사용처
+
+**핵심 포지셔닝**
+- TensorRT-LLM의 목표는 범용성이 아니라 **NVIDIA 하드웨어에서 낼 수 있는 최대 실전 성능**을 뽑아내는 것이다.
+- 즉, vLLM이 "모델·하드웨어에 무관한 유연성"을 추구하는 것과 대조적으로, TensorRT-LLM은 "**NVIDIA GPU의 Tensor Core·CUDA 커널을 극한까지 활용**하는 것"에 초점을 맞춘다.
+
+**적합한 사용처**
+- 이미 **NVIDIA 하드웨어와 서빙 스택(Triton, Dynamo 등)으로 표준화**되어 있고, **프로덕션에서 최고 수준의 처리량·효율성이 필요**한 조직에 가장 적합하다.
+- 앞서 다룬 vLLM이 다양한 하드웨어·모델에 걸친 범용 프레임워크를 지향한다면, TensorRT-LLM은 **NVIDIA 생태계 안에서의 "끝판왕 성능**"을 지향한다고 이해하면 된다.
+
+---
+### SGLang
+
+---
+#### 개요
+
+![](assets/08-llm-serving-study-week4/sglang.png)
+
+> SGLang은 structured generation(ex: JSON 포맷)과 에이전트 애플리케이션을 타깃으로 하는 비교적 새로운 프레임워크이다.
+> 
+> 빠른 백엔드 런타임(커널, 캐싱, 스케줄링)을 유연한 프론트엔드 언어 및 API(OpenAI 호환 및 네이티브)와 함께 공동 설계하여, 생성을 더 빠르고 더 제어 가능하게 만든다.
+> 
+> SGLang은 LLM과 비전-언어 모델(VLM)을 위한 오픈소스 고성능 서빙 프레임워크이다.
+> 
+> vLLM의 직접적인 동급 경쟁 프레임워크
+
+- **설계 철학**
+	- 빠른 백엔드 런타임 + 유연한 프론트엔드 언어/API를 공동 설계
+- **핵심 기능**
+	- RadixAttention(프리픽스/KV 재사용)
+	- 연속 배칭
+	- 페이지드 KV
+	- 추측 디코딩(EAGLE-2/3)
+	- 청크드 프리필
+	- 구조화된 출력
+	- 멀티-LoRA
+	- 다양한 병렬화(텐서/파이프라인/전문가/데이터)
+- **하드웨어 지원**
+	- NVIDIA뿐 아니라 AMD Instinct, CPU, TPU, Jetson Orin, Ascend까지 vs TensorRT-LLM보다 훨씬 폭넓음
+- **API 사용성**
+	- vLLM·TensorRT-LLM과 유사한 고수준 `Engine/generate()` 인터페이스
+
+---
+#### 간단한 예시
+
+```bash
+# Qwen3 모델 로드
+llm = sgl.Engine(model_path="Qwen/Qwen3-7B")
+
+prompts = [
+    "Hello, my name is",
+    "The president of the United States is",
+    "The capital of France is",
+    "The future of AI is",
+]
+sampling_params = {"temperature": 0.8, "top_p": 0.95}
+
+# 모델 생성 요청 실행
+outputs = llm.generate(prompts, sampling_params)
+for prompt, output in zip(prompts, outputs):
+    print("===============================")
+    print(f"Prompt: {prompt}\nGenerated text: {output['text']}")
+```
+
+---
+#### 다른 프레임워크 비교 및 차별점
+
+**비교**
+- **TensorRT-LLM**
+	- NVIDIA GPU 전용, 최대 실전 성능에 특화
+- **vLLM**
+	- 모델·하드웨어 무관, 가장 큰 오픈소스 생태계·커뮤니티
+- **SGLang**
+	- 멀티 벤더 하드웨어 지원 + RadixAttention 기반 프리픽스 재사용 강점, 구조화된 출력·에이전트 워크플로우에 특화되어 vLLM의 대안이자 경쟁자로 부상 중
+
+**핵심 차별점**
+- RadixAttention은 여러 호출에 걸친 KV 캐시 재사용을 트리(radix tree) 구조로 관리하여, 특히 반복적인 프리픽스가 많은 에이전트/멀티턴 시나리오에서 강점을 보인다.
+- 성능은 vLLM과 경쟁력 있는 수준이지만, vLLM이 아직 더 넓은 커뮤니티·생태계를 갖고 있다는 것이 현재 시점(2026년)의 주요 차이로 언급된다.
+
+---
+### Llama.cpp
+
+---
+#### 개요
+
+![](assets/08-llm-serving-study-week4/llama-cpp.png)
+
+> `llama.cpp`는 로컬·엣지·온프레미스 환경에서 LLM을 가볍게 실행하는 데 초점을 둔 오픈소스 C/C++ 추론 프레임워크이다.
+> 
+> 노트북과 워크스테이션부터 서버, 엣지 디바이스까지 다양한 하드웨어에서 동작하며, **최고 처리량보다는 이식성·단순성·비용 효율성**을 우선한다.  
+> 
+> 모델은 주로 **GGUF 포맷**을 사용하며, CLI뿐 아니라 **OpenAI 호환 HTTP 서버** 형태로도 실행할 수 있다.  
+> `vLLM`·`TensorRT-LLM`·`SGLang`이 데이터센터 GPU 기반의 고처리량 서빙에 집중한다면, `llama.cpp`는 **“어디서든 최소한의 구성으로 LLM을 실행하는 것”** 에 강점이 있다.
+
+- **설계 철학**
+    - 최소한의 의존성과 가벼운 런타임
+    - 다양한 하드웨어에서의 높은 이식성
+    - 절대적인 최고 처리량보다 단순성·비용 효율성 우선
+- **핵심 기능**
+    - GGUF 모델 포맷
+    - 8/6/5/4비트 등 다양한 정수 양자화
+    - CPU SIMD 최적화
+    - CPU/GPU 혼합 추론 및 GPU Offloading
+    - CLI 기반 로컬 추론 및 벤치마킹
+    - OpenAI 호환 HTTP 서버
+- **하드웨어 지원**
+    - CPU를 기본 타깃으로 폭넓게 지원
+    - NVIDIA CUDA
+    - AMD ROCm
+    - Apple Metal
+    - Vulkan 등 다양한 가속 백엔드 지원
+    - vLLM·TensorRT-LLM보다 저사양·로컬·엣지 환경에 적합
+- **적합한 사용처**
+    - 개인 PC 및 로컬 개발 환경
+    - 프라이버시가 중요한 온디바이스 추론
+    - 엣지 디바이스
+    - GPU가 없거나 제한적인 환경
+    - 비용을 최소화해야 하는 소규모 LLM 서빙
+
+---
+#### 간단한 예시
+
+Qwen3 모델을 CPU 디바이스에서 실행하는 간단한 예시
+
+ ```bash
+ from llama_cpp import Llama
+
+# llama.cpp로 CPU에서 Qwen3 모델 실행
+# Hugging Face에서 Qwen 모델(GGUF 포맷)을 로드
+llm = Llama.from_pretrained(
+   repo_id="Qwen/Qwen3-8B-GGUF",
+   filename="*Q8_0.gguf",
+   verbose=False
+)
+
+# 고수준 API로 LLM 생성 실행
+output = llm(
+     "Q: Name the planets in the solar system? A: ", # 프롬프트
+     max_tokens=32, # 최대 32개 토큰 생성
+     stop=["Q:", "\n"], # 모델이 새 질문을 생성하기 직전에 멈춤
+     echo=True # 출력에 프롬프트를 그대로 포함
+)
+
+# 채팅 완성 API 예시
+output = llm.create_chat_completion(
+    messages=[
+        {
+            "role": "system",
+            "content": "You are an assistant who perfectly describes "
+                       "images.",
+        },
+        {
+            "role": "user",
+            "content": "Describe this image in detail please.",
+        },
+    ])
+ ```
+
+---
+#### Llama.cpp 의 장점
+
+- 모든 LLM 애플리케이션이 고처리량 서빙을 필요로 하는 것은 아니다.
+- 추론을 로컬(온디바이스 또는 온프레미스 엣지)에서 실행할 때는 목표가 달라진다.
+    - 플릿 전체의 초당 토큰 수가 아니라, 지연 시간과 응답성을 최적화하고 싶어짐
+    - 낮은 동시성(흔히 단일 사용자)이므로 대규모 배칭과 복잡한 스케줄러의 가치가 줄어듦
+    - 메모리·연산·전력 측면의 풋프린트와 비용이 주요 제약이 됨
+    - 프라이버시와 오프라인 신뢰성이 최우선 요구사항이 됨
+- Llama.cpp는 이 프로필에 딱 들어맞다.
+    - **CPU, Apple Silicon, 소형 GPU에서 오픈 웨이트 모델을 직접 실행**할 수 있고, 드롭인 통합을 위한 **OpenAI 호환 서버를 제공**한다.
+    - 그 결과, 토큰당 클라우드 요금이나 데이터 유출 없이, 로컬 개발, 프라이빗·온프레미스 어시스턴트, 엣지 배포를 위한 초저비용·저운영 서빙 옵션이 만들어진다.
+
+> [!info] API 노출
+> - `llama.cpp`를 REST API 호출로 노출하고 싶다면, `llama.cpp`(그리고 때로는 `Mistral.cpp`나 `RWKV Runner` 같은 다른 백엔드)를 감싸서 로컬 LLM 사용을 간단하고 일관되며 개발자 친화적으로 만드는 상위 레벨 프레임워크인 `Ollama`를 사용할 수 있다.
+
+---
+### 올바른 프레임 워크 선택하기
+
+> 프레임워크 선택은 "벤치마크 1위"가 아니라 "내 SLO·워크로드·운영 현실에 맞는가"를 기준으로 해야 한다.
+
+---
+#### 일반적으로 권장하는 평가 접근법 6단계
+
+1. **기능이 아니라 SLO부터 시작**
+    - 지연 시간(TTFT, p95/p99), 처리량(TPS/QPS), 토큰당 비용, 품질 제약(구조화된 JSON, 안전성), 가용성에 대한 목표를 고려한다.
+2. **사용 사례에서 나오는 실제 프롬프트를 분석**
+    - prefill 위주인지 decode 위주인지, 컨텍스트 길이는 어느 정도인지, 도구 호출(tool call)이나 멀티턴 체인이 포함되는지를 명확히 한다.
+3. **동일한 조건으로 비교**
+    - 경쟁 프레임워크들 사이에서 동일한 모델, dtype/양자화, 최대 시퀀스 길이, 배치/동시성, 스트리밍 설정을 사용해 동일한 조건으로 비교가 되도록 한다.
+4. **운영성을 측정**
+    - 콜드 스타트 시간, 관측 가능성(observability), 오토스케일링 동작, 멀티테넌시 공정성, 업그레이드 마찰, 장애 모드 같은 지표를 활용한다.
+5. **하드웨어와 벤더 종속(lock-in)을 고려하라.**
+    - 여러 벤더(예: NVIDIA/AMD/CPU/TPU/엣지)를 사용한다면, 이식성이 크게 중요해진다.
+6. **변화를 계획**
+    - 모델 교체와 새로운 디코딩 기법은 **매주 일어나므로, 큰 수술 없이 업데이트할 수 있는 프레임워크를 선택**해라.
+
+---
+#### 최종 프레임워크 선택 가이드
+
+|상황|추천 프레임워크|이유|
+|---|---|---|
+|빠른 프로덕션 배포, 폭넓은 모델 지원, 파이썬 워크플로우|vLLM|강력한 기본 성능 + 가장 큰 생태계|
+|에이전틱/다단계 워크플로우, 구조화된 출력(JSON/정규식), 멀티 벤더|SGLang|프리픽스/KV 재사용, 추측 디코딩, 스케일아웃 라우터|
+|NVIDIA 스택 올인, 달러당 최고 처리량|TensorRT-LLM|Triton/Dynamo 통합, 깊은 CUDA 최적화|
+|로컬/온프레미스/엣지, 저비용, 프라이버시|llama.cpp|GGUF 양자화, 이식 가능한 경량 백엔드|
+
+> [!info] 핵심
+> - 프레임워크 선택은 일회성 결정이 아니라 지속적인 재평가 과정이어야 한다.
+> - LLM 서빙 생태계가 매달 바뀌므로, 서빙 엔지니어는 3~6개월 주기로 프레임워크를 재검토하고, 프레임워크 추상화 레이어와 탈출 계획을 마련해 앱 코드를 다시 쓰지 않고도 프레임워크를 교체할 수 있어야 한다.
+> - 가장 중요한 것은 **유연성을 유지하는 것**
+
+---
