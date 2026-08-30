@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/05-CS/01-Algorithm/02-divide-and-conquer-binarysearch/divide1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-01-08
@@ -9,6 +9,7 @@ description: 문제를 작은 단위로 나누어 해결하는 분할정복 알�
 ---
 ## 분할 정복 기초
 
+---
 ### 대표 예제
 
 > [!info] **가짜 동전 찾기**
@@ -16,15 +17,15 @@ description: 문제를 작은 단위로 나누어 해결하는 분할정복 알�
 > - n개의 동전들 중에 가짜 동전이 하나 포함되어 있다. 가짜 동전은 진짜 동전에 비해 아주 조금 가볍다. 진짜 동전들의 무게가 동일하다고 할 때, 양팔 저울을 이용해서 가짜 동전을 찾아보자.
 > - 양팔 저울을 최소로 사용해서 가짜 동전을 찾는 방법은 무엇인가?
 > - 예를 들어 동전이 24(진짜 23, 가짜 1)개 있다면?
->   :::info
-**풀이 예시**
+
+**풀이**
 
 1. n = 24 : 절반(12개)씩 나눠서 비교 (가벼운 쪽에 가짜 동전이 있다)
 2. n = 12 : 6개씩 나눠서 비교
 3. (...)
 4. n = 3 : 1, 1, 1로 나눠서 1, 1을 비교 - 만약 무게가 같다면 비교하지 않은 쪽이 가짜 동전 - 무게가 다르다면 가벼운쪽 이 가짜 동전
-   :::
 
+---
 ### 개념
 
 - **분할(Divide)**: 해결할 문제를 여러 개의 작은 부분으로 나눈다.
@@ -37,6 +38,7 @@ description: 문제를 작은 단위로 나누어 해결하는 분할정복 알�
 
 ![divide1|500](assets/02-divide-and-conquer-binarysearch/divide1.png)
 
+---
 ### 예제: 거듭 제곱
 
 **(기존) 반복(Iterative) 알고리즘**: $O(n)$
@@ -65,8 +67,10 @@ Recursive_Power(C, n)
 		RETURN y * y * C
 ```
 
+---
 ## 분할 정복 응용
 
+---
 ### 예제: 같은 색 공간 만들기
 
 ![divide2|300](assets/02-divide-and-conquer-binarysearch/divide2.png)
@@ -77,15 +81,14 @@ Recursive_Power(C, n)
 > - 주어진 정사각형 공간을 일정한 규칙에 따라 나누어 다양한 크기를 갖는 정사각형 모양의 하얀색 또는 초록색의 공간으로 만들려고 한다.
 > - 입력으로 주어진 전체 공간의 한 변의 길이 N과 전체 공간을 구성하는 각 단위 정사각형 공간의 색상 (하얀색 또는 초록색)이 주어질 때 규칙에 따라 나누어진 하얀색 공간과 초록색 공간의 정사각형의 개수를 구하는 프로그램을 작성하시오.
 > - 전체 공간의 크기는 N x N (N = 2, 4, 8, 16, 32, 64, 128 중 하나)
->   :::
 >
-> ![divide3|700](assets/02-divide-and-conquer-binarysearch/divide3.png)info
-솔루션
+> ![divide3|700](assets/02-divide-and-conquer-binarysearch/divide3.png)
+
+**풀이**
 
 - 공간이 모두 같은 색으로 칠해져있지 않으면 가로와 세로로 중간 부분을 잘라서 똑같은 크기의 4개의 N/2 x N/2 공간으로 나눈다.
 - 나누어진 4 개의 공간 각각에 대해서도 앞에서와 마찬가지로 모두 같은 색으로 칠해져 있지 않으면 같은 방법으로 똑같은 크기의 4개의 공간으로 나눈다.
 - 이와 같은 과정을 나누어진 공간이 모두 하얀색 또는 초록색으로 칠해져 있거나, 하나의 정사각형 공간이 되어 더 이상 나눌 수 없을 때까지 반복한다.
-  :::
 
 **풀이 코드 예시**
 
@@ -151,9 +154,11 @@ public class DivideSpaceTest {
 }
 ```
 
+---
 ## 이진 탐색
 
-#### 개념
+---
+### 개념
 
 - 대표적인 분할 정복을 활용한 알고리즘이다. (Divide와 Conquer까지만 하고 Combine은 하지 않는다)
 - 이진 검색을 하기 위해서는 자료가 **정렬된 상태**여야 한다.
@@ -204,6 +209,7 @@ binarySearch(S[], start, end, key)
 			RETURN binarySearch(S[], start, mid - 1, key)
 ```
 
+---
 ### 일반 이진 탐색 구현 코드
 
 ```java
@@ -229,6 +235,7 @@ public class BinarySearchExample {
 }
 ```
 
+---
 ### Lower Bound 구현 코드
 
 ```java
@@ -255,6 +262,7 @@ public class BinarySearchExample {
 
 ```
 
+---
 ### Upper Bound 구현 코드
 
 ```java
@@ -279,6 +287,7 @@ public class BinarySearchExample {
 }
 ```
 
+---
 ### `java.util.Arrays.binarySearch`
 
 - `int binarySearch(int[] a, int key)`
@@ -288,3 +297,5 @@ public class BinarySearchExample {
   - 탐색실패 - `-삽입할위치-1`
   - 탐색실패시 저런 리턴값을 주는 이유는 탐색 실패시 삽입 위치가 0일 경우를 구별하기 위함
 - https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html
+
+---

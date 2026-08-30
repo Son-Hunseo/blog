@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/posts/05-CS/01-Algorithm/01-union-find/disjoint-set-1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-01-01
@@ -9,6 +9,7 @@ description: Union-Find 자료구조를 활용한 서로소 집합(Disjoint Set)
 ---
 ## 서로소 집합 - 기본
 
+---
 ### 서로소 집합 (Disjoint-set, Union-Find Algorithm)
 
 - 서로소 또는 상호 배타 집합들은 서로 중복 포함된 원소가 없는 집합들이다. 다시 말해 **교집합이 없다.**
@@ -23,6 +24,7 @@ description: Union-Find 자료구조를 활용한 서로소 집합(Disjoint Set)
     - x집합에 y집합이 흡수되는 형태인데, 어떤 대표자를 갖는 집합에 흡수시킬지는 문제를 풀 때 고려해봐야할 점이다.
     - 예: 어느 집합에 어느 집합을 흡수시키느냐에 따라서 트리의 높이가 달라질 수 있다. (대표자를 찾을 때 높이가 낮은 것이 빠른시간에 대표자를 찾을 수 있다.)
 
+---
 ### 서로소 집합 표현
 
 - 같은 집합의 원소들을 하나의 트리로 표현한다.
@@ -34,6 +36,7 @@ description: Union-Find 자료구조를 활용한 서로소 집합(Disjoint Set)
 ![disjoint-set-2|500](assets/01-union-find/disjoint-set-2.png)
 ![disjoint-set-3|500](assets/01-union-find/disjoint-set-3.png)
 
+---
 ### 서로소 집합에 대한 연산
 
 - p는 x의 부모를 저장하는 배열이다. (p\[x]는 x의 부모노드 번호이다)
@@ -118,14 +121,17 @@ public class DisjointSet {
 
 ```
 
+---
 ## 서로소 집합 - 최적화
 
+---
 ### 문제점
 
 - 최악의 경우의 수 - 대표자를 찾는데 **O(H)** 가 걸린다.
 
 ![disjoint-set-4|500](assets/01-union-find/disjoint-set-4.png)
 
+---
 ### 최적화
 
 1. **Rank(트리의 높이)를 이용한 Union**
@@ -141,14 +147,16 @@ public class DisjointSet {
 
 ![disjoint-set-6|700](assets/01-union-find/disjoint-set-6.png)
 
+---
 ## Tip
 
 > [!tip] 집합의 크기를 관리하고싶다면
 >
 > 1. 배열을 하나 더 만들어서 크기 관리
 > 2. **(추천)부모 배열을 처음에 -1로 초기화하고, Union할 때마다 대표자의 부모를 -1씩 늘려준다.** 그리고 크기를 구할때는 대표의 부모값의 절댓값을 구하면 된다.
->    :::tip
-집합의 개수 구하기
 
-- 대표자의 개수를 구하면 된다!!
-  :::
+> [!tip] 집합의 개수 구하기
+> - 대표자의 개수를 구하면 된다!!
+
+---
+

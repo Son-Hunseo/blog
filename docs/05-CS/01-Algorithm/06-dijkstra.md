@@ -1,11 +1,10 @@
-﻿---
+---
 image: /img/posts/05-CS/01-Algorithm/06-dijkstra/dijkstra1.jpeg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-02-05
 title: 최단거리 - 다익스트라(Dijkstra)
 description: 다익스트라(Dijkstra) 알고리즘의 핵심 개념부터 동작 원리, PriorityQueue 기반 구현, 2차원 응용 예제까지 한 번에 정리한 글입니다. BFS, 벨만-포드, 플로이드-워셜과의 비교를 통해 어떤 상황에서 어떤 최단 경로 알고리즘을 써야 하는지도 명확히 설명합니다.
 ---
-
 ---
 > [!tip] 최단 경로 문제 판단 기준
 >
@@ -16,6 +15,8 @@ description: 다익스트라(Dijkstra) 알고리즘의 핵심 개념부터 동�
 
 ---
 ## 동작 원리
+
+---
 ### 개념
 
 1. 출발 노드를 설정
@@ -26,6 +27,7 @@ description: 다익스트라(Dijkstra) 알고리즘의 핵심 개념부터 동�
 	- ex) <span class="t-red">A에서 C를 바로 가는 것과 A에서 B를 거쳐서 C를 가는 것의 거리를 비교해서 더 작은 비용 갱신</span>
 5. 3번 ~ 4번 반복
 
+---
 ### 예시
 
 ![dijkstra1](assets/06-dijkstra/dijkstra1.jpeg)
@@ -113,6 +115,7 @@ description: 다익스트라(Dijkstra) 알고리즘의 핵심 개념부터 동�
 > 	- `PriorityQueue`로 구현 $O((V + E) \log(V))$
 > 	- $V$: 노드 개수, $E$: 간선 개수
 
+---
 ### 기본
 
 **문제 설명**
@@ -219,6 +222,7 @@ public class Dijkstra {
 >
 > -> `if (via.price > best[via.n]) continue;` 이 코드의 의미는 '이미 더 짧은 경로로 해당 노드를 처리한 적이 있다는 의미' 이며 이는 즉, 이미 방문한 노드라는 뜻이고 그래서 생략한다. 
 
+---
 ### 응용 (2차원 배열)
 
 **문제 설명**
@@ -364,6 +368,3 @@ public class Dijkstra_2dim {
 > - [BOJ11779 - 최소 비용 구하기2](https://www.acmicpc.net/problem/11779)
 
 ---
-## 레퍼런스
-
-그림 출처 - 이것이 취업을 위한 코딩 테스트다 with 파이썬 (나동빈)

@@ -1,4 +1,4 @@
-﻿---
+---
 image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2025-01-22
@@ -6,10 +6,10 @@ title: 문자열 1 - 기본 유형
 description: 자바(Java)로 배우는 문자열 알고리즘 유형 정리. 회문(Palindrome), 문자열 뒤집기, 조건부 정렬, 단어 빈도수 계산, 애너그램(Anagram) 등 코딩 테스트에서 자주 등장하는 문자열 문제를 예제 코드와 함께 설명합니다.
 sidebar_position: 4
 ---
-
 ---
 ## 회문 (Palindrome)
 
+---
 ### 기본 유형
 
 - 회문, Palindrome은 앞뒤가 똑같은 단어나 문장을 의미
@@ -53,6 +53,7 @@ public class PalindromeChecker {
   - `Character.isLetter(a)`: `a`가 알파벳인지 아닌지 판단
   - `Character.toLowerCase(a)`: `a`를 소문자로 변환
 
+---
 ### 가장 긴 회문
 
 - 주어진 문자열에서 가장 긴 팰린드롬을 찾는 문제
@@ -97,7 +98,6 @@ public class LongestPalindrome {
 	- 하지만, 현재 공부하려는 범위를 벗어나므로 추후에 다시 정리하겠다.
 
 ---
-
 ## 문자열 뒤집기
 
 **코드 예시**
@@ -139,6 +139,7 @@ public class ReverseStringTwoPointer {
 }
 ```
 
+---
 ## 조건에 맞는 정렬
 
 **코드 예시**
@@ -190,7 +191,6 @@ public class CustomSort {
 - 새로운 Class 정의해서 `implements Comparable<Class>` 이고 `compareTo` 구현하는 방법 외우기
 
 ---
-
 ## 특정 단어 등장 횟수
 
 **코드 예시**
@@ -242,7 +242,6 @@ public class MostCommonWord {
 - `for (Map.Entry<String, Integer> entry : 해시맵.entrySet())` 이러한 반복문 패턴 외워두기
 
 ---
-
 ## 애너그램 (anagrams)
 
 - 애너그램은 문자를 재 배열하여 다른 뜻을 가진 단어로 바꾸는 것을 말함
@@ -273,3 +272,5 @@ public class GroupAnagrams {
 ```
 
 - 의외로 풀이는 매우 간단하다. 정렬해서 같으면 서로 애너그램이 가능한 것이다.
+
+---
