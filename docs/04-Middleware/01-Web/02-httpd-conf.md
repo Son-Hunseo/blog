@@ -3,7 +3,7 @@ title: Apache Http Server 설치 방법 및 운영환경에서의 주요 설정
 description: Apache HTTP Server의 소스 빌드부터 운영 환경 설정, MPM 튜닝, SSL/TLS, Tomcat 연동, Reverse Proxy, 보안 설정 및 운영 점검까지 정리한 Apache 구축·운영 가이드
 date: 2026-09-21
 sidebar_class_name: hidden-sidebar-item
-image: /img/posts/02-httpd-conf/apache.png
+image: /img/posts/04-Middleware/01-Web/02-httpd-conf/apache.png
 ---
 ---
 ## 기준

@@ -3,7 +3,7 @@ title: Tomcat 설치 방법 및 운영환경에서의 주요 설정
 description: Tomcat 설치부터 인스턴스 구성, 운영 튜닝, 세션 클러스터링, JDBC, 로그 관리 및 보안 설정까지 운영 환경 구성을 위한 전반적인 설정 방법을 정리합니다.
 date: 2026-09-28
 sidebar_class_name: hidden-sidebar-item
-image: /img/posts/03-tomcat-conf/tomcat.png
+image: /img/posts/04-Middleware/01-Web/03-tomcat-conf/tomcat.png
 ---
 ---
 ## 기준

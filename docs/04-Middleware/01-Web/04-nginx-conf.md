@@ -3,7 +3,7 @@ title: Nginx 설치 방법 및 운영환경에서의 주요 설정
 description: Nginx 소스 빌드 설치부터 nginx.conf, SSL/TLS, Reverse Proxy, Logrotate, 모듈 및 보안 설정까지 운영 환경 구성을 정리합니다.
 date: 2026-09-29
 sidebar_class_name: hidden-sidebar-item
-image: /img/posts/04-nginx-conf/nginx.png
+image: /img/posts/04-Middleware/01-Web/04-nginx-conf/nginx.png
 ---
 ---
 ## 기준
