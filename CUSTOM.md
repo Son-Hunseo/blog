@@ -309,7 +309,10 @@ const SELECTED_POST_IDS = [
 
 - URL 경로 기반 자동 필터링
 - index 페이지 제외
-- **날짜 내림차순 정렬** (최신 글이 상단, `date` 없는 글은 하단, 날짜 동일 시 파일명 숫자 프리픽스 내림차순)
+- **정렬 기준**: 1순위 파일명 숫자 프리픽스(`fileOrder`, 예: `10-aa`가 `01-aa`보다 최신), 2순위 프론트매터 `date`
+- **정렬 토글** (`SortToggle`): `최신순`(기본값, 내림차순) / `작성순`(오름차순) 버튼
+  - 선택값은 `localStorage`(`categoryPosts.sortOrder`)에 저장되어 다른 카테고리에서도 유지
+  - SSR 결과와 일치시키기 위해 저장값은 마운트 후(`useEffect`)에 반영
 - `Posts.module.css` 공통 스타일 사용
 
 ### 5.4 SimpleDocList.js
@@ -326,6 +329,7 @@ const SELECTED_POST_IDS = [
   - 이미지는 `object-fit: cover`로 150×150 영역을 채움
 - **썸네일 없을 때**: `.noImage`가 브랜드 색상 그라디언트(`--ifm-color-primary-lighter` → `--ifm-color-primary-light`)로 대체 표시
 - **설명 2줄 말줄임**: `-webkit-line-clamp: 2`
+- **정렬 토글**: `.sortToggle`(우측 정렬), `.sortButton` / `.sortButtonActive`(선택 시 `--ifm-color-primary` 채움) pill 버튼
 - 색상은 모두 Infima 변수(`--ifm-color-emphasis-*`)를 사용하므로 다크/라이트 모드에 자동 대응
 
 ```css

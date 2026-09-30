@@ -33,7 +33,7 @@ npm run clear      # Docusaurus 캐시 삭제
   - 네이밍: 카테고리 폴더는 대문자 시작, 글 파일명은 소문자 케밥 케이스
 - **src/components/** - React 컴포넌트
   - `SelectedPosts.js` - 홈페이지 추천 글
-  - `CategoryPosts.js` - 카테고리별 포스트 목록
+  - `CategoryPosts.js` - 카테고리별 포스트 목록 (파일명 번호 → 날짜 순 정렬, 최신순/작성순 토글)
   - `GiscusComponent.js` - GitHub Discussions 댓글
   - `SimpleDocList.js` - 단순 문서 목록
   - `Posts.module.css` - 포스트 목록 공통 스타일
@@ -109,6 +109,7 @@ npm run clear      # Docusaurus 캐시 삭제
 `src/components/Posts.module.css` (SelectedPosts/CategoryPosts 공통):
 - `.imageWrapper`의 `background: var(--ifm-color-emphasis-100)` - 썸네일 뒤 배경 레이어
 - `.noImage` - 썸네일 없을 때 브랜드 색상 그라디언트로 대체
+- `.sortToggle`, `.sortButton`, `.sortButtonActive` - CategoryPosts 정렬 토글 버튼
 
 ## 문서 동기화 규칙
 

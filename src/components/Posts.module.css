@@ -2,6 +2,36 @@
   margin: 2rem 0;
 }
 
+.sortToggle {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.sortButton {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sortButton:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.sortButtonActive,
+.sortButtonActive:hover {
+  border-color: var(--ifm-color-primary);
+  background: var(--ifm-color-primary);
+  color: var(--ifm-color-white);
+}
+
 .postsGrid {
   display: flex;
   flex-direction: column;

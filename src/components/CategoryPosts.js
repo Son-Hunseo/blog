@@ -11,14 +11,15 @@
  * 1. 현재 URL 경로를 파싱하여 카테고리 경로 추출
  * 2. gather-meta-plugin의 postsByPath에서 해당 경로의 글 목록 가져오기
  * 3. index 페이지 자체는 목록에서 제외
- * 4. 글들을 카드 그리드로 렌더링
+ * 4. 파일명 숫자 프리픽스 → 날짜 순으로 정렬 (최신순/작성순 토글)
+ * 5. 글들을 카드 그리드로 렌더링
  *
  * [사용처]
  * - 각 카테고리의 index.mdx 파일
  * - 예: docs/01-Kubernetes/index.mdx에서 <CategoryPosts /> 사용
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from '@docusaurus/Link';                    // Docusaurus 내부 링크 컴포넌트
 import {usePluginData} from '@docusaurus/useGlobalData'; // 플러그인 전역 데이터 훅
 import {useLocation} from '@docusaurus/router';          // 현재 URL 경로 훅
@@ -37,6 +38,60 @@ function formatDate(dateString) {
     month: 'long',
     day: 'numeric'
   });
+}
+
+const SORT_STORAGE_KEY = 'categoryPosts.sortOrder';
+const SORT_OPTIONS = [
+  {value: 'latest', label: '최신순'},
+  {value: 'written', label: '작성순'},
+];
+
+/**
+ * 정렬 옵션 상태 훅
+ * - 기본값은 최신순, 선택한 값은 localStorage에 저장해 다른 카테고리에서도 유지
+ * - SSR 결과와 일치시키기 위해 저장값은 마운트 후에 반영
+ */
+function useSortOrder() {
+  const [sortOrder, setSortOrder] = useState('latest');
+
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(SORT_STORAGE_KEY);
+      if (SORT_OPTIONS.some(option => option.value === saved)) {
+        setSortOrder(saved);
+      }
+    } catch (e) {}
+  }, []);
+
+  const updateSortOrder = value => {
+    setSortOrder(value);
+    try {
+      window.localStorage.setItem(SORT_STORAGE_KEY, value);
+    } catch (e) {}
+  };
+
+  return [sortOrder, updateSortOrder];
+}
+
+/**
+ * 정렬 옵션 토글 (최신순 / 작성순)
+ */
+function SortToggle({value, onChange}) {
+  return (
+    <div className={styles.sortToggle} role="group" aria-label="글 정렬 순서">
+      {SORT_OPTIONS.map(option => (
+        <button
+          key={option.value}
+          type="button"
+          className={`${styles.sortButton} ${value === option.value ? styles.sortButtonActive : ''}`}
+          aria-pressed={value === option.value}
+          onClick={() => onChange(option.value)}
+        >
+          {option.label}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 /**
@@ -67,18 +122,26 @@ function CategoryPosts() {
    * index 페이지 자체는 목록에서 제외
    * - 카테고리 index 페이지가 자기 자신을 목록에 포함하지 않도록 필터링
    */
+  const [sortOrder, setSortOrder] = useSortOrder();
+
+  /**
+   * 정렬 기준
+   * 1순위: 파일명 숫자 프리픽스 (10-aa가 01-aa보다 최신)
+   * 2순위: 프론트매터 date
+   * - 최신순(latest): 내림차순 / 작성순(written): 오름차순
+   */
+  const direction = sortOrder === 'written' ? -1 : 1;
   const filteredPosts = categoryPosts
     .filter(post =>
       post.link !== `/${currentPath}` &&
       post.link !== `/${currentPath}/`
     )
     .sort((a, b) => {
-      if (!a.date && !b.date) return (b.fileOrder || 0) - (a.fileOrder || 0);
-      if (!a.date) return 1;
-      if (!b.date) return -1;
-      const dateDiff = new Date(b.date) - new Date(a.date);
-      if (dateDiff !== 0) return dateDiff;
-      return (b.fileOrder || 0) - (a.fileOrder || 0);
+      const orderDiff = (b.fileOrder || 0) - (a.fileOrder || 0);
+      if (orderDiff !== 0) return orderDiff * direction;
+      const dateA = a.date ? new Date(a.date).getTime() : 0;
+      const dateB = b.date ? new Date(b.date).getTime() : 0;
+      return (dateB - dateA) * direction;
     });
 
   // 표시할 글이 없으면 컴포넌트 렌더링 안 함
@@ -88,6 +151,9 @@ function CategoryPosts() {
 
   return (
     <section className={styles.categoryPosts}>
+      {/* 정렬 옵션 토글 */}
+      <SortToggle value={sortOrder} onChange={setSortOrder} />
+
       {/* 포스트 카드 그리드 */}
       <div className={styles.postsGrid}>
         {filteredPosts.map((post, idx) => (
