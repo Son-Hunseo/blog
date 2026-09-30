@@ -44,7 +44,8 @@ image: /img/posts/04-Middleware/01-Web/04-nginx-conf/nginx.png
 
 > Nginx 소스 다운로드 : https://nginx.org/en/download.html 공식 문서 : https://nginx.org/en/docs/
 
-> [!info] 소스 빌드를 하는 이유 [참고](https://claude.ai/chat/02-httpd-conf.md#%EC%86%8C%EC%8A%A4-%EB%B9%8C%EB%93%9C%EB%A5%BC-%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0)
+> [!info] 소스 빌드를 하는 이유 
+> - [참고](./02-httpd-conf.md#소스-빌드를-하는-이유)
 
 ---
 ### 패키지 의존성
