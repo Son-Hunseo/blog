@@ -1,5 +1,5 @@
 ---
-title: Apache Http Server 설치 방법 및 주요 튜닝 설정
+title: Apache Http Server 설치 방법 및 운영환경에서의 주요 설정
 description: Apache HTTP Server의 소스 빌드부터 운영 환경 설정, MPM 튜닝, SSL/TLS, Tomcat 연동, Reverse Proxy, 보안 설정 및 운영 점검까지 정리한 Apache 구축·운영 가이드
 date: 2026-09-21
 sidebar_class_name: hidden-sidebar-item
@@ -21,23 +21,23 @@ image: /img/posts/02-httpd-conf/apache.png
 
 **파일 시스템**
 
-| 구분          | 경로              | 비고                    |
-| ----------- | --------------- | --------------------- |
-| Service 파티션 | /svc            | -                     |
-| Log 파티션     | /log            | -                     |
+| 구분          | 경로   |
+| ----------- | ---- |
+| Service 파티션 | /svc |
+| Log 파티션     | /log |
 
 
 **디렉토리 구성**
 
-| 구분             | 명명규칙                            | 예시                       |
-| -------------- | ------------------------------- | ------------------------ |
-| Service HOME   | /svc                            | /svc                     |
-| WebServer HOME | {Service HOME}/{3rd Party 기능구분} | /svc/web                 |
-| Apache HOME    | {WebServer HOME}/apache         | /svc/web/apache          |
-| 명령어 HOME       | {Apache HOME}/bin               | /svc/web/apache/bin      |
-| 설정 HOME        | {Apache HOME}/conf              | /svc/web/apache/conf     |
-| 인증서 HOME       | {Apache HOME}/conf/ssl          | /svc/web/apache/conf/ssl |
-| LOG HOME       | {Apache HOME}/logs              | /svc/web/apache/logs     |
+| 구분             | 명명규칙                               | 예시                         |
+| -------------- | ---------------------------------- | -------------------------- |
+| Service HOME   | `/svc`                             | `/svc`                     |
+| WebServer HOME | `${Service HOME}/{3rd Party 기능구분}` | `/svc/web`                 |
+| Apache HOME    | `{WebServer HOME}/apache`          | `/svc/web/apache`          |
+| 명령어 HOME       | `{Apache HOME}/bin`                | `/svc/web/apache/bin`      |
+| 설정 HOME        | `{Apache HOME}/conf`               | `/svc/web/apache/conf`     |
+| 인증서 HOME       | `{Apache HOME}/conf/ssl`           | `/svc/web/apache/conf/ssl` |
+| LOG HOME       | `{Apache HOME}/logs`               | `/svc/web/apache/logs`     |
 
 ---
 ## Apache 설치
@@ -62,7 +62,7 @@ image: /img/posts/02-httpd-conf/apache.png
 **필요한 모듈만 정확히 포함하기 위해**
 - 예를 들어 `mod_ssl`, `mod_http2`, `mod_proxy`, `mod_jk` 등을 회사 표준에 맞춰 활성화하거나, 불필요한 모듈을 제외할 수 있음.
 
-**APR, APR-util, OpenSSL, PCRE2 같은 의존성 버전을 통제하기 위해**  
+**APR, APR-util, OpenSSL, PCRE2 같은 의존성 버전을 통제하기 위해**
 - WAS, 보안 솔루션, 사내 모듈과의 호환성을 맞춰야 할 때.
 
 ---
@@ -208,7 +208,7 @@ ln -s /log/web/apache/logs /svc/web/apache/logs
 | **Event**   | Apache HTTP Server 2.4 계열에서 일반적으로 권장되는 MPM<br />Worker와 동일하게 멀티 프로세스 + 멀티 스레드 구조 사용<br />Keep-Alive 연결 처리 방식 개선<br />Listener Thread가 Keep-Alive 상태의 연결을 관리하여 Worker Thread가 불필요하게 점유되는 것을 줄임<br />대량 동시 연결 처리에 유리 |
 
 ---
-## Apache 튜닝
+## Apache 설정
 
 ---
 ### httpd.conf
@@ -326,19 +326,19 @@ Include conf/extra/httpd-ssl.conf
 ---
 #### Log Format Combined
 
-| Log Format          | Description                                                                   |
-| ------------------- | ----------------------------------------------------------------------------- |
-| %h                  | 클라이언트 IP 주소<br />ex) 192.168.1.1                                              |
-| %l                  | RFC1413 ID (거의 항상 - 로 기록됨)<br />ex) -                                         |
-| %u                  | 사용자 이름(HTTP 인증 시 사용됨, 없으면 -)<br />ex) -                                       |
-| %t                  | 요청 시간(로그 기록 시간)<br />ex) [02/Apr/2026:12:34:56 +0900]                         |
-| "%r"                | 클라이언트의 요청 라인(메서드, 경로, 프로토콜)<br />ex) "GET /index.html HTTP/1.1"               |
-| %>s                 | 응답 HTTP 상태 코드<br />ex) 200, 404, 500 …                                        |
-| %b                  | 응답 바이트 크기(헤더 제외, 0일 경우 -)<br />ex) 1024 or -                                  |
-| "%{Referer}i"       | Referer(사용자가 이전에 방문한 페이지 URL)<br />ex) https://www.test.com/home/test or -    |
-| "%{User-Agent}i"    | User-Agent(브라우저 및 OS 정보)<br />ex) "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" |
-| %D                  | 요청 처리 시간(마이크로초)<br />지연 구간 분석 시 유용하므로 추가를 권장                                  |
-| %{X-Forwarded-For}i | L4/프록시를 거친 경우의 원본 클라이언트 IP<br />앞단에 L4 또는 프록시가 있으면 추가                         |
+| Log Format            | Description                                                                  |
+| --------------------- | ---------------------------------------------------------------------------- |
+| `%h`                  | 클라이언트 IP 주소<br/>ex) 192.168.1.1                                              |
+| `%l`                  | RFC1413 ID (거의 항상 - 로 기록됨)<br/>ex) -                                         |
+| `%u`                  | 사용자 이름(HTTP 인증 시 사용됨, 없으면 -)<br/>ex) -                                       |
+| `%t`                  | 요청 시간(로그 기록 시간)<br/>ex) [02/Apr/2026:12:34:56 +0900]                         |
+| `"%r"`                | 클라이언트의 요청 라인(메서드, 경로, 프로토콜)<br/>ex) "GET /index.html HTTP/1.1"               |
+| `%>s`                 | 응답 HTTP 상태 코드<br/>ex) 200, 404, 500 …                                        |
+| `%b`                  | 응답 바이트 크기(헤더 제외, 0일 경우 -)<br/>ex) 1024 or -                                  |
+| `"%{Referer}i"`       | Referer(사용자가 이전에 방문한 페이지 URL)<br/>ex) https://www.test.com/home/test or -    |
+| `"%{User-Agent}i"`    | User-Agent(브라우저 및 OS 정보)<br/>ex) "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" |
+| `%D`                  | 요청 처리 시간(마이크로초)<br/>지연 구간 분석 시 유용하므로 추가를 권장                                  |
+| `%{X-Forwarded-For}i` | L4/프록시를 거친 경우의 원본 클라이언트 IP<br/>앞단에 L4 또는 프록시가 있으면 추가                         |
 
 ---
 ### httpd-default.conf
