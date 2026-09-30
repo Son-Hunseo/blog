@@ -341,6 +341,6 @@ kubectl get node
 ## 레퍼런스
 
  - https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-cluster-auto.html
- - https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/network-reqs.html?utm_source=chatgpt.com
- - https://docs.aws.amazon.com/en_en/eks/latest/userguide/cluster-iam-role.html?utm_source=chatgpt.com
+ - https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/network-reqs.html
+ - https://docs.aws.amazon.com/en_en/eks/latest/userguide/cluster-iam-role.html
 
