@@ -1062,14 +1062,14 @@ server.built=
 
 |Tomcat 버전|AJP Secret 설정|비고|
 |---|---|---|
-|Tomcat 5.5 / 6.0|`request.useSecret="true"`  <br>`request.secret="growintest"`|인증 실패 시 `403`이 아닌 `200`으로 응답하며 페이지 내용이 비어 보일 수 있음|
+|Tomcat 5.5 / 6.0|`request.useSecret="true"`  <br />`request.secret="growintest"`|인증 실패 시 `403`이 아닌 `200`으로 응답하며 페이지 내용이 비어 보일 수 있음|
 |Tomcat 7.0.99 이하|`requiredSecret="growintest"`||
-|Tomcat 7.0.100 이상|`secretRequired="true"`  <br>`secret="growintest"`||
+|Tomcat 7.0.100 이상|`secretRequired="true"`  <br />`secret="growintest"`||
 |Tomcat 8.5.50 이하|`requiredSecret="growintest"`||
-|Tomcat 8.5.51 이상|`secretRequired="true"`  <br>`secret="growintest"`||
+|Tomcat 8.5.51 이상|`secretRequired="true"`  <br />`secret="growintest"`||
 |Tomcat 9.0.30 이하|`requiredSecret="growintest"`||
-|Tomcat 9.0.31 이상|`secretRequired="true"`  <br>`secret="growintest"`||
-|Tomcat 10 이상|`secretRequired="true"`  <br>`secret="growintest"`||
+|Tomcat 9.0.31 이상|`secretRequired="true"`  <br />`secret="growintest"`||
+|Tomcat 10 이상|`secretRequired="true"`  <br />`secret="growintest"`||
 
 ---
 ## 이외 설정
