@@ -20,11 +20,11 @@ npm run clear      # Docusaurus 캐시 삭제
 ### 디렉토리 구조
 
 - **docs/** - 메인 콘텐츠 (MDX 파일, 번호 프리픽스 폴더로 대분류 → 소분류 2단계 구성)
-  - `00-IaaS/` (01-AWS, 11-Openstack)
-  - `01-Container/` (01-Docker, 02-Kubernetes)
-  - `02-Platform/` (01-Registry, 02-Secret, 03-CI-CD)
-  - `03-Observability/` (01-Monitoring, 02-Logging)
-  - `04-Middleware/` (01-Web, 02-Messaging, 03-Cache)
+  - `00-Linux/` (하위 카테고리 없음)
+  - `01-Cloud/` (01-AWS, 02-OpenStack)
+  - `02-Container/` (01-Docker, 02-Kubernetes)
+  - `03-DevOps/` (01-CI-CD, 02-Observability, 03-Operations)
+  - `04-Middleware/` (01-Web, 02-Messaging, 03-Caching)
   - `05-CS/` (01-Algorithm, 02-OS, 03-Network, 11-Security)
   - `06-Dev/` (01-Golang, 02-SQL, 11-Spring, 31-Project)
   - `07-AI/`, `08-HomeLab/` (01-SynologyNas, 02-Proxmox, 03-Hands-on), `09-Peer-Learning/`, `10-Etc/`

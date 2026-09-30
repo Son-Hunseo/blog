@@ -58,7 +58,7 @@ const SELECTED_POST_IDS = [
     'Container/Kubernetes/CKA/exam-recap-2',
     'Dev/Golang/java-vs-go-thread',
     'AI/claude-code-tips',
-    'IaaS/Openstack/connect-openStack-ceph',
+    'Cloud/OpenStack/connect-openStack-ceph',
 ];
 
 /**

@@ -33,7 +33,7 @@ import DocSidebar from '@theme-original/DocSidebar';  // 원본 Docusaurus 사�
  *
  * 글이 있는 카테고리는 index.mdx가 카테고리 자체의 링크로 흡수되어 items에 나타나지 않지만,
  * 글이 없는 카테고리는 Docusaurus가 카테고리를 통째로 link 타입으로 접어버린다.
- * 이 경우 index.mdx가 글 1개로 집계되어 "Platform (3)"처럼 글이 없는데 개수가 잡히므로 제외한다.
+ * 이 경우 index.mdx가 글 1개로 집계되어 "Operations (1)"처럼 글이 없는데 개수가 잡히므로 제외한다.
  *
  * @param {Object} item - 사이드바 아이템
  * @returns {boolean} 카테고리 목록 페이지면 true

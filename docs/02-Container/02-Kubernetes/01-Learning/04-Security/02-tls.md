@@ -1,0 +1,105 @@
+---
+image: /img/posts/02-Container/02-Kubernetes/01-Learning/04-Security/02-tls/TLS1.png
+sidebar_class_name: hidden-sidebar-item
+date: 2025-12-21
+title: TLS in Kubernetes
+description: 쿠버네티스(Kubernetes) 클러스터 내부의 TLS(Transport Layer Security) 통신 구조와 Zero Trust 보안 모델을 상세히 설명합니다. kube-apiserver, etcd, kubelet 등 각 컴포넌트가 사용하는 서버 인증서 및 클라이언트 인증서의 역할과, 클러스터 내부 CA(인증 기관)의 생성 및 관리 방식에 대해 다룹니다. CKA 시험 및 보안 관련 지식을 위한 핵심 가이드입니다.
+---
+
+---
+## Kubernetes에서의 TLS 통신
+
+---
+### 개념
+
+![TLS1](assets/02-tls/TLS1.png)
+
+- 쿠버네티스는 'Node to Node', 'User to kube-apiserver', 'kube-apiserver to kube-sceduler' 등 <span class="t-red">모든 컴포넌트 간 통신을 TLS</span>로 한다.
+- 여기서 의문이 들 수 있다. '클러스터 내부인데 굳이 내부안에서 TLS 같은 보안 통신을 할 필요가 있나?'
+- 이러한 보안 통신을 하는 이유는 쿠버네티스는 이미 해커가 클러스터 내부에 들어와있다는 전제로 모든 것을 신뢰하지 않는 '<span class="t-red">Zero Trust</span>' 보안 모델을 채택하기 때문이다.
+
+---
+### 흐름도
+
+![TLS2](assets/02-tls/TLS2.png)
+
+---
+## Kubernetes 클러스터 내부의 인증서 종류
+
+**1. 서버 인증서**
+- 서버가 자신이 해당 서버가 맞음을 증명하는 데 사용한다. (저는 CA로 부터 서명받은 인증서가 있기 때문에 당신이 요청하고자하는 서버가 맞아요!)
+- 예: `kube-apiserver`, `etcd`, `kubelet`
+
+**2. 클라이언트 인증서**
+- 클라이언트가 서버에 접근할 때 본인의 자격을 증명하는데 사용한다. (CSR을 서버로 보냈었고 이를 승인받아서 CA로부터 서명받은 인증서가 있기 때문에 클러스터에 접근할 수 있어요!)
+- 예: User, `kube-scheduler`, `kube-controller-manager`, `kube-proxy`
+
+> [!info] 클라이언트 인증서??
+> - 일반적인 웹 환경을 생각해보면 클라이언트의 자격 증명을 하는 '클라이언트 인증서' 조금 낯설 수 있다.
+> - 왜냐하면, 일반적인 웹 페이지는 보통 클라이언트의 자격 증명을 Id/pw 로 하기 때문이다.
+> - 우리에게 익숙한 인증서 기반 클라이언트 자격 증명이 존재하는데, 은행이나 공공기관에서 사용되는 '공인인증서'를 떠올려보면 된다. (공인인증서는 과거의 TLS와 같은 RSA를 사용하였다)
+> - 쿠버네티스는 이러한 클라이언트 자격증명을 '클라이언트 인증서'로 하는 것이다.
+
+**3. 루트 인증서(Root Certificate, CA Certificate)**
+- CA가 본인이 신뢰할만한 CA임을 증명하는 인증서
+- CA는 모든 서버/클라이언트의 인증서를 서명한다.
+
+> [!info] 엥? CA가 클러스터 내부에 있다고?
+> - 일반적인 웹 환경에서는 몇몇 공인된 회사들이 CA역할을 하며 인증서를 발급한다.
+> - 하지만, 쿠버네티스 클러스터 내부에서는 클러스터가 설치될 때(by `kubeadm`) `/etc/kubernetes/pki/` 폴더 내부에 `ca.crt`와 `ca.key`를 생성하여 CA를 만든다.
+> - 해당 CA가 모든 서버/클라이언트 인증서에 서명하는 것이다.
+
+> [!info] 그러면 `ca.key`를 탈취되면요? (이러면 서명을 위조하여 가짜 인증서를 만들 수 있게 됨)
+> - 일반적으로는 `/etc/kubernetes/pki/ca.key`는 `600`(소유자만 읽기/쓰기 가능)으로 설정되어있고 소유자는 `root`이다.
+> - 즉, 해커가 `root` 권한을 얻지 못한다면 `ca.key`를 얻을 수 없다.
+> - 근데, 마스터 노드에 침입할 정도라면 `root` 권한도  얻을 수 있지 않을까?
+> - 이 때문에 금융권과 같은 매우 높은 보안이 필요한 쿠버네티스 환경에서는 `ca.key`를 HSM과 같은 전용 하드웨어 보안 장치에 둔다. (HSM 외에도 여러 보안 use case가 존재)
+
+---
+## Kubernetes 구성 요소별 인증서
+
+![TLS3](assets/02-tls/TLS3.png)
+
+**Server Certificates**
+- `kube-apiserver`, `etcd`, `kubelet` 등이 '요청을 받는' 역할을 수행하므로 '서버 인증서'가 필요하다.
+
+**Client Certificates**
+- User(`admin`), `kube-scheduler`, `kube-controller-manager`, `kube-proxy` 는 `kube-apiserver`로 '요청을 하는' 역할이므로 '클라이언트 인증서'가 필요하다.
+- 추가적으로 `kube-apiserver`는 `etcd`와 통신하는 유일한 컴포넌트이며, 이 때, `kube-apiserver`는 `etcd`로 '요청을 하는' 역할이므로 '클라이언트 인증서'가 필요한데, 이때 하나의 인증서로 클라이언트/서버 모두 가능하다. (하지만, 따로 관리하는 것이 표준)
+- `kubelet` 또한 '요청을 받는' 역할과 '요청을 하는' 역할 모두 수행한다. 이때`kube-apiserver`와 같이 1개의 인증서로 클라이언트/서버 모두 사용해도 되고, 따로 관리해도 된다. (하지만, 따로 관리하는 것이 표준)
+
+**CA**
+- 기본적으로 쿠버네티스 설치(by `kubeadm`)시 `/etc/kubernetes/pki/` 폴더 내부에 `ca.crt`와 `ca.key`를 생성하여 CA를 만든다.
+- 원한다면, `etcd` 전용 CA를 별도로 둘 수 있다.
+
+---
+## 클라이언트 인증 과정 요약
+
+> [!tip]  클라이언트 인증 과정
+> 1. 유저가 유저 개인키를 생성함
+> 2. 유저 개인키로 CSR을 생성함
+> 	- CSR 구성 요소 (아래 요소들이 다같이 base64로 인코딩 되어 있음)
+> 		- CN(Common Name)값: 유저 이름(이게 RBAC의 사용자 name을 구분하는 기준이다)
+> 		- 유저 공개키
+> 		- CN 과 유저 공개키를 유저 개인키로 서명(암호화)한 값
+> 3. CSR을 base64로 (한번 더)인코딩해서 쿠버네티스 CSR 객체 포맷에 맞게 바꾼 뒤 이 객체를 클러스터에 생성한다. (유저가 가지고잇던 다른 자격증명이 있다면 CSR 객체를 만들고, 없다면 CSR yaml을 관리자에게 보내 관리자가 CSR 객체를 만든다)
+> 4. CSR을 클러스터가 알아서 검증함 (자동)
+> 	- (base64 디코딩을 2번하고) 유저 공개키로 서명을 풀어봄 -> 음 지금 이 CSR을 보낸 녀석은 개인키를 가지고 있군 (보낸 시점까지는!!) -> 관리자에게 넘겨도 되겠구만
+> 5. 클러스터 관리자가 CSR을 approve함 (수동)
+> 	- 여기서 approve하면, CSR을 CA 개인키로 서명하여 인증서가 생성됨
+> 6. 인증서와 CA 공개키는 관리자에게 받음(직접 받든 아니면 EKS처럼 어떤 자동화 장치가 마련되어 있던)
+> 7. 이제 유저는 kubeconfig로 kubectl 명령어로 클러스터에 요청을 보냄 (여기서 TLS 핸드셰이크 이루어짐)
+> 	1. api-server는 유저에게 ca에게 서명받은 api-server 인증서를 보여줌
+> 	2. 유저가 가진 ca 공개키로 검증 (지금 요청을 보내는 목적지가 내가 보내려는 목적지가 맞구만 -> 중간자 공격이 없구만)
+> 	3. 유저는 본인이 ca에게 서명받은 인증서를 api-server로 보냄
+> 	4. api-server는 본인이 가진 ca 공개키로 서명을 검증함 (ca가 검증한 유저가 맞구만)
+> 	5. 하지만, 아직 api-server는 해당 요청을 보낸 주체가 인증서의 주체인지 검증하지 못했다.
+> 	6. api-server는 랜덤 챌린지를 유저에게 보낸다.
+> 	7. 유저는 본인의 개인키로 챌린지에 서명해서 api-server에 보낸다.
+> 	8. api-server는 서명된 챌린지를 유저 인증서에 있던 공개키로 검증한다. (지금 이 순간에도 개인키를 가진것을 보면 요청을 보내는 녀석이 유저 인증서의 소유주가 맞구만)
+> 8. 인증 끝 (이제 인가 시작)
+
+---
+## 레퍼런스
+
+- Udemy - Certified Kubernetes Administrator (CKA) with Practice Tests (Mumshad)

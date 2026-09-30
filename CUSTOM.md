@@ -30,11 +30,11 @@ basic-docu/
 ```
 son-blog/
 ├── docs/                          # 번호 프리픽스로 정렬 (대분류 → 소분류 2단계)
-│   ├── 00-IaaS/                   # 01-AWS, 11-Openstack
-│   ├── 01-Container/              # 01-Docker, 02-Kubernetes
-│   ├── 02-Platform/               # 01-Registry, 02-Secret, 03-CI-CD
-│   ├── 03-Observability/          # 01-Monitoring, 02-Logging
-│   ├── 04-Middleware/             # 01-Web, 02-Messaging, 03-Cache
+│   ├── 00-Linux/                  # 하위 카테고리 없음
+│   ├── 01-Cloud/                  # 01-AWS, 02-OpenStack
+│   ├── 02-Container/              # 01-Docker, 02-Kubernetes
+│   ├── 03-DevOps/                 # 01-CI-CD, 02-Observability, 03-Operations
+│   ├── 04-Middleware/             # 01-Web, 02-Messaging, 03-Caching
 │   ├── 05-CS/                     # 01-Algorithm, 02-OS, 03-Network, 11-Security
 │   ├── 06-Dev/                    # 01-Golang, 02-SQL, 11-Spring, 31-Project
 │   ├── 07-AI/
@@ -70,7 +70,7 @@ son-blog/
 각 카테고리 폴더에는 `_category_.json`으로 사이드바 라벨을 지정합니다 (번호 프리픽스 제거용).
 
 ```json
-{ "label": "IaaS" }
+{ "label": "Cloud" }
 ```
 
 ---
@@ -408,7 +408,7 @@ export default function DocItemContent({children}) {
 
 ```js
 // 글이 없는 카테고리는 Docusaurus가 카테고리를 link로 접어버려 index.mdx가 글 1개로 잡힌다.
-// (예: 글 0개인 Platform이 "3 items"로 표시) 이를 막기 위해 index 문서를 걸러낸다.
+// (예: 글 0개인 Operations가 "1 items"로 표시) 이를 막기 위해 index 문서를 걸러낸다.
 const isCategoryIndexLink = (item) =>
   item.docId === 'index' || item.docId?.endsWith('/index');
 
