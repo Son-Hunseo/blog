@@ -1,5 +1,5 @@
 ---
-image: /img/posts/00-Linux/01-network-namespace/namespace1.png
+image: /img/default/linux/linux.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-12-30
 title: 네트워크 네임스페이스
