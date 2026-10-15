@@ -220,7 +220,7 @@ ln -s /log/web/apache/logs /svc/web/apache/logs
 vi /svc/web/apache/conf/httpd.conf
 ```
 
-```conf
+```apacheconf
 Listen 80
 ```
 
@@ -228,7 +228,7 @@ Listen 80
 - 위처럼 그냥 80으로 설정하면, 모든 네트워크 인터페이스에서 TCP 80으로 수신한다.
 - 만약 특정 IP에서만 서비스하려면 IP와 포트를 함께 지정한다. (ex : `Listen 192.168.0.30:80`)
 
-```conf
+```apacheconf
 LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
 LoadModule ssl_module modules/mod_ssl.so
 ```
@@ -236,7 +236,7 @@ LoadModule ssl_module modules/mod_ssl.so
 - 위 옵션은 SSL 사용 시 활성화시켜야 하는 모듈이다.
 - 사용해야할 경우 주석을 해제한다.
 
-```conf
+```apacheconf
 User apache
 Group apache
 ```
@@ -245,14 +245,14 @@ Group apache
 - 부모 프로세스의 경우 `su - apache 실행명령어` 혹은 Systemd로 등록할 경우 Systemd의 설정 파일에 계정을 지정할 수 있다.
 - 다만, 이 경우 일반 사용자는 기본적으로 `80`, `443` 같은 1024 미만 포트에 바인딩할 수 없기 때문에, 위 처럼 80포트로 설정할 경우 부모 프로세스는 root로 기동한다.
 
-```conf
+```apacheconf
 #ServerAdmin you@example.com
 ```
 
 - 관리자 연락처 메타데이터 설정이다.
 - 보통 쓸 일이 없으므로 주석처리한다.
 
-```conf
+```apacheconf
 ServerName 127.0.0.1
 ```
 
@@ -262,7 +262,7 @@ ServerName 127.0.0.1
 	- 없어도 되는 설정인데 이렇게 지정하는 이유는 이 설정이 없을 경우 기동마다 `AH00558: Could not reliably determine the server's fully qualified domain name` 경고가 뜬다. 이에 경고를 억제하기 위함이다.
 	- vhost : 하나의 Apache 서버에서 여러 웹사이트나 서비스를 서로 다른 설정으로 운영하는 기능
 
-```conf
+```apacheconf
 DocumentRoot "/svc/web/apache/htdocs"
 <Directory "/svc/web/apache/htdocs">
     Options None
@@ -280,7 +280,7 @@ DocumentRoot "/svc/web/apache/htdocs"
 - `Require all granted` : 웹 루트 자체는 외부 요청이 들어와야 하므로 HTTP 접근은 허용
 - 결론적으로 이 설정의 이유는 "htdocs는 웹에 공개하되, 불필요한 Apache 기능은 최대한 막아두기 위해서" 이다.
 
-```conf
+```apacheconf
 ErrorLog "|/svc/web/apache/bin/rotatelogs logs/error_log.%Y%m%d 86400 +540"
 ..
 
@@ -295,7 +295,7 @@ ErrorLog "|/svc/web/apache/bin/rotatelogs logs/error_log.%Y%m%d 86400 +540"
 - `86400`은 로그 회전 주기로 하루를 의미하며(초단위), `+540`은 한국 시간으로 설정하기 위해서 GMT +9시간(분단위)로 설정한 것이다.
 - 결과적으로 Apache의 에러 로그와 커스텀 로그는 하루에 한번씩 회전하며, 한국 시간 기준으로 저장된다.
 
-```conf
+```apacheconf
 Include conf/extra/httpd-modjk.conf
 Include conf/extra/httpd-mpm.conf
 Include conf/extra/httpd-vhosts.conf
@@ -350,7 +350,7 @@ Include conf/extra/httpd-ssl.conf
 cd /svc/web/apache/conf/extra/htpd-default.conf
 ```
 
-```conf
+```apacheconf
 Timeout 120
 ```
 
@@ -359,7 +359,7 @@ Timeout 120
 - 반대로 너무 길게 잡으면 느리거나 악의적인 연결이 스레드를 오래 점유하므로 120초에서 끊는다.
 - 주의: mod_jk 백엔드(Tomcat)의 응답 대기 시간은 이 값이 아니라 `workers.properties`의 `socket_timeout`, `reply_timeout`이 결정한다. WAS 응답이 느려서 끊기는 문제를 이 값으로 해결하려고 하면 안 된다.
 
-```conf
+```apacheconf
 KeepAlive On
 ```
 
@@ -368,7 +368,7 @@ KeepAlive On
 - 이에 연결을 재사용하는, Keep-Alive를 사용한다.
 - 이에, `KeepAlive On` : On이 기본 설정이다. 이를 유지한다.
 
-```conf
+```apacheconf
 MaxKeepAliveRequests 2000
 ```
 
@@ -376,7 +376,7 @@ MaxKeepAliveRequests 2000
 - event MPM은 유휴 Keep-Alive 연결을 Listener Thread가 관리하므로, 값을 크게 잡아도 Worker Thread 부담이 적다.
 - 0(무제한)은 쓰지 않는다. 한 연결이 계속 유지되면 L4 부하 분산이 특정 서버로 치우칠 수 있으므로 상한은 둔다.
 
-```conf
+```apacheconf
 KeepAliveTimeout 20
 ```
 
@@ -384,7 +384,7 @@ KeepAliveTimeout 20
 - **event MPM을 전제로 한 값이다.** prefork/worker에서는 대기 중인 연결이 워커를 그대로 점유하므로 20초는 과하다.
 - 앞단에 L4가 있다면 **L4의 세션(Idle) 타임아웃보다 짧게** 잡는다. 그래야 Apache가 먼저 연결을 정리하고, L4가 세션을 먼저 지워서 생기는 연결 리셋을 막을 수 있다.
 
-```conf
+```apacheconf
 ServerTokens Prod
 ServerSignature Off
 ```
@@ -417,7 +417,7 @@ ServerSignature Off
 vi /svc/web/apache/conf/extra/httpd-mpm.conf
 ```
 
-```conf
+```apacheconf
 <IfModule mpm_event_module>
     ServerLimit             128
     ThreadsPerChild          25
@@ -490,13 +490,13 @@ vi /svc/web/apache/conf/extra/httpd-mpm.conf
 vi /svc/web/apache/conf/extra/httpd-ssl.conf
 ```
 
-```conf
+```apacheconf
 Listen 443
 ```
 
 - 일반적인 HTTPS well-known 포트인 443으로 설정
 
-```conf
+```apacheconf
 SSLProtocol -all +TLSv1.2 +TLSv1.3
 ```
 
@@ -504,7 +504,7 @@ SSLProtocol -all +TLSv1.2 +TLSv1.3
 - `-all`로 전부 끈 뒤 필요한 것만 켠다. 이렇게 하면 OpenSSL이나 Apache 버전에 따라 기본값이 달라져도 결과가 바뀌지 않는다.
 - VirtualHost 밖(전역)에 두어 모든 vhost에 같은 표준이 적용되게 한다.
 
-```conf
+```apacheconf
 SSLCipherSuite ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-CHACHA20-POLY1305
 SSLHonorCipherOrder off
 ```
@@ -514,7 +514,7 @@ SSLHonorCipherOrder off
 - 이렇게 하면 허용 목록이 OpenSSL 버전에 따라 바뀌지 않는다.
 - 트레이드오프: TLS 1.2를 지원하지만 GCM 암호가 없는 구형 클라이언트(오래된 Java, 일부 레거시 장비)는 접속하지 못한다. 이런 클라이언트가 있는 환경에서만 기본값 사용을 검토한다.
 
-```conf
+```apacheconf
 SSLProxyProtocol    -all +TLSv1.2 +TLSv1.3
 SSLProxyCipherSuite (SSLCipherSuite와 동일)
 ```
@@ -523,7 +523,7 @@ SSLProxyCipherSuite (SSLCipherSuite와 동일)
 - mod_jk(AJP) 연동에서는 적용되는 곳이 없다.
 - 나중에 mod_proxy로 전환해도 약한 설정이 따라가지 않도록 표준에는 남겨둔다. 대신 기존 cipher 문자열은 위와 같이 교체한다.
 
-```conf
+```apacheconf
 SSLPassPhraseDialog builtin
 ```
 
@@ -533,7 +533,7 @@ SSLPassPhraseDialog builtin
     - `SSLPassPhraseDialog exec:/경로/스크립트`로 암호를 출력하는 스크립트를 지정한다. 이 경우 암호가 파일로 존재하게 되므로, 스크립트 권한도 같이 관리해야 한다.
 - 사내 보안 정책에서 개인키 암호화를 요구하는지 먼저 확인하고 정한다.
 
-```conf
+```apacheconf
 <VirtualHost *:443>
     DocumentRoot "/svc/web/apache/htdocs"
     ServerName www.example.com
@@ -597,7 +597,7 @@ SSLPassPhraseDialog builtin
 vi /svc/web/apache/conf/extra/httpd-vhosts.conf
 ```
 
-```conf
+```apacheconf
 <VirtualHost *:80>
     DocumentRoot "/svc/web/apache/htdocs"
     ServerName 127.0.0.1
@@ -627,7 +627,7 @@ vi /svc/web/apache/conf/extra/httpd-vhosts.conf
 vi /svc/web/apache/conf/extra/httpd-modjk.conf
 ```
 
-```conf
+```apacheconf
 LoadModule jk_module modules/mod_jk.so
 <IfModule mod_jk.c>
     JkWorkersFile conf/extra/workers.properties
@@ -705,7 +705,7 @@ LoadModule jk_module modules/mod_jk.so
 vi /svc/web/apache/conf/extra/workers.properties
 ```
 
-```conf
+```ini
 worker.list=test,jkstatus
 
 # 공통 설정을 template으로 정의하고 각 worker 가 상속받는다.
@@ -838,7 +838,7 @@ worker.jkstatus.type=status
 ---
 ### httpd.conf
 
-```conf
+```apacheconf
 LoadModule proxy_module modules/mod_proxy.so
 LoadModule proxy_http_module modules/mod_proxy_http.so
 LoadModule proxy_balancer_module modules/mod_proxy_balancer.so
@@ -854,7 +854,7 @@ LoadModule lbmethod_byrequests_module modules/mod_lbmethod_byrequests.so
 ---
 #### 단일 백엔드 형태
 
-```conf
+```apacheconf
 <VirtualHost *:80>
 DocumentRoot "/svc/web/apache/htdocs"
     ServerName 127.0.0.1
@@ -886,7 +886,7 @@ DocumentRoot "/svc/web/apache/htdocs"
 ---
 #### 다수의 백엔드로 로드밸런싱
 
-```conf
+```apacheconf
 <VirtualHost *:80>
 DocumentRoot "/svc/web/apache/htdocs"
     ServerName 127.0.0.1
@@ -935,7 +935,7 @@ DocumentRoot "/svc/web/apache/htdocs"
 ---
 ### httpd.conf
 
-```confg
+```apacheconf
 LoadModule rewrite_module modules/mod_rewrite.so
 ```
 
@@ -944,7 +944,7 @@ LoadModule rewrite_module modules/mod_rewrite.so
 ---
 ### httpd-vhosts.conf
 
-```conf
+```apacheconf
 <VirtualHost *:80>
     ServerName 127.0.0.1
     RewriteEngine on
@@ -961,18 +961,31 @@ LoadModule rewrite_module modules/mod_rewrite.so
 ## Apache 보안 설정
 
 ---
-### 보안 헤더 및 정보 노출 차단
+### 보안 헤더 정보 노출 차단
 
----
-#### httpd.conf
+`httpd.conf`
 
-```conf
+```apacheconf
 LoadModule headers_module modules/mod_headers.so
 ```
 
 - 필요한 모듈 로드
 
-```conf
+`httpd-default.conf`
+
+```apacheconf
+...
+ServerTokens Prod
+ServerSignature Off
+...
+```
+
+- 위에서 설정 했던 설정
+
+---
+### 불필요한 메서드 차단
+
+```apacheconf
 TraceEnable Off
 
 <Location />
@@ -980,14 +993,23 @@ TraceEnable Off
         Require all denied
     </LimitExcept>
 </Location>
-
-Options None
 ```
 
 - `TraceEnable Off` : HTTP `TRACE` 메서드를 비활성화하는 설정이다.
 	- TRACE는 클라이언트가 보낸 요청을 서버가 그대로 돌려주는 디버깅용 메서드인데, 일반적인 웹 서비스에서는 쓸 일이 거의 없고 보안상 꺼두는 경우가 많다.
 - `Location` 블럭의 설정은 사용하는 HTTP 메서드를 제외한 나머지 메서드를 모두 거부하는 옵션이다.
+
+---
+### 디렉토리 목록 노출 차단
+
+```apacheconf
+Options None
+```
+
 - `Options None` : 디렉토리 목록 노출을 차단하는 설정이다.
+
+---
+### 불필요한 기본 콘텐츠 제거
 
 ```bash
 rm -rf /svc/web/apache/htdocs/index.html
@@ -1168,7 +1190,7 @@ netstat -natp | grep httpd
 
 `httpd.conf`
 
-```conf
+```apacheconf
 # status 모듈 주석 해제
 LoadModule status_module modules/mod_status.so
 
