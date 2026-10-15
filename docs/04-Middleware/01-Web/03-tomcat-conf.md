@@ -21,7 +21,7 @@ image: /img/posts/04-Middleware/01-Web/03-tomcat-conf/tomcat.png
 **이 글 기준**
 
 > Tomcat : `11.0.26`
-> OpenJDK : `17.0.20`
+> OracleJDK : `17.0.20`
 
 ---
 ### 경로 기준
@@ -54,7 +54,7 @@ image: /img/posts/04-Middleware/01-Web/03-tomcat-conf/tomcat.png
 
 >  Tomcat : https://tomcat.apache.org/download-11.cgi
 >  Tomcat Version 별 지원 Java 버전 및 최신 릴리즈 : https://tomcat.apache.org/whichversion.html
->  Open JDK : https://www.oracle.com/kr/java/technologies/downloads/archive/
+>  OracleJDK : https://www.oracle.com/kr/java/technologies/downloads/archive/
 
 ---
 ### 기본 설정
@@ -81,7 +81,7 @@ ln -s /svc/was/apache-tomcat-11.0.26 tomcat
 ```
 
 - 소스 압축 해제 후 엔진 파티션으로 옮긴다.
-- 이후 `CATALINA_HOME`으로 사용할 이름으로 심볼릭 링크를 건다.
+- 이후 `CATALINA_HOME`으로 사용할 이름으로 심볼릭 링크를 건다. (이렇게 하는 이유는 추후 심볼릭 링크만 바꾸면서 편하게 업그레이드 하기 위함이다다)
 
 
 **불필요한 파일 삭제**
