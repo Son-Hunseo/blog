@@ -234,7 +234,7 @@ flowchart LR
 ![](assets/05-llm-serving-study-week1/single-model3.png)
 
 - **GPU 운영 원칙**
-	- 가능하면 **여러 서버보다 한 서버의 여러 GPU(Intra-node)**를 사용하는 것이 성능에 유리
+	- 가능하면 **여러 서버보다 한 서버의 여러 GPU(Intra-node)** 를 사용하는 것이 성능에 유리
 	- Kubernetes의 **Bin Packing** 스케줄링으로 GPU 파편화를 줄이고 자원 활용률을 높일 수 있음
 	- 위 사진을 보면 아무리 인피니밴드로 연결한다고 하더라도 같은 노드에 연결된 GPU들에 비해 대역폭이 크게 낮은 것을 볼 수 있음.
 
@@ -246,7 +246,7 @@ flowchart LR
 - **한계**
 	- 모델 수가 많아질수록 컨테이너 수가 급증
 	- 사용하지 않는 모델도 자원을 계속 점유하여 비용과 운영 부담이 증가
-	- 이러한 문제를 해결하기 위해 **멀티 모델 서비스(Multi-Model Service)**가 등장
+	- 이러한 문제를 해결하기 위해 **멀티 모델 서비스(Multi-Model Service)** 가 등장
 
 > [!tip] K8S Bin Packing 스케줄러
 > - k8s 기본 스케줄러는 가용 자원에 따라 스케줄러가 여러 노드에 파드를 골고루 분산한다.
