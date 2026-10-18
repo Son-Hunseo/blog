@@ -56,7 +56,8 @@ son-blog/
 │       ├── DocItem/Layout/        # 문서 레이아웃 (댓글 추가)
 │       ├── DocItem/Content/       # 문서 콘텐츠 (제목 아래 날짜 표시)
 │       ├── DocItem/Paginator/     # 이전/다음 네비게이션 (index.mdx 제외)
-│       └── DocSidebar/            # 사이드바 (글 개수 표시)
+│       ├── DocSidebar/            # 사이드바 (글 개수 표시)
+│       └── DocSidebar/Desktop/    # PC 사이드바 (접기 버튼을 상단으로 이동)
 ├── plugins/
 │   └── gather-meta-plugin.js      # 커스텀 플러그인
 ├── .github/
@@ -172,7 +173,7 @@ themeConfig: {
 }
 ```
 
-모바일은 원래 햄버거 메뉴로 열고 닫을 수 있지만, 데스크톱은 기본값에서 사이드바가 항상 고정되어 있어 활성화했습니다. `src/theme/DocSidebar`는 Wrap 방식으로 props를 그대로 전달하므로 글 개수 표시와 함께 동작합니다.
+모바일은 원래 햄버거 메뉴로 열고 닫을 수 있지만, 데스크톱은 기본값에서 사이드바가 항상 고정되어 있어 활성화했습니다. `src/theme/DocSidebar`는 Wrap 방식으로 props를 그대로 전달하므로 글 개수 표시와 함께 동작합니다. 접기 버튼은 6.4.1의 `DocSidebar/Desktop` 오버라이드로 사이드바 맨 위에 배치합니다.
 
 ### 3.3.3 URL 끝 슬래시 통일 (신규)
 
@@ -472,6 +473,21 @@ const addCountToItems = (items) => {
 };
 ```
 
+### 6.4.1 DocSidebar/Desktop/index.js
+
+**변경 내용:**
+- `docs.sidebar.hideable`로 생기는 PC 사이드바 접기 버튼(`«`)을 하단에서 카테고리 목록 맨 위로 이동
+- 원본은 버튼이 사이드바 맨 아래에 있어 찾기 어려움
+- Eject 방식: 원본을 복사해 `CollapseButton`과 `Content`의 렌더링 순서만 바꿈 (`styles.module.css`는 원본 그대로 복사)
+
+```js
+{hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
+{hideable && <CollapseButton onClick={onCollapse} />}   // 원본은 Content 아래
+<Content path={path} sidebar={sidebar} />
+```
+
+> Eject한 컴포넌트라 Docusaurus 업그레이드 시 원본(`@docusaurus/theme-classic/lib/theme/DocSidebar/Desktop`) 변경 사항을 확인해야 합니다.
+
 ### 6.5 DocItem/Paginator/index.js
 
 **변경 내용:**
@@ -740,7 +756,7 @@ Obsidian과 Docusaurus에서 동일한 색상 클래스를 사용하기 위한 �
 | `src/css/custom.css` | 확장 | KaTeX, 검색 하이라이트, 홈페이지 스타일, Obsidian 콜아웃, 공용 색상 클래스, 본문 이미지 테두리 |
 | `src/pages/` | 삭제 | docs/index.mdx로 대체 |
 | `src/components/` | 신규 | 4개 커스텀 컴포넌트 + 공통 CSS |
-| `src/theme/` | 신규 | 5개 테마 오버라이드 |
+| `src/theme/` | 신규 | 6개 테마 오버라이드 |
 | `plugins/` | 신규 | gather-meta-plugin.js |
 | `Dockerfile` | 신규 | 멀티 스테이지 빌드 (Node 20 -> Nginx) |
 | `nginx.conf` | 신규 | 프로덕션 nginx 설정 (`absolute_redirect off`) |

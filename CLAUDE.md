@@ -43,6 +43,7 @@ npm run clear      # Docusaurus 캐시 삭제
   - `DocItem/Layout/` - 문서 레이아웃 (날짜 및 댓글 추가)
   - `DocItem/Paginator/` - 이전/다음 네비게이션 (카테고리 index.mdx 페이지 건너뜀)
   - `DocSidebar/` - 사이드바 (카테고리별 글 개수 표시)
+  - `DocSidebar/Desktop/` - PC 사이드바 (접기 버튼을 카테고리 목록 맨 위로 이동, Eject)
 - **plugins/gather-meta-plugin.js** - 포스트 메타데이터 수집 커스텀 플러그인
 - **.github/** - 배포 워크플로(`workflows/build-push-and-bump-tag.yaml`)와 이미지 태그 계산 스크립트(`scripts/calc_next_tag.py`)
 
@@ -83,7 +84,7 @@ npm run clear      # Docusaurus 캐시 삭제
 - `trailingSlash: true` - 모든 URL을 끝 슬래시 형태로 통일 (nginx 301 리다이렉트 제거, Algolia 크롤링 정상화)
 - 라이트 모드 기본값 (`colorMode.defaultMode: 'light'`, 시스템 설정 무시)
 - 우측 목차 `maxHeadingLevel: 4` (`####`까지 표시)
-- PC 사이드바 접기/펼치기 (`docs.sidebar.hideable: true`)
+- PC 사이드바 접기/펼치기 (`docs.sidebar.hideable: true`, 버튼은 `DocSidebar/Desktop` 오버라이드로 상단 배치)
 
 ## 배포
 
