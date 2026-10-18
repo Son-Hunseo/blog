@@ -125,6 +125,13 @@ const config = {
         maxHeadingLevel: 4,
       },
 
+      // PC에서 왼쪽 사이드바 접기/펼치기 버튼 활성화
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
+      },
+
       // docusaurus 사이트 소유주 인증 과정
       // metadata: [
       //   {name: 'algolia-site-verification', content: 'E4E0793C52EF1DEC'},
