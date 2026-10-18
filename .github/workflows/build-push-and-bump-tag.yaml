@@ -1,4 +1,4 @@
-name: Build & Push and Update GitOps deploy tag
+name: Build & Deploy (S3 / Harbor / ECR)
 
 on:
   workflow_dispatch:
@@ -13,6 +13,73 @@ permissions:
   id-token: write
 
 jobs:
+  # 기본 배포: 정적 빌드 결과물을 S3(static-son98/hsson)에 올리고 CloudFront 캐시 무효화
+  # blog.sonhs.com -> CloudFront(E16577PZ88ST6K) -> S3 (OAC)
+  deploy-s3:
+    if: ${{ (vars.ENABLE_S3 || 'true') == 'true' && github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: us-east-1
+      S3_BUCKET: static-son98
+      S3_PREFIX: hsson
+      CLOUDFRONT_DISTRIBUTION_ID: E16577PZ88ST6K
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_S3_DEPLOY_ROLE_ARN }}
+
+      # 해시가 붙은 assets/는 1년 immutable 캐시, 나머지(HTML 등)는 매번 재검증
+      # assets를 먼저 올려 새 HTML이 참조하는 파일이 항상 먼저 존재하도록 함
+      - name: Upload hashed assets
+        run: |
+          aws s3 sync build/assets "s3://${S3_BUCKET}/${S3_PREFIX}/assets" \
+            --cache-control "public, max-age=31536000, immutable"
+
+      - name: Upload remaining files
+        run: |
+          aws s3 sync build "s3://${S3_BUCKET}/${S3_PREFIX}" \
+            --exclude "assets/*" \
+            --cache-control "public, max-age=0, must-revalidate" \
+            --delete
+
+      - name: Remove stale assets
+        run: |
+          aws s3 sync build/assets "s3://${S3_BUCKET}/${S3_PREFIX}/assets" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --delete
+
+      - name: Invalidate CloudFront cache
+        run: |
+          INVALIDATION_ID="$(aws cloudfront create-invalidation \
+            --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" \
+            --paths "/*" \
+            --query 'Invalidation.Id' --output text)"
+          echo "Invalidation: ${INVALIDATION_ID}"
+          aws cloudfront wait invalidation-completed \
+            --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" \
+            --id "${INVALIDATION_ID}"
+
+  # [레거시] 온프레미스 K8s 배포 (Harbor 푸시 + blog-gitops 태그 갱신)
+  # S3 배포로 전환 후 병행 운영용으로 유지. vars.ENABLE_ONPREM로 토글
   deploy-onprem:
     if: ${{ (vars.ENABLE_ONPREM || 'false') == 'true' && github.actor != 'github-actions[bot]' }}
     runs-on: my-blog-runner
@@ -83,6 +150,8 @@ jobs:
           git commit -m "chore(gitops): bump on-prem image tag to ${NEXT_TAG}" || exit 0
           git push
 
+  # [레거시] AWS EKS 배포 (ECR 푸시 + blog-gitops 태그 갱신)
+  # S3 배포로 전환 후 병행 운영용으로 유지. vars.ENABLE_AWS로 토글
   deploy-aws:
     if: ${{ (vars.ENABLE_AWS || 'true') == 'true' && github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest

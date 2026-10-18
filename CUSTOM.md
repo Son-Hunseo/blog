@@ -60,7 +60,7 @@ son-blog/
 ├── plugins/
 │   └── gather-meta-plugin.js      # 커스텀 플러그인
 ├── .github/
-│   ├── workflows/build-push-and-bump-tag.yaml   # 온프렘/AWS 2중 배포 파이프라인
+│   ├── workflows/build-push-and-bump-tag.yaml   # S3+CloudFront(기본) / 온프렘·ECR(레거시) 배포 파이프라인
 │   └── scripts/calc_next_tag.py                 # 이미지 태그 자동 증가 스크립트
 ├── Dockerfile                     # 멀티 스테이지 빌드 (Node 20 -> Nginx)
 ├── nginx.conf                     # 프로덕션 nginx 설정 (absolute_redirect off)
@@ -744,7 +744,7 @@ Obsidian과 Docusaurus에서 동일한 색상 클래스를 사용하기 위한 �
 | `plugins/` | 신규 | gather-meta-plugin.js |
 | `Dockerfile` | 신규 | 멀티 스테이지 빌드 (Node 20 -> Nginx) |
 | `nginx.conf` | 신규 | 프로덕션 nginx 설정 (`absolute_redirect off`) |
-| `.github/` | 신규 | 온프렘/AWS 2중 배포 워크플로 + 태그 계산 스크립트 |
+| `.github/` | 신규 | S3+CloudFront / 온프렘 / ECR 배포 워크플로 + 태그 계산 스크립트 |
 
 ---
 
@@ -783,30 +783,45 @@ Obsidian과 Docusaurus에서 동일한 색상 클래스를 사용하기 위한 �
 
 ## 11. 배포 및 CI/CD (순정 대비 신규)
 
-순정 Docusaurus는 GitHub Pages 배포(`deploy` 스크립트)를 전제로 하지만, 이 프로젝트는 **컨테이너 이미지 빌드 + GitOps** 방식으로 배포합니다.
+순정 Docusaurus는 GitHub Pages 배포(`deploy` 스크립트)를 전제로 하지만, 이 프로젝트는 **S3 + CloudFront 정적 호스팅**을 기본으로 하고, 기존 **컨테이너 이미지 빌드 + GitOps** 방식을 레거시로 병행 유지합니다.
 
-### 11.1 Dockerfile
+### 11.1 S3 + CloudFront (기본)
 
-멀티 스테이지 빌드 — `node:20-alpine`에서 `npm run build` 후 결과물(`/app/build`)을 `nginx:stable-alpine`으로 복사.
+`blog.sonhs.com` → CloudFront(`E16577PZ88ST6K`) → S3 `static-son98/hsson/` (OAC, 버킷 비공개)
 
-### 11.2 GitHub Actions 워크플로
+| 리소스 | 값 | 비고 |
+|--------|-----|------|
+| ACM 인증서 (us-east-1) | `blog.sonhs.com` | Route53 DNS 검증 |
+| CloudFront Function | `hsson-blog-rewrite` (viewer-request) | `/path/` → `/path/index.html` 재작성, 확장자 없는 `/path` → `/path/` 301 (nginx `try_files $uri/` 대체, `trailingSlash: true`와 짝) |
+| 커스텀 에러 응답 | 403/404 → `/404.html` (404) | OAC에 ListBucket이 없어 없는 키는 403으로 옴 |
+| 캐시 정책 | `CachingOptimized`, `PriceClass_200` | `PriceClass_100`은 한국 엣지 미포함 |
+| IAM 역할 | `github-actions-blog-s3-deploy` | GitHub OIDC, `repo:Son-Hunseo/blog:ref:refs/heads/main`만 허용. `hsson/*` 쓰기 + 해당 배포 무효화만 가능 |
 
-`.github/workflows/build-push-and-bump-tag.yaml` — main 브랜치 push 시 실행되며, **온프렘과 AWS 두 개의 job**으로 구성됩니다.
+업로드 시 `Cache-Control`: 해시가 붙은 `assets/`는 `max-age=31536000, immutable`, 나머지(HTML·sitemap·`img/` 등)는 `max-age=0, must-revalidate`. 업로드 후 `/*` 무효화를 걸고 완료까지 대기합니다.
 
-| Job | 실행 환경 | 레지스트리 | GitOps 대상 |
+### 11.2 Dockerfile (레거시)
+
+멀티 스테이지 빌드 — `node:20-alpine`에서 `npm run build` 후 결과물(`/app/build`)을 `nginx:stable-alpine`으로 복사. 온프렘/ECR job에서만 사용.
+
+### 11.3 GitHub Actions 워크플로
+
+`.github/workflows/build-push-and-bump-tag.yaml` — main 브랜치 push 시 실행되며, **세 개의 job**으로 구성됩니다.
+
+| Job | 실행 환경 | 배포 대상 | GitOps 대상 |
 |-----|-----------|------------|-------------|
-| `deploy-onprem` | self-hosted runner (`my-blog-runner`) | Harbor (`harbor.onprem.arpa/son/blog`) | `overlays/onprem/prod/kustomization.yaml` |
-| `deploy-aws` | `ubuntu-latest` | AWS ECR (OIDC role assume) | `overlays/aws/prod/kustomization.yaml` |
+| `deploy-s3` | `ubuntu-latest` | S3 `static-son98/hsson` + CloudFront 무효화 (OIDC, secret `AWS_S3_DEPLOY_ROLE_ARN`) | - |
+| `deploy-onprem` (레거시) | self-hosted runner (`my-blog-runner`) | Harbor (`harbor.onprem.arpa/son/blog`) | `overlays/onprem/prod/kustomization.yaml` |
+| `deploy-aws` (레거시) | `ubuntu-latest` | AWS ECR (OIDC role assume) | `overlays/aws/prod/kustomization.yaml` |
 
-- 각 job은 리포지토리 변수 `ENABLE_ONPREM` / `ENABLE_AWS`로 개별 on/off (온프렘 기본 `false`, AWS 기본 `true`)
+- 각 job은 리포지토리 변수 `ENABLE_S3` / `ENABLE_ONPREM` / `ENABLE_AWS`로 개별 on/off (S3 기본 `true`, 온프렘 기본 `false`, AWS 기본 `true`)
 - 매니페스트는 이 저장소가 아닌 **별도 GitOps 저장소 `Son-Hunseo/blog-gitops`** 에 있으며, 워크플로가 해당 저장소의 kustomization `newTag`를 갱신하고 커밋/푸시 → ArgoCD가 동기화
 - 과거에 있던 `k8s/resource/` 매니페스트 폴더는 GitOps 저장소로 이관되며 삭제됨
 
-### 11.3 이미지 태그 자동 증가
+### 11.4 이미지 태그 자동 증가 (레거시 job 전용)
 
 `.github/scripts/calc_next_tag.py`가 레지스트리(Harbor API / `aws ecr describe-images`) 응답을 stdin으로 받아 `major.minor` 형식 태그 중 최댓값 +1을 계산합니다. (`0.9` → `1.0`, 태그가 없으면 `0.1`부터)
 
-### 11.4 무한 루프 방지
+### 11.5 무한 루프 방지
 
 - `paths-ignore: .github/**` — 워크플로 자체 수정은 파이프라인을 트리거하지 않음
 - `github.actor != 'github-actions[bot]'` — 봇이 만든 커밋으로 재실행되지 않음

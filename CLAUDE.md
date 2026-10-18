@@ -87,11 +87,13 @@ npm run clear      # Docusaurus 캐시 삭제
 
 ## 배포
 
-- **Docker**: 멀티 스테이지 빌드 (Node 20 -> Nginx). 루트의 `nginx.conf`를 `/etc/nginx/conf.d/default.conf`로 복사하며, TLS를 앞단 Nginx Gateway Fabric에서 끊는 구조라 `absolute_redirect off`로 리다이렉트 `Location`을 상대 경로로 발급해 https -> http 스킴 다운그레이드를 막습니다
-- **CI/CD**: `.github/workflows/build-push-and-bump-tag.yaml`가 main 브랜치 push 시 실행되며 두 개의 job으로 구성
-  - `deploy-onprem`: self-hosted runner에서 Harbor(`harbor.onprem.arpa/son/blog`)로 푸시 (`vars.ENABLE_ONPREM`로 토글)
-  - `deploy-aws`: OIDC로 AWS 인증 후 ECR로 푸시 (`vars.ENABLE_AWS`로 토글)
-- **이미지 태그**: `.github/scripts/calc_next_tag.py`가 레지스트리의 기존 `major.minor` 태그를 조회해 자동 증가
+- **S3 + CloudFront (기본)**: `blog.sonhs.com` → CloudFront(`E16577PZ88ST6K`) → S3 `static-son98/hsson/` (OAC). CloudFront Function `hsson-blog-rewrite`가 `/path/` → `/path/index.html` 재작성 및 `/path` → `/path/` 301 처리, 403/404는 `/404.html`로 응답
+- **Docker (레거시)**: 멀티 스테이지 빌드 (Node 20 -> Nginx). 루트의 `nginx.conf`를 `/etc/nginx/conf.d/default.conf`로 복사하며, TLS를 앞단 Nginx Gateway Fabric에서 끊는 구조라 `absolute_redirect off`로 리다이렉트 `Location`을 상대 경로로 발급해 https -> http 스킴 다운그레이드를 막습니다
+- **CI/CD**: `.github/workflows/build-push-and-bump-tag.yaml`가 main 브랜치 push 시 실행되며 세 개의 job으로 구성
+  - `deploy-s3`: `ubuntu-latest`에서 빌드 → OIDC(`secrets.AWS_S3_DEPLOY_ROLE_ARN`)로 S3 sync(`assets/`는 immutable 캐시, 나머지는 `max-age=0`) → CloudFront `/*` 무효화 (`vars.ENABLE_S3`로 토글)
+  - `deploy-onprem` (레거시): self-hosted runner에서 Harbor(`harbor.onprem.arpa/son/blog`)로 푸시 (`vars.ENABLE_ONPREM`로 토글)
+  - `deploy-aws` (레거시): OIDC로 AWS 인증 후 ECR로 푸시 (`vars.ENABLE_AWS`로 토글)
+- **이미지 태그** (레거시 job): `.github/scripts/calc_next_tag.py`가 레지스트리의 기존 `major.minor` 태그를 조회해 자동 증가
 - **GitOps**: 매니페스트는 이 저장소가 아닌 **별도 저장소 `Son-Hunseo/blog-gitops`** 에 있으며, 워크플로가 `overlays/{onprem,aws}/prod/kustomization.yaml`의 `newTag`를 갱신·푸시합니다. (이 저장소의 `k8s/` 폴더는 삭제됨)
 
 무한 루프 방지: `paths-ignore: .github/**`와 `github.actor != 'github-actions[bot]'` 조건을 사용합니다.
