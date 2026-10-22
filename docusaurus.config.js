@@ -159,6 +159,11 @@ const config = {
           position: 'left',
           label: 'Blog',
         },
+        {
+          to: '/tags',
+          label: 'Tags',
+          position: 'left',
+        },
         // {
         //   to: '/About/About',
         //   position: 'left',

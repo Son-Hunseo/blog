@@ -83,6 +83,7 @@ npm run clear      # Docusaurus 캐시 삭제
 - 한국어(`ko`)가 기본 로케일
 - `trailingSlash: true` - 모든 URL을 끝 슬래시 형태로 통일 (nginx 301 리다이렉트 제거, Algolia 크롤링 정상화)
 - 라이트 모드 기본값 (`colorMode.defaultMode: 'light'`, 시스템 설정 무시)
+- 네비바에 `Tags` 링크 (`/tags`, docs 태그 목록 페이지)
 - 우측 목차 `maxHeadingLevel: 4` (`####`까지 표시)
 - PC 사이드바 접기/펼치기 (`docs.sidebar.hideable: true`, 버튼은 `DocSidebar/Desktop` 오버라이드로 상단 배치)
 

@@ -214,6 +214,7 @@ algolia: {
 
 **현재:**
 - Blog 링크 (`/`)
+- Tags 링크 (`/tags`, docs 플러그인이 생성하는 태그 목록 페이지)
 - 개인 GitHub 링크 (Son-Hunseo)
 
 ### 3.7 Footer 간소화
