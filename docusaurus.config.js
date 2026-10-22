@@ -27,6 +27,15 @@ const config = {
   */
   markdown: {
     mermaid: true,
+    // 옵시디언 동기화용 '유형/블로그' 태그는 모든 글에 붙어 있으므로 태그 집계/표시에서 제외
+    parseFrontMatter: async (params) => {
+      const result = await params.defaultParseFrontMatter(params);
+      const {tags} = result.frontMatter;
+      if (Array.isArray(tags)) {
+        result.frontMatter.tags = tags.filter((tag) => tag !== '유형/블로그');
+      }
+      return result;
+    },
   },
   themes: ['@docusaurus/theme-mermaid'],
 

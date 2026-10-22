@@ -115,11 +115,21 @@ son-blog/
 | `url` | `'https://your-docusaurus-site.example.com'` | `'https://blog.sonhs.com'` |
 | `i18n.defaultLocale` | `'en'` | `'ko'` |
 
-### 3.2 Mermaid 다이어그램 지원 (신규)
+### 3.2 Mermaid 다이어그램 지원 및 태그 필터링 (신규)
 
 ```js
 markdown: {
   mermaid: true,
+  // 옵시디언 동기화용 '유형/블로그' 태그는 모든 글에 붙어 있으므로 태그 집계/표시에서 제외
+  // (plugins/gather-meta-plugin.js 의 tags 수집에서도 동일하게 제외)
+  parseFrontMatter: async (params) => {
+    const result = await params.defaultParseFrontMatter(params);
+    const {tags} = result.frontMatter;
+    if (Array.isArray(tags)) {
+      result.frontMatter.tags = tags.filter((tag) => tag !== '유형/블로그');
+    }
+    return result;
+  },
 },
 themes: ['@docusaurus/theme-mermaid'],
 ```

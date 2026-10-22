@@ -279,7 +279,7 @@ module.exports = function (context, options) {
           link: `/${urlPath}`,                           // URL 링크
           category: categoryName,                        // 카테고리 이름 (표시용)
           categoryPath: categoryPath,                    // 카테고리 경로 (필터링용)
-          tags: frontMatter.tags || [],                  // 태그 배열
+          tags: (frontMatter.tags || []).filter(tag => tag !== '유형/블로그'),  // 태그 배열 (옵시디언 동기화용 태그 제외)
           date: frontMatter.date || null,                // 작성일
           readingTime: readingTime,                      // 예상 읽기 시간 (분)
           fileOrder: fileOrder,                          // 파일명 숫자 프리픽스 (정렬용)
