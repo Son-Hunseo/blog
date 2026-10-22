@@ -1,9 +1,12 @@
-﻿---
+---
 image: /img/posts/06-Dev/02-SQL/02-select-where/select6.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-05
 title: "[DML] SELECT - WHERE 절과 조건문"
 description: 데이터를 필터링하는 WHERE 절의 모든 문법을 정리합니다. AND, OR, IN, BETWEEN, LIKE 등 조건식의 차이와 NULL 처리 시 주의점을 다룹니다.
+tags:
+  - "유형/블로그"
+  - "주제/database"
 ---
 
 ---

@@ -4,6 +4,9 @@ description: Linux의 장치 이름 규칙부터 LVM(PV, VG, LV) 기반 파티�
 date: 2026-10-02
 sidebar_class_name: hidden-sidebar-item
 image: /img/default/linux/linux.png
+tags:
+  - "유형/블로그"
+  - "주제/linux"
 ---
 ---
 ## 파티션 분리

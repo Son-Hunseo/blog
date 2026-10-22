@@ -4,6 +4,12 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-12-06
 title: Service
 description: Kubernetes의 Service 개념과 역할을 정리하고, ClusterIP·NodePort·LoadBalancer 타입의 차이와 동작 원리를 예시와 YAML 코드로 설명합니다. Pod 간 통신 구조부터 외부 트래픽 처리까지 한눈에 이해할 수 있습니다.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/network"
+related:
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/6. Service (ClusterIP, NodePort, LoadBalancer, ExternalName)]]"
 ---
 
 ---

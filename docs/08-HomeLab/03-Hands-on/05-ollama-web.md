@@ -1,9 +1,13 @@
-﻿---
+---
 image: /img/posts/08-HomeLab/03-Hands-on/05-ollama-web/ollama1.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-24
 title: Ollama를 사용한 Local LLM 추론 및 웹 UI 호스팅
 description: 로컬 환경에서 Ollama를 설치하고 GPU 기반 LLM 모델을 실행하는 방법을 소개합니다. 또한 Open WebUI를 Docker로 설치해 Ollama와 연동하고, 웹 인터페이스를 통해 대화형으로 모델을 활용하는 과정을 단계별로 설명합니다.
+tags:
+  - "유형/블로그"
+  - "주제/homelab"
+  - "주제/llm"
 ---
 
 ---

@@ -4,6 +4,15 @@ description: Speculative Decoding, 분산 추론, Prefill-Decode 분리, 고급 
 date: 2026-08-29
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/05-llm-serving-study-week1/llm-serving-book.jpg
+tags:
+  - "유형/블로그"
+  - "주제/python"
+  - "주제/llm"
+  - "주제/prompt-engineering"
+related:
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/07-llm-serving-study-week3]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/06-llm-serving-study-week2]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/09-llm-serving-study-week5]]"
 ---
 
 ---

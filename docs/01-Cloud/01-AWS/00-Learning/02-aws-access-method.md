@@ -4,6 +4,9 @@ description: AWS를 사용하는 대표적인 세 가지 방법인 Management Co
 date: 2026-04-28
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/01-Cloud/01-AWS/00-Learning/02-aws-access-method/aws.png
+tags:
+  - "유형/블로그"
+  - "주제/aws"
 ---
 
 ---

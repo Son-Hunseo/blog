@@ -4,6 +4,9 @@ description: NTP의 개념과 chrony를 이용한 Client/Server 시간 동기화
 date: 2026-10-02
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/00-Linux/07-ntp/ntp.png
+tags:
+  - "유형/블로그"
+  - "주제/linux"
 ---
 ---
 ## NTP란?

@@ -4,6 +4,11 @@ description: Nginx 소스 빌드 설치부터 nginx.conf, SSL/TLS, Reverse Proxy
 date: 2026-09-29
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/04-Middleware/01-Web/04-nginx-conf/nginx.png
+tags:
+  - "유형/블로그"
+  - "주제/html"
+  - "주제/security"
+  - "주제/nginx"
 ---
 ---
 ## 기준

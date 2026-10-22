@@ -4,6 +4,10 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-12-27
 title: 오퍼레이터 (커스텀 리소스, 커스텀 컨트롤러)
 description: 쿠버네티스 오퍼레이터 패턴을 완벽히 이해하세요. CRD(Custom Resource Definition)를 정의하여 커스텀 리소스 상태를 정의하고, 커스텀 컨트롤러로 상태를 실현하는 원리를 예시 YAML과 함께 상세히 설명합니다.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/cicd"
 ---
 
 ---

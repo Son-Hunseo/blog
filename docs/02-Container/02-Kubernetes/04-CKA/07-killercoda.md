@@ -1,9 +1,12 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-16
 title: Killercoda 트러블슈팅 문제 풀이
 description: CKA 시험 대비 Killercoda 트러블슈팅 문제 풀이입니다. Apiserver Crash/Misconfigured, Kube Controller Manager 설정 오류, Kubelet 설정 오류, Application 설정 오류 등의 시나리오별 원인 분석과 해결 방법을 정리했습니다.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
 ---
 
 ---

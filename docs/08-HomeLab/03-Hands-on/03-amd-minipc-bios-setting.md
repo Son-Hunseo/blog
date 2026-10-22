@@ -1,9 +1,12 @@
-﻿---
+---
 image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-10
 title: AMD mini pc 안정성을 위한 바이오스 설정
 description: AMD CPU 발열 문제 해결을 위한 BIOS 설정 가이드. Core Performance Boost, C-state, PSS Support 비활성화로 서버 운영 시 IDLE 온도 60→45도, 빌드 시 92→60도 감소. 오버클럭 없이 안정적인 시스템 구축 방법.
+tags:
+  - "유형/블로그"
+  - "주제/homelab"
 ---
 
 ---

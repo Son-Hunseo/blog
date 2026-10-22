@@ -1,9 +1,12 @@
-﻿---
+---
 image: /img/posts/02-Container/02-Kubernetes/04-CKA/06-exam-recap-1/recap1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-16
 title: CKA 시험 후기 & 못푼 문제 복기
 description: CKA 자격증 첫 시험에서 65점으로 1점 차이로 불합격 후 못 푼 문제를 복기한 글입니다. 리소스 부족 트러블슈팅, cert-manager CRD 조회, Gateway API 마이그레이션, Helm template 명령어, 컨테이너 런타임 점검 등의 문제 풀이를 정리했습니다.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
 ---
 
 ---

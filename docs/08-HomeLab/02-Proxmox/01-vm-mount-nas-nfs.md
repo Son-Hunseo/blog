@@ -1,9 +1,14 @@
-﻿---
+---
 image: /img/posts/08-HomeLab/02-Proxmox/01-vm-mount-nas-nfs/vm-to-nfs1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-05-01
 title: 시놀로지 나스의 공유 폴더를 Proxmox VM의 볼륨으로 사용해보자
 description: Proxmox 환경에서 Synology NAS 스토리지를 NFS로 마운트하여 VM 볼륨으로 활용하는 방법을 다룹니다. 컴퓨팅과 스토리지 자원 분리를 통한 고가용성 구성 가이드입니다
+tags:
+  - "유형/블로그"
+  - "주제/proxmox"
+  - "주제/homelab"
+  - "주제/synology"
 ---
 
 ---

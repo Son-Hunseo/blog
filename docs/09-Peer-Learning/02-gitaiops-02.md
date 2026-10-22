@@ -6,6 +6,11 @@ description: "ArgoCD와 GitHub Actions를 활용한 GitOps 배포 파이프라�
 date: 2026-07-11
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/02-gitaiops-02/ai-book.png
+tags:
+  - "유형/블로그"
+  - "주제/cicd"
+  - "주제/monitoring"
+  - "주제/prompt-engineering"
 ---
 
 ---

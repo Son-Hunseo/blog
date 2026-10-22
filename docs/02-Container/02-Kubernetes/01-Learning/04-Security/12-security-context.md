@@ -4,6 +4,11 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-12-26
 title: Security Context
 description: 쿠버네티스(Kubernetes)에서 Pod와 컨테이너의 보안 권한 및 접근 제어를 설정하는 securityContext에 대해 알아봅니다. 프로세스 실행 사용자 ID(runAsUser) 설정과 리눅스 Capabilities(capabilities) 추가/삭제를 Pod 또는 컨테이너 레벨에서 구성하는 방법을 예시 YAML과 함께 상세히 설명합니다.
+tags:
+  - "유형/블로그"
+  - "주제/docker"
+  - "주제/kubernetes"
+  - "주제/linux"
 ---
 
 ---

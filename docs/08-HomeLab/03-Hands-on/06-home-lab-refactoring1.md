@@ -1,9 +1,15 @@
-﻿---
+---
 image: /img/posts/08-HomeLab/03-Hands-on/06-home-lab-refactoring1/home-refac3.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-07-31
 title: "[홈랩 리팩토링 - 1] 리팩토링 하는 이유"
 description: 홈랩 인프라를 클라우드 네이티브 아키텍처로 리팩토링하는 이유를 설명합니다. Nginx VM에서 Kubernetes Gateway API로, Jenkins에서 Github Action으로 전환하여 리소스 효율성과 재현성을 높이는 과정을 다룹니다.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/nginx"
+  - "주제/cicd"
+  - "주제/homelab"
 ---
 
 ---

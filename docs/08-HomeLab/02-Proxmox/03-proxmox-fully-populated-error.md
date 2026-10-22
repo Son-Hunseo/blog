@@ -1,9 +1,13 @@
-﻿---
+---
 image: /img/posts/08-HomeLab/02-Proxmox/03-proxmox-fully-populated-error/pve-install-error1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-05-15
 title: Proxmox 설치 waiting for /dev to be fully populated 오류
 description: GPU가 장착된 서버에서 Proxmox 설치 시 'waiting for /dev to be fully populated' 단계에서 멈추는 문제를 해결하는 방법을 설명합니다. nomodeset 옵션을 통해 그래픽 드라이버 충돌을 방지하고 설치를 완료할 수 있습니다.
+tags:
+  - "유형/블로그"
+  - "주제/proxmox"
+  - "주제/homelab"
 ---
 
 ---

@@ -4,6 +4,13 @@ description: Tomcat 설치부터 인스턴스 구성, 운영 튜닝, 세션 클�
 date: 2026-09-28
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/04-Middleware/01-Web/03-tomcat-conf/tomcat.png
+tags:
+  - "유형/블로그"
+  - "주제/java"
+  - "주제/database"
+  - "주제/systemd"
+  - "주제/network"
+  - "주제/security"
 ---
 ---
 ## 기준

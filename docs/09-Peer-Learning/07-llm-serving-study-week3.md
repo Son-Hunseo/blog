@@ -4,6 +4,15 @@ description: LLM 서빙의 주요 병목을 이해하고, GPU 하드웨어 특�
 date: 2026-08-19
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/05-llm-serving-study-week1/llm-serving-book.jpg
+tags:
+  - "유형/블로그"
+  - "주제/network"
+  - "주제/llm"
+  - "주제/prompt-engineering"
+related:
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/08-llm-serving-study-week4]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/09-llm-serving-study-week5]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/06-llm-serving-study-week2]]"
 ---
 
 ---

@@ -1,9 +1,12 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-13
 title: JSON Path
 description: Kubernetes kubectl의 -o jsonpath와 custom-columns 옵션을 활용하여 노드 이름, CPU 사양 등 원하는 데이터를 추출하고 정렬하는 방법을 정리합니다. CKA 자격증 준비와 실무 효율을 높여주는 고급 출력 제어 팁을 확인하세요.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
 ---
 
 ---

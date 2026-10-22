@@ -4,6 +4,11 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-12-16
 title: Env - ConfigMaps
 description: "Kubernetes ConfigMap을 활용하여 Pod의 환경 설정과 환경 변수를 효과적으로 관리하는 방법을 마스터하세요. 이 가이드는 ConfigMap의 생성 방법(Imperative, Declarative), Pod에 환경 변수로 주입하는 세 가지 주요 방식(envFrom, valueFrom: configMapKeyRef), 그리고 설정 파일을 볼륨으로 마운트하는 방법까지 YAML 예제와 함께 단계별로 설명합니다. 복잡한 Pod YAML 파일에서 환경 설정을 분리하여 관리의 효율성을 높이고, 애플리케이션의 유연성을 극대화하세요."
+tags:
+  - "유형/블로그"
+  - "주제/html"
+  - "주제/kubernetes"
+  - "주제/nginx"
 ---
 
 ---

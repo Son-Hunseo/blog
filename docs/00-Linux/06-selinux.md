@@ -4,6 +4,11 @@ description: SELinux의 개념과 동작 모드(Enforcing, Permissive, Disabled)
 date: 2026-10-02
 sidebar_class_name: hidden-sidebar-item
 image: /img/default/linux/linux.png
+tags:
+  - "유형/블로그"
+  - "주제/html"
+  - "주제/linux"
+  - "주제/network"
 ---
 ---
 ## SELinux란?

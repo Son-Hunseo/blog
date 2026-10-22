@@ -1,9 +1,12 @@
-﻿---
+---
 image: /img/default/default.webp
 sidebar_class_name: hidden-sidebar-item
 date: 2026-03-26
 title: 운영체제(OS)란?
 description: 운영체제(OS)의 정의와 역할을 한눈에 정리합니다. 프로세스 관리, 메모리 관리, 파일 시스템, 네트워크, 디바이스 드라이버까지 핵심 개념을 초보자도 이해하기 쉽게 설명한 글입니다.
+tags:
+  - "유형/블로그"
+  - "주제/os"
 ---
 
 ---

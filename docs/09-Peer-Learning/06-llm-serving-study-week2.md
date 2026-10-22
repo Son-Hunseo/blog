@@ -4,6 +4,17 @@ description: vLLM·Triton 같은 프레임워크를 쓰기 전에, 단일 모델
 date: 2026-08-15
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/05-llm-serving-study-week1/llm-serving-book.jpg
+tags:
+  - "유형/블로그"
+  - "주제/python"
+  - "주제/fastapi"
+  - "주제/docker"
+  - "주제/kubernetes"
+  - "주제/network"
+related:
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/08-llm-serving-study-week4]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/07-llm-serving-study-week3]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/11-llm-serving-study-week7]]"
 ---
 ---
 ## CH3. Model Serving System Design: A Deep Dive

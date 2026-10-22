@@ -1,9 +1,15 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-15
 title: Mock Exam 2 오답 정리
 description: CKA 모의고사 2회 오답 정리입니다. StorageClass 설정, Sidecar 컨테이너 로깅, Ingress/IngressClass 설정, CSR 인증서 발급 및 RBAC 설정, DNS lookup 테스트, Static Pod 생성, Gateway TLS 설정, Helm 차트 삭제 등의 문제 풀이와 해결 방법을 설명합니다.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/network"
+  - "주제/security"
+  - "주제/nginx"
 ---
 ## 1 (O)
 

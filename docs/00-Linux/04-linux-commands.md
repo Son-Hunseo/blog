@@ -4,6 +4,10 @@ description: mkdir, chmod, ps, ss, nmcli, ssh-keygen, base64 등 기본 명령�
 date: 2026-10-02
 sidebar_class_name: hidden-sidebar-item
 image: /img/default/linux/linux.png
+tags:
+  - "유형/블로그"
+  - "주제/linux"
+  - "주제/network"
 ---
 ---
 ## 각종 명령어

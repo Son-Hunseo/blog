@@ -4,6 +4,9 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-12-06
 title: Deployment
 description: 쿠버네티스 Deployment의 개념과 동작 원리를 이해하고, ReplicaSet을 자동으로 관리하며 롤링 업데이트와 롤백을 수행하는 방법을 YAML 예시와 함께 자세히 설명합니다.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
 ---
 
 ---

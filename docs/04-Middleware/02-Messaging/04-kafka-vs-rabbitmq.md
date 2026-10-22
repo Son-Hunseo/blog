@@ -4,6 +4,10 @@ description: Kafka와 RabbitMQ의 구조적 차이를 메시지 저장, 소비, 
 date: 2026-08-27
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/04-Middleware/02-Messaging/04-kafka-vs-rabbitmq/kafka-rabbitmq.png
+tags:
+  - "유형/블로그"
+  - "주제/kafka"
+  - "주제/rabbitmq"
 ---
 ---
 ## Kafka vs RabbitMQ

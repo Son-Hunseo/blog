@@ -4,6 +4,14 @@ description: 모델과 모델 서빙의 정의부터 On-Device, Single-Model, Mu
 date: 2026-08-08
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/05-llm-serving-study-week1/llm-serving-book.jpg
+tags:
+  - "유형/블로그"
+  - "주제/security"
+  - "주제/llm"
+related:
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/09-llm-serving-study-week5]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/08-llm-serving-study-week4]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/07-llm-serving-study-week3]]"
 ---
 
 ---

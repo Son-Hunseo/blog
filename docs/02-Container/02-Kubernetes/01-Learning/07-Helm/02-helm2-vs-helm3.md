@@ -1,9 +1,12 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-06
 title: Helm 2 vs Helm 3
 description: Helm 2와 Helm 3의 차이점을 완벽 정리합니다. Tiller 제거를 통한 보안 강화 아키텍처와 3-Way Strategic Merge Patch를 이용한 안전한 롤백 및 업그레이드 원리를 확인하세요.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
 ---
 
 ---

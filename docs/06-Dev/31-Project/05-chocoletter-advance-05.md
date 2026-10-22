@@ -1,9 +1,14 @@
-﻿---
+---
 image: /img/posts/06-Dev/31-Project/05-chocoletter-advance-05/erd.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-02-05
 title: "[초코레터 프로젝트 고도화 -5] DB 설계 변경 & 데이터 Backfill"
 description: Gift와 Letter 테이블을 GiftLetter로 통합하며 발생한 DB 설계 변경과 무중단 데이터 마이그레이션 과정을 다룹니다. 이중쓰기 전략, Spring Batch를 활용한 데이터 Backfill, 쿼리 최적화(2N+1 → 1) 등 실무에서 적용 가능한 마이그레이션 기법을 설명합니다.
+tags:
+  - "유형/블로그"
+  - "주제/spring"
+  - "주제/java"
+  - "주제/security"
 ---
 
 ---

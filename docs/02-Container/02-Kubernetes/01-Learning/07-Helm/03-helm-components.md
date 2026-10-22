@@ -1,9 +1,15 @@
-﻿---
+---
 image: /img/posts/02-Container/02-Kubernetes/01-Learning/07-Helm/03-helm-components/helm-components1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-07
 title: Helm의 구성 요소
 description: 쿠버네티스 패키지 매니저 Helm의 기본 개념인 Chart, Release, Revision을 입문자 눈높이에서 정리합니다. NGINX와 WordPress 예시 코드를 통해 Helm 템플릿 구조와 values.yaml 활용법을 확인해 보세요.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/nginx"
+related:
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/9. Helm, Ingress (그림만 넣으면 됨)]]"
 ---
 
 ---

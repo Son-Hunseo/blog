@@ -4,6 +4,9 @@ description: Kafka의 ZooKeeper 기반 클러스터 관리 방식과 한계, 그
 date: 2026-08-25
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/04-Middleware/02-Messaging/02-kraft-vs-zookeeper/kraft-zookeeper.png
+tags:
+  - "유형/블로그"
+  - "주제/kafka"
 ---
 ---
 ## Zookeeper

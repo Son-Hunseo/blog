@@ -4,6 +4,17 @@ description: AWS Trainium과 Neuron SDK의 구조를 이해하고, Amazon EKS �
 date: 2026-09-12
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/05-llm-serving-study-week1/llm-serving-book.jpg
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/nginx"
+  - "주제/aws"
+  - "주제/monitoring"
+  - "주제/llm"
+related:
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/11-llm-serving-study-week7]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/09-llm-serving-study-week5]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/07-llm-serving-study-week3]]"
 ---
 
 ---

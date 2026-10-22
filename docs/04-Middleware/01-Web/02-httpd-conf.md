@@ -4,6 +4,13 @@ description: Apache HTTP Server의 소스 빌드부터 운영 환경 설정, MPM
 date: 2026-09-21
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/04-Middleware/01-Web/02-httpd-conf/apache.png
+tags:
+  - "유형/블로그"
+  - "주제/html"
+  - "주제/linux"
+  - "주제/systemd"
+  - "주제/network"
+  - "주제/security"
 ---
 ---
 ## 기준

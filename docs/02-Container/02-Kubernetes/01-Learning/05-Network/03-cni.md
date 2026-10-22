@@ -4,6 +4,11 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-12-31
 title: CNI (Container Network Interface)
 description: 컨테이너 네트워크 표준인 CNI(Container Network Interface)의 개념, 탄생 배경 및 스펙을 정리합니다. Docker, Kubernetes 환경에서 네트워크 플러그인이 작동하는 원리와 주요 종류(Calico, Cilium 등)를 확인하세요.
+tags:
+  - "유형/블로그"
+  - "주제/docker"
+  - "주제/kubernetes"
+  - "주제/network"
 ---
 
 ---

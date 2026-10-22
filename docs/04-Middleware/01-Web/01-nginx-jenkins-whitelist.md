@@ -1,9 +1,14 @@
-﻿---
+---
 image: /img/posts/04-Middleware/01-Web/01-nginx-jenkins-whitelist/whitelist1.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-10-20
 title: Jenkins Webhook을 위해 Nginx 화이트리스트 처리하기
 description: Jenkins를 외부에 노출하지 않고 Github Webhook을 안전하게 받는 방법을 소개합니다. Nginx 화이트리스트를 통한 보안 강화 기법을 다룹니다
+tags:
+  - "유형/블로그"
+  - "주제/security"
+  - "주제/nginx"
+  - "주제/cicd"
 ---
 
 ---

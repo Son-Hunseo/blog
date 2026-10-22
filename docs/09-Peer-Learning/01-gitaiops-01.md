@@ -4,6 +4,12 @@ description: GitAIOps 스터디를 시작하며 Claude Code 기반 가드레일 
 date: 2026-07-03
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/01-gitaiops-01/ai-book.png
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/gcp"
+  - "주제/cicd"
+  - "주제/git"
 ---
 
 ---

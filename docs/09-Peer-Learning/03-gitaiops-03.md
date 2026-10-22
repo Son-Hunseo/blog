@@ -4,6 +4,10 @@ description: Claude Code와 함께 Gateway API, Argo Rollouts, Valkey, Secret Ma
 date: 2026-07-19
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/03-gitaiops-03/ai-book.png
+tags:
+  - "유형/블로그"
+  - "주제/redis"
+  - "주제/gcp"
 ---
 
 ---

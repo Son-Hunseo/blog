@@ -4,6 +4,9 @@ description: Transformer의 Encoder/Decoder 구조를 Multi-Head Attention, Mask
 date: 2026-08-05
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/07-AI/02-transformer/transformer.jpg
+tags:
+  - "유형/블로그"
+  - "주제/llm"
 ---
 
 ---

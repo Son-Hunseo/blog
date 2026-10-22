@@ -4,6 +4,10 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-05-22
 title: Proxmox 클러스터 구축 방법
 description: Proxmox VE에서 클러스터를 구성하는 방법과 join 시 발생하는 오류 해결법을 정리했습니다. 홈서버나 소규모 인프라 환경에서 고가용성(HA)을 구축하기 위한 기초 개념과 방화벽 포트 설정, 호스트네임 변경 절차까지 단계별로 설명합니다.
+tags:
+  - "유형/블로그"
+  - "주제/proxmox"
+  - "주제/homelab"
 ---
 
 ---

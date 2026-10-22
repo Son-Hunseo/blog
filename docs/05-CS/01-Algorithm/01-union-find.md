@@ -4,6 +4,9 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-01-01
 title: 서로소 집합
 description: Union-Find 자료구조를 활용한 서로소 집합(Disjoint Set) 구현과 경로 압축, 랭크 최적화 기법을 다룹니다
+tags:
+  - "유형/블로그"
+  - "주제/algorithm"
 ---
 
 ---

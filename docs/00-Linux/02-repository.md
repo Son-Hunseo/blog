@@ -4,6 +4,10 @@ description: Linux Repository의 개념과 배포판 계열별 차이를 살펴�
 date: 2026-10-02
 sidebar_class_name: hidden-sidebar-item
 image: /img/default/linux/linux.png
+tags:
+  - "유형/블로그"
+  - "주제/linux"
+  - "주제/nginx"
 ---
 ---
 ## Repository란?

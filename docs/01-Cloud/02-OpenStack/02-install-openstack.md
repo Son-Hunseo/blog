@@ -4,6 +4,16 @@ title: "[OpenStack 아키텍처 실습1] 전체 설계 및 OpenStack 설치(Koll
 description: Proxmox 가상화 환경에서 802.1Q VLAN 스위치를 활용해 실제 데이터센터의 망 분리 구조를 재현하고, Kolla-Ansible로 OpenStack 클러스터를 구축하는 실습 가이드입니다.
 date: 2026-04-22
 sidebar_class_name: hidden-sidebar-item
+tags:
+  - "유형/블로그"
+  - "주제/python"
+  - "주제/docker"
+  - "주제/linux"
+  - "주제/network"
+  - "주제/proxmox"
+related:
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/04-connect-openStack-ceph]]"
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/03-install-ceph]]"
 ---
 
 ---

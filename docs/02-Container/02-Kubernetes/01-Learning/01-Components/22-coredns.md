@@ -4,6 +4,10 @@ sidebar_class_name: hidden-sidebar-item
 date: 2026-01-02
 title: CoreDNS
 description: 쿠버네티스(Kubernetes) 서비스와 포드의 DNS 네이밍 규칙부터 CoreDNS의 동작 원리, /etc/resolv.conf 설정까지 한 번에 정리합니다. FQDN 구조와 Search Domain의 차이를 명확히 이해해 보세요.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/network"
 ---
 
 ---

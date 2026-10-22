@@ -4,6 +4,12 @@ description: OpenSSL의 enc, genrsa, req, x509 명령어로 파일 암복호화,
 date: 2026-10-19
 sidebar_class_name: hidden-sidebar-item
 image: /img/default/linux/linux.png
+tags:
+  - "유형/블로그"
+  - "주제/algorithm"
+  - "주제/linux"
+  - "주제/network"
+  - "주제/security"
 ---
 ---
 ## OpenSSL이란?

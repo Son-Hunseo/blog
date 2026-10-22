@@ -1,9 +1,12 @@
-﻿---
+---
 image: /img/posts/02-Container/02-Kubernetes/04-CKA/08-exam-recap-2/cka.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-17
 title: CKA 자격증 취득 후기
 description: CKA 자격증 시험에 1차에서 1점 차이로 떨어진 후 재응시하여 합격한 후기입니다. 2달간의 공부 과정, Helm과 트러블슈팅 보완 방법, 시험 중 못 풀었던 컨트롤플레인 문제 복기, 그리고 자격증의 의미에 대한 솔직한 생각을 공유합니다.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
 ---
 
 ---

@@ -4,6 +4,11 @@ title: Docusaurus와 Obsidian 공통으로 글자색 변경하는 md 파일 만�
 description: 옵시디언과 도큐사우루스에서 공통으로 사용할 수 있는 글자 색상/형광펜 CSS 가이드입니다. 호환성 문제 해결을 위한 커스텀 클래스 설정과 옵시디언 스니펫 활용법을 통해 나만의 기술 블로그 커스터마이징을 완성해 보세요.
 date: 2026-04-14
 sidebar_class_name: hidden-sidebar-item
+tags:
+  - "유형/블로그"
+  - "주제/docusaurus"
+  - "주제/html"
+  - "주제/css"
 ---
 
 ---

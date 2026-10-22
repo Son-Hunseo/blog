@@ -4,6 +4,14 @@ title: "[OpenStack 아키텍처 실습2] Ceph 클러스터 구성"
 description: Proxmox 가상화 환경에서 Cephadm을 이용해 분산 스토리지 시스템인 Ceph 클러스터를 구축하고, 고성능 데이터 복제를 위한 Public/Cluster 네트워크 분리 및 OSD 구성 과정을 다룹니다.
 date: 2026-04-23
 sidebar_class_name: hidden-sidebar-item
+tags:
+  - "유형/블로그"
+  - "주제/css"
+  - "주제/linux"
+  - "주제/network"
+related:
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/02-install-openstack]]"
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/04-connect-openStack-ceph]]"
 ---
 
 ---

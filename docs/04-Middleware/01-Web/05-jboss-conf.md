@@ -4,6 +4,12 @@ description: JBoss EAP 7.4 Standalone 설치부터 인스턴스 구성, Datasour
 date: 2026-10-14
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/04-Middleware/01-Web/05-jboss-conf/jboss.png
+tags:
+  - "유형/블로그"
+  - "주제/java"
+  - "주제/database"
+  - "주제/network"
+  - "주제/security"
 ---
 ---
 ## 기준

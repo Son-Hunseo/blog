@@ -4,6 +4,10 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-12-02
 title: etcd
 description: etcd는 Kubernetes의 핵심 구성 요소로, 클러스터의 모든 상태 데이터를 저장하는 고가용성 분산 키-값 저장소입니다. 이 글에서는 etcd의 개념부터 standalone 설치, etcdctl 사용법, kubeadm 환경 배포, HA 구성을 포함한 실무 설정 방법까지 정리했습니다.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/linux"
 ---
 
 ---

@@ -4,6 +4,10 @@ description: RabbitMQ의 핵심 구성요소인 Broker, Exchange, Binding, Queue
 date: 2026-08-27
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/04-Middleware/02-Messaging/03-rabbitmq-component/rabbitmq.png
+tags:
+  - "유형/블로그"
+  - "주제/network"
+  - "주제/rabbitmq"
 ---
 ---
 ## RabbitMQ의 구성요소

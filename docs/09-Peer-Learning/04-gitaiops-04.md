@@ -4,6 +4,12 @@ description: 멀티 노드풀과 네임스페이스 격리로 워크로드를 �
 date: 2026-07-25
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/04-gitaiops-04/ai-book.png
+tags:
+  - "유형/블로그"
+  - "주제/cicd"
+  - "주제/monitoring"
+  - "주제/kafka"
+  - "주제/git"
 ---
 
 ---

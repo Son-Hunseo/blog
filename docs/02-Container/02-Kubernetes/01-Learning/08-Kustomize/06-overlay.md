@@ -1,9 +1,13 @@
-﻿---
+---
 image: /img/default/cloud/k8s.png
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-10
 title: Overlay
 description: Kustomize의 Base와 Overlay 구조를 활용해 Kubernetes 환경별 설정을 효율적으로 관리하는 방법을 알아봅니다. 중복 없는 k8s 매니페스트 관리 전략과 실제 디렉토리 구조 예시를 확인하세요.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/nginx"
 ---
 
 ---

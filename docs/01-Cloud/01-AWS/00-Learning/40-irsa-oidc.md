@@ -4,6 +4,11 @@ description: EKS에서 IRSA를 사용하여 Kubernetes ServiceAccount와 AWS IAM
 date: 2026-08-09
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/01-Cloud/01-AWS/00-Learning/40-irsa-oidc/flow.png
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/security"
+  - "주제/aws"
 ---
 ---
 ## IRSA

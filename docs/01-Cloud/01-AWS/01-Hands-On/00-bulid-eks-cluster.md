@@ -4,6 +4,11 @@ description: EKS 클러스터를 콘솔에서 직접 구성하며 VPC·IAM 역�
 date: 2026-08-09
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/01-Cloud/01-AWS/01-Hands-On/00-build-eks-cluster/eks.png
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/network"
+  - "주제/aws"
 ---
 
 ---

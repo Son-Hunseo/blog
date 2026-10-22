@@ -4,6 +4,10 @@ description: AWS IAM의 핵심 개념을 정리한 글. Root 계정과 최소 �
 date: 2026-04-29
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/01-Cloud/01-AWS/00-Learning/03-iam/iam.png
+tags:
+  - "유형/블로그"
+  - "주제/security"
+  - "주제/aws"
 ---
 
 ---

@@ -4,6 +4,9 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-12-10
 title: 자원 할당 - Requests, Limits, LimitRange, ResourceQuota
 description: Kubernetes 리소스 관리의 핵심 개념을 정리한 가이드입니다. CPU·메모리 단위, Resource Requests·Limits의 동작 원리, LimitRange 및 ResourceQuota 설정 방법, 그리고 실무에서 활용할 수 있는 최적의 리소스 사용 전략까지 상세히 설명합니다. CKA 준비 및 Kubernetes 운영 환경에서 Pod 스케줄링과 자원 관리의 이해도를 높이고 싶은 개발자에게 도움이 됩니다.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
 ---
 
 ---

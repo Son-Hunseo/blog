@@ -4,6 +4,9 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-07-01
 title: 프로메테우스와 그라파나 설치 및 통합
 description: Helm Chart를 사용해 Kubernetes 클러스터에 Prometheus와 Grafana를 설치하고, PV 바인딩부터 NodePort 노출, 데이터 소스 연동 및 대시보드 구성까지 단계별로 설정하는 방법을 자세히 안내합니다.
+tags:
+  - "유형/블로그"
+  - "주제/monitoring"
 ---
 
 ---

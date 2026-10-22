@@ -1,9 +1,12 @@
-﻿---
+---
 image: /img/posts/06-Dev/02-SQL/04-select-case-when-then/select4.jpg
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-09
 title: "[DML] SELECT - CASE ~ WHEN 조건 분기"
 description: CASE문을 이용해 SQL에서 조건별 다른 값을 반환하는 방법을 배웁니다. 급여 구간별 등급 분류 등 실무 예시로 쉽게 이해할 수 있습니다.
+tags:
+  - "유형/블로그"
+  - "주제/database"
 ---
 
 ---

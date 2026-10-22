@@ -1,9 +1,11 @@
-﻿---
+---
 image: /img/posts/06-Dev/31-Project/04-chocoletter-advance-04/calender.jpeg
 sidebar_class_name: hidden-sidebar-item
 date: 2026-01-21
 title: "[초코레터 프로젝트 고도화 -4] 영상통화 기능 삭제"
 description: 사용률이 낮은 영상통화 기능을 삭제한 리팩토링 과정입니다. Openvidu 호스팅 비용, 복잡한 부가 기능(일정 관리, 알림, 스케줄링) 등 유지보수 부담을 줄이기 위한 프론트엔드/백엔드 코드 정리 내용을 설명합니다.
+tags:
+  - "유형/블로그"
 ---
 
 ---

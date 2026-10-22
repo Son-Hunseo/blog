@@ -4,6 +4,9 @@ description: Kafka의 핵심 구성요소인 Broker, Topic, Partition, Segment, 
 date: 2026-08-24
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/04-Middleware/02-Messaging/01-kafka-component/kafka.png
+tags:
+  - "유형/블로그"
+  - "주제/kafka"
 ---
 
 ---

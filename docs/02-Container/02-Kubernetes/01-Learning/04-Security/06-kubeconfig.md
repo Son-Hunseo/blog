@@ -4,6 +4,10 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-12-23
 title: KubeConfig
 description: KubeConfig 파일의 역할, 구조(Cluster, User, Context), YAML 포맷, 그리고 kubectl config 명령어를 사용한 클러스터 접근 및 관리 방법을 상세히 설명합니다. 쿠버네티스 외부에서 안전하고 효율적으로 클러스터에 접속하기 위한 필수 설정 파일입니다.
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/security"
 ---
 
 ---

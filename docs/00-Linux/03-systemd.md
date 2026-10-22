@@ -1,5 +1,9 @@
 ---
 title: Systemd와 systemctl
+tags:
+  - 주제/linux
+  - 주제/systemd
+  - 유형/블로그
 description: Systemd의 Unit 개념과 Unit 파일의 구조, Service Type의 차이, 그리고 systemctl과 journalctl의 주요 명령어를 정리합니다.
 date: 2026-10-02
 sidebar_class_name: hidden-sidebar-item

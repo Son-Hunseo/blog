@@ -4,6 +4,15 @@ description: Qwen3-14B와 vLLM으로 벤치마크 트래픽 설계부터 양자�
 date: 2026-09-05
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/05-llm-serving-study-week1/llm-serving-book.jpg
+tags:
+  - "유형/블로그"
+  - "주제/reinforcement-learning"
+  - "주제/llm"
+  - "주제/prompt-engineering"
+related:
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/07-llm-serving-study-week3]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/08-llm-serving-study-week4]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/05-llm-serving-study-week1]]"
 ---
 
 ---

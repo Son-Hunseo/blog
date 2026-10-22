@@ -4,6 +4,9 @@ description: 내적과 가중합이라는 텐서 연산에서 출발해 Attentio
 date: 2026-08-04
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/07-AI/01-attention/attention.jpg
+tags:
+  - "유형/블로그"
+  - "주제/llm"
 ---
 
 ---

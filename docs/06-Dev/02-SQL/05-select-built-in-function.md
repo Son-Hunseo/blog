@@ -1,9 +1,12 @@
-﻿---
+---
 image: /img/posts/06-Dev/02-SQL/05-select-built-in-function/select8.png
 sidebar_class_name: hidden-sidebar-item
 date: 2025-03-11
 title: "[DML] SELECT - 내장 함수 정리"
 description: SQL에서 자주 쓰이는 내장함수를 한눈에 정리합니다. 숫자, 문자, 날짜, 논리, 집계 함수별로 예제와 함께 비교하며 활용 방법을 익힙니다.
+tags:
+  - "유형/블로그"
+  - "주제/database"
 ---
 
 ---

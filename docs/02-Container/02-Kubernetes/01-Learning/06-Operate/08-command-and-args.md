@@ -4,6 +4,11 @@ sidebar_class_name: hidden-sidebar-item
 date: 2025-12-15
 title: Command & Args (Docker, k8s)
 description: Docker의 컨테이너 종료 원리부터 CMD, ENTRYPOINT의 차이점을 명확히 이해하고, 이를 Kubernetes Pod의 command와 args로 매핑하는 방법을 학습하세요. 이 가이드는 컨테이너의 핵심 실행 메커니즘을 다루며, 실행 프로세스 생명 주기 관리와 YAML 파일 구성을 통한 애플리케이션 실행 명령어 설정 방법을 상세히 설명합니다.
+tags:
+  - "유형/블로그"
+  - "주제/docker"
+  - "주제/kubernetes"
+  - "주제/linux"
 ---
 
 ---

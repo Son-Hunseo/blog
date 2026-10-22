@@ -4,6 +4,17 @@ description: 이번 주는 GPU가 필요한 실습이 포함돼 직접 환경을
 date: 2026-09-19
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/09-Peer-Learning/05-llm-serving-study-week1/llm-serving-book.jpg
+tags:
+  - "유형/블로그"
+  - "주제/redis"
+  - "주제/docker"
+  - "주제/kubernetes"
+  - "주제/network"
+  - "주제/security"
+related:
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/06-llm-serving-study-week2]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/10-llm-serving-study-week6]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/07-llm-serving-study-week3]]"
 ---
 
 ---
