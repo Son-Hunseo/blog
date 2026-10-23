@@ -318,17 +318,17 @@ Include conf/extra/httpd-ssl.conf
 ---
 #### Options 지시자
 
-| Options              | Description                                                                                          |
-| -------------------- | ---------------------------------------------------------------------------------------------------- |
-| All                  | MultiViews 를 제외한 모든 옵션을 허용<br />Options 값이 공백일 때도 All 과 같음                                           |
-| ExecCGI              | mod_cgi 를 사용하여 CGI 스크립트 실행 허용                                                                        |
-| FollowSymLinks       | 심볼릭 링크를 허용                                                                                           |
-| SymLinksIfOwnerMatch | 심볼릭 링크의 소유자가 원본 파일의 소유자와 같을 때만 허용                                                                    |
-| Includes             | SSI 사용을 허용<br />mod_include 모듈이 필요하며 기본적으로 로드되어 있음                                                   |
-| IncludesNOEXEC       | SSI 사용은 허용되지만 #exec 와 CGI 를 대상으로 한 #include 는 허용되지 않는다<br />SSI 를 사용하면서 시스템에 위험한 실행 태그는 허용하지 않는다는 설정 |
-| Indexes              | index.html 이 없을 경우 디렉토리 목록 표시 허용<br />디렉토리 구조가 노출되므로 운영 환경에서는 반드시 제거                                 |
-| MultiViews           | 웹 브라우저의 요청에 따라 적절한 페이지로 보여줌<br />브라우저 종류나 문서 종류에 따라 가장 적합한 페이지를 보여줄 수 있도록 하는 설정                      |
-| None                 | 모든 옵션을 허용하지 않는다<br /> 보통 이를 표준으로(보안 점검 지적사항 예방)                                                      |
+| Options              | Description                                                                                            |
+| -------------------- | ------------------------------------------------------------------------------------------------------ |
+| All                  | MultiViews 를 제외한 모든 옵션을 허용<br />Options 값이 공백일 때도 All 과 같음                                             |
+| ExecCGI              | mod_cgi 를 사용하여 CGI 스크립트 실행 허용                                                                          |
+| FollowSymLinks       | 심볼릭 링크를 허용                                                                                             |
+| SymLinksIfOwnerMatch | 심볼릭 링크의 소유자가 원본 파일의 소유자와 같을 때만 허용                                                                      |
+| Includes             | SSI 사용을 허용<br />mod_include 모듈이 필요하며 기본적으로 로드되어 있음                                                     |
+| IncludesNOEXEC       | SSI 사용은 허용되지만 `exec` 와 CGI 를 대상으로 한 `include` 는 허용되지 않는다<br />SSI 를 사용하면서 시스템에 위험한 실행 태그는 허용하지 않는다는 설정 |
+| Indexes              | index.html 이 없을 경우 디렉토리 목록 표시 허용<br />디렉토리 구조가 노출되므로 운영 환경에서는 반드시 제거                                   |
+| MultiViews           | 웹 브라우저의 요청에 따라 적절한 페이지로 보여줌<br />브라우저 종류나 문서 종류에 따라 가장 적합한 페이지를 보여줄 수 있도록 하는 설정                        |
+| None                 | 모든 옵션을 허용하지 않는다<br /> 보통 이를 표준으로(보안 점검 지적사항 예방)                                                        |
 
 ---
 #### Log Format Combined
