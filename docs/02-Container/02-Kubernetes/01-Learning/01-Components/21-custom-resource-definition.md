@@ -8,6 +8,10 @@ tags:
   - "유형/블로그"
   - "주제/kubernetes"
   - "주제/cicd"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/05-kube-controller-manager]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/11-deployment]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/02-Scheduling/08-multiple-schedulers]]"
 ---
 
 ---

@@ -7,6 +7,17 @@ description: kube-scheduler는 Kubernetes에서 Pod를 어떤 노드에 배치�
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/03-etcd]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/04-kube-api-server]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/05-kube-controller-manager]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/07-kubelet]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/08-kube-proxy]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/14-daemonsets]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/02-Scheduling/03-taints-tolerations]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/02-Scheduling/06-resource]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/02-Scheduling/08-multiple-schedulers]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/02-Scheduling/09-scheduler-profile]]"
 ---
 
 ---

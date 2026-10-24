@@ -10,6 +10,11 @@ tags:
   - "주제/nginx"
   - "주제/cicd"
   - "주제/homelab"
+related:
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/11. ArgoCD (그림만 넣으면 됨)]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/31-Project/01-chocoletter-advance-01]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/07-home-lab-refactoring2]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/08-home-lab-refactoring3]]"
 ---
 
 ---

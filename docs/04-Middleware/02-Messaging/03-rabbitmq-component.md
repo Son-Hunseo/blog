@@ -8,6 +8,9 @@ tags:
   - "유형/블로그"
   - "주제/network"
   - "주제/rabbitmq"
+related:
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/02-Messaging/01-kafka-component]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/02-Messaging/04-kafka-vs-rabbitmq]]"
 ---
 ---
 ## RabbitMQ의 구성요소

@@ -8,6 +8,11 @@ tags:
   - "유형/블로그"
   - "주제/proxmox"
   - "주제/homelab"
+related:
+  - "[[0. Main/2. Publish/1. Writing/08-HomeLab/03-Hands-on/문라이트 최적화]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/02-Proxmox/02-multi-boot]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/02-Proxmox/05-gpu-passthrough]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/02-Proxmox/06-spice-macos-debug]]"
 ---
 
 ---

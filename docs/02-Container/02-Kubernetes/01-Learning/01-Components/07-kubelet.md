@@ -7,6 +7,14 @@ description: kubelet은 Kubernetes 노드에서 실행되는 핵심 에이전트
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/01-cluster-architecture]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/03-etcd]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/04-kube-api-server]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/05-kube-controller-manager]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/06-kube-scheduler]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/08-kube-proxy]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/15-static-pods]]"
 ---
 
 ---

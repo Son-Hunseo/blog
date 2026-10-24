@@ -8,6 +8,9 @@ tags:
   - "유형/블로그"
   - "주제/kubernetes"
   - "주제/llm"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/08-Kustomize/03-kustomize-basic]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/08-Kustomize/06-overlay]]"
 ---
 
 ---

@@ -7,6 +7,8 @@ description: 운영체제 핵심 개념인 인터럽트와 시스템 콜을 쉽�
 tags:
   - "유형/블로그"
   - "주제/os"
+related:
+  - "[[0. Main/2. Publish/2. Blog/05-CS/02-OS/05-cpu-scheduling]]"
 ---
 
 ---

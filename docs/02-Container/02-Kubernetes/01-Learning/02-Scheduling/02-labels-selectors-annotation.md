@@ -7,6 +7,8 @@ description: Kubernetes의 Labels와 Selectors 개념을 쉽게 설명한 가이
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/10-replicaset]]"
 ---
 
 ---

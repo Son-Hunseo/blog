@@ -11,6 +11,12 @@ tags:
   - "주제/cicd"
   - "주제/homelab"
   - "주제/git"
+related:
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/11. ArgoCD (그림만 넣으면 됨)]]"
+  - "[[0. Main/1. Private/1. Portfolio/01-ver1-2026-01/01-Portfolio-PDF]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/31-Project/01-chocoletter-advance-01]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/06-home-lab-refactoring1]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/08-home-lab-refactoring3]]"
 ---
 
 ---

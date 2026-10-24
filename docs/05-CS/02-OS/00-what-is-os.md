@@ -7,6 +7,8 @@ description: 운영체제(OS)의 정의와 역할을 한눈에 정리합니다. 
 tags:
   - "유형/블로그"
   - "주제/os"
+related:
+  - "[[0. Main/2. Publish/2. Blog/05-CS/02-OS/12-storage-data-storage-approach]]"
 ---
 
 ---

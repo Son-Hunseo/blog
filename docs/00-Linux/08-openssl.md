@@ -10,6 +10,16 @@ tags:
   - "주제/linux"
   - "주제/network"
   - "주제/security"
+related:
+  - "[[0. Main/2. Publish/1. Writing/05-CS/11-Security/04-SSH-Handshake]]"
+  - "[[0. Main/2. Publish/1. Writing/05-CS/11-Security/05-TLS-Handshake]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/02-tls]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/03-certificate-creation]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/05-certificates-api]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/01-Web/02-httpd-conf]]"
+  - "[[0. Main/2. Publish/2. Blog/05-CS/11-Security/01-encryption-type]]"
+  - "[[0. Main/2. Publish/2. Blog/05-CS/11-Security/02-encryption-vs-signature]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/31-Project/03-chocoletter-advance-03]]"
 ---
 ---
 ## OpenSSL이란?

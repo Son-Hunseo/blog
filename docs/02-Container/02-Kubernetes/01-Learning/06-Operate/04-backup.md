@@ -9,6 +9,9 @@ tags:
   - "주제/kubernetes"
   - "주제/aws"
   - "주제/gcp"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/03-etcd]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/15-static-pods]]"
 ---
 
 ---

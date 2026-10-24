@@ -8,6 +8,12 @@ tags:
   - "유형/블로그"
   - "주제/kubernetes"
   - "주제/network"
+related:
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/01-network-namespace]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/20-network-policies]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/22-coredns]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/02-pod-networking]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/03-cni]]"
 ---
 
 ---

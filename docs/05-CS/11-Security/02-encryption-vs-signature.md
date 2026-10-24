@@ -8,6 +8,14 @@ tags:
   - "유형/블로그"
   - "주제/algorithm"
   - "주제/security"
+related:
+  - "[[0. Main/0. Raw/2. Infra/999. etc/10. SSH 키인증의 정확한 원리]]"
+  - "[[0. Main/2. Publish/1. Writing/05-CS/11-Security/04-SSH-Handshake]]"
+  - "[[0. Main/2. Publish/1. Writing/05-CS/11-Security/05-TLS-Handshake]]"
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/08-openssl]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/02-tls]]"
+  - "[[0. Main/2. Publish/2. Blog/05-CS/11-Security/01-encryption-type]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/31-Project/03-chocoletter-advance-03]]"
 ---
 
 ---

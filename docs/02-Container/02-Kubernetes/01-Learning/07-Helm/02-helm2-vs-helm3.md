@@ -7,6 +7,10 @@ description: Helm 2와 Helm 3의 차이점을 완벽 정리합니다. Tiller 제
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/07-Helm/03-helm-components]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/07-Helm/04-working-with-helm]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/08-Kustomize/05-patches]]"
 ---
 
 ---

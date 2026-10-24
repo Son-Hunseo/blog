@@ -7,6 +7,12 @@ description: 단방향 및 양방향 암호화의 주요 개념과 차이점을 
 tags:
   - "유형/블로그"
   - "주제/security"
+related:
+  - "[[0. Main/2. Publish/1. Writing/05-CS/11-Security/04-SSH-Handshake]]"
+  - "[[0. Main/2. Publish/1. Writing/05-CS/11-Security/05-TLS-Handshake]]"
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/08-openssl]]"
+  - "[[0. Main/2. Publish/2. Blog/05-CS/11-Security/02-encryption-vs-signature]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/31-Project/03-chocoletter-advance-03]]"
 ---
 
 ---

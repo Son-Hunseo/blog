@@ -8,6 +8,16 @@ tags:
   - "유형/블로그"
   - "주제/kubernetes"
   - "주제/network"
+related:
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/6. Service (ClusterIP, NodePort, LoadBalancer, ExternalName)]]"
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/9. Helm, Ingress (그림만 넣으면 됨)]]"
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/01-network-namespace]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/08-kube-proxy]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/12-service]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/20-network-policies]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/22-coredns]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/01-cluster-networking]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/02-pod-networking]]"
 ---
 
 ---

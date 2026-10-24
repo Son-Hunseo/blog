@@ -7,6 +7,8 @@ description: 데드락(DeadLock)이란 무엇인지, 발생 조건 4가지(상�
 tags:
   - "유형/블로그"
   - "주제/os"
+related:
+  - "[[0. Main/2. Publish/2. Blog/05-CS/02-OS/05-cpu-scheduling]]"
 ---
 
 ---

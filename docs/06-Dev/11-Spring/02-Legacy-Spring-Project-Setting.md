@@ -8,6 +8,10 @@ tags:
   - "유형/블로그"
   - "주제/spring"
   - "주제/java"
+related:
+  - "[[0. Main/0. Raw/0. 정리대상/2. SSAFY/5. Servlet/1. Servlet]]"
+  - "[[0. Main/0. Raw/0. 정리대상/2. SSAFY/6. Spring/8. Spring Boot]]"
+  - "[[0. Main/0. Raw/1. Dev/1. Backend/1. Spring/1. Legacy Spring/1. Pure Spring 설정 (xml) (not Boot)]]"
 ---
 
 ---

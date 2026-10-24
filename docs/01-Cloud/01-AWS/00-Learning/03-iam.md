@@ -8,6 +8,10 @@ tags:
   - "유형/블로그"
   - "주제/security"
   - "주제/aws"
+related:
+  - "[[0. Main/0. Raw/2. Infra/2. Cloud/1. AWS/0. 기초 개념/1. IAM]]"
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/01-AWS/00-Learning/02-aws-access-method]]"
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/01-AWS/00-Learning/40-irsa-oidc]]"
 ---
 
 ---

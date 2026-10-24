@@ -7,6 +7,12 @@ description: SQL 결과를 정렬하고 제한하는 ORDER BY와 LIMIT의 작동
 tags:
   - "유형/블로그"
   - "주제/database"
+related:
+  - "[[0. Main/0. Raw/0. 정리대상/2. SSAFY/5. Servlet/시험 대비 정리]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/02-SQL/01-select-intro]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/02-SQL/02-select-where]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/02-SQL/04-select-case-when-then]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/02-SQL/06-select-groupby-having]]"
 ---
 
 ---

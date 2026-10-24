@@ -10,9 +10,11 @@ tags:
   - "주제/llm"
   - "주제/prompt-engineering"
 related:
-  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/07-llm-serving-study-week3]]"
   - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/06-llm-serving-study-week2]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/07-llm-serving-study-week3]]"
   - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/09-llm-serving-study-week5]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/10-llm-serving-study-week6]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/11-llm-serving-study-week7]]"
 ---
 
 ---

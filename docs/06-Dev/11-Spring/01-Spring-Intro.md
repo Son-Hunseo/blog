@@ -9,6 +9,10 @@ tags:
   - "주제/spring"
   - "주제/java"
   - "주제/database"
+related:
+  - "[[0. Main/0. Raw/0. 정리대상/2. SSAFY/6. Spring/1. DI (완)]]"
+  - "[[0. Main/0. Raw/0. 정리대상/2. SSAFY/6. Spring/2. AOP (완)]]"
+  - "[[0. Main/0. Raw/0. 정리대상/2. SSAFY/6. Spring/6. MyBatis (완)]]"
 ---
 
 ---

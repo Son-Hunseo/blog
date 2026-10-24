@@ -8,6 +8,8 @@ tags:
   - "유형/블로그"
   - "주제/linux"
   - "주제/network"
+related:
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/06-selinux]]"
 ---
 ---
 ## 각종 명령어

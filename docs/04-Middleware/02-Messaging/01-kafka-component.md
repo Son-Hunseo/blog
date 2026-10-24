@@ -7,6 +7,10 @@ image: /img/posts/04-Middleware/02-Messaging/01-kafka-component/kafka.png
 tags:
   - "유형/블로그"
   - "주제/kafka"
+related:
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/02-Messaging/02-kraft-vs-zookeeper]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/02-Messaging/03-rabbitmq-component]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/02-Messaging/04-kafka-vs-rabbitmq]]"
 ---
 
 ---

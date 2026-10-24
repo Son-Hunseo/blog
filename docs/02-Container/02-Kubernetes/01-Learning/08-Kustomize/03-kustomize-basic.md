@@ -7,6 +7,11 @@ description: 쿠버네티스 Kustomize의 핵심 파일인 kustomization.yaml의
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/08-Kustomize/01-kustomize-intro]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/08-Kustomize/04-transformers]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/08-Kustomize/06-overlay]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/08-Kustomize/07-components]]"
 ---
 
 ---

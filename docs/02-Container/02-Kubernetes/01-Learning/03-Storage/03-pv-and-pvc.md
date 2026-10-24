@@ -7,6 +7,10 @@ description: Kubernetes의 영구 스토리지 관리 핵심 개념인 PV (Persi
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/7. Storage Volume]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/03-Storage/02-volume]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/03-Storage/04-storage-class]]"
 ---
 
 ---

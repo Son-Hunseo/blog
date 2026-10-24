@@ -7,6 +7,9 @@ description: 쿠버네티스(Kubernetes) 운영 환경의 필수 조건인 HA(�
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/02-Hands-On/04-etcd-ha]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/03-TroubleShooting/05-controlplane-troubleshooting]]"
 ---
 
 ---

@@ -8,6 +8,8 @@ tags:
   - "유형/블로그"
   - "주제/kubernetes"
   - "주제/aws"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/03-Storage/03-pv-and-pvc]]"
 ---
 
 ---

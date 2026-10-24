@@ -9,6 +9,10 @@ tags:
   - "주제/html"
   - "주제/security"
   - "주제/nginx"
+related:
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/01-Web/02-httpd-conf]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/01-Web/03-tomcat-conf]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/01-Web/05-jboss-conf]]"
 ---
 ---
 ## 기준

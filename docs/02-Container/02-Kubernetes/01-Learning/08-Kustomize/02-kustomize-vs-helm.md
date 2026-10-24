@@ -7,6 +7,8 @@ description: Kustomize와 Helm 중 무엇을 선택해야 할까요? 쿠버네�
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/08-Kustomize/01-kustomize-intro]]"
 ---
 
 ---

@@ -7,6 +7,8 @@ description: Docker의 데이터 저장 구조( /var/lib/docker)와 레이어드
 tags:
   - "유형/블로그"
   - "주제/docker"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/01-Docker/03-Docker-Volume]]"
 ---
 
 ---

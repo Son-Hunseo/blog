@@ -8,6 +8,8 @@ tags:
   - "유형/블로그"
   - "주제/network"
   - "주제/aws"
+related:
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/01-AWS/01-Hands-On/00-bulid-eks-cluster]]"
 ---
 
 ---

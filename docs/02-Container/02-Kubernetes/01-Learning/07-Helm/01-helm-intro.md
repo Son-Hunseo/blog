@@ -7,6 +7,10 @@ description: Kubernetes 운영의 필수 도구 Helm 입문 가이드. Deploymen
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/07-Helm/03-helm-components]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/07-Helm/04-working-with-helm]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/08-Kustomize/01-kustomize-intro]]"
 ---
 
 ---

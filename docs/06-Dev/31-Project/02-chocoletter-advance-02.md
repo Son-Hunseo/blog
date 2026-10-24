@@ -9,6 +9,8 @@ tags:
   - "주제/redis"
   - "주제/mongodb"
   - "주제/kafka"
+related:
+  - "[[0. Main/1. Private/1. Portfolio/01-ver1-2026-01/01-Portfolio-PDF]]"
 ---
 
 ---

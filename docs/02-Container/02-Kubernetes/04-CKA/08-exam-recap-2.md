@@ -7,6 +7,8 @@ description: CKA 자격증 시험에 1차에서 1점 차이로 떨어진 후 재
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/06-exam-recap-1]]"
 ---
 
 ---

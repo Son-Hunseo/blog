@@ -7,6 +7,12 @@ description: 쿠버네티스(Kubernetes) 컨트롤 플레인 장애 해결을 �
 tags:
   - "유형/트러블슈팅"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/15-static-pods]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/04-view-certificate-details]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/02-Hands-On/03-ha-intro]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/03-TroubleShooting/01-application-level]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/03-TroubleShooting/06-workernode-troubleshooting]]"
 ---
 
 ---

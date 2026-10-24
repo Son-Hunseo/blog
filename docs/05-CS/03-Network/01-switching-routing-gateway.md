@@ -8,6 +8,12 @@ tags:
   - "유형/블로그"
   - "주제/linux"
   - "주제/network"
+related:
+  - "[[0. Main/0. Raw/2. Infra/4. Network/1. 혼자 공부하는 네트워크 정리/3-3 라우팅 (라우터, 라우팅 테이블, 라우팅 프로토콜)]]"
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/01-network-namespace]]"
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/02-install-openstack]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/01-cluster-networking]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/02-pod-networking]]"
 ---
 
 ---

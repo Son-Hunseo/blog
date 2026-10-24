@@ -7,6 +7,10 @@ description: Kubernetes에서 네임스페이스가 Terminating 상태로 삭제
 tags:
   - "유형/트러블슈팅"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/3. Kubernetes 삭제]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/09-cluster-roles]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/03-TroubleShooting/03-when-nfs-pv-ip-changed]]"
 ---
 
 ---

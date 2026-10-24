@@ -8,6 +8,10 @@ tags:
   - "유형/블로그"
   - "주제/redis"
   - "주제/gcp"
+related:
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/01-gitaiops-01]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/02-gitaiops-02]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/04-gitaiops-04]]"
 ---
 
 ---

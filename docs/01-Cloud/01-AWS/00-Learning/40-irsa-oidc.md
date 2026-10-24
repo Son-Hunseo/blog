@@ -9,6 +9,10 @@ tags:
   - "주제/kubernetes"
   - "주제/security"
   - "주제/aws"
+related:
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/01-AWS/00-Learning/02-aws-access-method]]"
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/01-AWS/00-Learning/03-iam]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/10-service-account]]"
 ---
 ---
 ## IRSA

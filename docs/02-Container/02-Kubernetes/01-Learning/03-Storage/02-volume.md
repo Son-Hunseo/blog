@@ -10,6 +10,10 @@ tags:
   - "주제/kubernetes"
 related:
   - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/7. Storage Volume]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/01-Docker/03-Docker-Volume]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/03-Storage/01-container-storage-interface]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/03-Storage/03-pv-and-pvc]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/12-security-context]]"
 ---
 
 ---

@@ -7,6 +7,8 @@ description: nodeSelector는 Kubernetes에서 특정 레이블을 가진 노드�
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/02-Scheduling/05-node-affinity]]"
 ---
 
 ---

@@ -8,6 +8,9 @@ tags:
   - "유형/블로그"
   - "주제/database"
   - "주제/docker"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/01-Docker/02-Docker-Storage]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/03-Storage/02-volume]]"
 ---
 
 ---

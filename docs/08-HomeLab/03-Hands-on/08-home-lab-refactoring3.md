@@ -10,6 +10,15 @@ tags:
   - "주제/security"
   - "주제/nginx"
   - "주제/homelab"
+related:
+  - "[[0. Main/0. Raw/2. Infra/0. SynologyNAS/1. nginx로 리버스 프록시를 했을 때, 큰 파일 업로드 안되는 문제]]"
+  - "[[0. Main/0. Raw/2. Infra/5. nginx/기본 리버스 프록시 설정]]"
+  - "[[0. Main/1. Private/1. Portfolio/02-ver2-2026-07/01-Portfolio-PDF]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/23-ingress]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/24-gateway-api]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/31-Project/01-chocoletter-advance-01]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/06-home-lab-refactoring1]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/07-home-lab-refactoring2]]"
 ---
 
 ---

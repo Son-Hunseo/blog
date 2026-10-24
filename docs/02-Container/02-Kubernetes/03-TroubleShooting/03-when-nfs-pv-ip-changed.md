@@ -7,6 +7,8 @@ description: 쿠버네티스 환경에서 NFS 서버 IP 변경 시 Helm으로 NF
 tags:
   - "유형/트러블슈팅"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/03-TroubleShooting/02-namespace-force-delete]]"
 ---
 
 ---

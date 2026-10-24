@@ -7,6 +7,9 @@ description: Kubernetes Kustomize의 핵심 기능인 Patch 개념과 JSON 6902,
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/07-Helm/02-helm2-vs-helm3]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/08-Kustomize/01-kustomize-intro]]"
 ---
 
 ---

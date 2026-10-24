@@ -7,6 +7,9 @@ description: "Kubernetes Node Affinity 완전 정복: nodeSelector와의 차이,
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/02-Scheduling/03-taints-tolerations]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/02-Scheduling/04-node-selectors]]"
 ---
 
 ---

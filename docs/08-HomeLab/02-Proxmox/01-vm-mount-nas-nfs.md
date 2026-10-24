@@ -9,6 +9,9 @@ tags:
   - "주제/proxmox"
   - "주제/homelab"
   - "주제/synology"
+related:
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/01-SynologyNas/01-openvpn-to-wireguard]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/02-Proxmox/04-proxmox-cluster]]"
 ---
 
 ---

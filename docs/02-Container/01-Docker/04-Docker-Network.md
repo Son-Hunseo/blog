@@ -9,6 +9,12 @@ tags:
   - "주제/docker"
   - "주제/network"
   - "주제/nginx"
+related:
+  - "[[0. Main/0. Raw/2. Infra/999. etc/12. Openvidu의 구조와 이를 포함한 서버 설계]]"
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/01-network-namespace]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/01-Docker/01-Docker-Security]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/02-pod-networking]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/03-cni]]"
 ---
 
 ---

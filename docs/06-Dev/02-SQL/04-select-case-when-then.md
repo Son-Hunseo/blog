@@ -7,6 +7,10 @@ description: CASE문을 이용해 SQL에서 조건별 다른 값을 반환하는
 tags:
   - "유형/블로그"
   - "주제/database"
+related:
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/02-SQL/01-select-intro]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/02-SQL/02-select-where]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/02-SQL/03-select-orderby-limit]]"
 ---
 
 ---

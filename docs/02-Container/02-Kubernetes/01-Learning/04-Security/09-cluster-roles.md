@@ -7,6 +7,13 @@ description: Kubernetes RBAC의 핵심인 ClusterRole과 ClusterRoleBinding의 �
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/13-namespace]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/20-network-policies]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/06-kubeconfig]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/08-authorization]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/10-service-account]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/03-TroubleShooting/02-namespace-force-delete]]"
 ---
 
 ---

@@ -7,6 +7,11 @@ description: Helm의 핵심 CLI 명령어를 한눈에 확인하세요. 레포�
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/06-Operate/07-rolling-update-and-rollback]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/07-Helm/01-helm-intro]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/07-Helm/02-helm2-vs-helm3]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/07-Helm/03-helm-components]]"
 ---
 
 ---

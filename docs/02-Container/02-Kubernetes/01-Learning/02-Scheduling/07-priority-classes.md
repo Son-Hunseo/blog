@@ -7,6 +7,8 @@ description: Kubernetes PriorityClass는 워크로드 간 우선순위를 정의
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/02-Scheduling/06-resource]]"
 ---
 
 ---

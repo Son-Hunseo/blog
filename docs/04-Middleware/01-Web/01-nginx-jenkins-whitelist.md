@@ -9,6 +9,8 @@ tags:
   - "주제/security"
   - "주제/nginx"
   - "주제/cicd"
+related:
+  - "[[0. Main/0. Raw/2. Infra/5. nginx/기본 리버스 프록시 설정]]"
 ---
 
 ---

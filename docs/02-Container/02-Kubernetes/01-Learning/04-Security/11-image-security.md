@@ -9,6 +9,9 @@ tags:
   - "주제/docker"
   - "주제/kubernetes"
   - "주제/nginx"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/12-security-context]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/06-Operate/06-managing-application-logs]]"
 ---
 
 ---

@@ -9,6 +9,11 @@ tags:
   - "주제/linux"
   - "주제/proxmox"
   - "주제/homelab"
+related:
+  - "[[0. Main/2. Publish/1. Writing/08-HomeLab/02-Proxmox/proxmox window vm]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/02-Proxmox/02-multi-boot]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/02-Proxmox/03-proxmox-fully-populated-error]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/02-Proxmox/07-Proxmox-Host-IP-Change]]"
 ---
 
 ---

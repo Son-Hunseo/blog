@@ -7,6 +7,9 @@ description: CPU 스케줄링의 개념, 프로세스 상태 전이, 선점/비�
 tags:
   - "유형/블로그"
   - "주제/os"
+related:
+  - "[[0. Main/2. Publish/2. Blog/05-CS/02-OS/02-interrupt-and-systemcall]]"
+  - "[[0. Main/2. Publish/2. Blog/05-CS/02-OS/06-deadlock]]"
 ---
 
 ---

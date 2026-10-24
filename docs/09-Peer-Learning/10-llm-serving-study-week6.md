@@ -12,9 +12,12 @@ tags:
   - "주제/monitoring"
   - "주제/llm"
 related:
-  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/11-llm-serving-study-week7]]"
-  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/09-llm-serving-study-week5]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/05-llm-serving-study-week1]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/06-llm-serving-study-week2]]"
   - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/07-llm-serving-study-week3]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/08-llm-serving-study-week4]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/09-llm-serving-study-week5]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/11-llm-serving-study-week7]]"
 ---
 
 ---

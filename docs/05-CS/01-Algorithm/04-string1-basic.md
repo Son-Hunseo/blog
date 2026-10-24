@@ -9,6 +9,8 @@ tags:
   - "유형/블로그"
   - "주제/java"
   - "주제/algorithm"
+related:
+  - "[[0. Main/2. Publish/2. Blog/05-CS/01-Algorithm/05-trie]]"
 ---
 ---
 ## 회문 (Palindrome)

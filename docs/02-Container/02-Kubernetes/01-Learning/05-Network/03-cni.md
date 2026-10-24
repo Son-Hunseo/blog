@@ -9,6 +9,16 @@ tags:
   - "주제/docker"
   - "주제/kubernetes"
   - "주제/network"
+related:
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/01-network-namespace]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/01-Docker/04-Docker-Network]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/02-docker-containerd]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/20-network-policies]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/22-coredns]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/03-Storage/01-container-storage-interface]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/02-pod-networking]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/04-cni-in-kubernetes]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/02-Hands-On/00-install-kubeadm]]"
 ---
 
 ---

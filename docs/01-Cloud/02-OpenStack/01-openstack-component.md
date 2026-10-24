@@ -8,6 +8,10 @@ tags:
   - "유형/블로그"
   - "주제/database"
   - "주제/network"
+related:
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/02-install-openstack]]"
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/03-install-ceph]]"
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/04-connect-openStack-ceph]]"
 ---
 
 ---

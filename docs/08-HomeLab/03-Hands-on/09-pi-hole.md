@@ -8,6 +8,8 @@ tags:
   - "유형/블로그"
   - "주제/network"
   - "주제/homelab"
+related:
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/02-wol-linux]]"
 ---
 
 ---

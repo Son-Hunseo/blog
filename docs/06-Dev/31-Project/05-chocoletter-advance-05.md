@@ -9,6 +9,8 @@ tags:
   - "주제/spring"
   - "주제/java"
   - "주제/security"
+related:
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/31-Project/06-chocoletter-advance-06]]"
 ---
 
 ---

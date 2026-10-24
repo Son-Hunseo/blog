@@ -9,6 +9,15 @@ tags:
   - "주제/kubernetes"
   - "주제/network"
   - "주제/security"
+related:
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/08-openssl]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/04-kube-api-server]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/01-authentication]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/02-tls]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/04-view-certificate-details]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/05-certificates-api]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/10-service-account]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/04-mock-exam-2]]"
 ---
 
 ---

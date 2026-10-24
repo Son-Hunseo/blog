@@ -8,6 +8,8 @@ tags:
   - "유형/블로그"
   - "주제/kubernetes"
   - "주제/cicd"
+related:
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/888. Jenkins 설치, 배포]]"
 ---
 
 ---

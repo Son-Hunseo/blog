@@ -8,6 +8,8 @@ tags:
   - "유형/블로그"
   - "주제/proxmox"
   - "주제/homelab"
+related:
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/02-Proxmox/03-proxmox-fully-populated-error]]"
 ---
 
 ---

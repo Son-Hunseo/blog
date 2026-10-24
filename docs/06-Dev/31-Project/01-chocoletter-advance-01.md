@@ -8,6 +8,14 @@ tags:
   - "유형/블로그"
   - "주제/kubernetes"
   - "주제/cicd"
+related:
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/11. ArgoCD (그림만 넣으면 됨)]]"
+  - "[[0. Main/1. Private/1. Portfolio/00-ver0-2025-09/Skills]]"
+  - "[[0. Main/1. Private/1. Portfolio/01-ver1-2026-01/01-Portfolio-PDF]]"
+  - "[[0. Main/1. Private/1. Portfolio/02-ver2-2026-07/01-Portfolio-PDF]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/06-home-lab-refactoring1]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/07-home-lab-refactoring2]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/08-home-lab-refactoring3]]"
 ---
 
 ---

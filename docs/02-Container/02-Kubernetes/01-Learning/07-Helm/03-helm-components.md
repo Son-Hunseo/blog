@@ -10,6 +10,9 @@ tags:
   - "주제/nginx"
 related:
   - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/9. Helm, Ingress (그림만 넣으면 됨)]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/07-Helm/01-helm-intro]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/07-Helm/02-helm2-vs-helm3]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/07-Helm/04-working-with-helm]]"
 ---
 
 ---

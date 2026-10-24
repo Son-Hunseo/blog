@@ -8,6 +8,9 @@ tags:
   - "유형/트러블슈팅"
   - "주제/kubernetes"
   - "주제/security"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/04-view-certificate-details]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/03-TroubleShooting/05-controlplane-troubleshooting]]"
 ---
 
 ---

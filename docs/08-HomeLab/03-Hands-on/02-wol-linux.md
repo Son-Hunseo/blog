@@ -9,6 +9,10 @@ tags:
   - "주제/linux"
   - "주제/network"
   - "주제/homelab"
+related:
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/02-Proxmox/02-multi-boot]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/03-amd-minipc-bios-setting]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/09-pi-hole]]"
 ---
 
 ---

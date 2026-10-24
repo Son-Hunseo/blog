@@ -9,6 +9,11 @@ tags:
   - "주제/docker"
   - "주제/kubernetes"
   - "주제/nginx"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/02-lightning-lab-recap]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/04-mock-exam-2]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/05-mock-exam-3]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/07-killercoda]]"
 ---
 ## 1 (O)
 

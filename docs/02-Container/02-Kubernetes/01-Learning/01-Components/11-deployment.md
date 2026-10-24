@@ -7,6 +7,11 @@ description: 쿠버네티스 Deployment의 개념과 동작 원리를 이해하�
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/5. Manifest, Pod, Deployment]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/10-replicaset]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/21-custom-resource-definition]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/06-Operate/07-rolling-update-and-rollback]]"
 ---
 
 ---

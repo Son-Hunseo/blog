@@ -7,6 +7,8 @@ description: 쿠버네티스에서 가장 작은 배포 단위인 Pod의 개념�
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/10-replicaset]]"
 ---
 
 ---

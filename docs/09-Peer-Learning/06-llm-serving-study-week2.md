@@ -12,8 +12,12 @@ tags:
   - "주제/kubernetes"
   - "주제/network"
 related:
-  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/08-llm-serving-study-week4]]"
+  - "[[0. Main/0. Raw/1. Dev/1. Backend/3. FastAPI/2. 동시성과 async & await]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/05-llm-serving-study-week1]]"
   - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/07-llm-serving-study-week3]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/08-llm-serving-study-week4]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/09-llm-serving-study-week5]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/10-llm-serving-study-week6]]"
   - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/11-llm-serving-study-week7]]"
 ---
 ---

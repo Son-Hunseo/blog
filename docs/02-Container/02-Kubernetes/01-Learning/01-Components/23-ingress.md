@@ -12,8 +12,13 @@ tags:
   - "주제/nginx"
   - "주제/gcp"
 related:
-  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/1. 궁금한 점/1. ClusterIP, NodePort, LoadBalancer, Ingress controller 구조 그림 및 이해]]"
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/6. Service (ClusterIP, NodePort, LoadBalancer, ExternalName)]]"
   - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/9. Helm, Ingress (그림만 넣으면 됨)]]"
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/1. 궁금한 점/1. ClusterIP, NodePort, LoadBalancer, Ingress controller 구조 그림 및 이해]]"
+  - "[[0. Main/0. Raw/2. Infra/5. nginx/기본 리버스 프록시 설정]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/12-service]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/24-gateway-api]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/08-home-lab-refactoring3]]"
 ---
 
 ---

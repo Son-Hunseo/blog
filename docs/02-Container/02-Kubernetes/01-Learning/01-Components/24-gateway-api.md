@@ -10,6 +10,11 @@ tags:
   - "주제/network"
   - "주제/security"
   - "주제/nginx"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/20-network-policies]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/23-ingress]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/04-mock-exam-2]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/08-home-lab-refactoring3]]"
 ---
 
 ---

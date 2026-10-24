@@ -11,6 +11,10 @@ tags:
   - "주제/linux"
   - "주제/monitoring"
   - "주제/homelab"
+related:
+  - "[[0. Main/2. Publish/1. Writing/08-HomeLab/02-Proxmox/wsl과 proxmox 차이]]"
+  - "[[0. Main/2. Publish/2. Blog/03-DevOps/02-Observability/01-prometheus-grafana-install]]"
+  - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/04-wsl-autostart]]"
 ---
 
 ---

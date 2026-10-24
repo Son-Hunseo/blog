@@ -7,6 +7,11 @@ description: CKA 시험 대비 Killercoda 트러블슈팅 문제 풀이입니다
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/02-lightning-lab-recap]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/03-mock-exam-1]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/05-mock-exam-3]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/06-exam-recap-1]]"
 ---
 
 ---

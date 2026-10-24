@@ -11,6 +11,10 @@ tags:
   - "주제/cicd"
   - "주제/monitoring"
   - "주제/prompt-engineering"
+related:
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/01-gitaiops-01]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/03-gitaiops-03]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/04-gitaiops-04]]"
 ---
 
 ---

@@ -8,6 +8,14 @@ tags:
   - "유형/블로그"
   - "주제/kubernetes"
   - "주제/network"
+related:
+  - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/0. 기초 개념/6. Service (ClusterIP, NodePort, LoadBalancer, ExternalName)]]"
+  - "[[0. Main/0. Raw/2. Infra/4. Network/1. 혼자 공부하는 네트워크 정리/3-3 라우팅 (라우터, 라우팅 테이블, 라우팅 프로토콜)]]"
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/01-network-namespace]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/02-pod-networking]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/05-service-networking]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/02-Hands-On/00-install-kubeadm]]"
+  - "[[0. Main/2. Publish/2. Blog/05-CS/03-Network/01-switching-routing-gateway]]"
 ---
 
 ---

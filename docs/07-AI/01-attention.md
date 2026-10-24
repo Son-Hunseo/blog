@@ -7,6 +7,9 @@ image: /img/posts/07-AI/01-attention/attention.jpg
 tags:
   - "유형/블로그"
   - "주제/llm"
+related:
+  - "[[0. Main/2. Publish/2. Blog/07-AI/02-transformer]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/05-llm-serving-study-week1]]"
 ---
 
 ---

@@ -8,6 +8,9 @@ tags:
   - "유형/블로그"
   - "주제/kubernetes"
   - "주제/nginx"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/06-Operate/06-managing-application-logs]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/06-Operate/08-command-and-args]]"
 ---
 
 ---

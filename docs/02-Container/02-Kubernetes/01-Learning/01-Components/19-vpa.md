@@ -7,6 +7,8 @@ description: Kubernetes VPA(Vertical Pod Autoscaler)의 개념, 구성 요소, �
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/18-hpa]]"
 ---
 
 ---

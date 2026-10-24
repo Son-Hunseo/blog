@@ -10,6 +10,7 @@ tags:
   - "주제/linux"
   - "주제/network"
 related:
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/01-openstack-component]]"
   - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/02-install-openstack]]"
   - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/04-connect-openStack-ceph]]"
 ---

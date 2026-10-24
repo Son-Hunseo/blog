@@ -8,6 +8,7 @@ tags:
   - "유형/블로그"
   - "주제/os"
 related:
+  - "[[0. Main/2. Publish/2. Blog/05-CS/02-OS/00-what-is-os]]"
   - "[[0. Main/2. Publish/2. Blog/05-CS/02-OS/11-storage-connectivity-method]]"
 ---
 

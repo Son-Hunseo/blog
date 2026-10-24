@@ -7,6 +7,9 @@ description: 쿠버네티스(Kubernetes) 클러스터를 안전하게 업그레�
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/01-cluster-architecture]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/06-Operate/07-rolling-update-and-rollback]]"
 ---
 
 ---

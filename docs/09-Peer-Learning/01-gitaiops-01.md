@@ -10,6 +10,10 @@ tags:
   - "주제/gcp"
   - "주제/cicd"
   - "주제/git"
+related:
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/02-gitaiops-02]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/03-gitaiops-03]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/04-gitaiops-04]]"
 ---
 
 ---

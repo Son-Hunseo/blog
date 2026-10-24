@@ -8,6 +8,17 @@ tags:
   - "유형/블로그"
   - "주제/kubernetes"
   - "주제/security"
+related:
+  - "[[0. Main/2. Publish/1. Writing/05-CS/11-Security/05-TLS-Handshake]]"
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/08-openssl]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/02-Scheduling/10-admission-controllers]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/01-authentication]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/03-certificate-creation]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/04-view-certificate-details]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/05-certificates-api]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/06-kubeconfig]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/04-mock-exam-2]]"
+  - "[[0. Main/2. Publish/2. Blog/05-CS/11-Security/02-encryption-vs-signature]]"
 ---
 
 ---

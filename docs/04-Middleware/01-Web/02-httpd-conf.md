@@ -11,6 +11,12 @@ tags:
   - "주제/systemd"
   - "주제/network"
   - "주제/security"
+related:
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/06-selinux]]"
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/08-openssl]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/01-Web/03-tomcat-conf]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/01-Web/04-nginx-conf]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/01-Web/05-jboss-conf]]"
 ---
 ---
 ## 기준

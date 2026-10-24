@@ -10,6 +10,10 @@ tags:
   - "주제/database"
   - "주제/network"
   - "주제/security"
+related:
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/01-Web/02-httpd-conf]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/01-Web/03-tomcat-conf]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/01-Web/04-nginx-conf]]"
 ---
 ---
 ## 기준

@@ -9,6 +9,9 @@ tags:
   - "주제/html"
   - "주제/linux"
   - "주제/network"
+related:
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/04-linux-commands]]"
+  - "[[0. Main/2. Publish/2. Blog/04-Middleware/01-Web/02-httpd-conf]]"
 ---
 ---
 ## SELinux란?

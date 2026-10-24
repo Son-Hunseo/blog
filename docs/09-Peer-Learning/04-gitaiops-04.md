@@ -10,6 +10,10 @@ tags:
   - "주제/monitoring"
   - "주제/kafka"
   - "주제/git"
+related:
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/01-gitaiops-01]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/02-gitaiops-02]]"
+  - "[[0. Main/2. Publish/2. Blog/09-Peer-Learning/03-gitaiops-03]]"
 ---
 
 ---

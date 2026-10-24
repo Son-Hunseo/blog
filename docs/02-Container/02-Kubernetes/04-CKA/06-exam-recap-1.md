@@ -7,6 +7,9 @@ description: CKA 자격증 첫 시험에서 65점으로 1점 차이로 불합격
 tags:
   - "유형/블로그"
   - "주제/kubernetes"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/07-killercoda]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/04-CKA/08-exam-recap-2]]"
 ---
 
 ---

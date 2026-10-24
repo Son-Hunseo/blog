@@ -7,6 +7,10 @@ description: SQL의 핵심인 SELECT와 FROM 문법을 이해하고, 별칭(alia
 tags:
   - "유형/블로그"
   - "주제/database"
+related:
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/02-SQL/02-select-where]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/02-SQL/03-select-orderby-limit]]"
+  - "[[0. Main/2. Publish/2. Blog/06-Dev/02-SQL/04-select-case-when-then]]"
 ---
 
 ---
