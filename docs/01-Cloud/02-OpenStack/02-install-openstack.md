@@ -12,7 +12,9 @@ tags:
   - "주제/network"
   - "주제/proxmox"
 related:
+  - "[[0. Main/2. Publish/1. Writing/00-Linux/10-linux-bridge]]"
   - "[[0. Main/2. Publish/1. Writing/08-HomeLab/02-Proxmox/wsl과 proxmox 차이]]"
+  - "[[0. Main/2. Publish/2. Blog/00-Linux/01-network-namespace]]"
   - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/01-openstack-component]]"
   - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/03-install-ceph]]"
   - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/04-connect-openStack-ceph]]"

@@ -12,6 +12,7 @@ tags:
 related:
   - "[[0. Main/0. Raw/2. Infra/1. Container/2. Kubernetes/999. 자체 구축 클러스터에 NLB 연결하기]]"
   - "[[0. Main/2. Publish/2. Blog/01-Cloud/01-AWS/00-Learning/01-aws-network-basic]]"
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/01-AWS/00-Learning/40-irsa-oidc]]"
 ---
 
 ---

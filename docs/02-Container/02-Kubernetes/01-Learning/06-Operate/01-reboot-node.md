@@ -9,6 +9,7 @@ tags:
   - "주제/kubernetes"
 related:
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/14-daemonsets]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/06-Operate/03-cluster-upgrade]]"
 ---
 
 ---

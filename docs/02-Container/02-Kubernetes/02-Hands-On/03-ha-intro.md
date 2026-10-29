@@ -8,6 +8,7 @@ tags:
   - "유형/블로그"
   - "주제/kubernetes"
 related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/01-cluster-architecture]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/02-Hands-On/04-etcd-ha]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/03-TroubleShooting/05-controlplane-troubleshooting]]"
 ---

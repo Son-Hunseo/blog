@@ -10,6 +10,7 @@ tags:
   - "주제/linux"
   - "주제/security"
 related:
+  - "[[0. Main/2. Publish/1. Writing/00-Linux/11-lxc]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/01-Docker/04-Docker-Network]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/04-Security/12-security-context]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/06-Operate/08-command-and-args]]"

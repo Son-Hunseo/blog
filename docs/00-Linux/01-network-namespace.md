@@ -9,6 +9,7 @@ tags:
   - "주제/linux"
   - "주제/network"
 related:
+  - "[[0. Main/2. Publish/2. Blog/01-Cloud/02-OpenStack/02-install-openstack]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/01-Docker/04-Docker-Network]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/01-cluster-networking]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/02-pod-networking]]"

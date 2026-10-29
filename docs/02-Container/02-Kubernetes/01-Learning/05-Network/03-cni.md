@@ -18,6 +18,7 @@ related:
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/03-Storage/01-container-storage-interface]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/02-pod-networking]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/04-cni-in-kubernetes]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/05-Network/05-service-networking]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/02-Hands-On/00-install-kubeadm]]"
 ---
 

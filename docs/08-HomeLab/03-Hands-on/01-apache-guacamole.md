@@ -9,6 +9,8 @@ tags:
   - "주제/docker"
   - "주제/linux"
   - "주제/homelab"
+related:
+  - "[[0. Main/2. Publish/1. Writing/00-Linux/12-xrdp]]"
 ---
 
 ---

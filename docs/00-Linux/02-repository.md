@@ -8,6 +8,8 @@ tags:
   - "유형/블로그"
   - "주제/linux"
   - "주제/nginx"
+related:
+  - "[[0. Main/2. Publish/1. Writing/00-Linux/12-xrdp]]"
 ---
 ---
 ## Repository란?
