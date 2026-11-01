@@ -3,11 +3,11 @@ title: kube-prometheus-stack으로 쿠버네티스 모니터링 환경 구성하
 description: kube-prometheus-stack Helm 차트를 왜 쓰는지와 구성요소(Prometheus Operator·CRD)를 정리하고, NFS 환경에서 설치한 뒤 MinIO를 오브젝트 스토리지로 하는 Thanos Sidecar 방식으로 Prometheus HA·중복 제거·장기 보관을 구성하는 실습 정리
 date: 2026-10-29
 sidebar_class_name: hidden-sidebar-item
-image: /img/posts/03-DevOps/02-Observability/02-kube-prometheus-stack-thanos/02-kube-prometheus-stack-thanos.jpg
+image: /img/posts/03-DevOps/02-Observability/02-kube-prometheus-stack-thanos/02-kube-prometheus-stack-thanos.png
 tags:
-  - "유형/블로그"
-  - "주제/kubernetes"
-  - "주제/monitoring"
+  - 유형/블로그
+  - 주제/kubernetes
+  - 주제/monitoring
 related:
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/06-Operate/05-monitoring-kubernetes-components]]"
   - "[[0. Main/2. Publish/2. Blog/03-DevOps/02-Observability/01-prometheus-grafana-install]]"
