@@ -3,7 +3,7 @@ title: kube-prometheus-stack으로 쿠버네티스 모니터링 환경 구성하
 description: kube-prometheus-stack Helm 차트를 왜 쓰는지와 구성요소(Prometheus Operator·CRD)를 정리하고, NFS 환경에서 설치한 뒤 MinIO를 오브젝트 스토리지로 하는 Thanos Sidecar 방식으로 Prometheus HA·중복 제거·장기 보관을 구성하는 실습 정리
 date: 2026-10-29
 sidebar_class_name: hidden-sidebar-item
-image: /img/default/default.webp
+image: /img/posts/03-DevOps/02-Observability/02-kube-prometheus-stack-thanos/02-kube-prometheus-stack-thanos.jpg
 ---
 ---
 ## kube-prometheus-stack Helm Chart를 사용하는 이유
@@ -42,7 +42,7 @@ image: /img/default/default.webp
 ---
 ## kube-prometheus-stack의 구성요소
 
-![[kube-prometheus-stack-archi.png]]
+![kube-prometheus-stack-archi](assets/02-kube-prometheus-stack-thanos/kube-prometheus-stack-archi.png)
 
 ---
 ### 핵심 컴포넌트
@@ -116,7 +116,7 @@ image: /img/default/default.webp
 
 그러나, Prometheus Operator를 사용하면 `ServiceMonitor`, `PodMonitor`, `PrometheusRule` 같은 Kubernetes CRD를 만들고 Operator가 이 리소스들을 감시해서 실제 Prometheus 설정을 자동 생성/반영 한다.
 
-![[prometheus-operator-archi.png]]
+![prometheus-operator-archi](assets/02-kube-prometheus-stack-thanos/prometheus-operator-archi.png)
 
 
 ---
@@ -311,14 +311,14 @@ kubectl port-forward -n monitoring svc/kube-prom-stack-grafana 3000:80
 kubectl port-forward -n monitoring svc/kube-prom-stack-kube-prome-prometheus 9090:9090
 ```
 
-![[grafana-dafault-dashboard.png]]
+![grafana-dafault-dashboard](assets/02-kube-prometheus-stack-thanos/grafana-dafault-dashboard.png)
 
 접속해보면, `kube-prometheus-stack`이 생성한기본 대시보드들이 생성되어있는 것을 볼 수 있다.
 
 ---
 ## Thanos
 
-![[thanos-architecture.png]]
+![thanos-architecture](assets/02-kube-prometheus-stack-thanos/thanos-architecture.png)
 
 ---
 ### Thanos란?
@@ -338,7 +338,7 @@ Thanos는 위와같은 문제점들을 해결한다.
 ---
 ### 구성요소
 
-![[thanos-sidecar-archi.png]]
+![thanos-sidecar-archi](assets/02-kube-prometheus-stack-thanos/thanos-sidecar-archi.png)
 
 #### Thanos Sidecar
 
@@ -511,7 +511,7 @@ spec:
 
 접속 후 로그인하면 아래와 같은 화면을 볼 수 있다.
 
-![[minio-dashboard.png]]
+![minio-dashboard](assets/02-kube-prometheus-stack-thanos/minio-dashboard.png)
 
 
 여기서 Bucket 메뉴에서 `thanos` 버킷을 생성한다.
@@ -519,7 +519,7 @@ spec:
 	- Bucket Name : `thanos`
 	- 나머지 옵션 디폴트로 놔두고 'Create Bucket'
 
-![[minio-create-bucket.png]]
+![minio-create-bucket](assets/02-kube-prometheus-stack-thanos/minio-create-bucket.png)
 
 ---
 #### Thanos Object Storage 설정 Secret 생성
@@ -693,22 +693,22 @@ helm upgrade kube-prom-stack prometheus-community/kube-prometheus-stack \
 ---
 #### 확인
 
-![[thanos-check1.png]]
+![thanos-check1](assets/02-kube-prometheus-stack-thanos/thanos-check1.png)
 
 1. Query 연결 확인: `kubectl port-forward svc/thanos-query 9090:9090 -n monitoring`로 연결한 뒤 Query UI의  Endpoints 탭을 연다. sidecar 2개와 Store Gateway 1개가 모두 UP이면 정상이다.
 
-![[thanos-check-2.png]]
+![thanos-check-2](assets/02-kube-prometheus-stack-thanos/thanos-check-2.png)
 
-![[thanos-check3.png]]
+![thanos-check3](assets/02-kube-prometheus-stack-thanos/thanos-check3.png)
 
 2. 중복 제거 확인: 쿼리 화면에서 `count(up)` 쿼리 입력하고 deduplication 체크박스를 켜고 끄면서 결과를 비교한다. 켰을 때 시계열이 반으로 줄면 정상이다.
 
-![[minio-result.png]]
+![minio-result](assets/02-kube-prometheus-stack-thanos/minio-result.png)
 
 3. 업로드 확인: 약 2시간 뒤 MinIO 콘솔의 `thanos` 버킷에 블록(ULID 디렉터리)이 올라오는지 봅니다. Prometheus 블록 단위가 2시간이라 바로 보이지는 않습니다.
 
 
-![[thanos-check5.png]]
+![thanos-check5](assets/02-kube-prometheus-stack-thanos/thanos-check5.png)
 
 4. Grafana 확인: Thanos 데이터소스로 기존 대시보드가 정상 표시되는지 본다.
 
