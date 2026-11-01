@@ -4,6 +4,13 @@ description: kube-prometheus-stack Helm 차트를 왜 쓰는지와 구성요소(
 date: 2026-10-29
 sidebar_class_name: hidden-sidebar-item
 image: /img/posts/03-DevOps/02-Observability/02-kube-prometheus-stack-thanos/02-kube-prometheus-stack-thanos.jpg
+tags:
+  - "유형/블로그"
+  - "주제/kubernetes"
+  - "주제/monitoring"
+related:
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/06-Operate/05-monitoring-kubernetes-components]]"
+  - "[[0. Main/2. Publish/2. Blog/03-DevOps/02-Observability/01-prometheus-grafana-install]]"
 ---
 ---
 ## kube-prometheus-stack Helm Chart를 사용하는 이유

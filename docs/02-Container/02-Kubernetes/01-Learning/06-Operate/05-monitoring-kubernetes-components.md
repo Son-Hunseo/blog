@@ -10,6 +10,7 @@ tags:
   - "주제/monitoring"
 related:
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/18-hpa]]"
+  - "[[0. Main/2. Publish/2. Blog/03-DevOps/02-Observability/02-kube-prometheus-stack-thanos]]"
 ---
 
 ---

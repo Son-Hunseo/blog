@@ -8,6 +8,7 @@ tags:
   - "유형/블로그"
   - "주제/monitoring"
 related:
+  - "[[0. Main/2. Publish/2. Blog/03-DevOps/02-Observability/02-kube-prometheus-stack-thanos]]"
   - "[[0. Main/2. Publish/2. Blog/08-HomeLab/03-Hands-on/10-window-dcgm-expoter]]"
 ---
 
