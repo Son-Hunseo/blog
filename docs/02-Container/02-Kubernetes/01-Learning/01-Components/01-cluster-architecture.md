@@ -14,6 +14,7 @@ related:
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/08-kube-proxy]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/14-daemonsets]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/01-Components/15-static-pods]]"
+  - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/02-Scheduling/08-multiple-schedulers]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/01-Learning/06-Operate/03-cluster-upgrade]]"
   - "[[0. Main/2. Publish/2. Blog/02-Container/02-Kubernetes/02-Hands-On/03-ha-intro]]"
 ---
